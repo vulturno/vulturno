@@ -1,0 +1,47 @@
+{
+  "name": "base",
+  "version": "3.0.0",
+  "description": "Base for any project of Jorge Aznar, {data/designer} based on Zaragoza ⦉ http://jorgeatgu.com ⦊",
+  "main": "gulpfile.js",
+  "repository": "jorgeatgu/base",
+  "keywords": [
+    "css",
+    "postcss",
+    "gulp",
+    "init"
+  ],
+  "author": "Jorge Aznar",
+  "lint-staged": {
+    "src/css/*.css": "stylelint"
+  },
+  "pre-commit": "lint-staged",
+  "scripts": {
+    "server-on": "browser-sync start --server --files '*.css, *.html' --tunnel jorgeatgu",
+    "lint-staged": "lint-staged",
+    "build:release": "gulp build"
+  },
+  "browserslist": "last 2 versions",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.24.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-terser": "^1.1.5",
+    "lint-staged": "^7.2.0",
+    "postcss-custom-properties": "^7.0.0",
+    "postcss-custom-selectors": "^4.0.1",
+    "postcss-import": "^11.1.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-normalize": "^7.0.1",
+    "postcss-reporter": "^5.0.0",
+    "postcss-sorting": "^4.0.0",
+    "pre-commit": "^1.2.2",
+    "stylelint": "^9.3.0"
+  }
+}
