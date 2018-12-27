@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-    </head>
-    <body>
-        <header>
-            <nav></nav>
-        </header>
 
-        <section>
-            <article></article>
-            <article></article>
-            <article></article>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>A clau | d3 responsive</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Rubik:400,500|Adamina" rel="stylesheet">
+</head>
+
+<body>
+    <section class="clau-container bg7">
+            <section class="chart-container">
+                <h3 class="subtitle">
+                Gráfica de area con input </h3>
+                <p class="text">Gráfica de area que se actualiza a través de un input.</p>
+                <article class="chart-lluvia-input">
+                    <select class="temperatura-mensual-minima-select" id="select-city"></select>
+                    <svg>
+                        <g class="chart-lluvia-input-container"></g>
+                    </svg>
+                </article>
+            </section>
         </section>
+    <footer class="footer">
+        <div class="clau-container">
+            <p class="footer-texto">Hecho en Zaragoza con mucha maña por un <a class="footer-links" href="http://jorgeatgu.com" target="_blank">maño</a> - MMXVII</p>
+            <p class="footer-texto">Cualquier consulta escribid a: contacto@jorgeatgu.com</p>
+            <a class="footer-links" href="http://github.com/jorgeatgu/vulturno">GitHub</a>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.18.7/slimselect.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.18.7/slimselect.min.css" rel="stylesheet"></link>
+    <script src="js/d3.min.js"></script>
+    <script src="js/area.js"></script>
+</body>
 
-        <footer>
-
-        </footer>
-    </body>
 </html>

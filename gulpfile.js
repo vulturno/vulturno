@@ -11,12 +11,12 @@ reporter = require('postcss-reporter');
 imagemin = require('gulp-imagemin');
 newer = require('gulp-newer');
 nano = require('gulp-cssnano');
+terser = require('gulp-terser');
 notify = require('gulp-notify');
 stylelint = require('stylelint');
 browserSync = require('browser-sync');
-terser = require('gulp-terser');
+babel = require('gulp-babel');
 postcssNormalize = require('postcss-normalize');
-
 
 var paths = {
   js: 'src/js',
@@ -45,11 +45,24 @@ var watch = {
   ]
 };
 
+gulp.task('babel', () =>
+    gulp.src(watch.js)
+        .pipe(newer(paths.js))
+        .pipe(babel({
+            presets: ["@babel/preset-env"]
+        }))
+        .on("error", errorAlertJS)
+        .pipe(gulp.dest(paths.buildJs))
+        .pipe(notify({
+            message: 'JavaScript complete'
+        }))
+);
+
 gulp.task("browserSync", function() {
     browserSync({
         server: {
             baseDir: "./",
-            reloadDelay: 200
+            reloadDelay: 2000
         },
         online: true
     })
@@ -77,6 +90,16 @@ function errorAlertPost(error) {
     this.emit("end");
 };
 
+/* Comprimiendo JavaScript */
+gulp.task('compress', function() {
+   return gulp.src(watch.js)
+     .pipe(terser())
+     .on("error", errorAlertJS)
+     .pipe(gulp.dest(paths.buildJs))
+     .pipe(notify({
+         message: 'JavaScript complete'
+     }))
+});
 
 /* ==========================================================================
    Lanzando postCSS
@@ -93,7 +116,6 @@ function errorAlertPost(error) {
 
 gulp.task('css', function() {
     var processors = [
-
         atImport({
             plugins: [stylelint]
         }),
@@ -113,7 +135,7 @@ gulp.task('css', function() {
             forceImport: true
         }),
     ];
-    return gulp.src('./src/css/styles.css')
+    return gulp.src('src/css/styles.css')
 
     .pipe(sourcemaps.init())
         .pipe(postcss(processors))
@@ -159,21 +181,16 @@ gulp.task('images', function() {
         .pipe(gulp.dest(paths.buildImages));
 });
 
-/* Comprimiendo JavaScript */
-gulp.task('compress', function() {
-    return gulp.src(paths.js)
-        .pipe(newer(paths.js))
-        .pipe(imagemin())
-        .pipe(gulp.dest(paths.buildJs));
-});
 
 /* Tarea por defecto para compilar CSS y comprimir imagenes */
 gulp.task('default', ["browserSync"], function() {
     //Add interval to watcher!
     gulp.watch(watch.css, { interval: 300 }, ['css']);
     gulp.watch(watch.images, { interval: 300 }, ['images']);
-    gulp.watch(["*.html", "css/*.css", "js/*.js", "./*.csv", "./*.json"]).on("change", browserSync.reload);
+    gulp.watch(watch.js, { interval: 300 }, ['babel', 'compress']);
+    gulp.watch(["./*.html", "css/*.css", "js/*.js"]).on("change", browserSync.reload);
 });
+
 
 // Build para un proyecto sin imágenes
 gulp.task('build', ['minify', 'compress']);
