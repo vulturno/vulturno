@@ -1,24 +1,21 @@
 const areaInput = () => {
 
-    //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
-    const margin = { top: 16, right: 16, bottom: 24, left: 32 };
+    const margin = { top: 16, right: 16, bottom: 24, left: 48 };
     let width = 0;
     let height = 0;
-    const chart = d3.select('.chart-lluvia-input');
+    const chart = d3.select('.chart-vulturno');
     const svg = chart.select('svg');
     let scales = {};
     const temp = "ºC";
+    let datos;
 
-
-    //Escala para los ejes X e Y
     const setupScales = () => {
 
         const countX = d3.scaleTime()
-            .domain([1950, 2017]);
-
+            .domain([d3.min(datos, d => d.year), d3.max(datos, d => d.year )]);
 
         const countY = d3.scaleLinear()
-            .domain([14, 23]);
+            .domain([d3.min(datos, d => d.temp - 1), 20]);
 
         scales.count = { x: countX, y: countY };
 
@@ -27,13 +24,13 @@ const areaInput = () => {
     //Seleccionamos el contenedor donde irán las escalas y en este caso el area donde se pirntara nuestra gráfica
     const setupElements = () => {
 
-        const g = svg.select('.chart-lluvia-input-container');
+        const g = svg.select('.chart-vulturno-container');
 
         g.append('g').attr('class', 'axis axis-x');
 
         g.append('g').attr('class', 'axis axis-y');
 
-        g.append('g').attr('class', 'area-input-container');
+        g.append('g').attr('class', 'chart-vulturno-container-bis');
 
     }
 
@@ -85,7 +82,7 @@ const areaInput = () => {
 
         const translate = "translate(" + margin.left + "," + margin.top + ")";
 
-        const g = svg.select('.chart-lluvia-input-container')
+        const g = svg.select('.chart-vulturno-container')
 
         g.attr("transform", translate)
 
@@ -96,17 +93,17 @@ const areaInput = () => {
 
         updateScales(width, height)
 
-        const container = chart.select('.area-input-container')
+        const container = chart.select('.chart-vulturno-container-bis')
 
         const layer = container.selectAll('.area')
-            .data([data])
+            .data([datos])
 
         const newLayer = layer.enter()
             .append('path')
-            .attr('class', 'area area-bgc7')
+            .attr('class', 'area area-vulturno')
 
-        const dots = container.selectAll('.circles')
-            .data(data)
+        const dots = container.selectAll('.circles').remove().exit()
+            .data(datos)
 
         const dotsLayer = dots.enter()
             .append("circle")
@@ -121,9 +118,13 @@ const areaInput = () => {
             .attr('d', area)
 
         dots.merge(dotsLayer)
+            .attr("cx", d => scales.count.x(d.year))
+            .attr("cy", 0)
             .transition()
-            .duration(600)
-            .ease(d3.easeLinear)
+            .delay(function(d, i) {
+                return i * 10
+            })
+            .duration(300)
             .attr("cx", d => scales.count.x(d.year))
             .attr("cy", d => scales.count.y(d.temp))
             .attr('r', 3)
@@ -136,7 +137,9 @@ const areaInput = () => {
 
         d3.csv("csv/" + mes + ".csv", (error, data) => {
 
-            data.forEach(d => {
+            datos = data;
+
+            datos.forEach(d => {
                 d.temp = +d.temp;
                 d.year = d.year;
             });
@@ -145,13 +148,13 @@ const areaInput = () => {
             scales.count.y.range([height, 0]);
 
             const countX = d3.scaleTime()
-                .domain([d3.min(data, d => d.year), d3.max(data, d => d.year )]);
+                .domain([d3.min(datos, d => d.year), d3.max(datos, d => d.year )]);
 
             const countY = d3.scaleLinear()
-                .domain([d3.min(data, d => d.temp - 5), d3.max(data, d => d.temp + 5 )]);
+                .domain([d3.min(datos, d => d.temp - 1), d3.max(datos, d => d.temp + 2 )]);
 
             scales.count = { x: countX, y: countY };
-            updateChart(data)
+            updateChart(datos)
 
         });
 
@@ -160,16 +163,13 @@ const areaInput = () => {
 
     const resize = () => {
 
-        d3.csv("csv/total-media-limpio.csv", (error, data) => {
+        const stationResize = d3.select("#select-city")
+            .property("value")
 
-            const mesActual = d3.select("#mes-mensual-minima")
-                .select("select")
-                .property("value")
+        d3.csv("csv/" + stationResize + ".csv", (error, data) => {
 
-            data = data.filter(d => String(d.mes).match(mesActual));
-
-            updateChart(data)
-
+            datos = data;
+            updateChart(datos)
 
         });
 
@@ -181,9 +181,11 @@ const areaInput = () => {
                 console.log(error);
             } else {
 
+                datos = data;
+
                 const nest = d3.nest()
                     .key(d => d.Name)
-                    .entries(data);
+                    .entries(datos);
 
                 console.log(nest)
 
@@ -216,18 +218,19 @@ const areaInput = () => {
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/1249I.csv', (error, data) => {
+        d3.csv('csv/Albacete.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
 
-                data.forEach(d => {
+                datos = data;
+                datos.forEach(d => {
                     d.year = d.year;
                     d.temp = d.temp;
                 });
                 setupElements()
                 setupScales()
-                updateChart(data)
+                updateChart(datos)
             }
 
         });
