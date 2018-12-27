@@ -1,0 +1,69 @@
+.chart-container {
+    max-width: 90vw;
+    margin: 6rem auto;
+}
+
+.chart-vulturno-container {
+    .domain {
+        stroke: none;
+    }
+    .axis-y {
+        .tick {
+            stroke-dasharray: 3px;
+        }
+    }
+    text {
+        font-family: var(--roboto);
+        font-size: 14px;
+    }
+    .area {
+        fill: var(--orange);
+    }
+    .circles {
+        fill: var(--circles);
+    }
+}
+
+.ss-single-selected {
+    max-width: 10rem !important;
+    margin-left: 3rem;
+    border-radius: 5px;
+    padding: 1rem !important;
+    padding-right: .25rem !important;
+    border: 1px solid #ddd !important;
+    background-color: #f1f1f1;
+    font-family: var(--roboto) !important;
+    color: var(--black) !important;
+}
+
+.ss-option {
+    font-family: var(--roboto) !important;
+    color: var(--black) !important;
+}
+
+.ss-main .ss-content .ss-list .ss-option.ss-disabled {
+    color: #bdbdbd !important;
+}
+
+.ss-main .ss-single-selected .ss-arrow span {
+    border-color: var(--black) !important;
+}
+
+.ss-main .ss-single-selected .placeholder,
+.ss-main .ss-single-selected .placeholder * {
+    overflow: initial !important;
+}
+
+.ss-content {
+    max-width: 10rem !important;
+    margin-left: 3rem !important;
+    border: 1px solid #ddd !important;
+}
+
+@media only screen and (min-width: 48em) {
+
+    .chart-container {
+        max-width: 65rem;
+    }
+
+}
