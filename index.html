@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +7,31 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Rubik:400,500|Adamina" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Adamina" rel="stylesheet">
 </head>
-
 <body>
-    <section class="clau-container bg7">
+    <nav class="header orange">
+        <div class="header-column">
+            <img class="header-column-image" src="img/cuatro.jpg"/>
+        </div>
+        <div class="header-text">
+            <h1 class="header-title">VULTURNO</h1>
+            <p class="header-p">Una visualización de datos para ver la evolución de la  temperatura media anual en las diferentes estaciones de la AEMET.</p>
+        </div>
+    </nav>
+
+    <section class="chart">
             <section class="chart-container">
-                <h3 class="subtitle">
-                Gráfica de area con input </h3>
-                <p class="text">Gráfica de area que se actualiza a través de un input.</p>
-                <article class="chart-lluvia-input">
+                <article class="chart-vulturno">
                     <select class="temperatura-mensual-minima-select" id="select-city"></select>
                     <svg>
-                        <g class="chart-lluvia-input-container"></g>
+                        <g class="chart-vulturno-container"></g>
                     </svg>
                 </article>
             </section>
         </section>
     <footer class="footer">
-        <div class="clau-container">
+        <div class="chart-container">
             <p class="footer-texto">Hecho en Zaragoza con mucha maña por un <a class="footer-links" href="http://jorgeatgu.com" target="_blank">maño</a> - MMXVII</p>
             <p class="footer-texto">Cualquier consulta escribid a: contacto@jorgeatgu.com</p>
             <a class="footer-links" href="http://github.com/jorgeatgu/vulturno">GitHub</a>

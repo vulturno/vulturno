@@ -3,10 +3,10 @@ La evolución de las temperaturas máximas en España
 
 
 
-| Ciudad        | Número        | Año     |
-| ------------- |:-------------:| -------:|
-| A coruña      | 1387          |  1950   |
-| Valencia      | 8416          |  1950   |
+| Ciudad        | Número        | Año     | Completo      |
+| ------------- |:-------------:| -------:|:-------------:|
+| A coruña      | 1387          |  1950   | SI
+| Valencia      | 8416          |  1950   | SI
 | Sevilla       | 5783          |  1951   |
 | Malaga        | 6155A         |  1950   |
 | Murcia        | 7031          |  1950   |
@@ -20,7 +20,7 @@ La evolución de las temperaturas máximas en España
 | Granada       | 5514          |  1950   |
 | Oviedo        | 1249I         |  1972   |
 | Tenerife      | C447A         |  1950   |
-| Pamplona      | 9262          |  1954   |
+| Pamplona      | 9771          |  1954   |
 | Donostia      | 1024E         |  1950   |
 | Burgos        | 2331          |  1950   |
 | Albacete      | 8175          |  1950   |
@@ -81,3 +81,16 @@ Toledo contiene la información de dos estaciones, la 3259 que contiene datos de
 Fuera de la lista:
 
 Ceuta, la estación 5000A tiene datos desde 1950 hasta 1986, la 5000C desde 2009.
+
+
+Incompletos
+
+Albacete: 1953 - 1954 - 1955 - 1956 - 1959 - 1960
+Almería: desde 1981 en adelante
+Avila: repasarlo entero
+Badajoz: desde 1954
+Bilbao: 1958 - 2000 - 2001
+Burgos: 1955
+Caceres: faltan desde 1983 en adelante
+Castellon: 1952 - 1953 - 1954 -
+Murcia: 1955 - 1965 - 2007 - 2011 - 2012
