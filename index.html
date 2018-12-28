@@ -21,6 +21,10 @@
     </div>
     <section class="chart">
         <section class="chart-container">
+            <article class="chart-text-container">
+                <p class="chart-text">A continuación puedes consultar la temperatura media de 45 estaciones de la AEMET, casi todas capitales de provincia. También el año cuando se registro la temperatura media mínima y la temperatura media máxima.</p>
+                <p class="chart-text">En algunas estaciones faltan datos. En la gráfica cada año esta representado con un círculo, la ausencia del mismo indica que faltan los datos de ese año.</p>
+            </article>
             <article class="chart-vulturno">
                 <select class="temperatura-mensual-minima-select" id="select-city"></select>
                 <svg>
@@ -34,6 +38,7 @@
             <h3 class="metodology-title">METODOLOGÍA</h3>
             <p class="metodology-text">He decidido comenzar en 1950 ya que no todas las estaciones contienen datos de todos los años.</p>
             <p class="metodology-text">En Almería, Ávila, Cáceres, Castellón, Ciudad Real, Guadalajara, Huelva, Jaén, Lleida, Mérida, Segovia, Toledo y Vitoria he tenido que unificar las dos estaciones que tiene cada ciudad.</p>
+            <p class="metodology-text">Mérida se queda fuera ya que la estación(4410X) apenas tiene datos. Algo parecido pasa con Vitoria, una estación emite datos hasta 1982 y la otra comienza en 2009.</p>
         </article>
         <article class="metodology-container">
             <h3 class="metodology-title">CRÉDITOS</h3>
@@ -41,6 +46,26 @@
             <p class="metodology-text">Para extraer los datos he usado <a href="https://github.com/jorgeatgu/lurte">Lurte</a>.</p>
             <p class="metodology-text">Para el dropdown he usado <a href="http://slimselectjs.com">SlimSelect</a>.</p>
             <p class="metodology-text">La fotografía de la portada es en los Monegros, y la ha realizado <a href="https://www.flickr.com/photos/polgaroid/4531303205/in/album-72157626176625614/">Pato Hernán</a>.</p>
+        </article>
+    </section>
+    <section class="data-viz">
+        <article class="metodology-container">
+            <h3 class="metodology-title">OTROS PROYECTOS</h3>
+            <a href="http://bislai.co" class="proyectos-element proyecto-1">
+                <h2 class="proyectos-element-title proyecto-1-text">BISLAI </h2>
+                <span class="proyectos-element-subtitle proyecto-1-text">[ DATAVIZ - OPENDATA ]</span>
+                <p class="proyectos-element-text proyecto-1-text">Fiscalización de las mociones que presentan los grupos politicos en el Ayuntamiento de Zaragoza.</p>
+            </a>
+            <a href="https://forno.es" class="proyectos-element proyecto-2">
+                <h2 class="proyectos-element-title proyecto-2-text">FORNO</h2>
+                <span class="proyectos-element-subtitle proyecto-2-text">[ DATAVIZ ]</span>
+                <p class="proyectos-element-text proyecto-2-text">Una visualización de datos sobre como el cambio climático esta aumentando las temperaturas en la ciudad de Zaragoza.</p>
+            </a>
+            <a href="http://jorgeatgu.com/data-mestika" class="proyectos-element proyecto-4">
+                <h2 class="proyectos-element-title proyecto-4-text">DATA-MESTIKA</h2>
+                <span class="proyectos-element-subtitle proyecto-4-text">[ DATAVIZ ]</span>
+                <p class="proyectos-element-text proyecto-4-text">Una visualización de datos sobre todas las ofertas de trabajo ofertadas en Domestika a lo largo de 10 años.</p>
+            </a>
         </article>
     </section>
     <footer class="footer">
