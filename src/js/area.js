@@ -1,4 +1,4 @@
-const areaInput = () => {
+const vulturno = () => {
 
     const margin = { top: 16, right: 16, bottom: 24, left: 48 };
     let width = 0;
@@ -8,6 +8,14 @@ const areaInput = () => {
     let scales = {};
     const temp = "ºC";
     let datos;
+    let tooltipMax;
+    let tooltipMin;
+    const tooltipTemp = chart.append("div")
+        .attr("class", "tooltip tooltip-temp")
+        .style("opacity", 0);
+    const bisectDate = d3.bisector(d => d.year).left;
+    console.log(bisectDate)
+
 
     const setupScales = () => {
 
@@ -21,6 +29,32 @@ const areaInput = () => {
 
     }
 
+    const tooltips = (data) => {
+
+        tooltipMax = chart.append("div")
+            .attr("class", "tooltip tooltip-media-anual-maxima")
+            .attr("id", "tooltip-max");
+
+        tooltipMin = chart.append("div")
+            .attr("class", "tooltip tooltip-media-anual-minima");
+
+        /*Calculamos la posicion del tooltip de temperatura maxima*/
+        const posToolMax = document.getElementById('tooltip-max').getBoundingClientRect();
+        const widthToolMax = document.getElementById('tooltip-max').offsetWidth;
+        const leftToolMax = posToolMax.left;
+
+        tooltipMax.data(datos)
+            .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
+
+        tooltipMin.data(datos)
+            .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" })
+            /*Al tooltip de minimas le modificamos la posición, pasandole la posición del otro tooltip y restandole el ancho de los dos*/
+            .style("right", leftToolMax - widthToolMax + 'px');
+
+
+
+    }
+
     //Seleccionamos el contenedor donde irán las escalas y en este caso el area donde se pirntara nuestra gráfica
     const setupElements = () => {
 
@@ -31,6 +65,19 @@ const areaInput = () => {
         g.append('g').attr('class', 'axis axis-y');
 
         g.append('g').attr('class', 'chart-vulturno-container-bis');
+
+        g.append('rect')
+            .attr('class', 'overlay');
+
+        g.append('g')
+            .attr('class', 'focus')
+            .style("display", "none")
+            .append("line")
+            .attr("class", "x-hover-line hover-line")
+            .attr("y1", 0);
+
+        g.select('.focus').append("text")
+            .attr("class", "text-focus");
 
     }
 
@@ -66,11 +113,47 @@ const areaInput = () => {
             .duration(300)
             .ease(d3.easeLinear)
             .call(axisY)
+
+        const focus = g.select('.focus');
+
+        const overlay = g.select('.overlay');
+
+        focus.select(".x-hover-line").attr("y2", height);
+
+        overlay.attr("width", width + margin.left + margin.right)
+            .attr("height", height)
+            .on("mouseover", function() {
+                focus.style("display", null);
+            })
+            .on("mouseout", function() {
+                focus.style("display", "none")
+                tooltipTemp.style("opacity", 0)
+            })
+            .on("mousemove", mousemove);
+
+        function mousemove() {
+            const w = chart.node().offsetWidth;
+            const positionTooltip = w / 2 - (352 / 2);
+            const x0 = scales.count.x.invert(d3.mouse(this)[0]);
+            const i = bisectDate(datos, x0, 1);
+            const d0 = datos[i - 1];
+            const d1 = datos[i];
+            const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
+                tooltipTemp.style("opacity", 1)
+                    .html(`<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`)
+                    .style("left", positionTooltip + 'px')
+
+                focus.select(".x-hover-line")
+                    .attr("transform",
+                        `translate(${scales.count.x(d.fecha)},${0})`);
+
+        }
+
     }
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 400;
+        const h = 500;
 
 
         width = w - margin.left - margin.right;
@@ -115,7 +198,7 @@ const areaInput = () => {
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
-            .attr('d', area)
+            .attr('d', area);
 
         dots.merge(dotsLayer)
             .attr("cx", d => scales.count.x(d.year))
@@ -125,6 +208,7 @@ const areaInput = () => {
                 return i * 10
             })
             .duration(300)
+            .ease(d3.easeLinear)
             .attr("cx", d => scales.count.x(d.year))
             .attr("cy", d => scales.count.y(d.temp))
             .attr('r', 3)
@@ -142,6 +226,7 @@ const areaInput = () => {
             datos.forEach(d => {
                 d.temp = +d.temp;
                 d.year = d.year;
+                d.fecha = +d.year;
             });
 
             scales.count.x.range([0, width]);
@@ -155,6 +240,12 @@ const areaInput = () => {
 
             scales.count = { x: countX, y: countY };
             updateChart(datos)
+
+            tooltipMax.data(datos)
+                .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
+
+            tooltipMin.data(datos)
+                .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
 
         });
 
@@ -187,11 +278,9 @@ const areaInput = () => {
                     .key(d => d.Name)
                     .entries(datos);
 
-                console.log(nest)
+                const selectCity = d3.select("#select-city");
 
-                const mesMenuMensualMinima = d3.select("#select-city");
-
-                mesMenuMensualMinima
+                selectCity
                     .selectAll("option")
                     .data(nest)
                     .enter()
@@ -199,7 +288,7 @@ const areaInput = () => {
                     .attr("value", d => d.key)
                     .text(d => d.key)
 
-                mesMenuMensualMinima.on('change', function() {
+                selectCity.on('change', function() {
 
                     const mes = d3.select(this)
                         .property("value")
@@ -218,7 +307,7 @@ const areaInput = () => {
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/Albacete.csv', (error, data) => {
+        d3.csv('csv/Vitoria.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -227,10 +316,14 @@ const areaInput = () => {
                 datos.forEach(d => {
                     d.year = d.year;
                     d.temp = d.temp;
+                    d.fecha = +d.year;
                 });
                 setupElements()
                 setupScales()
                 updateChart(datos)
+                tooltips(datos)
+                mes = 'Vitoria';
+                update(mes)
             }
 
         });
@@ -243,9 +336,10 @@ const areaInput = () => {
 
 }
 
-areaInput()
+vulturno()
 
 
 new SlimSelect({
-  select: '#select-city'
+  select: '#select-city',
+  searchPlaceholder: 'Busca tu ciudad'
 })

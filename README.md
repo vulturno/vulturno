@@ -2,6 +2,7 @@
 La evolución de las temperaturas máximas en España
 
 
+## Lista de estaciones 
 
 | Ciudad        | Número        | Año     | Completo      |
 | ------------- |:-------------:| -------:|:-------------:|
@@ -36,7 +37,7 @@ La evolución de las temperaturas máximas en España
 | Jerez         | 5960          |  1950   |
 | Jaen          | 5270          |  1950   |
 | Ourense       | 1690B         |  1952   |
-| Girona(X)     | 0370B         |  1950   |
+| Girona        | 0370B         |  1950   |
 | Lugo          | 1505          |  1951   |
 | Santiago      | 1428          |  1950   |
 | Caceres       | 3469          |  1950   |
@@ -58,6 +59,7 @@ La evolución de las temperaturas máximas en España
 | Almería(X)    | 6297          |  1950   |
 
 
+## Limpiando datos
 
 Seleccionamos el resumen anual del año, este es el número del año acabado en -13. Ahora nos quedamos solamente con la fecha y con tm_mes que corresponde a la temperatura media del año.
 ```
@@ -83,14 +85,18 @@ Fuera de la lista:
 Ceuta, la estación 5000A tiene datos desde 1950 hasta 1986, la 5000C desde 2009.
 
 
-Incompletos
+## Lista de ciudades con estaciones unificadas
 
-Albacete: 1953 - 1954 - 1955 - 1956 - 1959 - 1960
-Almería: desde 1981 en adelante
-Avila: repasarlo entero
-Badajoz: desde 1954
-Bilbao: 1958 - 2000 - 2001
-Burgos: 1955
-Caceres: faltan desde 1983 en adelante
-Castellon: 1952 - 1953 - 1954 -
-Murcia: 1955 - 1965 - 2007 - 2011 - 2012
+Almería unificar 6325O(desde 1980) y 6297()
+Avila unificar 2444(desde 1983) y 2444C
+Caceres unificar 3469A(desde 1983) y 3469
+Castellón unificar 8500A y 8501. Falta la 8500A desde 1976
+Ciudad Real unificar 4121(desde 1970) y 4121C
+Guadalajara unificar 3168C(desde 1985) y 3168A
+Huelva unificar 4642E(desde 1985) y 4605
+Jaen unificar 5270(desde 1985) y 5270B
+Lleida unificar 9771C(desde 1985) y 9771
+Merida no tiene datos suficientes
+Segovia unificar 2465(desde 1989) y 2465A
+Toledo unificar 3260B y 3259
+Vitoria no tiene datos suficientes.
