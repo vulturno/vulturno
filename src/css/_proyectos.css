@@ -1,0 +1,77 @@
+.data-viz {
+    padding: 4rem 0;
+}
+
+.proyectos-element {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 30rem;
+    display: inline-block;
+    text-decoration: none;
+    transition: all .3s ease-in;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .31), 0 2px 4px 0 rgba(50, 50, 58, .2);
+    &:hover {
+        transform: translateY(-.25rem);
+        opacity: .9;
+    }
+}
+
+.proyectos-element-title {
+    font-size: 1.25rem;
+    font-family: var(--roboto);
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: block;
+    margin: 0;
+    padding-bottom: .25rem;
+}
+
+.proyectos-element-subtitle {
+    font-size: .75rem;
+    font-family: var(--roboto);
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.proyectos-element-text {
+    font-size: 1rem;
+    font-family: var(--text);
+    margin-top: .5rem;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.proyecto-1 {
+    background-color: var(--project1bg);
+}
+
+.proyecto-1-text {
+    color: var(--project1txt);
+}
+
+.proyecto-2 {
+    background-color: var(--project2bg);
+}
+
+.proyecto-2-text {
+    color: var(--project2txt);
+}
+
+.proyecto-4 {
+    background-color: var(--project4bg);
+}
+
+.proyecto-4-text {
+    color: var(--project4txt);
+}
+
+@media only screen and (min-width: 48em) {
+
+    .proyectos-element {
+        padding: 2rem;
+    }
+
+}

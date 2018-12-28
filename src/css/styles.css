@@ -2,9 +2,11 @@
 @import '_header';
 @import '_chart';
 @import '_metodology';
+@import '_proyectos';
 @import '_footer';
 
 body {
     margin: 0;
     background-color: rgba(14, 31, 57, .2);
+    line-height: 1.3;
 }

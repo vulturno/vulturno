@@ -9,4 +9,10 @@
   --black: #111;
   --white: #fff;
   --shadowTooltip: 0 2px 9px 0 rgba(0, 0, 0, .2);
+  --project1bg: #FEE1C2;
+  --project1txt: #952747;
+  --project2bg: #354A57;
+  --project2txt: #a5cf80;
+  --project4bg: #798780;
+  --project4txt: #1a182a;
 }
