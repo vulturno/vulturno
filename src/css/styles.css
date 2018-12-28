@@ -1,23 +1,10 @@
-/*
-  Base CSS por Jorge Aznar
-  http://jorgeatgu.com
-  Estructura básica para iniciar cualquier proyecto con postCSS
-*/
-
 @import '_variables';
 @import '_header';
 @import '_chart';
+@import '_metodology';
 @import '_footer';
-
-@font-face {
-    font-family: 'Butler';
-    src: url('../font/Butler-ExtraBold.woff2') format('woff2'),
-        url('../font/Butler-ExtraBold.woff') format('woff');
-    font-weight: 800;
-    font-style: normal;
-}
 
 body {
     margin: 0;
-    background-color: #dde8e0;
+    background-color: rgba(14, 31, 57, .2);
 }

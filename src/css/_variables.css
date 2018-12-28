@@ -1,10 +1,12 @@
 :root {
   --fontSystem: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, sans-serif;
   --monospace: 'SFMono-Regular', Consolas, Menlo, Courier, monospace;
-  --title: 'Butler', serif;
+  --title: 'Abril Fatface', cursive;
   --text: 'Adamina', serif;
   --roboto: 'Roboto Condensed', sans-serif;
   --orange: #F35F3D;
   --circles: #4d122c;
   --black: #111;
+  --white: #fff;
+  --shadowTooltip: 0 2px 9px 0 rgba(0, 0, 0, .2);
 }

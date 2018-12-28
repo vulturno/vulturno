@@ -1,0 +1,19 @@
+.metodology {
+    background-color: #dde8e0;
+    padding: 6rem 0;
+}
+
+.metodology-container {
+    margin: 0 auto;
+}
+
+.metodology-title {
+    font-family: var(--title);
+    font-weight: normal;
+}
+
+.metodology-text {
+    font-family: var(--text);
+    max-width: 30rem;
+    line-height: 1.3;
+}
