@@ -1,5 +1,5 @@
-year,temp,tempmax,yearmax
-1950,14.3,15.8,1997
+year,temp,tempmax,yearmax,tempmin,yearmin
+1950,14.3,15.8,1997,13.2,1956
 1951,13.7
 1952,14.1
 1953,13.9

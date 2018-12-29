@@ -1,5 +1,5 @@
-year,temp,tempmax,yearmax
-1971,17.7,19.9,1989
+year,temp,tempmax,yearmax,tempmin,yearmin
+1971,17.7,19.9,1989,17.5,1972
 1972,17.5
 1973,17.9
 1974,18
