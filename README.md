@@ -89,15 +89,15 @@ Ceuta, la estación 5000A tiene datos desde 1950 hasta 1986, la 5000C desde 2009
 
 Almería unificar 6325O(desde 1980) y 6297() - **Hecho**
 Avila unificar 2444(desde 1983) y 2444C **Hecho**
-Caceres unificar 3469A(desde 1983) y 3469
-Castellón unificar 8500A y 8501. Falta la 8500A desde 1976
-Ciudad Real unificar 4121(desde 1970) y 4121C
-Guadalajara unificar 3168C(desde 1985) y 3168A
-Huelva unificar 4642E(desde 1985) y 4605
-Jaen unificar 5270(desde 1985) y 5270B
-Lleida unificar 9771C(desde 1985) y 9771
+Caceres unificar 3469A(desde 1983) y 3469 **Hecho**
+Castellón unificar 8500A y 8501. Falta la 8500A desde 1976 **Hecho**
+Ciudad Real unificar 4121(desde 1970) y 4121C **Hecho**
+Guadalajara no tiene datos suficientes unificar 3168C(desde 1985) y 3168A
+Huelva unificar 4642E(desde 1985) y 4605 **Hecho**
+Jaen unificar 5270(desde 1985) y 5270B **no tiene datos suficientes**
+Lleida unificar 9771C(desde 1985) y 9771 **Hecho**
 Merida no tiene datos suficientes
-Segovia unificar 2465(desde 1989) y 2465A
+Segovia unificar 2465(desde 1989) y 2465A **Hecho**
 Toledo unificar 3260B y 3259 **Hecho**
 Vitoria no tiene datos suficientes.
 Lugo consultar otras estaciones.
