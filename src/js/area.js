@@ -51,7 +51,7 @@ const vulturno = () => {
         const leftToolMax = posToolMax.left;
 
         tooltipMax.data(datos)
-            .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
+            .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
 
         tooltipMin.data(datos)
             .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" })
@@ -232,7 +232,9 @@ const vulturno = () => {
 
             datos.forEach(d => {
                 d.temp = +d.temp;
+                d.tempmax = +d.tempmax;
                 d.year = d.year;
+                d.yearmax = d.yearmax;
                 d.fecha = +d.year;
             });
 
@@ -249,7 +251,7 @@ const vulturno = () => {
             updateChart(datos)
 
             tooltipMax.data(datos)
-                .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
+                .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
 
             tooltipMin.data(datos)
                 .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
@@ -314,7 +316,7 @@ const vulturno = () => {
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/Vitoria.csv', (error, data) => {
+        d3.csv('csv/Segovia.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -329,7 +331,7 @@ const vulturno = () => {
                 setupScales()
                 updateChart(datos)
                 tooltips(datos)
-                mes = 'Vitoria';
+                mes = 'Segovia';
                 update(mes)
             }
 
