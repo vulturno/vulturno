@@ -8,25 +8,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Adamina|Abril+Fatface" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Adamina|Playfair+Display:400,900" rel="stylesheet">
 </head>
 
 <body>
     <div class="header-100 orange">
         <img src="img/cinco.jpg" alt="" class="header-absolute">
         <div class="header-text">
-            <h1 class="header-title">VULTURNO</h1>
-            <p class="header-p">Una visualización de datos para ver la evolución de la temperatura media anual en las diferentes estaciones de la AEMET.</p>
+            <h1 class="header-title">Vulturno</h1>
         </div>
     </div>
     <section class="chart">
         <section class="chart-container">
             <article class="chart-text-container">
-                <p class="chart-text">A continuación puedes consultar la temperatura media de 45 estaciones de la AEMET, casi todas capitales de provincia. También el año cuando se registro la temperatura media mínima y la temperatura media máxima.</p>
+                <p class="chart-text">Una visualización de datos para ver la evolución de la temperatura media anual en las diferentes estaciones de la AEMET.</p>
+                <p class="chart-text">En la gráfica podrás consultar la temperatura media de 45 estaciones de la AEMET, casi todas capitales de provincia. También el año cuando se registro la temperatura media mínima y la temperatura media máxima.</p>
                 <p class="chart-text">En algunas estaciones faltan datos. En la gráfica cada año esta representado con un círculo, la ausencia del mismo indica que faltan los datos de ese año.</p>
+                <select class="temperatura-mensual-minima-select" id="select-city"></select>
             </article>
             <article class="chart-vulturno">
-                <select class="temperatura-mensual-minima-select" id="select-city"></select>
                 <svg>
                     <g class="chart-vulturno-container"></g>
                 </svg>

@@ -1,6 +1,13 @@
 const vulturno = () => {
 
-    const margin = { top: 16, right: 16, bottom: 24, left: 48 };
+    const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+    if (widthMobile > 544) {
+        margin = { top: 16, right: 16, bottom: 24, left: 48 };
+    } else {
+        margin = { top: 16, right: 16, bottom: 24, left: 32 };
+    }
+
     let width = 0;
     let height = 0;
     const chart = d3.select('.chart-vulturno');
