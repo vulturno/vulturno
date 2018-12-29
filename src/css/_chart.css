@@ -6,13 +6,13 @@
 
 .chart-text-container {
     padding: 1.5rem;
-    background-color: #2c3b58;
+    background-color: var(--white);
     margin: 3rem auto;
-    max-width: 20rem;
+    max-width: 25rem;
     border-radius: 2px;
     box-shadow: var(--shadowTooltip);
     font-family: var(--text);
-    color: var(--white);
+    color: var(--black);
 }
 
 .chart-text {
@@ -23,7 +23,7 @@
     position: relative;
     .tooltip {
         position: absolute;
-        top: -10px;
+        top: -1rem;
         right: 0;
         padding: 1rem;
         background-color: #DB455E;
@@ -39,7 +39,7 @@
     }
     .tooltip-media-anual-minima {
         background-color: #2A7D97;
-        left: 30%;
+        left: 3.5rem;
     }
     .tooltip-temp {
         top: 105%;
@@ -101,43 +101,6 @@
     .circles {
         fill: var(--circles);
     }
-}
-
-.ss-single-selected {
-    max-width: 10rem !important;
-    margin-left: 3rem;
-    border-radius: 5px;
-    padding: 1rem !important;
-    padding-right: .25rem !important;
-    border: 1px solid #ddd !important;
-    background-color: #f1f1f1;
-    font-family: var(--roboto) !important;
-    color: var(--black) !important;
-}
-
-.ss-option {
-    font-family: var(--roboto) !important;
-    color: var(--black) !important;
-}
-
-.ss-main .ss-content .ss-list .ss-option.ss-disabled {
-    color: #bdbdbd !important;
-}
-
-.ss-main .ss-single-selected .ss-arrow span {
-    border-color: var(--black) !important;
-}
-
-.ss-main .ss-single-selected .placeholder,
-.ss-main .ss-single-selected .placeholder * {
-    overflow: initial !important;
-}
-
-.ss-content {
-    max-width: 10rem !important;
-    margin-left: 3rem !important;
-    border: 1px solid #ddd !important;
-    box-shadow: var(--shadowTooltip);
 }
 
 @media only screen and (min-width: 48rem) {

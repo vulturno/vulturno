@@ -42,28 +42,20 @@
 }
 
 .header-text {
-    position: absolute;
-    top: 5vh;
-    left: 40vw;
+    margin: auto;
+    padding-bottom: 5rem;
 }
 
 .header-title {
-    font-size: 3rem;
+    font-size: 7rem;
     font-family: var(--title);
     margin: .5rem 0 0;
-}
-
-.header-p {
-    font-size: 1rem;
-    font-family: var(--text);
-    max-width: 25rem;
-    margin-top: .25rem;
-    line-height: 1.3;
 }
 
 .header-100 {
     width: 100%;
     height: 80vh;
+    display: flex;
     position: relative;
 }
 

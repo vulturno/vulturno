@@ -1,0 +1,36 @@
+.ss-main .ss-single-selected {
+    max-width: 10rem !important;
+    margin: 0 auto !important;
+    border-radius: 5px;
+    padding: 1rem !important;
+    padding-right: .25rem !important;
+    border: 1px solid #ddd !important;
+    background-color: #f1f1f1;
+    font-family: var(--roboto) !important;
+    color: var(--black) !important;
+}
+
+.ss-option {
+    font-family: var(--roboto) !important;
+    color: var(--black) !important;
+}
+
+.ss-main .ss-content .ss-list .ss-option.ss-disabled {
+    color: #bdbdbd !important;
+}
+
+.ss-main .ss-single-selected .ss-arrow span {
+    border-color: var(--black) !important;
+}
+
+.ss-main .ss-single-selected .placeholder,
+.ss-main .ss-single-selected .placeholder * {
+    overflow: initial !important;
+}
+
+.ss-content {
+    max-width: 10rem !important;
+    margin-left: 3rem !important;
+    border: 1px solid #ddd !important;
+    box-shadow: var(--shadowTooltip);
+}

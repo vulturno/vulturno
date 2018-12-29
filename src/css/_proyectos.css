@@ -68,7 +68,7 @@
     color: var(--project4txt);
 }
 
-@media only screen and (min-width: 48em) {
+@media only screen and (min-width: 48rem) {
 
     .proyectos-element {
         padding: 2rem;
