@@ -67,3 +67,28 @@
     left: 0;
     object-fit: cover;
 }
+
+.header-photo {
+    position: absolute;
+    bottom: .25rem;
+    right: 1rem;
+}
+
+.header-photo-icon {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header-photo-text {
+    font-size: 12px;
+    font-family: var(--roboto);
+    color: var(--white);
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: .25rem;
+    a {
+        color: currentColor;
+    }
+}

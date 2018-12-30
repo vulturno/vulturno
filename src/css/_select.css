@@ -1,13 +1,16 @@
 .ss-main .ss-single-selected {
     max-width: 10rem !important;
-    margin: 0 auto !important;
     border-radius: 5px;
+    height: auto !important;
     padding: 1rem !important;
     padding-right: .25rem !important;
     border: 1px solid #ddd !important;
     background-color: #f1f1f1;
     font-family: var(--roboto) !important;
     color: var(--black) !important;
+    top: -1rem;
+    position: relative;
+    margin-left: 3rem;
 }
 
 .ss-option {
@@ -32,5 +35,5 @@
     max-width: 10rem !important;
     border: 1px solid #ddd !important;
     box-shadow: var(--shadowTooltip);
-    margin: 0 auto !important;
+    margin-left: 3rem !important;
 }

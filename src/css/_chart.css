@@ -24,7 +24,7 @@
     .tooltip {
         position: absolute;
         top: -1rem;
-        right: 0;
+        right: 1rem;
         padding: 1rem;
         background-color: #DB455E;
         border-radius: 2px;
@@ -39,11 +39,12 @@
     }
     .tooltip-media-anual-minima {
         background-color: #2A7D97;
-        left: 3.5rem;
+        top: 3rem;
     }
     .tooltip-temp {
-        top: 105%;
-        left: 0;
+        top: 0;
+        left: 3rem;
+        bottom: initial;
         background-color: #050b2c;
         width: 20rem;
         .tooltip-media-texto {
@@ -57,7 +58,7 @@
     }
     .lines {
         fill: none;
-        stroke: var(--black);
+        stroke: #2f1c0e;
         stroke-dasharray: 1 4;
         opacity: .4;
     }
@@ -100,6 +101,11 @@
     }
     .circles {
         fill: var(--circles);
+    }
+    .circlesBig {
+        fill: transparent;
+        stroke: var(--circles);
+        stroke-width: 1;
     }
 }
 
