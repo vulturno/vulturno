@@ -4,10 +4,12 @@ La evolución de las temperaturas máximas en España
 
 ## Lista de estaciones 
 
-| Ciudad        | Número        | Año     | Completo      |
-| ------------- |:-------------:| -------:|:-------------:|
-| A coruña      | 1387          |  1950   | SI
-| Valencia      | 8416          |  1950   | SI
+| Ciudad        | Número        | Año     | 
+| ------------- |:-------------:| -------:|
+| A coruña      | 1387          |  1950   |
+| Valencia      | 8416          |  1950   |
+| Madrid(Retiro)| 3195          |  1950   |
+| Barcelona     | 0076          |  1950   |
 | Sevilla       | 5783          |  1951   |
 | Malaga        | 6155A         |  1950   |
 | Murcia        | 7031          |  1950   |
