@@ -45,20 +45,11 @@ const vulturno = () => {
         tooltipMin = chart.append("div")
             .attr("class", "tooltip tooltip-media-anual-minima");
 
-        /*Calculamos la posicion del tooltip de temperatura maxima*/
-        const posToolMax = document.getElementById('tooltip-max').getBoundingClientRect();
-        const widthToolMax = document.getElementById('tooltip-max').offsetWidth;
-        const leftToolMax = posToolMax.left;
-
         tooltipMax.data(datos)
             .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
 
         tooltipMin.data(datos)
-            .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" })
-            /*Al tooltip de minimas le modificamos la posición, pasandole la posición del otro tooltip y restandole el ancho de los dos*/
-            .style("right", leftToolMax - widthToolMax + 'px');
-
-
+            .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.tempmin ) + "ºC</strong> en <strong>" + d.yearmin; + "</strong></p>" });
 
     }
 
@@ -148,7 +139,6 @@ const vulturno = () => {
             const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
                 tooltipTemp.style("opacity", 1)
                     .html(`<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`)
-                    .style("left", positionTooltip + 'px')
 
                 focus.select(".x-hover-line")
                     .attr("transform",
@@ -190,16 +180,21 @@ const vulturno = () => {
 
         const newLayer = layer.enter()
             .append('path')
-            .attr('class', 'area area-vulturno')
+            .attr('class', 'area area-vulturno');
+
+        const dotsBig = container.selectAll('.circlesBig').remove().exit()
+            .data(datos)
+
+        const dotsBigLayer = dotsBig.enter()
+            .append("circle")
+            .attr("class", "circlesBig");
 
         const dots = container.selectAll('.circles').remove().exit()
             .data(datos)
 
         const dotsLayer = dots.enter()
             .append("circle")
-            .attr("class", "circles")
-            .attr("fill", "#921d5d")
-            .attr("opacity", 1)
+            .attr("class", "circles");
 
         layer.merge(newLayer)
             .transition()
@@ -218,7 +213,20 @@ const vulturno = () => {
             .ease(d3.easeLinear)
             .attr("cx", d => scales.count.x(d.year))
             .attr("cy", d => scales.count.y(d.temp))
-            .attr('r', 3)
+            .attr('r', 3);
+
+        dotsBigLayer.merge(dotsBig)
+            .attr("cx", d => scales.count.x(d.year))
+            .attr("cy", 0)
+            .transition()
+            .delay(function(d, i) {
+                return i * 10
+            })
+            .duration(300)
+            .ease(d3.easeLinear)
+            .attr("cx", d => scales.count.x(d.year))
+            .attr("cy", d => scales.count.y(d.temp))
+            .attr('r', 6)
 
         drawAxes(g)
 
@@ -232,10 +240,12 @@ const vulturno = () => {
 
             datos.forEach(d => {
                 d.temp = +d.temp;
-                d.tempmax = +d.tempmax;
                 d.year = d.year;
-                d.yearmax = d.yearmax;
                 d.fecha = +d.year;
+                d.tempmax = +d.tempmax;
+                d.yearmax = d.yearmax;
+                d.tempmin = +d.tempmin;
+                d.yearmin = d.yearmin;
             });
 
             scales.count.x.range([0, width]);
@@ -254,7 +264,7 @@ const vulturno = () => {
                 .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
 
             tooltipMin.data(datos)
-                .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.temp ) + "ºC</strong> en <strong>" + d.year; + "</strong></p>" });
+                .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.tempmin ) + "ºC</strong> en <strong>" + d.yearmin; + "</strong></p>" })
 
         });
 
