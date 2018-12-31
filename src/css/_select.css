@@ -1,5 +1,5 @@
 .ss-main .ss-single-selected {
-    max-width: 10rem !important;
+    max-width: 13rem !important;
     border-radius: 5px;
     height: auto !important;
     padding: 1rem !important;
@@ -32,8 +32,9 @@
 }
 
 .ss-content {
-    max-width: 10rem !important;
+    max-width: 13rem !important;
     border: 1px solid #ddd !important;
     box-shadow: var(--shadowTooltip);
     margin-left: 3rem !important;
+    margin-top: -1rem !important;
 }

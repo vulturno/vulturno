@@ -11,12 +11,14 @@
     max-width: 25rem;
     border-radius: 2px;
     box-shadow: var(--shadowTooltip);
-    font-family: var(--text);
     color: var(--black);
 }
 
 .chart-text {
+    font-family: var(--roboto);
+    margin-left: 3rem;
     margin-top: 0;
+    margin-bottom: 1.25rem;
 }
 
 .chart-vulturno {
