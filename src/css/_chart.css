@@ -15,10 +15,7 @@
 }
 
 .chart-text {
-    font-family: var(--roboto);
-    margin-left: 3rem;
-    margin-top: 0;
-    margin-bottom: 1.25rem;
+    font-family: var(--text);
 }
 
 .chart-vulturno {
