@@ -182,13 +182,6 @@ const vulturno = () => {
             .append('path')
             .attr('class', 'area area-vulturno');
 
-        const dotsBig = container.selectAll('.circlesBig').remove().exit()
-            .data(datos)
-
-        const dotsBigLayer = dotsBig.enter()
-            .append("circle")
-            .attr("class", "circlesBig");
-
         const dots = container.selectAll('.circles').remove().exit()
             .data(datos)
 
@@ -200,7 +193,7 @@ const vulturno = () => {
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
-            .attr('d', area);
+            .attr('d', area)
 
         dots.merge(dotsLayer)
             .attr("cx", d => scales.count.x(d.year))
@@ -213,20 +206,7 @@ const vulturno = () => {
             .ease(d3.easeLinear)
             .attr("cx", d => scales.count.x(d.year))
             .attr("cy", d => scales.count.y(d.temp))
-            .attr('r', 3);
-
-        dotsBigLayer.merge(dotsBig)
-            .attr("cx", d => scales.count.x(d.year))
-            .attr("cy", 0)
-            .transition()
-            .delay(function(d, i) {
-                return i * 10
-            })
-            .duration(300)
-            .ease(d3.easeLinear)
-            .attr("cx", d => scales.count.x(d.year))
-            .attr("cy", d => scales.count.y(d.temp))
-            .attr('r', 6)
+            .attr('r', 4);
 
         drawAxes(g)
 
@@ -247,6 +227,8 @@ const vulturno = () => {
                 d.tempmin = +d.tempmin;
                 d.yearmin = d.yearmin;
             });
+
+            console.log(datos)
 
             scales.count.x.range([0, width]);
             scales.count.y.range([height, 0]);
@@ -326,7 +308,7 @@ const vulturno = () => {
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/Segovia.csv', (error, data) => {
+        d3.csv('csv/Albacete.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -341,7 +323,7 @@ const vulturno = () => {
                 setupScales()
                 updateChart(datos)
                 tooltips(datos)
-                mes = 'Segovia';
+                mes = 'Albacete';
                 update(mes)
             }
 
