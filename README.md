@@ -4,61 +4,62 @@ La evolución de las temperaturas máximas en España
 
 ## Lista de estaciones 
 
-| Ciudad        | Número        | Año     | 
-| ------------- |:-------------:| -------:|
-| A coruña      | 1387          |  1950   |
-| Valencia      | 8416          |  1950   |
-| Madrid(Retiro)| 3195          |  1950   |
-| Barcelona     | 0076          |  1950   |
-| Sevilla       | 5783          |  1951   |
-| Malaga        | 6155A         |  1950   |
-| Murcia        | 7031          |  1950   |
-| Palma         | B278          |  1951   |
-| Gran Canaria  | C649I         |  1951   |
-| Bilbao        | 1082          |  1950   |
-| Alicante      | 8025          |  1950   |
-| Cordoba       | 5402          |  1960   |
-| Valladolid    | 2539          |  1950   |
+| Ciudad        | Número        | Año     | Máxima  | Mínima  |
+| ------------- |:-------------:| -------:| -------:| -------:|
+| A coruña      | 1387          |  1950   | 1997    | 1956    |
+| Valencia      | 8416          |  1950   | 2014    | 1956    |
+| Zaragoza      | 9434          |  1950   | 2014    | 1956    |
+| Madrid(Retiro)| 3195          |  1950   | 2017    | 1956    |
+| Barcelona     | 0076          |  1950   | 2017    | 1972    |
+| Sevilla       | 5783          |  1951   |         |         |
+| Malaga        | 6155A         |  1950   |         |         |
+| Murcia        | 7031          |  1950   | 2014    | 1956    |
+| Palma         | B278          |  1951   | 2014    | 1956    |
+| Gran Canaria  | C649I         |  1951   | 1998    | 1954    |
+| Bilbao        | 1082          |  1950   | 2011    | 1956    |
+| Alicante      | 8025          |  1950   | 1955    | 1972    |
+| Cordoba       | 5402          |  1960   | 2014    | 1956    |
+| Valladolid    | 2539          |  1950   | 2011    | 1956    |
 | Vitoria(X)    | 9087          |  1950   |
-| Granada       | 5514          |  1950   |
-| Oviedo        | 1249I         |  1972   |
-| Tenerife      | C447A         |  1950   |
-| Pamplona      | 9771          |  1954   |
-| Donostia      | 1024E         |  1950   |
-| Burgos        | 2331          |  1950   |
-| Albacete      | 8175          |  1950   |
-| Santander     | 1109          |  1954   |
-| Castellón     | 8501          |  1950   |
-| Logroño       | 9170          |  1950   |
-| Badajoz       | 4452          |  1955   |
-| Huelva        | 4605          |  1950   |
-| Salamanca     | 2867          |  1950   |
-| Lleida        | 9771          |  1960   |
-| Reus          | 0016A         |  1950   |
-| León          | 2661          |  1950   |
-| Jerez         | 5960          |  1950   |
-| Jaen          | 5270          |  1950   |
+| Granada       | 5514          |  1950   | 2017    | 1971    |
+| Oviedo        | 1249I         |  1972   | 2014    | 1956    |
+| Tenerife      | C447A         |  1950   | 2017    | 1950    |
+| Pamplona      | 9771          |  1954   | 2011    | 1972    |
+| Donostia      | 1024E         |  1950   | 1997    | 1956    |
+| Burgos        | 2331          |  1950   | 2014    | 1956    |
+| Albacete      | 8175          |  1950   | 2014    | 1971    |
+| Santander     | 1109          |  1954   | 2014    | 1962    |
+| Castellón     | 8501          |  1950   | 2014    | 1976    |
+| Logroño       | 9170          |  1950   | 2011    | 1956    |
+| Badajoz       | 4452          |  1955   | 2017    | 1956    |
+| Huelva        | 4605          |  1950   | 1961    | 1956    |
+| Salamanca     | 2867          |  1950   | 1995    | 1956    |
+| Lleida        | 9771          |  1960   | 2014    | 1972    |
+| Reus          | 0016A         |  1950   | 2015    | 1972    |
+| León          | 2661          |  1950   | 2017    | 1956    |
+| Jerez         | 5960          |  1950   | 2011    | 1956    |
+| Jaen          | 5270          |  1950   |         |         |
 | Ourense       | 1690B         |  1952   |
-| Girona        | 0370B         |  1950   |
-| Lugo          | 1505          |  1951   |
-| Santiago      | 1428          |  1950   |
-| Caceres       | 3469          |  1950   |
-| Melilla       | 6000A         |  1971   |
-| Ceuta(X)      | 5000A         |  1950   |
-| Guadalajara   | 3168A         |  1950   |
-| Toledo(?)     | 3259          |  1950   |
+| Girona        | 0370B         |  1950   | 2011    | 1980    |
+| Lugo          | 1505          |  1951   | 2014    | 1956    |
+| Santiago      | 1428          |  1950   | 1997    | 1956    |
+| Caceres       | 3469          |  1950   | 2017    | 1972    |
+| Melilla       | 6000A         |  1971   | 1989    | 1972    |
+| Ceuta(X)      | 5000A         |  1950   |         |         |
+| Guadalajara   | 3168A         |  1950   |         |         |
+| Toledo(?)     | 3259          |  1950   | 2017    | 1956    |
 | Pontevedra    | 1484          |  1964   |
-| Palencia      | 2401          |  1950   |
-| Ciudad Real   | 4121C         |  1950   |
-| Zamora        | 2614          |  1956   |
-| Merida        | 4410X         |  1990   |
-| Avila         | 2444C         |  1953   |
-| Cuenca        | 8096          |  1951   |
-| Huesca        | 9898          |  1950   |
-| Segovia       | 2465A         |  1950   |
-| Soria         | 2030          |  1950   |
+| Palencia      | 2401          |  1950   | 1981    | 1956    |
+| Ciudad Real   | 4121C         |  1950   | 2017    | 1972    |
+| Zamora        | 2614          |  1956   |         |         |
+| Merida        | 4410X         |  1990   |  
+| Avila         | 2444C         |  1953   | 2017    | 1972    |
+| Cuenca        | 8096          |  1951   | 2017    | 1956    |
+| Huesca        | 9898          |  1950   | 2014    | 1956    |
+| Segovia       | 2465A         |  1950   | 2017    | 1972    |
+| Soria         | 2030          |  1950   | 2017    | 1956    |
 | Teruel(X)     | 9381          |  1950   |
-| Almería(X)    | 6297          |  1950   |
+| Almería(X)    | 6297          |  1950   | 2015    | 1956    |
 
 
 ## Limpiando datos
@@ -102,4 +103,9 @@ Merida no tiene datos suficientes
 Segovia unificar 2465(desde 1989) y 2465A **Hecho**
 Toledo unificar 3260B y 3259 **Hecho**
 Vitoria no tiene datos suficientes.
-Lugo consultar otras estaciones.
+Lugo consultar otras estaciones, no tiene datos suficientes.
+Palencia consultar otras estaciones, no tiene datos suficientes.
+Pontevedra desde 1964 en la 1484.
+Ourense desde 1952 en la 1690B **Hecho**
+Sevilla desde 1950(error en los años 1988,1989) en la 5783 **Hecho**
+Malaga desde 1950(error en los años 1958 y 1959) en la 6155A **Hecho**
