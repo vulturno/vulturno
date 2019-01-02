@@ -52,7 +52,6 @@
     }
     .tooltip-temp {
         top: 0;
-        left: 0;
         bottom: initial;
         background-color: #050b2c;
         width: max-content;
@@ -104,8 +103,8 @@
     }
     .lines {
         fill: none;
-        /* stroke: #66070D; */
-        stroke-width: 1px;
+        stroke: #E76E32;
+        stroke-width: 5px;
     }
     .circles {
         fill: var(--circles);
@@ -132,9 +131,6 @@
             strong {
                 font-size: 1.25rem;
             }
-        }
-        .tooltip-temp {
-            left: 35%;
         }
         .tooltip-media-texto {
             font-size: 1rem;
