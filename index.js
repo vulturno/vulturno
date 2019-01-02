@@ -11,7 +11,7 @@ export {
 } from "d3-array";
 
 export {
-    area, line
+    line, curveCardinal
 } from "d3-shape";
 
 export {

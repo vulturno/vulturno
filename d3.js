@@ -2055,7 +2055,7 @@ Cardinal.prototype = {
   }
 };
 
-(function custom(tension) {
+var cardinal = (function custom(tension) {
 
   function cardinal(context) {
     return new Cardinal(context, tension);
@@ -7373,6 +7373,7 @@ exports.max = max;
 exports.bisector = bisector;
 exports.area = area;
 exports.line = line;
+exports.curveCardinal = cardinal;
 exports.scaleTime = time;
 exports.scaleLinear = linear;
 exports.axisBottom = axisBottom;
