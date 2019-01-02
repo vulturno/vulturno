@@ -22,7 +22,7 @@ for (( i=0; i<${#cities[@]}; ++i )); do
     sed '1,2!d' ${cities[$i]}-temp.csv > min/${cities[$i]}-min.csv &&
     # Ahora ordenamos en orden ascendente
     csvsort -c 2 -r ${cities[$i]}.csv >  ${cities[$i]}-temp-max.csv &&
-    sed '1,2!d' ${cities[$i]}-temp.csv > max/${cities[$i]}-max.csv
+    sed '1,2!d' ${cities[$i]}-temp-max.csv > max/${cities[$i]}-max.csv
 done
 
 find . -name '*-temp*' -delete
