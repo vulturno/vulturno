@@ -7372,6 +7372,7 @@ exports.min = min;
 exports.max = max;
 exports.bisector = bisector;
 exports.area = area;
+exports.line = line;
 exports.scaleTime = time;
 exports.scaleLinear = linear;
 exports.axisBottom = axisBottom;

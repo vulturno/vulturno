@@ -11,7 +11,7 @@ export {
 } from "d3-array";
 
 export {
-    area
+    area, line
 } from "d3-shape";
 
 export {
