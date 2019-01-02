@@ -1,5 +1,6 @@
-# vulturno
-La evolución de las temperaturas máximas en España
+# Vulturno
+
+La evolución de las temperaturas media anual en 45 estaciones de la AEMET en España.
 
 
 ## Lista de estaciones 
@@ -32,9 +33,9 @@ La evolución de las temperaturas máximas en España
 | Castellón     | 8501          |  1950   | 2014    | 1976    |
 | Logroño       | 9170          |  1950   | 2011    | 1956    |
 | Badajoz       | 4452          |  1955   | 2017    | 1956    |
-| Huelva        | 4605          |  1950   | 1961    | 1956    |
+| Huelva        | 4642E         |  1950   | 1961    | 1956    |
 | Salamanca     | 2867          |  1950   | 1995    | 1956    |
-| Lleida        | 9771          |  1960   | 2014    | 1972    |
+| Lleida        | 9771C         |  1960   | 2014    | 1972    |
 | Reus          | 0016A         |  1950   | 2015    | 1972    |
 | León          | 2661          |  1950   | 2017    | 1956    |
 | Jerez         | 5960          |  1950   | 2011    | 1956    |
@@ -43,26 +44,34 @@ La evolución de las temperaturas máximas en España
 | Girona        | 0370B         |  1950   | 2011    | 1980    |
 | Lugo          | 1505          |  1951   | 2014    | 1956    |
 | Santiago      | 1428          |  1950   | 1997    | 1956    |
-| Caceres       | 3469          |  1950   | 2017    | 1972    |
+| Caceres       | 3469A         |  1950   | 2017    | 1972    |
 | Melilla       | 6000A         |  1971   | 1989    | 1972    |
 | Ceuta(X)      | 5000A         |  1950   |         |         |
 | Guadalajara   | 3168A         |  1950   |         |         |
-| Toledo(?)     | 3259          |  1950   | 2017    | 1956    |
+| Toledo(?)     | 3260B         |  1950   | 2017    | 1956    |
 | Pontevedra    | 1484          |  1964   |
 | Palencia      | 2401          |  1950   | 1981    | 1956    |
-| Ciudad Real   | 4121C         |  1950   | 2017    | 1972    |
+| Ciudad Real   | 4121          |  1950   | 2017    | 1972    |
 | Zamora        | 2614          |  1956   |         |         |
 | Merida        | 4410X         |  1990   |  
-| Avila         | 2444C         |  1953   | 2017    | 1972    |
+| Avila         | 2444          |  1953   | 2017    | 1972    |
 | Cuenca        | 8096          |  1951   | 2017    | 1956    |
 | Huesca        | 9898          |  1950   | 2014    | 1956    |
-| Segovia       | 2465A         |  1950   | 2017    | 1972    |
+| Segovia       | 2465          |  1950   | 2017    | 1972    |
 | Soria         | 2030          |  1950   | 2017    | 1956    |
 | Teruel(X)     | 9381          |  1950   |
-| Almería(X)    | 6297          |  1950   | 2015    | 1956    |
+| Almería(X)    | 6325O         |  1950   | 2015    | 1956    |
 
+
+## Datos
+
+Todos los datos provienen de [open data de la AEMET](https://opendata.aemet.es/centrodedescargas/inicio).
 
 ## Limpiando datos
+
+Todos los scripts que he utilizado para limpiar y extraer datos están disponibles en la carpeta ```scripts```
+
+Para obtener solamente la temperatura anual de cada año he usado: vulturno-temp.sh
 
 Seleccionamos el resumen anual del año, este es el número del año acabado en -13. Ahora nos quedamos solamente con la fecha y con tm_mes que corresponde a la temperatura media del año.
 ```
@@ -80,15 +89,9 @@ json2csv -i prueba.json -o prueba.csv
 ```
 
 
-(?):
-Toledo contiene la información de dos estaciones, la 3259 que contiene datos desde 1950 hasta 1981. Y la 3260B que contiene datos desde 1982 hasta 2017
+Para obtener la máxima y mínima de cada estación he usado: vulturno-max-min.sh
 
-Fuera de la lista:
-
-Ceuta, la estación 5000A tiene datos desde 1950 hasta 1986, la 5000C desde 2009.
-
-
-## Lista de ciudades con estaciones unificadas
+## Estaciones unificadas
 
 Almería unificar 6325O(desde 1980) y 6297() - **Hecho**
 Avila unificar 2444(desde 1983) y 2444C **Hecho**
