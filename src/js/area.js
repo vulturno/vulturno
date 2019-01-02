@@ -171,6 +171,10 @@ const vulturno = () => {
             .y0(height)
             .y1(d => scales.count.y(d.temp));
 
+        const line = d3.line()
+            .x(d => scales.count.x(d.year))
+            .y(d => scales.count.y(d.temp));
+
         updateScales(width, height)
 
         const container = chart.select('.chart-vulturno-container-bis')
@@ -181,6 +185,13 @@ const vulturno = () => {
         const newLayer = layer.enter()
             .append('path')
             .attr('class', 'area area-vulturno');
+
+        const lines = container.selectAll('.lines')
+            .data([datos])
+
+        const newLines = lines.enter()
+            .append('path')
+            .attr('class', 'lines')
 
         const dots = container.selectAll('.circles').remove().exit()
             .data(datos)
@@ -193,7 +204,13 @@ const vulturno = () => {
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
-            .attr('d', area)
+            .attr('d', area);
+
+        lines.merge(newLines)
+            .transition()
+            .duration(600)
+            .ease(d3.easeLinear)
+            .attr('d', line);
 
         dots.merge(dotsLayer)
             .attr("cx", d => scales.count.x(d.year))
@@ -205,8 +222,7 @@ const vulturno = () => {
             .duration(300)
             .ease(d3.easeLinear)
             .attr("cx", d => scales.count.x(d.year))
-            .attr("cy", d => scales.count.y(d.temp))
-            .attr('r', 4);
+            .attr("cy", d => scales.count.y(d.temp));
 
         drawAxes(g)
 
@@ -237,7 +253,7 @@ const vulturno = () => {
                 .domain([d3.min(datos, d => d.year), d3.max(datos, d => d.year )]);
 
             const countY = d3.scaleLinear()
-                .domain([d3.min(datos, d => d.temp - 1), d3.max(datos, d => d.temp + 2 )]);
+                .domain([d3.min(datos, d => d.temp - 2), d3.max(datos, d => d.temp + 2 )]);
 
             scales.count = { x: countX, y: countY };
             updateChart(datos)
