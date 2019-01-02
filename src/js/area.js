@@ -139,6 +139,7 @@ const vulturno = () => {
             const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
                 tooltipTemp.style("opacity", 1)
                     .html(`<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`)
+                    .style('left', positionTooltip + 'px')
 
                 focus.select(".x-hover-line")
                     .attr("transform",
@@ -166,25 +167,14 @@ const vulturno = () => {
 
         g.attr("transform", translate)
 
-        const area = d3.area()
-            .x(d => scales.count.x(d.year))
-            .y0(height)
-            .y1(d => scales.count.y(d.temp));
-
         const line = d3.line()
             .x(d => scales.count.x(d.year))
-            .y(d => scales.count.y(d.temp));
+            .y(d => scales.count.y(d.temp))
+            .curve(d3.curveCardinal.tension(0.6));
 
         updateScales(width, height)
 
         const container = chart.select('.chart-vulturno-container-bis')
-
-        const layer = container.selectAll('.area')
-            .data([datos])
-
-        const newLayer = layer.enter()
-            .append('path')
-            .attr('class', 'area area-vulturno');
 
         const lines = container.selectAll('.lines')
             .data([datos])
@@ -200,17 +190,13 @@ const vulturno = () => {
             .append("circle")
             .attr("class", "circles");
 
-        layer.merge(newLayer)
-            .transition()
-            .duration(600)
-            .ease(d3.easeLinear)
-            .attr('d', area);
 
         lines.merge(newLines)
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', line);
+
 
         dots.merge(dotsLayer)
             .attr("cx", d => scales.count.x(d.year))
@@ -253,7 +239,7 @@ const vulturno = () => {
                 .domain([d3.min(datos, d => d.year), d3.max(datos, d => d.year )]);
 
             const countY = d3.scaleLinear()
-                .domain([d3.min(datos, d => d.temp - 2), d3.max(datos, d => d.temp + 2 )]);
+                .domain([d3.min(datos, d => d.temp - 1), d3.max(datos, d => d.temp + 1 )]);
 
             scales.count = { x: countX, y: countY };
             updateChart(datos)
