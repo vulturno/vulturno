@@ -1,0 +1,41 @@
+.temperature-max,
+.temperature-min {
+    background-color: #670509;
+    padding: 5rem 0;
+}
+
+.temperature-max-container {
+    max-width: 90vw;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.temperature-max-text {
+    font-size: 1rem;
+    font-family: var(--text);
+    color: var(--white);
+    max-width: 15rem;
+    margin: 0 auto;
+    text-align: left;
+    margin-top: -2.5rem;
+}
+
+.temperature-max-number {
+    font-size: 8rem;
+    font-weight: bold;
+    font-family: var(--roboto);
+    color: var(--white);
+    margin: 0;
+}
+
+.temperature-min {
+    background-color: #2A7D97;
+}
+
+@media only screen and (min-width: 48rem) {
+
+    .temperature-max-number {
+        font-size: 10rem;
+    }
+
+}

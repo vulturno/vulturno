@@ -2,6 +2,7 @@
 @import '_header';
 @import '_select';
 @import '_chart';
+@import '_temperature';
 @import '_metodology';
 @import '_proyectos';
 @import '_footer';

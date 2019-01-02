@@ -47,7 +47,7 @@
 }
 
 .header-title {
-    font-size: 7rem;
+    font-size: 4rem;
     font-family: var(--title);
     margin: .5rem 0 0;
 }
@@ -91,4 +91,12 @@
     a {
         color: currentColor;
     }
+}
+
+@media only screen and (min-width: 48rem) {
+
+    .header-title {
+        font-size: 7rem;
+    }
+
 }

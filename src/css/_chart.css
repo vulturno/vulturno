@@ -22,30 +22,40 @@
     position: relative;
     .tooltip {
         position: absolute;
-        top: -1rem;
-        right: 1rem;
-        padding: 1rem;
-        background-color: #DB455E;
+        bottom: 2.5rem;
+        padding: .5rem;
+        background-color: #670509;
         border-radius: 2px;
         box-shadow: var(--shadowTooltip);
-        width: 15rem;
+        width: max-content;
+        strong {
+            font-size: 1rem;
+        }
     }
     .tooltip-media-texto {
         margin: 0;
-        font-size: 1rem;
+        font-size: .65rem;
         font-family: var(--roboto);
         color: var(--black);
     }
+    .tooltip-media-anual-maxima {
+        right: 2rem;
+        bottom: 5rem;
+        .tooltip-media-texto {
+            color: var(--white);
+        }
+    }
     .tooltip-media-anual-minima {
         background-color: #2A7D97;
-        top: 3rem;
+        right: 2rem;
+        left: initial;
     }
     .tooltip-temp {
         top: 0;
-        left: 3rem;
+        left: 0;
         bottom: initial;
         background-color: #050b2c;
-        width: 20rem;
+        width: max-content;
         .tooltip-media-texto {
             /* stylelint-disable */
             color: var(--white);
@@ -54,12 +64,6 @@
             }
             /* stylelint-enable */
         }
-    }
-    .lines {
-        fill: none;
-        stroke: #2f1c0e;
-        stroke-dasharray: 1 4;
-        opacity: .4;
     }
 }
 
@@ -74,7 +78,7 @@
     height: 100%;
     transition: all .3s ease-in-out;
     background-color: #b7ac7f;
-    opacity: 0;
+    opacity: 8;
     visibility: hidden;
 }
 
@@ -93,22 +97,64 @@
     }
     text {
         font-family: var(--roboto);
-        font-size: 14px;
+        font-size: 12px;
     }
     .area {
         fill: var(--orange);
     }
+    .lines {
+        fill: none;
+        /* stroke: #66070D; */
+        stroke-width: 1px;
+    }
     .circles {
         fill: var(--circles);
-    }
-    .circlesBig {
-        fill: transparent;
-        stroke: var(--circles);
-        stroke-width: 1;
+        r: 3px;
     }
 }
 
 @media only screen and (min-width: 48rem) {
+
+    .chart-container,
+    .metodology-container {
+        max-width: 35rem;
+    }
+
+    .chart-vulturno-container {
+        text {
+            font-size: 14px;
+        }
+    }
+
+    .chart-vulturno {
+        .tooltip {
+            padding: 1rem;
+            strong {
+                font-size: 1.25rem;
+            }
+        }
+        .tooltip-temp {
+            left: 35%;
+        }
+        .tooltip-media-texto {
+            font-size: 1rem;
+        }
+        .tooltip-media-anual-maxima {
+            right: initial;
+            left: 4rem;
+            bottom: 2.5rem;
+            width: 20rem;
+        }
+        .tooltip-media-anual-minima {
+            background-color: #2A7D97;
+            right: 2rem;
+            left: initial;
+        }
+    }
+
+}
+
+@media only screen and (min-width: 64em) {
 
     .chart-container,
     .metodology-container {
