@@ -69,9 +69,9 @@ Todos los datos provienen de [open data de la AEMET](https://opendata.aemet.es/c
 
 ## Limpiando datos
 
-Todos los scripts que he utilizado para limpiar y extraer datos están disponibles en la carpeta ```scripts```
+Todos los scripts que he utilizado para limpiar y extraer datos están disponibles en la carpeta [scripts](https://github.com/jorgeatgu/vulturno/tree/master/scripts)
 
-Para obtener solamente la temperatura anual de cada año he usado: vulturno-temp.sh
+Para obtener solamente la temperatura anual de cada año he usado: [vulturno-temp.sh](https://github.com/jorgeatgu/vulturno/blob/master/scripts/vulturno-temp.sh)
 
 Seleccionamos el resumen anual del año, este es el número del año acabado en -13. Ahora nos quedamos solamente con la fecha y con tm_mes que corresponde a la temperatura media del año.
 ```
@@ -89,26 +89,26 @@ json2csv -i prueba.json -o prueba.csv
 ```
 
 
-Para obtener la máxima y mínima de cada estación he usado: vulturno-max-min.sh
+Para obtener la máxima y mínima de cada estación he usado: [vulturno-max-min.sh](https://github.com/jorgeatgu/vulturno/blob/master/scripts/vulturno-max-min.sh)
 
 ## Estaciones unificadas
 
-Almería unificar 6325O(desde 1980) y 6297() - **Hecho**
-Avila unificar 2444(desde 1983) y 2444C **Hecho**
-Caceres unificar 3469A(desde 1983) y 3469 **Hecho**
-Castellón unificar 8500A y 8501. Falta la 8500A desde 1976 **Hecho**
-Ciudad Real unificar 4121(desde 1970) y 4121C **Hecho**
-Guadalajara no tiene datos suficientes unificar 3168C(desde 1985) y 3168A
-Huelva unificar 4642E(desde 1985) y 4605 **Hecho**
-Jaen unificar 5270(desde 1985) y 5270B **no tiene datos suficientes**
-Lleida unificar 9771C(desde 1985) y 9771 **Hecho**
-Merida no tiene datos suficientes
-Segovia unificar 2465(desde 1989) y 2465A **Hecho**
-Toledo unificar 3260B y 3259 **Hecho**
-Vitoria no tiene datos suficientes.
-Lugo consultar otras estaciones, no tiene datos suficientes.
-Palencia consultar otras estaciones, no tiene datos suficientes.
-Pontevedra desde 1964 en la 1484.
-Ourense desde 1952 en la 1690B **Hecho**
-Sevilla desde 1950(error en los años 1988,1989) en la 5783 **Hecho**
-Malaga desde 1950(error en los años 1958 y 1959) en la 6155A **Hecho**
+Almería unificar 6325O(desde 1980) y 6297() - **Hecho**  
+Avila unificar 2444(desde 1983) y 2444C **Hecho**  
+Caceres unificar 3469A(desde 1983) y 3469 **Hecho**  
+Castellón unificar 8500A y 8501. Falta la 8500A desde 1976 **Hecho**  
+Ciudad Real unificar 4121(desde 1970) y 4121C **Hecho**  
+Guadalajara no tiene datos suficientes unificar 3168C(desde 1985) y 3168A  
+Huelva unificar 4642E(desde 1985) y 4605 **Hecho**  
+Jaen unificar 5270(desde 1985) y 5270B **no tiene datos suficientes**  
+Lleida unificar 9771C(desde 1985) y 9771 **Hecho**  
+Merida no tiene datos suficientes  
+Segovia unificar 2465(desde 1989) y 2465A **Hecho**  
+Toledo unificar 3260B y 3259 **Hecho**  
+Vitoria no tiene datos suficientes.  
+Lugo consultar otras estaciones, no tiene datos suficientes.  
+Palencia consultar otras estaciones, no tiene datos suficientes.  
+Pontevedra desde 1964 en la 1484.  
+Ourense desde 1952 en la 1690B **Hecho**  
+Sevilla desde 1950(error en los años 1988,1989) en la 5783 **Hecho**  
+Malaga desde 1950(error en los años 1958 y 1959) en la 6155A **Hecho**  
