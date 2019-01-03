@@ -8,12 +8,8 @@
         "vulturno.co"
     ],
     "version": 2,
-    "static":
-    {
-        "directoryListing": [
-            "/csv/",
-            "/json/"
-        ]
-    }
-
+    "directoryListing": [
+        "/csv/",
+        "/json/"
+    ]
 }
