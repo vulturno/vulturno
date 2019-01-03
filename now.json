@@ -4,5 +4,16 @@
     {
         "NODE_ENV": "production"
     },
-    "version": 2
+    "alias": [
+        "vulturno.co"
+    ],
+    "version": 2,
+    "static":
+    {
+        "directoryListing": [
+            "/csv/",
+            "/json/"
+        ]
+    }
+
 }
