@@ -409,6 +409,64 @@ const maxvul = () => {
 
     }
 
+    const danotations = () => {
+
+        d3.csv('csv/max-record.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.fecha = d.yearmax;
+                    d.total = d.totalmax;
+                });
+               //Add annotations
+                       const labels = [{
+                               data: { year: 2012 },
+                               y: 100,
+                               dy: -50, dx: -52,
+                               note: {
+                                   title: "Entre 2009 y 2017 se establecen el 78% de los récords de máximas",
+                                   wrap: 230,
+                                   align: "middle"
+                               }
+                           }
+                       ].map(l => {
+                           l.subject = { radius: 4 }
+                           return l
+                       })
+
+                       window.makeAnnotations = d3.annotation()
+                           .annotations(labels)
+                           .type(d3.annotationCalloutCircle)
+                           .accessors({
+                               x: d => scales.count.x(d.year),
+                               y: d => scales.count.y(d.total)
+                           })
+                           .accessorsInverse({
+                               year: d => scales.count.x.invert(d.x),
+                               total: d => scales.count.y.invert(d.y)
+                           })
+                           .on('subjectover', function(annotation) {
+                               annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                                   .classed("hidden", false)
+                           })
+                           .on('subjectout', function(annotation) {
+                               annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                                   .classed("hidden", true)
+                           })
+
+                       svg.append("g")
+                           .attr("class", "annotation-test")
+                           .call(makeAnnotations)
+
+                       svg.selectAll("g.annotation-connector, g.annotation-note")
+            }
+
+        })
+
+    }
+
     const updateChart = (dataz) => {
         w = chart.node().offsetWidth;
         h = 200;
@@ -454,47 +512,6 @@ const maxvul = () => {
 
         drawAxes(g)
 
-            //Add annotations
-            const labels = [{
-                    data: { year: 2012 },
-                    y: 100,
-                    dy: -50, dx: -52,
-                    note: {
-                        title: "Entre 2009 y 2017 se establecen el 78% de los records de máximas",
-                        wrap: 230,
-                        align: "middle"
-                    }
-                }
-            ].map(l => {
-                l.subject = { radius: 4 }
-                return l
-            })
-
-            window.makeAnnotations = d3.annotation()
-                .annotations(labels)
-                .type(d3.annotationCalloutCircle)
-                .accessors({
-                    x: d => scales.count.x(d.year),
-                    y: d => scales.count.y(d.total)
-                })
-                .accessorsInverse({
-                    year: d => scales.count.x.invert(d.x),
-                    total: d => scales.count.y.invert(d.y)
-                })
-                .on('subjectover', function(annotation) {
-                    annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-                        .classed("hidden", false)
-                })
-                .on('subjectout', function(annotation) {
-                    annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-                        .classed("hidden", true)
-                })
-
-            svg.append("g")
-                .attr("class", "annotation-test")
-                .call(makeAnnotations)
-
-            svg.selectAll("g.annotation-connector, g.annotation-note")
 
     }
 
@@ -516,6 +533,7 @@ const maxvul = () => {
                 });
                 setupElements()
                 setupScales()
+                danotations()
                 updateChart(dataz)
             }
 
@@ -577,6 +595,66 @@ const minvul = () => {
         scales.count.x.range([0, width]);
     }
 
+    const danotations = () => {
+
+        d3.csv('csv/min-record.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data
+                dataz.forEach(d => {
+                    d.fecha = d.yearmin;
+                    d.total = d.totalmin;
+                });
+
+                //Add annotations
+                const labels = [{
+                        data: { year: 1988 },
+                        y: 100,
+                        dy: -50,
+                        note: {
+                            title: "Desde 1986 no se ha batido ni un solo récord de temperatura mínima",
+                            wrap: 230,
+                            align: "middle"
+                        }
+                    }
+                ].map(l => {
+                    l.subject = { radius: 4 }
+                    return l
+                })
+
+                window.makeAnnotations = d3.annotation()
+                    .annotations(labels)
+                    .type(d3.annotationCalloutCircle)
+                    .accessors({
+                        x: d => scales.count.x(d.year),
+                        y: d => scales.count.y(d.total)
+                    })
+                    .accessorsInverse({
+                        year: d => scales.count.x.invert(d.x),
+                        total: d => scales.count.y.invert(d.y)
+                    })
+                    .on('subjectover', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                            .classed("hidden", false)
+                    })
+                    .on('subjectout', function(annotation) {
+                        annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
+                            .classed("hidden", true)
+                    })
+
+                svg.append("g")
+                    .attr("class", "annotation-test")
+                    .call(makeAnnotations)
+
+                svg.selectAll("g.annotation-connector, g.annotation-note")
+
+            }
+
+        });
+
+    }
+
     //Dibujando ejes
     const drawAxes = (g) => {
 
@@ -634,49 +712,6 @@ const minvul = () => {
             .attr("r", d => 3 * d.total)
             .attr('fill-opacity', 0.6);
 
-        //Add annotations
-        const labels = [{
-                data: { year: 1988.5 },
-                y: 100,
-                dy: -50,
-                note: {
-                    title: "Desde 1986 no se bate ningún récord de temperatura mínima",
-                    wrap: 230,
-                    align: "middle"
-                }
-            }
-        ].map(l => {
-            l.subject = { radius: 4 }
-            return l
-        })
-
-        window.makeAnnotations = d3.annotation()
-            .annotations(labels)
-            .type(d3.annotationCalloutCircle)
-            .accessors({
-                x: d => scales.count.x(d.year),
-                y: d => scales.count.y(d.total)
-            })
-            .accessorsInverse({
-                year: d => scales.count.x.invert(d.x),
-                total: d => scales.count.y.invert(d.y)
-            })
-            .on('subjectover', function(annotation) {
-                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-                    .classed("hidden", false)
-            })
-            .on('subjectout', function(annotation) {
-                annotation.type.a.selectAll("g.annotation-connector, g.annotation-note")
-                    .classed("hidden", true)
-            })
-
-        svg.append("g")
-            .attr("class", "annotation-test")
-            .call(makeAnnotations)
-
-        svg.selectAll("g.annotation-connector, g.annotation-note")
-
-
     }
 
     const resize = () => {
@@ -697,6 +732,7 @@ const minvul = () => {
                 });
                 setupElements()
                 setupScales()
+                danotations()
                 updateChart(dataz)
             }
 
