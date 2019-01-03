@@ -3,6 +3,10 @@ export {
 } from "d3-selection";
 
 export {
+    dispatch
+} from "d3-dispatch";
+
+export {
     nest
 } from "d3-collection";
 
@@ -11,7 +15,7 @@ export {
 } from "d3-array";
 
 export {
-    line, curveCardinal
+    line, curveCardinal, arc, curveLinear
 } from "d3-shape";
 
 export {
@@ -36,5 +40,5 @@ export {
 
 
 import "d3-transition";
-
+import "d3-drag";
 
