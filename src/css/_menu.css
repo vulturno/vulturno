@@ -81,7 +81,7 @@
   height: 100%;
   max-width: 25rem;
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   overflow-y: auto;
   -webkit-transform: translateX(100%);
   transform: translateX(100%);

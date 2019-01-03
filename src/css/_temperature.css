@@ -6,7 +6,7 @@
 .temperature-max,
 .temperature-min {
     background-color: var(--white);
-    padding: 5rem 0;
+    padding: 1rem 0;
 }
 
 .temperature-max {
@@ -26,7 +26,7 @@
 }
 
 .temperature-max-title {
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-weight: bold;
     font-family: var(--title);
     margin: 0;
@@ -93,6 +93,11 @@
         font-size: 10rem;
     }
 
+    .temperature-max,
+    .temperature-min {
+        padding: 5rem 0;
+    }
+
     .chart-temperature-max,
     .chart-temperature-min {
         .tick {
@@ -101,6 +106,10 @@
                 font-family: var(--roboto);
             }
         }
+    }
+
+    .temperature-max-title {
+        font-size: 2rem;
     }
 
 }

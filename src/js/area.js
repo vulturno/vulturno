@@ -434,7 +434,7 @@ const maxvul = () => {
 
         const axisX = d3.axisBottom(scales.count.x)
             .tickFormat(d3.format("d"))
-            .ticks(10)
+            .ticks(6)
             .tickPadding(30);
 
         g.select(".axis-x")
@@ -694,7 +694,7 @@ const minvul = () => {
 
         const axisX = d3.axisBottom(scales.count.x)
             .tickFormat(d3.format("d"))
-            .ticks(10)
+            .ticks(6)
             .tickPadding(30);
 
         g.select(".axis-x")

@@ -12,7 +12,7 @@
 .chart-text-container {
     padding: 1.5rem;
     background-color: var(--white);
-    margin: 3rem auto;
+    margin: 0 auto;
     max-width: 25rem;
     border-radius: 2px;
     box-shadow: var(--shadowTooltip);
@@ -24,8 +24,9 @@
 }
 
 .chart-text-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: var(--title);
+    margin-top: 0;
 }
 
 .chart-vulturno {
@@ -118,7 +119,7 @@
     }
     .circles {
         fill: var(--circles);
-        r: 3px;
+        r: 3.5px;
     }
 }
 
@@ -126,7 +127,7 @@
 
     .chart-container,
     .metodology-container {
-        max-width: 55rem;
+        max-width: 45rem;
         padding: 3rem 0;
     }
 
@@ -134,6 +135,10 @@
         text {
             font-size: 14px;
         }
+    }
+
+    .chart-text-title {
+        font-size: 1.5rem;
     }
 
     .chart-vulturno {

@@ -8,10 +8,11 @@
 }
 
 .metodology-title {
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-family: var(--title);
     letter-spacing: 1px;
     margin-bottom: 1rem;
+    margin-top: 0;
 }
 
 .metodology-text {
@@ -23,6 +24,10 @@
 
     .metodology {
         padding: 6rem 0;
+    }
+
+    .metodology-title {
+        font-size: 2rem;
     }
 
 }
