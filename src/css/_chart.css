@@ -12,7 +12,8 @@
 .chart-text-container {
     padding: 1.5rem;
     background-color: var(--white);
-    margin: 0 auto;
+    margin: 1rem auto;
+    margin-top: 0;
     max-width: 25rem;
     border-radius: 2px;
     box-shadow: var(--shadowTooltip);
