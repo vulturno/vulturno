@@ -41,7 +41,7 @@
     }
     .tick {
         text {
-            font-size: 12px;
+            font-size: 11px;
             font-family: var(--roboto);
         }
     }
@@ -68,7 +68,7 @@
     }
     .tick {
         text {
-            font-size: 12px;
+            font-size: 11px;
             font-family: var(--roboto);
         }
     }

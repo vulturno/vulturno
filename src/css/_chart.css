@@ -1,7 +1,12 @@
+.chart {
+    background-color: rgba(253, 230, 167, .7);
+}
+
 .chart-container,
 .metodology-container {
     max-width: 90vw;
-    margin: 3rem auto;
+    margin: 0 auto;
+    padding: 1rem 0;
 }
 
 .chart-text-container {
@@ -29,7 +34,7 @@
         position: absolute;
         bottom: 2.5rem;
         padding: .5rem;
-        background-color: #670509;
+        background-color: #A13B39;
         border-radius: 2px;
         box-shadow: var(--shadowTooltip);
         width: max-content;
@@ -51,7 +56,7 @@
         }
     }
     .tooltip-media-anual-minima {
-        background-color: #2A7D97;
+        background-color: #313366;
         right: 2rem;
         left: initial;
     }
@@ -101,7 +106,7 @@
     }
     text {
         font-family: var(--roboto);
-        font-size: 12px;
+        font-size: 11px;
     }
     .area {
         fill: var(--orange);
@@ -121,7 +126,8 @@
 
     .chart-container,
     .metodology-container {
-        max-width: 35rem;
+        max-width: 55rem;
+        padding: 3rem 0;
     }
 
     .chart-vulturno-container {
