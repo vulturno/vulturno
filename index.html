@@ -11,6 +11,21 @@
 </head>
 
 <body>
+    <div class="burger">
+        <span></span>
+    </div>
+    <nav class="navegacion menu--inola">
+        <a href="#evolucion" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Evolución</span>
+        </a>
+        <a href="#max" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Temperaturas máximas</span>
+        </a>
+        <a href="#min" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Temperaturas mínimas</span>
+        </a>
+    </nav>
+    <div class="overlay"></div>
     <div class="header-100 orange">
         <img src="img/cinco.jpg" alt="" class="header-absolute">
         <div class="header-text">
@@ -32,14 +47,14 @@
             </article>
             <p class="select-text">Selecciona una ciudad</p>
             <select class="temperatura-mensual-minima-select" id="select-city"></select>
-            <article class="chart-vulturno">
+            <article id="evolucion" class="chart-vulturno">
                 <svg>
                     <g class="chart-vulturno-container"></g>
                 </svg>
             </article>
         </section>
     </section>
-    <section class="temperature-max">
+    <section id="max" class="temperature-max">
         <section class="temperature-container">
             <h3 class="temperature-max-title">Temperaturas máximas</h3>
             <p class="temperature-max-text">Una gráfica para visualizar cuando se establecieron los récords de temperaturas máximas en las 45 estaciones analizadas.</p>
@@ -51,7 +66,7 @@
             </article>
         </section>
     </section>
-    <section class="temperature-min">
+    <section id="min" class="temperature-min">
         <section class="temperature-container">
             <h3 class="temperature-max-title">Temperaturas mínimas</h3>
             <p class="temperature-max-text">Una gráfica para visualizar cuando se establecieron los récords de temperaturas mínimas en las 45 estaciones analizadas.</p>
