@@ -7,9 +7,5 @@
     "alias": [
         "vulturno.co"
     ],
-    "version": 2,
-    "directoryListing": [
-        "/csv/",
-        "/json/"
-    ]
+    "version": 2
 }
