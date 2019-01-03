@@ -18,6 +18,11 @@
     font-family: var(--text);
 }
 
+.chart-text-title {
+    font-size: 1.5rem;
+    font-family: var(--title);
+}
+
 .chart-vulturno {
     position: relative;
     .tooltip {
@@ -103,8 +108,8 @@
     }
     .lines {
         fill: none;
-        stroke: #E76E32;
-        stroke-width: 5px;
+        stroke: #dd435c;
+        stroke-width: 3px;
     }
     .circles {
         fill: var(--circles);
@@ -139,7 +144,6 @@
             right: initial;
             left: 4rem;
             bottom: 2.5rem;
-            width: 20rem;
         }
         .tooltip-media-anual-minima {
             background-color: #2A7D97;
