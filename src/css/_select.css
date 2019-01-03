@@ -5,7 +5,7 @@
     padding: 1rem !important;
     padding-right: .25rem !important;
     border: 1px solid #ddd !important;
-    background-color: #f1f1f1;
+    background-color: #f1f1f1 !important;
     font-family: var(--roboto) !important;
     color: var(--black) !important;
     position: relative;

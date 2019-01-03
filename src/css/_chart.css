@@ -1,5 +1,5 @@
 .chart {
-    background-color: rgba(253, 230, 167, .7);
+    background-color: rgba(253, 230, 167, .15);
 }
 
 .chart-container,
@@ -11,12 +11,9 @@
 
 .chart-text-container {
     padding: 1.5rem;
-    background-color: var(--white);
     margin: 1rem auto;
     margin-top: 0;
     max-width: 25rem;
-    border-radius: 2px;
-    box-shadow: var(--shadowTooltip);
     color: var(--black);
 }
 
