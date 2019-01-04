@@ -290,6 +290,7 @@ const vulturno = () => {
 
         const stationResize = d3.select("#select-city")
             .property("value")
+            .replace(/[\u00f1-\u036f]/g,"");
 
         d3.csv("csv/" + stationResize + ".csv", (error, data) => {
 
@@ -326,8 +327,7 @@ const vulturno = () => {
 
                     let mes = d3.select(this)
                         .property("value")
-
-                    mes = mes.normalize('NFD').replace(/[\u00f1-\u036f]/g,"");
+                        .replace(/[\u00f1-\u036f]/g,"");
 
                     update(mes)
 
