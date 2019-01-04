@@ -1,3 +1,4 @@
+
 # Vulturno
 
 La evolución de las temperaturas media anual en 45 estaciones de la AEMET en España.
@@ -97,7 +98,7 @@ find . -name '*-temp*' -delete
 | Burgos        | 2331          |  1950   | 2014    | 1956    |
 | Albacete      | 8175          |  1950   | 2014    | 1971    |
 | Santander     | 1109          |  1954   | 2014    | 1962    |
-| Castellón     | 8501          |  1950   | 2014    | 1976    |
+| Castellón     | 8500A         |  1950   | 2014    | 1976    |
 | Logroño       | 9170          |  1950   | 2011    | 1956    |
 | Badajoz       | 4452          |  1955   | 2017    | 1956    |
 | Huelva        | 4642E         |  1950   | 1961    | 1956    |
@@ -107,8 +108,8 @@ find . -name '*-temp*' -delete
 | León          | 2661          |  1950   | 2017    | 1956    |
 | Jerez         | 5960          |  1950   | 2011    | 1956    |
 | Jaen          | 5270          |  1950   |         |         |
-| Ourense       | 1690B         |  1952   |
-| Girona        | 0370B         |  1950   | 2011    | 1980    |
+| Ourense       | 1690A         |  1952   |
+| Girona        | 0367          |  1950   | 2011    | 1980    |
 | Lugo          | 1505          |  1951   | 2014    | 1956    |
 | Santiago      | 1428          |  1950   | 1997    | 1956    |
 | Caceres       | 3469A         |  1950   | 2017    | 1972    |
@@ -116,7 +117,7 @@ find . -name '*-temp*' -delete
 | Ceuta(X)      | 5000A         |  1950   |         |         |
 | Guadalajara   | 3168A         |  1950   |         |         |
 | Toledo(?)     | 3260B         |  1950   | 2017    | 1956    |
-| Pontevedra    | 1484          |  1964   |
+| Pontevedra    | 1484C         |  1964   |
 | Palencia      | 2401          |  1950   | 1981    | 1956    |
 | Ciudad Real   | 4121          |  1950   | 2017    | 1972    |
 | Zamora        | 2614          |  1956   |         |         |
