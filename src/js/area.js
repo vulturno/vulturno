@@ -460,7 +460,7 @@ const maxvul = () => {
                                y: 100,
                                dy: -50, dx: -52,
                                note: {
-                                   title: "Entre 2009 y 2017 se establecen el 78% de los récords de máximas",
+                                   title: "Entre 2009 y 2018 se establecen el 78% de los récords de máximas",
                                    wrap: 230,
                                    align: "middle"
                                }
