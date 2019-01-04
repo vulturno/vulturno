@@ -45,7 +45,7 @@
         margin: 0;
         font-size: .65rem;
         font-family: var(--roboto);
-        color: var(--black);
+        color: #fafbfc;
     }
     .tooltip-media-anual-maxima {
         right: 2rem;
@@ -147,7 +147,7 @@
             }
         }
         .tooltip-media-texto {
-            font-size: 1rem;
+            font-size: 14px;
         }
         .tooltip-media-anual-maxima {
             bottom: 2.5rem;

@@ -79,10 +79,10 @@ const vulturno = () => {
             .attr("class", "tooltip tooltip-media-anual-minima");
 
         tooltipMax.data(datos)
-            .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
+            .html(function(d) { return "<p class='tooltip-media-texto'>La temperatura media máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
 
         tooltipMin.data(datos)
-            .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.tempmin ) + "ºC</strong> en <strong>" + d.yearmin; + "</strong></p>" });
+            .html(function(d) { return "<p class='tooltip-media-texto'>La temperatura media mínima fue de <strong>" + d3.min(datos, d => d.tempmin ) + "ºC</strong> en <strong>" + d.yearmin; + "</strong></p>" });
 
     }
 
@@ -276,10 +276,10 @@ const vulturno = () => {
             updateChart(datos)
 
             tooltipMax.data(datos)
-                .html(function(d) { return "<p class='tooltip-media-texto'>La máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
+                .html(function(d) { return "<p class='tooltip-media-texto'>La temperatura media máxima fue de <strong>" + d3.max(datos, d => d.tempmax ) + "ºC</strong> en <strong>" + d.yearmax; + "</strong></p>" });
 
             tooltipMin.data(datos)
-                .html(function(d) { return "<p class='tooltip-media-texto'>La mínima fue de <strong>" + d3.min(datos, d => d.tempmin ) + "ºC</strong> en <strong>" + d.yearmin; + "</strong></p>" })
+                .html(function(d) { return "<p class='tooltip-media-texto'>La temperatura media mínima fue de <strong>" + d3.min(datos, d => d.tempmin ) + "ºC</strong> en <strong>" + d.yearmin; + "</strong></p>" })
 
         });
 
