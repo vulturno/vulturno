@@ -169,7 +169,7 @@ const vulturno = () => {
             const i = bisectDate(datos, x0, 1);
             const d0 = datos[i - 1];
             const d1 = datos[i];
-            const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
+            const d = x0 - d0.temp > d1.temp - x0 ? d1 : d0;
                 tooltipTemp.style("opacity", 1)
                     .html(`<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`)
                     .style('left', positionTooltip + 'px')
