@@ -141,13 +141,13 @@
 
     .chart-vulturno {
         .tooltip {
-            padding: 1rem;
+            padding: 1rem .5rem;
             strong {
                 font-size: 1.25rem;
             }
         }
         .tooltip-media-texto {
-            font-size: 14px;
+            font-size: 12px;
         }
         .tooltip-media-anual-maxima {
             bottom: 2.5rem;
@@ -167,6 +167,15 @@
     .chart-container,
     .metodology-container {
         max-width: 65rem;
+    }
+
+    .chart-vulturno {
+        .tooltip {
+            padding: 1rem;
+        }
+        .tooltip-media-texto {
+            font-size: 14px;
+        }
     }
 
 }
