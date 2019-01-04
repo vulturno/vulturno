@@ -55,7 +55,7 @@
         }
     }
     .tooltip-media-anual-minima {
-        background-color: #313366;
+        background-color: #2a7d97;
         right: 2rem;
         left: initial;
     }
@@ -155,7 +155,6 @@
             left: initial;
         }
         .tooltip-media-anual-minima {
-            background-color: #2A7D97;
             right: initial;
             left: 4rem;
         }

@@ -324,8 +324,10 @@ const vulturno = () => {
 
                 selectCity.on('change', function() {
 
-                    const mes = d3.select(this)
+                    let mes = d3.select(this)
                         .property("value")
+
+                    mes = mes.normalize('NFD').replace(/[\u00f1-\u036f]/g,"");
 
                     update(mes)
 
@@ -519,8 +521,6 @@ const maxvul = () => {
         g.attr("transform", translate)
 
         updateScales(width, height)
-
-
 
         const container = chart.select('.chart-temperature-max-container-bis')
 
