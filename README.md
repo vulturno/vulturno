@@ -19,7 +19,7 @@ Todos los scripts que he utilizado para limpiar y extraer datos están disponibl
 
 Para obtener solamente la temperatura anual de cada año he usado: [vulturno-temp.sh](https://github.com/vulturno/data/blob/master/scripts/vulturno-temp.sh)
 
-El resumen anual de cada estación es el [número del año seguido de -13](https://github.com/jorgeatgu/vulturno/blob/master/json/0076-total-anual.json#L240). Ahora nos quedamos solamente con la fecha y con tm_mes que corresponde a la temperatura media del año.
+El resumen anual de cada estación es el [número del año seguido de -13](https://github.com/vulturno/data/blob/master/json/0076-total-anual.json#L240). Ahora nos quedamos solamente con la fecha y con tm_mes que corresponde a la temperatura media del año.
 ```
 jq -c 'map(select(.fecha | contains("-13")) |  {"year": .fecha, "temp": .tm_mes} )' 1082-total-anual.json >> prueba.json
 ```
