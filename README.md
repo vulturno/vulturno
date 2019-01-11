@@ -7,17 +7,17 @@ La evolución de las temperaturas media anual en 45 estaciones de la AEMET en Es
 
 Todos los datos provienen de [open data de la AEMET](https://opendata.aemet.es/centrodedescargas/inicio).
 
-Para recolectar todos los datos he usado [Lurte](https://github.com/jorgeatgu/lurte)
+Para recolectar todos los datos he usado [Lurte](https://github.com/vulturno/lurte)
 
-Los datos que he utilizado están disponibles en bruto [aquí](https://github.com/jorgeatgu/vulturno/data).
+Los datos que he utilizado están disponibles en bruto [aquí](https://github.com/vulturno/data).
 
 ## Limpiando datos
 
-Todos los scripts que he utilizado para limpiar y extraer datos están disponibles en la carpeta [scripts](https://github.com/jorgeatgu/vulturno/tree/master/scripts)
+Todos los scripts que he utilizado para limpiar y extraer datos están disponibles en la carpeta [scripts](https://github.com/vulturno/data/tree/master/scripts)
 
 ### Temperatura anual
 
-Para obtener solamente la temperatura anual de cada año he usado: [vulturno-temp.sh](https://github.com/jorgeatgu/vulturno/blob/master/scripts/vulturno-temp.sh)
+Para obtener solamente la temperatura anual de cada año he usado: [vulturno-temp.sh](https://github.com/vulturno/data/blob/master/scripts/vulturno-temp.sh)
 
 El resumen anual de cada estación es el [número del año seguido de -13](https://github.com/jorgeatgu/vulturno/blob/master/json/0076-total-anual.json#L240). Ahora nos quedamos solamente con la fecha y con tm_mes que corresponde a la temperatura media del año.
 ```
@@ -38,7 +38,7 @@ json2csv -i prueba.json -o prueba.csv
 
 ### Temperatura mínima
 
-Para obtener la máxima y mínima de cada estación he usado: [vulturno-max-min.sh](https://github.com/jorgeatgu/vulturno/blob/master/scripts/vulturno-max-min.sh)
+Para obtener la máxima y mínima de cada estación he usado: [vulturno-max-min.sh](https://github.com/vulturno/data/blob/master/scripts/vulturno-max-min.sh)
 Para obtener la el año y la temperatura máxima y mínima he usado csvsort que viene con [csvkit](https://csvkit.readthedocs.io/en/1.0.3/).
 Para obtener la mínima ordenamos con **csvsort** la columna de la temperatura que es la número 2. El resultado lo guardamos en un CSV temporal para no hacer operaciones en el original
 ```
