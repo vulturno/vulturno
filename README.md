@@ -9,7 +9,7 @@ Todos los datos provienen de [open data de la AEMET](https://opendata.aemet.es/c
 
 Para recolectar todos los datos he usado [Lurte](https://github.com/jorgeatgu/lurte)
 
-Los datos que he utilizado están disponibles en bruto [aquí](https://github.com/jorgeatgu/vulturno/tree/master/json), y limpios [aquí](https://github.com/jorgeatgu/vulturno/tree/master/csv).
+Los datos que he utilizado están disponibles en bruto [aquí](https://github.com/jorgeatgu/vulturno/data).
 
 ## Limpiando datos
 
