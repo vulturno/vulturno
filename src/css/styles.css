@@ -1,11 +1,13 @@
 @import '_variables';
 @import '_menu';
 @import '_header';
+@import '_slim-select';
 @import '_select';
 @import '_chart';
 @import '_temperature';
 @import '_metodology';
 @import '_proyectos';
+@import '_data';
 @import '_footer';
 
 body {

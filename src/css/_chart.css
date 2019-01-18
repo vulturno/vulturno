@@ -3,7 +3,8 @@
 }
 
 .chart-container,
-.metodology-container {
+.metodology-container,
+.data-container {
     max-width: 90vw;
     margin: 0 auto;
     padding: 1rem 0;
@@ -124,7 +125,8 @@
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
-    .metodology-container {
+    .metodology-container,
+    .data-container {
         max-width: 45rem;
         padding: 3rem 0;
     }
@@ -165,7 +167,8 @@
 @media only screen and (min-width: 64em) {
 
     .chart-container,
-    .metodology-container {
+    .metodology-container,
+    .data-container {
         max-width: 65rem;
     }
 

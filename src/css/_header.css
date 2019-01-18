@@ -37,6 +37,9 @@
     top: 0;
     left: 0;
     object-fit: cover;
+    animation-duration: 3s;
+    animation-name: blur;
+    animation-timing-function: linear;
 }
 
 .header-photo {
@@ -61,6 +64,18 @@
     margin-left: .25rem;
     a {
         color: currentColor;
+    }
+}
+
+@keyframes blur {
+    from {
+        filter: blur(250px);
+        -webkit-filter: blur(250px);
+      }
+
+    to {
+        filter: blur(0);
+        -webkit-filter: blur(0);
     }
 }
 
