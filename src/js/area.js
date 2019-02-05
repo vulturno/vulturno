@@ -37,9 +37,9 @@ const vulturno = () => {
     const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
     if (widthMobile > 544) {
-        margin = { top: 16, right: 16, bottom: 24, left: 48 };
+        margin = { top: 0, right: 16, bottom: 24, left: 48 };
     } else {
-        margin = { top: 16, right: 16, bottom: 24, left: 32 };
+        margin = { top: 0, right: 16, bottom: 24, left: 32 };
     }
 
     let width = 0;
@@ -184,7 +184,7 @@ const vulturno = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 500;
+        const h = 600;
 
 
         width = w - margin.left - margin.right;
@@ -203,7 +203,6 @@ const vulturno = () => {
         const line = d3.line()
             .x(d => scales.count.x(d.year))
             .y(d => scales.count.y(d.temp))
-            .curve(d3.curveCardinal.tension(0.6));
 
         updateScales(width, height)
 
