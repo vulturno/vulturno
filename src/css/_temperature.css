@@ -3,6 +3,11 @@
     margin: 0 auto;
 }
 
+.temperature-container-full {
+    max-width: 65rem;
+    margin: 0 auto;
+}
+
 .temperature-max,
 .temperature-min {
     background-color: var(--white);

@@ -95,7 +95,7 @@
     stroke: #2d3065;
 }
 
-.chart-vulturno-container {
+.charts {
     .domain {
         stroke: none;
     }
@@ -108,6 +108,19 @@
         font-family: var(--roboto);
         font-size: 11px;
     }
+    .chart-temperature-min-container,
+    .chart-temperature-max-container {
+        .domain {
+            stroke: var(--black);
+        }
+    }
+}
+
+.area-tropical {
+    fill: #670509;
+}
+
+.chart-vulturno-container {
     .area {
         fill: var(--orange);
     }
@@ -131,7 +144,7 @@
         padding: 3rem 0;
     }
 
-    .chart-vulturno-container {
+    .charts {
         text {
             font-size: 14px;
         }
