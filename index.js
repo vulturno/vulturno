@@ -15,7 +15,7 @@ export {
 } from "d3-array";
 
 export {
-    line, curveCardinal, arc, curveLinear
+    line, curveCardinal, arc, curveLinear, area
 } from "d3-shape";
 
 export {
@@ -41,4 +41,3 @@ export {
 
 import "d3-transition";
 import "d3-drag";
-

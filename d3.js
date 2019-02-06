@@ -7661,6 +7661,7 @@ exports.line = line;
 exports.curveCardinal = cardinal;
 exports.arc = arc;
 exports.curveLinear = curveLinear;
+exports.area = area;
 exports.scaleTime = time;
 exports.scaleLinear = linear;
 exports.axisBottom = axisBottom;
