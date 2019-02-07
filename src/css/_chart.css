@@ -120,6 +120,10 @@
     fill: #670509;
 }
 
+.area-frosty {
+    fill: #2e4e74;
+}
+
 .chart-vulturno-container {
     .area {
         fill: var(--orange);
