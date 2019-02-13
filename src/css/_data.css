@@ -45,14 +45,14 @@
     margin: .25rem;
     margin-left: 0;
     font-size: 1.5rem;
-    font-family: var(--title);
+    font-family: var(--roboto);
     font-weight: 500;
     color: var(--black);
 }
 
 .data-card-text {
     font-size: 14px;
-    font-family: var(--text);
+    font-family: var(--roboto);
     color: var(--black);
     display: block;
     margin-bottom: 1rem;
