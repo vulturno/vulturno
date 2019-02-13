@@ -38,6 +38,10 @@ export {
     format
 } from "d3-format";
 
+export {
+    timeFormat
+} from "d3-time-format";
+
 
 import "d3-transition";
 import "d3-drag";

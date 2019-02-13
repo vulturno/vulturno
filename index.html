@@ -53,7 +53,6 @@
                 <h3 class="chart-text-title">¿Cómo se calcula la temperatura media anual?</h3>
                 <p class="chart-text">Para calcular la temperatura media anual lo que hay que hacer es sumar las temperaturas medias de todos los meses y dividirlo entre 12.</p>
             </article>
-
             <p class="select-text">Selecciona una ciudad</p>
             <select class="temperatura-mensual-minima-select" id="select-city"></select>
             <article id="evolucion" class="chart-vulturno">
@@ -111,6 +110,29 @@
             </article>
         </section>
     </section>
+    <div class="chart">
+        <section class="chart-container">
+            <article class="scatter-inputs">
+                <article class="scatter-inputs-filter">
+                    <h3 class="scatter-inputs-filter-title">FILTROS</h3>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-scatter-city"></select>
+                    <div class="container-inputs">
+                        <label class="inputs-label" for="updateButtonDay">Día</label>
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text" value="10" />
+                    </div>
+                    <div class="container-inputs">
+                        <label class="inputs-label" for="updateButtonMonth">Mes</label>
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text" value="12" />
+                    </div>
+                    <button class="btn-update-grafica roboto btn-update-max" id="update">MÁXIMAS</button>
+                    <button class="btn-update-grafica roboto btn-update-min" id="updateMin"> MÍNIMAS</button>
+                </article>
+                <svg class="charts scatter-chart">
+                    <g class="scatter-inputs-container"></g>
+                </svg>
+            </article>
+        </section>
+    </div>
     <section class="metodology">
         <article class="metodology-container">
             <h3 class="metodology-title">Metodología</h3>
@@ -161,6 +183,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.18.7/slimselect.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/d3-annotation.min.js"></script>
+    <script src="js/menu.js"></script>
     <script src="js/area.js"></script>
 </body>
 

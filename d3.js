@@ -5808,7 +5808,7 @@ function formatUnixTimestampSeconds(d) {
 }
 
 var locale$2;
-var timeFormat;
+
 var timeParse;
 var utcFormat;
 var utcParse;
@@ -5826,7 +5826,7 @@ defaultLocale$1({
 
 function defaultLocale$1(definition) {
   locale$2 = formatLocale$1(definition);
-  timeFormat = locale$2.format;
+  exports.timeFormat = locale$2.format;
   timeParse = locale$2.parse;
   utcFormat = locale$2.utcFormat;
   utcParse = locale$2.utcParse;
@@ -5977,7 +5977,7 @@ function calendar(year$$1, month$$1, week, day$$1, hour$$1, minute$$1, second$$1
 }
 
 var time = function() {
-  return calendar(year, month, sunday, day, hour, minute, second, millisecond, timeFormat).domain([new Date(2000, 0, 1), new Date(2000, 0, 2)]);
+  return calendar(year, month, sunday, day, hour, minute, second, millisecond, exports.timeFormat).domain([new Date(2000, 0, 1), new Date(2000, 0, 2)]);
 };
 
 function sequential(interpolator) {
