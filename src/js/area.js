@@ -1,3 +1,156 @@
+function forceLayout() {
+
+    const chart = d3.select('.chart-force');
+    const svg = chart.select('svg');
+    const nodePadding = 1.5;
+    const color = d3.scaleOrdinal(["#cc0011", "#a2000d", "#b8000f", "#e16973", "#ea969d", "#f0b7bc", "#f6d2d5"]);
+    const tooltip = chart.append("div")
+        .attr("class", "tooltip tooltip-under-over")
+        .attr("id", "tooltip-scatter")
+        .style("opacity", 0);
+
+    const xCenter = [75, 150, 225, 300, 375, 450, 525];
+
+
+    function updateChart(dataz) {
+        const w = chart.node().offsetWidth;
+        const h = 600;
+
+        svg
+            .attr('width', w)
+            .attr('height', h);
+
+        const simulation = d3.forceSimulation()
+            .force("forceX", d3.forceX().x(w * .5))
+            .force("forceY", d3.forceY().y(h * .5))
+            .force("center", d3.forceCenter().x(w * .5).y(h * .5))
+            .force("charge", d3.forceManyBody().strength(5))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 1));
+
+        simulation
+            .nodes(dataz)
+            .force("collide", d3.forceCollide().strength(.5).radius(function(d) { return d.radius + nodePadding; }).iterations(1))
+            .on("tick", d => {
+                node
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+            });
+
+
+        const node = svg
+            .selectAll(".circles").remove().exit()
+            .data(dataz)
+            .enter().append("circle")
+            .attr('class', "circles")
+            .attr("r", d => d.radius)
+            .attr("fill", d => color(d.decade))
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .on("mouseover", function(d) {
+               var circleUnderMouse = this;
+                d3.selectAll('.circles').filter(function(d,i) {
+                      return (this !== circleUnderMouse);
+                    }).transition().duration(300).ease(d3.easeLinear).style('opacity', '0.5')
+
+                tooltip.transition()
+                tooltip.style("opacity", 1)
+                    .html(`<p class="tooltip-record-max">En <span class="number">${d.year}</span> se establecieron <span class="number">${d.total}</span> récords.<p/>
+                        `)
+                    .style("left", (d3.event.pageX - 50) + "px")
+                    .style("top", (d3.event.pageY - 60) + "px");
+            })
+            .on("mouseout", function(d) {
+                d3.selectAll('.circles').transition().duration(800).ease(d3.easeLinear).style('opacity', 1)
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 0);
+            })
+    }
+
+    function loadData() {
+
+        d3.csv("csv/total-records-max.csv", (error, data) => {
+            if (error) {
+                  console.log(error);
+            } else {
+
+                dataz = data
+                dataz.forEach(d => {
+                    d.size = +d.total / 10;
+                    d.radius = +d.size;
+                    d.year = d.year;
+                });
+
+                // sort the nodes so that the bigger ones are at the back
+                dataz.sort((a, b) => b.size - a.size);
+
+                updateChart(dataz)
+
+            }
+
+        });
+
+    }
+
+    const resize = () => {
+        updateChart(dataz)
+    }
+
+    window.addEventListener('resize', resize)
+
+    loadData()
+}
+
+forceLayout()
+
+
+function forceLayoutVertical() {
+
+    const chart = d3.select('.chart-force-two');
+    const container = d3.select('.chart-force-two-container');
+    const svg = chart.select('svg');
+    const w = chart.node().offsetWidth;
+    const h = 600;
+
+    svg
+        .attr('width', w)
+        .attr('height', h);
+
+    const color = d3.scaleOrdinal(["#cc0011", "#a2000d", "#b8000f", "#e16973", "#ea969d", "#f0b7bc", "#f6d2d5"]);
+    var xCenter = [100, 200, 300, 400, 500, 600, 700]
+
+    var numNodes = 70;
+    var nodes = d3.range(numNodes).map(function(d, i) {
+      return {
+        radius: Math.random() * 25,
+        category: i % 7
+      }
+    });
+
+    var simulation = d3.forceSimulation(nodes)
+      .force('charge', d3.forceManyBody().strength(5))
+      .force('x', d3.forceX().x(d => xCenter[d.category]))
+      .force('collision', d3.forceCollide().radius(d => d.radius))
+      .on('tick', ticked);
+
+    function ticked() {
+      var u = container.selectAll('circle')
+        .data(nodes);
+
+      u.enter()
+        .append('circle')
+        .attr('r', d => d.radius)
+        .attr("fill", d => color(d.category))
+        .merge(u)
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+
+      u.exit().remove();
+    }
+}
+
+forceLayoutVertical();
+
 const vulturno = () => {
 
     const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -848,7 +1001,7 @@ const tropicalTotal = () => { //Estructura similar a la que utilizan en algunos 
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/total-dias-tropicales.csv', (error, data) => {
+        d3.csv('csv/total-tropicales.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -999,7 +1152,7 @@ const frostyTotal = () => { //Estructura similar a la que utilizan en algunos pr
     // LOAD THE DATA
     const loadData = () => {
 
-        d3.csv('csv/total-dias-heladas.csv', (error, data) => {
+        d3.csv('csv/total-heladas.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -1035,6 +1188,10 @@ const scatterInput = () => {
     let parseDate = d3.timeFormat('%m-%d-%Y');
     const temp = "ºC";
     const selectCity = d3.select("#select-scatter-city");
+    const tooltip = d3.select(".scatter-inputs")
+        .append("div")
+        .attr("class", "tooltip tooltip-scatter")
+        .style("opacity", 0);
 
     //Eliminando el año para quedarnos solamente con el día y la fecha en formato: DD-MM
     const getYear = (stringDate) => stringDate.split('-')[0];
@@ -1137,6 +1294,19 @@ const scatterInput = () => {
             .attr('class', 'scatter-inputs-circles')
 
         layer.merge(newLayer)
+            .on("mouseover", function(d) {
+                tooltip.transition()
+                tooltip.attr('class', 'tooltip tooltip-scatter tooltip-min')
+                tooltip.style("opacity", 1)
+                    .html(`<p class="tooltip-scatter-text">La temperatura mínima en ${d.year} fue de ${d.minima}ºC<p/>`)
+                    .style("left", `${d3.event.pageX}px`)
+                    .style("top", `${d3.event.pageY - 28}px`);
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", 0);
+            })
             .attr('cx', w / 2)
             .attr('cy', h / 2)
             .transition()
@@ -1146,7 +1316,8 @@ const scatterInput = () => {
             .attr("cy", d => scales.count.y(d.minima))
             .attr('r', 0)
             .transition()
-            .duration(300)
+            .duration(100)
+            .ease(d3.easeLinear)
             .attr("r", 6)
             .style("fill", "#257d98")
 
@@ -1217,6 +1388,8 @@ const scatterInput = () => {
         let valueDate = `${valueDateMonth}-${valueDateDay}`;
         let reValueDate = new RegExp(`^.*${valueDate}$`, "gi");
 
+        errorDate();
+
         const ciudad = selectCity.property("value")
             .replace(/ /g, "_")
             .normalize('NFD').replace(/[\u0300-\u036f]/g, "");
@@ -1269,6 +1442,19 @@ const scatterInput = () => {
                 .attr('class', 'scatter-inputs-circles')
 
             layer.merge(newLayer)
+                .on("mouseover", function(d) {
+                    tooltip.transition()
+                    tooltip.attr('class', 'tooltip tooltip-scatter tooltip-max')
+                    tooltip.style("opacity", 1)
+                        .html(`<p class="tooltip-scatter-text">La temperatura máxima en ${d.year} fue de ${d.maxima}ºC<p/>`)
+                        .style("left", `${d3.event.pageX}px`)
+                        .style("top", `${d3.event.pageY - 28}px`);
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", 0);
+                })
                 .attr('cx', width / 2)
                 .attr('cy', height / 2)
                 .transition()
@@ -1278,7 +1464,8 @@ const scatterInput = () => {
                 .attr("cy", d => scales.count.y(d.maxima))
                 .attr('r', 0)
                 .transition()
-                .duration(300)
+                .duration(100)
+                .ease(d3.easeLinear)
                 .attr("r", 6)
                 .style("fill", "#dc7176")
 
@@ -1289,6 +1476,26 @@ const scatterInput = () => {
 
     }
 
+    const errorDate = () => {
+        const monthFail = document.getElementById('fail-month');
+        const dayFail = document.getElementById('fail-day');
+        const valueDateDay = d3.select("#updateButtonDay").property("value");
+        const valueDateMonth = d3.select("#updateButtonMonth").property("value");
+        const year = "2020"; // Hardcodeamos el año a 2020 por ser bisiesto y permitir 29 febrero
+        if (!isValidDate(valueDateDay, valueDateMonth, year)) {
+            monthFail.classList.add('fail-active');
+        } else {
+            monthFail.classList.remove('fail-active');
+
+        }
+    }
+
+    const isValidDate = (day, month, year) => {
+        const date = new Date();
+        date.setFullYear(year, month - 1, day); // month - 1 porque empiezan en 0 (enero = 0)
+        return (date.getFullYear() == year) && (date.getMonth() == month - 1) && (date.getDate() == day);
+    }
+
     const updateMin = () => {
 
         let valueDateDay = d3.select("#updateButtonDay").property("value");
@@ -1297,6 +1504,9 @@ const scatterInput = () => {
         if (valueDateMonth < 10) valueDateMonth = (`0${valueDateMonth}`).slice(-2);
         let valueDate = `${valueDateMonth}-${valueDateDay}`;
         let reValueDate = new RegExp(`^.*${valueDate}$`, "gi");
+
+        errorDate();
+
 
         const ciudad = selectCity.property("value")
             .replace(/ /g, "_")
@@ -1342,40 +1552,7 @@ const scatterInput = () => {
 
     const resize = () => {
 
-        const stationResize = d3.select("#select-scatter-city")
-            .property("value")
-            .replace(/[\u00f1-\u036f]/g, "")
-            .replace(/ /g, "_")
-            .replace(/á/g, "a")
-            .replace(/Á/g, "A")
-            .replace(/é/g, "e")
-            .replace(/è/g, "e")
-            .replace(/í/g, "i")
-            .replace(/ó/g, "o")
-            .replace(/ú/g, "u")
-            .replace(/ñ/g, "n");
-
-        d3.csv("csv/day-by-day/" + stationResize + "-diarias.csv", (error, data) => {
-
-            let valueDateDay = d3.select("#updateButtonDay").property("value");
-            let valueDateMonth = d3.select("#updateButtonMonth").property("value");
-            if (valueDateDay < 10) valueDateDay = (`0${valueDateDay}`).slice(-2);
-            if (valueDateMonth < 10) valueDateMonth = (`0${valueDateMonth}`).slice(-2);
-            let valueDate = `${valueDateMonth}-${valueDateDay}`;
-            let reValueDate = new RegExp(`^.*${valueDate}$`, "gi");
-
-            dataz = data.filter(d => String(d.fecha).match(reValueDate));
-
-            dataz.forEach(d => {
-                d.fecha = d.fecha;
-                d.maxima = +d.maxima;
-                d.minima = +d.minima;
-                d.year = getYear(d.fecha);
-            });
-
-            updateChart(dataz)
-
-        });
+        updateMax()
 
     }
 

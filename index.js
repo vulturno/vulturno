@@ -1,5 +1,5 @@
 export {
-    select, selectAll, mouse
+    select, selectAll, mouse, event
 } from "d3-selection";
 
 export {
@@ -11,7 +11,7 @@ export {
 } from "d3-collection";
 
 export {
-    min, max, bisector
+    min, max, bisector, range
 } from "d3-array";
 
 export {
@@ -19,7 +19,7 @@ export {
 } from "d3-shape";
 
 export {
-    scaleTime,scaleLinear
+    scaleTime,scaleLinear, scaleOrdinal
 } from "d3-scale";
 
 export {
@@ -29,6 +29,10 @@ export {
 export {
     csv
 } from "d3-request";
+
+export {
+    forceSimulation, forceManyBody, forceX, forceY, forceCollide, forceCenter
+} from "d3-force";
 
 export {
     easeLinear
@@ -45,3 +49,4 @@ export {
 
 import "d3-transition";
 import "d3-drag";
+import "d3-fetch";
