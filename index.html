@@ -43,6 +43,38 @@
     </div>
     <section class="chart">
         <section class="chart-container">
+            <article class="scatter-inputs">
+                <article class="scatter-inputs-filter">
+                    <h3 class="scatter-inputs-filter-title">FILTROS</h3>
+                    <div class="container-inputs">
+                        <label class="inputs-label">Ciudad</label>
+                        <select class="temperatura-mensual-minima-select select-scatter-city" id="select-scatter-city"></select>
+                    </div>
+                    <div class="container-inputs">
+                        <label class="inputs-label" r="0" fodata-r="updateButtonDay">Día</label>
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text" value="10" />
+                    </div>
+                    <div class="container-inputs">
+                        <label class="inputs-label" r="0" fodata-r="updateButtonMonth">Mes</label>
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text" value="12" />
+                    </div>
+                    <button class="btn-update-grafica roboto btn-update-max" id="update">MÁXIMAS</button>
+                    <button class="btn-update-grafica roboto btn-update-min" id="updateMin"> MÍNIMAS</button>
+                </article>
+                <div id="fail-month" class="fail-scatter">
+                    <p class="fail-scatter-text">Las civilizaciones mayas y aztecas tenían calendarios con más de 12 meses. Nuestro calendario solamente tiene 12 meses, así que selecciona uno de estos.</p>
+                    <p class="fail-scatter-text">Los habitantes de Alba Longa(Italia) tenían meses con 36 días. No es nuestro caso. Selecciona un día entre el 1 y el 31 dependiendo del mes.</p>
+                </div>
+
+                <svg class="charts scatter-chart">
+                    <g class="scatter-inputs-container">
+                    </g>
+                </svg>
+            </article>
+        </section>
+    </section>
+    <section class="chart">
+        <section class="chart-container">
             <article class="chart-text-container">
                 <h3 class="chart-text-title">Evolución de las temperaturas</h3>
                 <p class="chart-text">Una visualización de datos para ver la evolución de la temperatura media anual en las diferentes estaciones de la AEMET.</p>
@@ -109,30 +141,24 @@
                 </svg>
             </article>
         </section>
-    </section>
-    <div class="chart">
-        <section class="chart-container">
-            <article class="scatter-inputs">
-                <article class="scatter-inputs-filter">
-                    <h3 class="scatter-inputs-filter-title">FILTROS</h3>
-                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-scatter-city"></select>
-                    <div class="container-inputs">
-                        <label class="inputs-label" for="updateButtonDay">Día</label>
-                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text" value="10" />
-                    </div>
-                    <div class="container-inputs">
-                        <label class="inputs-label" for="updateButtonMonth">Mes</label>
-                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text" value="12" />
-                    </div>
-                    <button class="btn-update-grafica roboto btn-update-max" id="update">MÁXIMAS</button>
-                    <button class="btn-update-grafica roboto btn-update-min" id="updateMin"> MÍNIMAS</button>
-                </article>
-                <svg class="charts scatter-chart">
-                    <g class="scatter-inputs-container"></g>
+    <section id="records" class="records-max">
+        <section class="temperature-container-full">
+            <article id="frosty" class="chart-force">
+                <svg class="charts">
+                    <g class="chart-force-container"></g>
                 </svg>
             </article>
         </section>
-    </div>
+        <section class="temperature-container-full">
+            <article id="frosty" class="chart-force-two">
+                <svg class="charts">
+                    <g class="chart-force-two-container"></g>
+                </svg>
+            </article>
+        </section>
+    </section>
+
+    </section>
     <section class="metodology">
         <article class="metodology-container">
             <h3 class="metodology-title">Metodología</h3>
@@ -182,6 +208,7 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.18.7/slimselect.min.js"></script>
     <script src="js/d3.min.js"></script>
+    <script src="js/anime.min.js"></script>
     <script src="js/d3-annotation.min.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/area.js"></script>
