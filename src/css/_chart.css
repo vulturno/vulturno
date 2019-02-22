@@ -30,6 +30,7 @@
 
 .chart-vulturno {
     position: relative;
+
     .tooltip {
         position: absolute;
         bottom: 2.5rem;
@@ -38,39 +39,48 @@
         border-radius: 2px;
         box-shadow: var(--shadowTooltip);
         width: max-content;
+
         strong {
             font-size: 1rem;
         }
     }
+
     .tooltip-media-texto {
         margin: 0;
         font-size: .65rem;
         font-family: var(--roboto);
         color: #fafbfc;
     }
+
     .tooltip-media-anual-maxima {
         right: 2rem;
         bottom: 5rem;
+
         .tooltip-media-texto {
             color: var(--white);
         }
     }
+
     .tooltip-media-anual-minima {
         background-color: #2a7d97;
         right: 2rem;
         left: initial;
     }
+
     .tooltip-temp {
         top: 0;
         bottom: initial;
         background-color: #050b2c;
         width: max-content;
+
         .tooltip-media-texto {
             /* stylelint-disable */
             color: var(--white);
-            + p {
+
+            +p {
                 display: none;
             }
+
             /* stylelint-enable */
         }
     }
@@ -99,15 +109,18 @@
     .domain {
         stroke: none;
     }
+
     .axis-y {
         .tick {
             stroke-dasharray: 3px;
         }
     }
+
     text {
         font-family: var(--roboto);
         font-size: 11px;
     }
+
     .chart-temperature-min-container,
     .chart-temperature-max-container {
         .domain {
@@ -124,7 +137,8 @@
 }
 
 .scatter-inputs-filter {
-    width: 100%;
+    width: fit-content;
+    margin: 0 auto;
     background-color: var(--white);
     padding: 1rem;
     border-radius: 4px;
@@ -134,10 +148,54 @@
 
 .scatter-inputs-filter-title {
     font-size: 1.25rem;
-    font-family: var(--title);
+    font-family: var(--roboto);
     color: var(--black);
     margin: 0;
-    margin-bottom: .25rem;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 2;
+    margin-left: 10px;
+    padding: .5rem .75rem;
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, .2);
+    .tooltip-scatter-text {
+        font-family: var(--roboto);
+        margin: 0;
+        font-weight: bold;
+    }
+
+    p + p {
+        display: none;
+    }
+
+    &.tooltip-max {
+        background-color: #13042e;
+
+        .tooltip-scatter-text {
+            color: #D15B60;
+        }
+    }
+
+    &.tooltip-min {
+        background-color: #adffc6;
+        color: #000;
+
+        .tooltip-scatter-text {
+            color: #1E6782;
+        }
+    }
+    .tooltip-record-max {
+        margin: .25rem;
+        font-family: var(--roboto);
+        font-size: 14px;
+        .number {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    }
 }
 
 .select-scatter-city {
@@ -146,7 +204,30 @@
 
 .container-inputs {
     display: inline-block;
-    margin-left: .25rem;
+
+    &:not(:first-of-type) {
+        margin-left: .25rem;
+    }
+}
+
+.fail-scatter {
+    display: none;
+    margin: 2rem auto;
+    width: 30rem;
+    border-radius: 4px;
+    background-color: rgba(252, 13, 27, .5);
+    padding: 1rem;
+    box-shadow: var(--shadowCard);
+}
+
+.fail-active {
+    display: block;
+}
+
+.fail-scatter-text {
+    font-size: 1rem;
+    font-family: var(--text);
+    color: #0b0037;
 }
 
 .ss-main .ss-single-selected {
@@ -169,6 +250,8 @@
 }
 
 .input-update-grafica {
+    font-size: 14px;
+    font-family: var(--roboto);
     border: 1px solid #ddd;
     background-color: #f1f1f1;
     border-radius: 4px;
@@ -177,7 +260,6 @@
     padding: 0 .63rem;
     display: inline-block;
     min-height: 50px;
-
 }
 
 .btn-update-max,
@@ -185,6 +267,7 @@
     -webkit-transition: border-color .4s, color .4s;
     transition: border-color .4s, color .4s;
 }
+
 .btn-update-max:before,
 .btn-update-min:before {
     content: '';
@@ -240,6 +323,7 @@
     z-index: 1;
     -webkit-backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
+
     &.btn-update-min {
         background-color: #3B5795;
         border: 1px solid #67efb6;
@@ -279,15 +363,34 @@
     .area {
         fill: var(--orange);
     }
+
     .lines {
         fill: none;
         stroke: #dd435c;
         stroke-width: 3px;
     }
+
     .circles {
         fill: var(--circles);
         r: 3.5px;
     }
+}
+
+.chart-force {
+    .circles {
+        cursor: pointer;
+        stroke: #3a403d;
+        stroke-width: .1px;
+        &:hover {
+            stroke-width: 1px;
+        }
+
+    }
+}
+
+.records-max {
+    min-height: 100vh;
+    background-color: #2c4050;
 }
 
 @media only screen and (min-width: 48rem) {
@@ -312,18 +415,22 @@
     .chart-vulturno {
         .tooltip {
             padding: 1rem .5rem;
+
             strong {
                 font-size: 1.25rem;
             }
         }
+
         .tooltip-media-texto {
             font-size: 12px;
         }
+
         .tooltip-media-anual-maxima {
             bottom: 2.5rem;
             right: 2rem;
             left: initial;
         }
+
         .tooltip-media-anual-minima {
             right: initial;
             left: 4rem;
@@ -344,6 +451,7 @@
         .tooltip {
             padding: 1rem;
         }
+
         .tooltip-media-texto {
             font-size: 14px;
         }
