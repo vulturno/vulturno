@@ -4,13 +4,11 @@ function forceLayout() {
     const svg = chart.select('svg');
     const nodePadding = 1.5;
     const color = d3.scaleOrdinal(["#cc0011", "#a2000d", "#b8000f", "#e16973", "#ea969d", "#f0b7bc", "#f6d2d5"]);
+
     const tooltip = chart.append("div")
         .attr("class", "tooltip tooltip-under-over")
         .attr("id", "tooltip-scatter")
         .style("opacity", 0);
-
-    const xCenter = [75, 150, 225, 300, 375, 450, 525];
-
 
     function updateChart(dataz) {
         const w = chart.node().offsetWidth;
@@ -41,16 +39,16 @@ function forceLayout() {
             .selectAll(".circles").remove().exit()
             .data(dataz)
             .enter().append("circle")
-            .attr('class', "circles")
+            .attr("class", 'circles')
             .attr("r", d => d.radius)
             .attr("fill", d => color(d.decade))
             .attr("cx", d => d.x)
             .attr("cy", d => d.y)
             .on("mouseover", function(d) {
-               var circleUnderMouse = this;
-                d3.selectAll('.circles').filter(function(d,i) {
-                      return (this !== circleUnderMouse);
-                    }).transition().duration(300).ease(d3.easeLinear).style('opacity', '0.5')
+                var circleUnderMouse = this;
+                d3.selectAll('.circles').filter(function(d, i) {
+                    return (this !== circleUnderMouse);
+                }).transition().duration(300).ease(d3.easeLinear).style('opacity', 0.2)
 
                 tooltip.transition()
                 tooltip.style("opacity", 1)
@@ -65,13 +63,53 @@ function forceLayout() {
                     .duration(200)
                     .style("opacity", 0);
             })
+
+        const legendData = d3.group(dataz.map(d => d.decade))
+        const unique = legendData.filter(function(elem, pos) {
+            return legendData.indexOf(elem) == pos;
+        })
+
+        const legend = svg.selectAll(".legend")
+            .data(unique, d => d)
+            .enter()
+            .append("g")
+            .attr("class", 'legend')
+            .attr("transform", (d, i) => `translate(${50},${(i + 10) * 20})`);
+
+        legend.append("rect")
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", d => color(d));
+
+        legend.append("text")
+            .attr("x", 20)
+            .attr("y", 10)
+            .text(d => d)
+
+        legend.on("mouseover", function(tipo) {
+                d3.selectAll(".legend")
+                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 0.1)
+                d3.select(this)
+                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
+                d3.selectAll(".circles")
+                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 0.1)
+                    .filter(d => d.decade == tipo)
+                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
+            })
+            .on("mouseout", function(tipo) {
+                d3.selectAll(".legend")
+                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
+                d3.selectAll(".circles")
+                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
+            })
+
     }
 
     function loadData() {
 
         d3.csv("csv/total-records-max.csv", (error, data) => {
             if (error) {
-                  console.log(error);
+                console.log(error);
             } else {
 
                 dataz = data
@@ -81,7 +119,6 @@ function forceLayout() {
                     d.year = d.year;
                 });
 
-                // sort the nodes so that the bigger ones are at the back
                 dataz.sort((a, b) => b.size - a.size);
 
                 updateChart(dataz)
@@ -104,7 +141,7 @@ function forceLayout() {
 forceLayout()
 
 
-function forceLayoutVertical() {
+/*function forceLayoutVertical() {
 
     const chart = d3.select('.chart-force-two');
     const container = d3.select('.chart-force-two-container');
@@ -121,35 +158,35 @@ function forceLayoutVertical() {
 
     var numNodes = 70;
     var nodes = d3.range(numNodes).map(function(d, i) {
-      return {
-        radius: Math.random() * 25,
-        category: i % 7
-      }
+        return {
+            radius: Math.random() * 25,
+            category: i % 7
+        }
     });
 
     var simulation = d3.forceSimulation(nodes)
-      .force('charge', d3.forceManyBody().strength(5))
-      .force('x', d3.forceX().x(d => xCenter[d.category]))
-      .force('collision', d3.forceCollide().radius(d => d.radius))
-      .on('tick', ticked);
+        .force('charge', d3.forceManyBody().strength(5))
+        .force('x', d3.forceX().x(d => xCenter[d.category]))
+        .force('collision', d3.forceCollide().radius(d => d.radius))
+        .on('tick', ticked);
 
     function ticked() {
-      var u = container.selectAll('circle')
-        .data(nodes);
+        var u = container.selectAll('circle')
+            .data(nodes);
 
-      u.enter()
-        .append('circle')
-        .attr('r', d => d.radius)
-        .attr("fill", d => color(d.category))
-        .merge(u)
-        .attr('cx', d => d.x)
-        .attr('cy', d => d.y)
+        u.enter()
+            .append('circle')
+            .attr('r', d => d.radius)
+            .attr("fill", d => color(d.category))
+            .merge(u)
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
 
-      u.exit().remove();
+        u.exit().remove();
     }
 }
 
-forceLayoutVertical();
+forceLayoutVertical();*/
 
 const vulturno = () => {
 

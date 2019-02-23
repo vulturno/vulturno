@@ -11,7 +11,7 @@ export {
 } from "d3-collection";
 
 export {
-    min, max, bisector, range
+    min, max, bisector, range, group
 } from "d3-array";
 
 export {
