@@ -119,6 +119,7 @@
     text {
         font-family: var(--roboto);
         font-size: 11px;
+        stroke: none;
     }
 
     .chart-temperature-min-container,
@@ -161,6 +162,9 @@
     background: var(--white);
     border-radius: 4px;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, .2);
+    &.tooltip-decade {
+        position: relative;
+    }
     .tooltip-scatter-text {
         font-family: var(--roboto);
         margin: 0;
@@ -384,7 +388,9 @@
         &:hover {
             stroke-width: 1px;
         }
-
+    }
+    .legend {
+        cursor: pointer;
     }
 }
 
