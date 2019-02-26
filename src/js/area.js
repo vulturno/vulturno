@@ -3,16 +3,19 @@ function forceLayout() {
     const chart = d3.select('.chart-force');
     const svg = chart.select('svg');
     const nodePadding = 1.5;
-    const color = d3.scaleOrdinal(["#cc0011", "#a2000d", "#b8000f", "#e16973", "#ea969d", "#f0b7bc", "#f6d2d5"]);
+    const color = d3.scaleOrdinal(["#f6d2d5", "#f0b7bc", "#ea969d", "#e16973", "#cc0011", "#a2000d", "#b8000f"]);
 
     const tooltip = chart.append("div")
-        .attr("class", "tooltip tooltip-under-over")
-        .attr("id", "tooltip-scatter")
+        .attr("class", "tooltip tooltip-record")
+        .style("opacity", 0);
+
+    const tooltipDecade = chart.append("div")
+        .attr("class", "tooltip tooltip-decade")
         .style("opacity", 0);
 
     function updateChart(dataz) {
         const w = chart.node().offsetWidth;
-        const h = 600;
+        const h = 608;
 
         svg
             .attr('width', w)
@@ -54,8 +57,8 @@ function forceLayout() {
                 tooltip.style("opacity", 1)
                     .html(`<p class="tooltip-record-max">En <span class="number">${d.year}</span> se establecieron <span class="number">${d.total}</span> récords.<p/>
                         `)
-                    .style("left", (d3.event.pageX - 50) + "px")
-                    .style("top", (d3.event.pageY - 60) + "px");
+                    .style("left", 50 + "px")
+                    .style("top", 16 + "px");
             })
             .on("mouseout", function(d) {
                 d3.selectAll('.circles').transition().duration(800).ease(d3.easeLinear).style('opacity', 1)
@@ -65,16 +68,24 @@ function forceLayout() {
             })
 
         const legendData = d3.group(dataz.map(d => d.decade))
-        const unique = legendData.filter(function(elem, pos) {
+        let unique = legendData.filter(function(elem, pos) {
             return legendData.indexOf(elem) == pos;
         })
+
+        unique = unique.reverse((d) => d.decade);
+
+        const titleLegend = svg.append('text')
+            .attr("class", "legend-title")
+            .attr("transform", "translate(50,110)")
+            .text("Décadas")
 
         const legend = svg.selectAll(".legend")
             .data(unique, d => d)
             .enter()
             .append("g")
             .attr("class", 'legend')
-            .attr("transform", (d, i) => `translate(${50},${(i + 10) * 20})`);
+            .attr("year", d => d)
+            .attr("transform", (d, i) => `translate(${50},${(i + 5) * 25})`);
 
         legend.append("rect")
             .attr("width", 10)
@@ -87,21 +98,45 @@ function forceLayout() {
             .text(d => d)
 
         legend.on("mouseover", function(tipo) {
+                const legendThis = d3.select(this);
                 d3.selectAll(".legend")
                     .transition().duration(300).ease(d3.easeLinear).style('opacity', 0.1)
-                d3.select(this)
+                legendThis
                     .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
                 d3.selectAll(".circles")
-                    .transition().duration(300).ease(d3.easeLinear).style('opacity', 0.1)
+                    .transition().duration(200).ease(d3.easeLinear).style('opacity', 0.1)
                     .filter(d => d.decade == tipo)
                     .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
+                d3.select(this).call(tooltipLast)
+
             })
             .on("mouseout", function(tipo) {
                 d3.selectAll(".legend")
                     .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
                 d3.selectAll(".circles")
                     .transition().duration(300).ease(d3.easeLinear).style('opacity', 1)
+                tooltipDecade
+                    .style("opacity", 0);
             })
+
+        function tooltipLast(legend) {
+
+            const valueYear = legend.attr("year")
+
+            d3.csv("csv/total-records-max.csv", (error, data) => {
+
+                dataz = data
+                dataz = dataz.filter(d => String(d.decade).match(valueYear));
+
+                tooltipDecade
+                    .data(dataz)
+                    .style("opacity", 1)
+                    .html(d => `<p class="tooltip-record-max">Entre <span class="number">${d.decade}</span> y <span class="number">${parseInt(d.decade) + 9}</span> se establecieron <span class="number">${d.totaldecade}</span> récords de temperatura máxima.<p/>
+                            `)
+                    .style("left", 50 + "px")
+                    .style("top", 16 + "px");
+            });
+        }
 
     }
 
@@ -119,7 +154,6 @@ function forceLayout() {
                     d.year = d.year;
                 });
 
-                dataz.sort((a, b) => b.size - a.size);
 
                 updateChart(dataz)
 
@@ -139,54 +173,6 @@ function forceLayout() {
 }
 
 forceLayout()
-
-
-/*function forceLayoutVertical() {
-
-    const chart = d3.select('.chart-force-two');
-    const container = d3.select('.chart-force-two-container');
-    const svg = chart.select('svg');
-    const w = chart.node().offsetWidth;
-    const h = 600;
-
-    svg
-        .attr('width', w)
-        .attr('height', h);
-
-    const color = d3.scaleOrdinal(["#cc0011", "#a2000d", "#b8000f", "#e16973", "#ea969d", "#f0b7bc", "#f6d2d5"]);
-    var xCenter = [100, 200, 300, 400, 500, 600, 700]
-
-    var numNodes = 70;
-    var nodes = d3.range(numNodes).map(function(d, i) {
-        return {
-            radius: Math.random() * 25,
-            category: i % 7
-        }
-    });
-
-    var simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(5))
-        .force('x', d3.forceX().x(d => xCenter[d.category]))
-        .force('collision', d3.forceCollide().radius(d => d.radius))
-        .on('tick', ticked);
-
-    function ticked() {
-        var u = container.selectAll('circle')
-            .data(nodes);
-
-        u.enter()
-            .append('circle')
-            .attr('r', d => d.radius)
-            .attr("fill", d => color(d.category))
-            .merge(u)
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
-
-        u.exit().remove();
-    }
-}
-
-forceLayoutVertical();*/
 
 const vulturno = () => {
 
@@ -323,7 +309,7 @@ const vulturno = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 600;
+        const h = 608;
 
 
         width = w - margin.left - margin.right;
@@ -517,7 +503,7 @@ const vulturno = () => {
 
 const maxvul = () => {
     //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
-    const margin = { top: 24, right: 48, bottom: 24, left: 24 };
+    const margin = { top: 0, right: 48, bottom: 24, left: 24 };
     let width = 0;
     let height = 0;
     let w = 0;
@@ -640,7 +626,7 @@ const maxvul = () => {
 
     const updateChart = (dataz) => {
         w = chart.node().offsetWidth;
-        h = 200;
+        h = 208;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -717,7 +703,7 @@ const maxvul = () => {
 
 const minvul = () => {
     //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
-    const margin = { top: 24, right: 48, bottom: 24, left: 24 };
+    const margin = { top: 0, right: 48, bottom: 24, left: 24 };
     let width = 0;
     let height = 0;
     let w = 0;
@@ -837,7 +823,7 @@ const minvul = () => {
 
     const updateChart = (dataz) => {
         w = chart.node().offsetWidth;
-        h = 200;
+        h = 208;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -912,7 +898,7 @@ const minvul = () => {
 }
 
 const tropicalTotal = () => { //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
-    const margin = { top: 24, right: 24, bottom: 24, left: 32 };
+    const margin = { top: 0, right: 24, bottom: 24, left: 32 };
     let width = 0;
     let height = 0;
     const chart = d3.select('.chart-tropical');
@@ -974,7 +960,7 @@ const tropicalTotal = () => { //Estructura similar a la que utilizan en algunos 
 
     const updateChart = (dataz) => {
         const w = chart.node().offsetWidth;
-        const h = 600;
+        const h = 608;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1062,7 +1048,7 @@ const tropicalTotal = () => { //Estructura similar a la que utilizan en algunos 
 }
 
 const frostyTotal = () => { //Estructura similar a la que utilizan en algunos proyectos de pudding.cool
-    const margin = { top: 24, right: 24, bottom: 24, left: 32 };
+    const margin = { top: 0, right: 24, bottom: 24, left: 32 };
     let width = 0;
     let height = 0;
     const chart = d3.select('.chart-frosty');
@@ -1124,7 +1110,7 @@ const frostyTotal = () => { //Estructura similar a la que utilizan en algunos pr
 
     const updateChart = (dataz) => {
         const w = chart.node().offsetWidth;
-        const h = 600;
+        const h = 608;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1304,7 +1290,7 @@ const scatterInput = () => {
     const updateChart = (dataz) => {
 
         const w = chart.node().offsetWidth;
-        const h = 550;
+        const h = 608;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1628,6 +1614,273 @@ const scatterInput = () => {
 
 }
 
+const tropicalCities = () => {
+
+    const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+    if (widthMobile > 544) {
+        margin = { top: 8, right: 16, bottom: 24, left: 48 };
+    } else {
+        margin = { top: 8, right: 16, bottom: 24, left: 32 };
+    }
+
+    let width = 0;
+    let height = 0;
+    const chart = d3.select('.chart-cities-tropical');
+    const svg = chart.select('svg');
+    let scales = {};
+    let datos;
+
+    const setupScales = () => {
+
+        const countX = d3.scaleTime()
+            .domain([d3.min(datos, d => d.fecha), d3.max(datos, d => d.fecha)]);
+
+        const countY = d3.scaleLinear()
+            .domain([0, d3.max(datos, d => d.tropical * 1.25)]);
+
+        scales.count = { x: countX, y: countY };
+
+    }
+
+    //Seleccionamos el contenedor donde irán las escalas y en este caso el area donde se pirntara nuestra gráfica
+    const setupElements = () => {
+
+        const g = svg.select('.chart-cities-tropical-container');
+
+        g.append('g').attr('class', 'axis axis-x');
+
+        g.append('g').attr('class', 'axis axis-y');
+
+        g.append('g').attr('class', 'chart-cities-tropical-container-bis');
+
+
+    }
+
+    //Actualizando escalas
+    const updateScales = (width, height) => {
+        scales.count.x.range([0, width]);
+        scales.count.y.range([height, 0]);
+    }
+
+    //Dibujando ejes
+    const drawAxes = (g) => {
+
+        const axisX = d3.axisBottom(scales.count.x)
+            .tickPadding(5)
+            .tickFormat(d3.format("d"))
+            .ticks(13)
+
+        g.select(".axis-x")
+            .attr("transform", "translate(0," + height + ")")
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .call(axisX);
+
+        const axisY = d3.axisLeft(scales.count.y)
+            .tickPadding(5)
+            .tickFormat(d => d)
+            .tickSize(-width)
+            .ticks(6);
+
+        g.select(".axis-y")
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .call(axisY)
+
+    }
+
+    function updateChart(data) {
+
+        const w = chart.node().offsetWidth;
+        const h = 608;
+
+        width = w - margin.left - margin.right;
+        height = h - margin.top - margin.bottom;
+
+        svg
+            .attr('width', w)
+            .attr('height', h);
+
+        const translate = "translate(" + margin.left + "," + margin.top + ")";
+
+        const g = svg.select('.chart-cities-tropical-container')
+
+        g.attr("transform", translate)
+
+        const area = d3.area()
+            .x(d => scales.count.x(d.year))
+            .y0(height)
+            .y1(d => scales.count.y(d.total))
+
+        const line = d3.line()
+            .x(d => scales.count.x(d.year))
+            .y(d => scales.count.y(d.total))
+
+        updateScales(width, height)
+
+        const container = chart.select('.chart-cities-tropical-container-bis')
+
+        const layer = container.selectAll('.area-cities-tropical')
+            .data([datos])
+
+        const layerLine = container.selectAll('.line-cities-tropical')
+            .data([datos])
+
+        const newLayer = layer.enter()
+            .append('path')
+            .attr('class', 'area-cities-tropical')
+
+        const newlayerLine = layerLine.enter()
+            .append('path')
+            .attr('class', 'line-cities-tropical')
+
+        layer.merge(newLayer)
+            .transition()
+            .duration(600)
+            .ease(d3.easeLinear)
+            .attr('d', area)
+
+        layerLine.merge(newlayerLine)
+            .transition(600)
+            .ease(d3.easeLinear)
+            .attr('d', line)
+
+
+        drawAxes(g)
+
+    }
+
+    function update(mes) {
+
+        d3.csv(`csv/tropicales/${mes}-total-tropicales.csv`, (error, data) => {
+
+            datos = data;
+
+            datos.forEach(d => {
+                d.fecha = +d.year;
+                d.tropical = +d.total;
+            });
+
+            console.log(datos)
+
+            scales.count.x.range([0, width]);
+            scales.count.y.range([height, 0]);
+
+            const countX = d3.scaleTime()
+                .domain([d3.min(datos, d => d.fecha), d3.max(datos, d => d.fecha)]);
+
+            const countY = d3.scaleLinear()
+                .domain([0, d3.max(datos, d => d.tropical * 1.25)]);
+
+            scales.count = { x: countX, y: countY };
+            updateChart(datos)
+
+        });
+
+
+    }
+
+    const resize = () => {
+
+        const stationResize = d3.select("#select-city-tropical")
+            .property("value")
+            .replace(/[\u00f1-\u036f]/g, "")
+            .replace(/ /g, "_")
+            .replace(/á/g, "a")
+            .replace(/Á/g, "A")
+            .replace(/é/g, "e")
+            .replace(/è/g, "e")
+            .replace(/í/g, "i")
+            .replace(/ó/g, "o")
+            .replace(/ú/g, "u")
+            .replace(/ñ/g, "n");
+
+        d3.csv("csv/" + stationResize + ".csv", (error, data) => {
+
+            datos = data;
+            updateChart(datos)
+
+        });
+
+    }
+
+    const menuMes = () => {
+        d3.csv('csv/stations.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+
+                datos = data;
+
+                const nest = d3.nest()
+                    .key(d => d.Name)
+                    .entries(datos);
+
+                const selectCity = d3.select("#select-city-tropical");
+
+                selectCity
+                    .selectAll("option")
+                    .data(nest)
+                    .enter()
+                    .append("option")
+                    .attr("value", d => d.key)
+                    .text(d => d.key)
+
+                selectCity.on('change', function() {
+
+                    let mes = d3.select(this)
+                        .property("value")
+                        .replace(/ /g, "_")
+                        .normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+                    console.log(mes)
+
+                    update(mes)
+
+                });
+
+
+            }
+
+        });
+
+    }
+
+    // LOAD THE DATA
+    const loadData = () => {
+
+        d3.csv('csv/tropicales/Albacete-total-tropicales.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+
+                datos = data;
+                datos.forEach(d => {
+                    d.fecha = +d.year;
+                    d.tropical = +d.total;
+                });
+                setupElements()
+                setupScales()
+                updateChart(datos)
+                mes = 'Albacete';
+                update(mes)
+            }
+
+        });
+    }
+
+    window.addEventListener('resize', resize)
+
+    loadData()
+    menuMes()
+
+}
+
+tropicalCities()
+
 scatterInput()
 
 vulturno()
@@ -1638,6 +1891,11 @@ new SlimSelect({
 
 new SlimSelect({
     select: '#select-scatter-city',
+    searchPlaceholder: 'Busca tu ciudad'
+})
+
+new SlimSelect({
+    select: '#select-city-tropical',
     searchPlaceholder: 'Busca tu ciudad'
 })
 maxvul()
