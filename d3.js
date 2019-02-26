@@ -2558,7 +2558,7 @@ CatmullRom.prototype = {
   }
 };
 
-(function custom(alpha) {
+var catmullRom = (function custom(alpha) {
 
   function catmullRom(context) {
     return alpha ? new CatmullRom(context, alpha) : new Cardinal(context, 0);
@@ -8911,6 +8911,7 @@ exports.curveCardinal = cardinal;
 exports.arc = arc;
 exports.curveLinear = curveLinear;
 exports.area = area;
+exports.curveCatmullRom = catmullRom;
 exports.scaleTime = time;
 exports.scaleLinear = linear;
 exports.scaleOrdinal = ordinal;

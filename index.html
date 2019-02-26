@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Vulturno | La evolución de la temperatura media anual en las diferentes estaciones de la AEMET</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Adamina|Playfair+Display:400,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Adamina|Playfair+Display:700,900" rel="stylesheet">
 </head>
 
 <body>
@@ -30,17 +31,15 @@
         </a>
     </nav>
     <div class="overlay"></div>
-    <div class="header-100 orange">
-        <img src="img/cinco.jpg" alt="" class="header-absolute">
-        <div class="header-text">
-            <h1 class="header-title">Vulturno</h1>
-        </div>
-        <div class="header-photo">
-            <svg aria-hidden="true" data-prefix="fal" data-icon="camera-alt" class="header-photo-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#fff" d="M256 408c-66.2 0-120-53.8-120-120s53.8-120 120-120 120 53.8 120 120-53.8 120-120 120zm0-208c-48.5 0-88 39.5-88 88s39.5 88 88 88 88-39.5 88-88-39.5-88-88-88zm-32 88c0-17.6 14.4-32 32-32 8.8 0 16-7.2 16-16s-7.2-16-16-16c-35.3 0-64 28.7-64 64 0 8.8 7.2 16 16 16s16-7.2 16-16zM324.3 64c3.3 0 6.3 2.1 7.5 5.2l22.1 58.8H464c8.8 0 16 7.2 16 16v288c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16h110.2l20.1-53.6c2.3-6.2 8.3-10.4 15-10.4h131m0-32h-131c-20 0-37.9 12.4-44.9 31.1L136 96H48c-26.5 0-48 21.5-48 48v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48h-88l-14.3-38c-5.8-15.7-20.7-26-37.4-26z"></path></svg>
-            <span class="header-photo-text">La fotografía esta hecha en los Monegros
-             por <a href="https://www.flickr.com/photos/polgaroid/4531303205/in/album-72157626176625614/">Pato Hernán</a>.</span>
-        </div>
-    </div>
+    <section class="chart">
+        <section class="chart-container">
+            <article class="chart-text-container">
+                <h1 class="header-title">Vulturno</h1>
+                <p class="chart-text">Una visualización de datos para ver como han ido evolucionando las temperaturas en casi todas las capitales de provincia de España.</p>
+                <p class="chart-text">A lo largo del proyecto podrás consultar la temperatura máxima y mínima registrada de cualquier día del año. El total de las noches tropicales. Las heladas registradas. La temperatura media mínima y la temperatura media máxima anual.</p>
+            </article>
+        </section>
+    </section>
     <section class="chart">
         <section class="chart-container">
             <article class="scatter-inputs">
@@ -65,7 +64,6 @@
                     <p class="fail-scatter-text">Las civilizaciones mayas y aztecas tenían calendarios con más de 12 meses. Nuestro calendario solamente tiene 12 meses, así que selecciona uno de estos.</p>
                     <p class="fail-scatter-text">Los habitantes de Alba Longa(Italia) tenían meses con 36 días. No es nuestro caso. Selecciona un día entre el 1 y el 31 dependiendo del mes.</p>
                 </div>
-
                 <svg class="charts scatter-chart">
                     <g class="scatter-inputs-container">
                     </g>
@@ -73,16 +71,12 @@
             </article>
         </section>
     </section>
-    <section class="chart">
+    <section class="chart chart-separator">
         <section class="chart-container">
             <article class="chart-text-container">
-                <h3 class="chart-text-title">Evolución de las temperaturas</h3>
-                <p class="chart-text">Una visualización de datos para ver la evolución de la temperatura media anual en las diferentes estaciones de la AEMET.</p>
-                <p class="chart-text">En la gráfica podrás consultar la temperatura media de 45 estaciones de la AEMET, están casi todas capitales de provincia. También el año cuando se registro la temperatura media mínima y la temperatura media máxima.</p>
-                <p class="chart-text">En algunas estaciones faltan datos de algún año. En la gráfica cada año esta representado con un círculo, la ausencia del mismo indica que faltan los datos de ese año.</p>
-            </article>
-            <article class="chart-text-container">
-                <h3 class="chart-text-title">¿Cómo se calcula la temperatura media anual?</h3>
+                <h3 class="chart-text-title">Temperatura media anual</h3>
+                <p class="chart-text">Una gráfica para ver cómo ha ido evolucionando la temperatura media anual en las diferentes estaciones.</p>
+                <h4 class="chart-text chart-text-subtitle">¿Cómo se calcula la temperatura media anual?</h4>
                 <p class="chart-text">Para calcular la temperatura media anual lo que hay que hacer es sumar las temperaturas medias de todos los meses y dividirlo entre 12.</p>
             </article>
             <p class="select-text">Selecciona una ciudad</p>
@@ -94,21 +88,37 @@
             </article>
         </section>
     </section>
-    <section id="max" class="temperature-max">
-        <section class="temperature-container">
-            <h3 class="temperature-max-title">Temperaturas máximas</h3>
-            <p class="temperature-max-text">Una gráfica para visualizar cuando se establecieron los récords de temperaturas máximas en las 45 estaciones analizadas.</p>
-            <p class="temperature-max-text">La mayoría de estaciones marcaron <strong>sus récords en el siglo XXI</strong>, sobre todo en la última década.</p>
-            <article class="chart-temperature-max">
-                <svg class="charts">
-                    <g class="chart-temperature-max-container"></g>
-                </svg>
-            </article>
+    <section id="records" class="records-max chart-separator">
+        <section class="chart-container">
+            <section class="chart-text-container">
+                <h3 class="chart-text-title">Récords de temperaturas máximas</h3>
+                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día en las 45 estaciones analizadas.</p>
+            </section>
+            <section class="temperature-container-full">
+                <article id="frosty" class="chart-force">
+                    <svg class="charts">
+                    </svg>
+                </article>
+            </section>
+        </section>
+    </section>
+    <section id="max" class="temperature-max chart-separator">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Temperaturas máxima anual</h3>
+            <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura máxima anual en cada una de las 45 estaciones analizadas.</p>
+            <p class="chart-text">La mayoría de estaciones marcaron <strong>sus récords en el siglo XXI</strong>, sobre todo en la última década.</p>
         </section>
         <section class="temperature-container">
-            <h3 class="temperature-max-title">Noches tropicales</h3>
-            <p class="temperature-max-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
-            <p class="temperature-max-text">En la siguiente gráfica podemos ver el total anual de noches tropicales registradas en 45 estaciones de la AEMET.</p>
+        <article class="chart-temperature-max">
+            <svg class="charts">
+                <g class="chart-temperature-max-container"></g>
+            </svg>
+        </article>
+        </section>
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Noches tropicales</h3>
+            <p class="chart-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
+            <p class="chart-text">En la siguiente gráfica podemos ver el total de días por año en el que la mínima fue igual o superior a 20ºC.</p>
         </section>
         <section class="temperature-container-full">
             <article id="tropical" class="chart-tropical">
@@ -117,22 +127,37 @@
                 </svg>
             </article>
         </section>
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Noches tropicales por ciudad</h3>
+            <p class="chart-text">En la siguiente gráfica podemos ver la evolución de las noches tropicales en cada ciudad a lo largo de los años.</p>
+            <p class="chart-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
+        </section>
+        <section class="temperature-container-full">
+            <select class="temperatura-mensual-minima-select select-scatter-city" id="select-city-tropical"></select>
+            <article id="tropical" class="chart-cities-tropical">
+                <svg class="charts">
+                    <g class="chart-cities-tropical-container"></g>
+                </svg>
+            </article>
+        </section>
     </section>
-    <section id="min" class="temperature-min">
+    <section id="min" class="temperature-min chart-separator">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Temperaturas mínimas</h3>
+            <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura mínima anual en cada una de las 45 estaciones analizadas.</p>
+            <p class="chart-text">Esta gráfica es <strong>totalmente contraria a la anterior</strong>. Si los récords de temperaturas máximas se concentran en el siglo XXI, los récords de temperaturas mínimas lo <strong>hacen en el siglo XX</strong>. Desde 1986 no se ha <strong>batido ningún récord</strong>. Y la mayoría de récords se concentran en 1956 y 1972.</p>
+        </section>
         <section class="temperature-container">
-            <h3 class="temperature-max-title">Temperaturas mínimas</h3>
-            <p class="temperature-max-text">Una gráfica para visualizar cuando se establecieron los récords de temperaturas mínimas en las 45 estaciones analizadas.</p>
-            <p class="temperature-max-text">Esta gráfica es <strong>totalmente contraria a la anterior</strong>. Si los récords de temperaturas máximas se concentran en el siglo XXI, los récords de temperaturas mínimas lo <strong>hacen en el siglo XX</strong>. Desde 1986 no se ha <strong>batido ningún récord</strong>. Y la mayoría de récords se concentran en 1956 y 1972.</p>
             <article class="chart-temperature-min">
                 <svg class="charts">
                     <g class="chart-temperature-min-container"></g>
                 </svg>
             </article>
         </section>
-        <section class="temperature-container">
-            <h3 class="temperature-max-title">Heladas</h3>
-            <p class="temperature-max-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
-            <p class="temperature-max-text">En la siguiente gráfica podemos ver el total anual de heladas en 45 estaciones de la AEMET.</p>
+        <section class="chart-text-container chart-separator">
+            <h3 class="chart-text-title">Heladas</h3>
+            <p class="chart-text">Se considera helada cuando la temperatura del aire, registrada a 1,50 metros sobre el nivel del suelo, es de 0ºC.</p>
+            <p class="chart-text">En la siguiente gráfica podemos ver el total anual de heladas en las 45 estaciones de la AEMET.</p>
         </section>
         <section class="temperature-container-full">
             <article id="frosty" class="chart-frosty">
@@ -141,23 +166,6 @@
                 </svg>
             </article>
         </section>
-    <section id="records" class="records-max">
-        <section class="temperature-container-full">
-            <article id="frosty" class="chart-force">
-                <svg class="charts">
-                    <g class="chart-force-container"></g>
-                </svg>
-            </article>
-        </section>
-        <section class="temperature-container-full">
-            <article id="frosty" class="chart-force-two">
-                <svg class="charts">
-                    <g class="chart-force-two-container"></g>
-                </svg>
-            </article>
-        </section>
-    </section>
-
     </section>
     <section class="metodology">
         <article class="metodology-container">
@@ -168,13 +176,13 @@
             <p class="metodology-text">Se han quedado fuera por falta de datos las estaciones de Teruel, Mérida, Lugo, Palencia, Ceuta, Guadalajara y Jaén.</p>
             <p class="metodology-text">La estación de Madrid es la que está ubicada en el Retiro.</p>
             <p class="metodology-text">¿El eje vertical no tiene 0? <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/"> Pues no y tampoco pasa nada.</a> </p>
-            <p class="metodology-text">Limpiando datos. <a href="https://github.com/jorgeatgu/vulturno#temperatura-anual">A unos les resultará aburrido a otros como yo les resultará divertido.</a> </p>
+            <p class="metodology-text"><a href="https://github.com/jorgeatgu/vulturno/data">Aquí están todos los cripts que he utilizado para obtener todos los datasets.</a> </p>
         </article>
         <article class="metodology-container">
             <h3 class="metodology-title">Créditos</h3>
-            <p class="metodology-text">Todos los datos de las temperaturas son información elaborada por la <a href="https://opendata.aemet.es/centrodedescargas/inicio">Agencia Estatal de Meteorología</a>. Que es el sistema para la difusión y reutilización de la información de AEMET.</p>
+            <p class="metodology-text">Todos los datos de las temperaturas son información elaborada por la <a href="https://opendata.aemet.es/centrodedescargas/inicio">Agencia Estatal de Meteorología</a>. Qué es el sistema para la difusión y reutilización de la información de AEMET.</p>
             <p class="metodology-text">Para extraer los datos he usado <a href="https://github.com/jorgeatgu/lurte">Lurte</a>.</p>
-            <p class="metodology-text">Para el dropdown he usado <a href="http://slimselectjs.com">SlimSelect</a>.</p>
+            <p class="metodology-text">Para él dropdown he usado <a href="http://slimselectjs.com">SlimSelect</a>.</p>
             <p class="metodology-text">Para las anotaciones he usado <a href="d3-annotation.susielu.com/">d3 annotation</a>.</p>
             <p class="metodology-text">La fotografía de la portada es en los Monegros, y la ha realizado <a href="https://www.flickr.com/photos/polgaroid/4531303205/in/album-72157626176625614/">Pato Hernán</a>.</p>
         </article>
