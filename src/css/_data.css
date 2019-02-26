@@ -25,7 +25,7 @@
 }
 
 .data-grid {
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 100%;
     display: grid;
     max-width: 58rem;
     margin-top: 0;
@@ -36,17 +36,18 @@
 }
 
 .data-card {
-    background-color: rgba(17, 64, 83, .2);
+    background: linear-gradient(150deg, #e34f6f 70%, #fcde9c);
     box-shadow: var(--shadowCard);
     padding: 1rem;
+    border-radius: 4px;
 }
 
 .data-card-name {
     margin: .25rem;
     margin-left: 0;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-family: var(--roboto);
-    font-weight: 500;
+    font-weight: bold;
     color: var(--black);
 }
 
@@ -59,18 +60,34 @@
 }
 
 .data-card-link {
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 3px;
     font-family: var(--roboto);
-    color: var(--white);
+    color: var(--black);
     display: inline-block;
-    background-color: #0e4054;
+    background-color: var(--white);
     padding: .5rem 1rem;
     text-decoration: none;
+    font-weight: bold;
     margin-right: .5rem;
-    letter-spacing: 1px;
     transition: all .3s ease-in;
     &:hover {
-        background-color: rgba(14, 64, 84, .8);
+        background-color: #FAD59E;
     }
+}
+
+@media only screen and (min-width: 48rem) {
+
+    .data-grid {
+        grid-template-columns: 49% 49%;
+    }
+
+}
+
+@media only screen and (min-width: 64em) {
+
+    .data-grid {
+        grid-template-columns: 33% 33% 33%;
+    }
+
 }

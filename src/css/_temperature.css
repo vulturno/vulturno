@@ -1,6 +1,7 @@
 .temperature-container {
     max-width: 45rem;
-    margin: 0 auto;
+    margin: 2rem auto;
+    margin-bottom: 0;
 }
 
 .temperature-container-full {
@@ -20,22 +21,6 @@
 
 .temperature-min {
     background-color: #B8DBDB;
-}
-
-.temperature-max-text {
-    font-size: 1rem;
-    font-family: var(--text);
-    color: var(--black);
-    max-width: 25rem;
-    padding: 0 1rem;
-}
-
-.temperature-max-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    font-family: var(--title);
-    margin: 0;
-    padding: 0 1rem;
 }
 
 .chart-temperature-max {
@@ -69,7 +54,7 @@
     width: 100%;
     margin-top: 4rem;
     .circles-min {
-        fill: #2e4e74;
+        fill: #257d98;
     }
     .tick {
         text {
@@ -92,6 +77,13 @@
     }
 }
 
+.records-max {
+    .chart-text-title,
+    .chart-text {
+        color: var(--white);
+    }
+}
+
 @media only screen and (min-width: 48rem) {
 
     .temperature-max-number {
@@ -111,10 +103,6 @@
                 font-family: var(--roboto);
             }
         }
-    }
-
-    .temperature-max-title {
-        font-size: 2rem;
     }
 
 }
