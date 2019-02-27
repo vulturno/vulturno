@@ -17,14 +17,32 @@
         <span></span>
     </div>
     <nav class="navegacion menu--inola">
-        <a href="#evolucion" class="navegacion-btn menu__item">
-            <span class="menu__item-name">Evolución</span>
+        <a href="#dia-a-dia" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Máximas y mínimas</span>
+        </a>
+        <a href="#media-anual" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Temperatura media anual</span>
+        </a>
+        <a href="#records-max" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Records de temperaturas máximas</span>
         </a>
         <a href="#max" class="navegacion-btn menu__item">
-            <span class="menu__item-name">Temperaturas máximas</span>
+            <span class="menu__item-name">Temperatura máxima anual</span>
+        </a>
+        <a href="#noches-tropicales" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Noches tropicales</span>
+        </a>
+        <a href="#noches-tropicales-ciudad" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Noches tropicales por ciudad</span>
         </a>
         <a href="#min" class="navegacion-btn menu__item">
-            <span class="menu__item-name">Temperaturas mínimas</span>
+            <span class="menu__item-name">Records de temperaturas mínimas</span>
+        </a>
+        <a href="#heladas" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Heladas</span>
+        </a>
+        <a href="#temp-ext" class="navegacion-btn menu__item">
+            <span class="menu__item-name">Temperaturas "extremas"</span>
         </a>
         <a href="/data" class="navegacion-btn menu__item">
             <span class="menu__item-name">Data</span>
@@ -42,6 +60,10 @@
     </section>
     <section class="chart">
         <section class="chart-container">
+            <section id="dia-a-dia" class="chart-text-container">
+                <h3 class="chart-text-title">Temperatura máxima y mínima día a día</h3>
+                <p class="chart-text">En esta gráfica puedes consultar todas las máximas y minimas registradas en cada una de las estaciones entre 1950 y 2019.</p>
+            </section>
             <article class="scatter-inputs">
                 <article class="scatter-inputs-filter">
                     <h3 class="scatter-inputs-filter-title">FILTROS</h3>
@@ -73,7 +95,7 @@
     </section>
     <section class="chart chart-separator">
         <section class="chart-container">
-            <article class="chart-text-container">
+            <article id="media-anual" class="chart-text-container">
                 <h3 class="chart-text-title">Temperatura media anual</h3>
                 <p class="chart-text">Una gráfica para ver cómo ha ido evolucionando la temperatura media anual en las diferentes estaciones.</p>
                 <h4 class="chart-text chart-text-subtitle">¿Cómo se calcula la temperatura media anual?</h4>
@@ -88,14 +110,28 @@
             </article>
         </section>
     </section>
-    <section id="records" class="records-max chart-separator">
+    <section id="records-max" class="records-max chart-separator">
         <section class="chart-container">
             <section class="chart-text-container">
                 <h3 class="chart-text-title">Récords de temperaturas máximas</h3>
-                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día en las 45 estaciones analizadas.</p>
+                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día del año en las 45 estaciones analizadas.</p>
             </section>
             <section class="temperature-container-full">
-                <article id="frosty" class="chart-force">
+                <article id="force-maxima" class="chart-force-maxima">
+                    <svg class="charts">
+                    </svg>
+                </article>
+            </section>
+        </section>
+    </section>
+    <section id="records-min" class="records-min chart-separator">
+        <section class="chart-container">
+            <section class="chart-text-container">
+                <h3 class="chart-text-title">Récords de temperaturas mínimas</h3>
+                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura mínima de cada día del año en las 45 estaciones analizadas.</p>
+            </section>
+            <section class="temperature-container-full">
+                <article id="force-minima" class="chart-force-minima">
                     <svg class="charts">
                     </svg>
                 </article>
@@ -115,19 +151,19 @@
             </svg>
         </article>
         </section>
-        <section class="chart-text-container">
+        <section id="noches-tropicales" class="chart-text-container">
             <h3 class="chart-text-title">Noches tropicales</h3>
             <p class="chart-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
             <p class="chart-text">En la siguiente gráfica podemos ver el total de días por año en el que la mínima fue igual o superior a 20ºC.</p>
         </section>
-        <section class="temperature-container-full">
+        <section  class="temperature-container-full">
             <article id="tropical" class="chart-tropical">
                 <svg class="charts">
                     <g class="chart-tropical-container"></g>
                 </svg>
             </article>
         </section>
-        <section class="chart-text-container">
+        <section id="noches-tropicales-ciudad" class="chart-text-container">
             <h3 class="chart-text-title">Noches tropicales por ciudad</h3>
             <p class="chart-text">En la siguiente gráfica podemos ver la evolución de las noches tropicales en cada ciudad a lo largo de los años.</p>
             <p class="chart-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
@@ -154,15 +190,31 @@
                 </svg>
             </article>
         </section>
-        <section class="chart-text-container chart-separator">
+        <section id="heladas" class="chart-text-container chart-separator">
             <h3 class="chart-text-title">Heladas</h3>
             <p class="chart-text">Se considera helada cuando la temperatura del aire, registrada a 1,50 metros sobre el nivel del suelo, es de 0ºC.</p>
             <p class="chart-text">En la siguiente gráfica podemos ver el total anual de heladas en las 45 estaciones de la AEMET.</p>
         </section>
         <section class="temperature-container-full">
-            <article id="frosty" class="chart-frosty">
+            <article class="chart-frosty">
                 <svg class="charts">
                     <g class="chart-frosty-container"></g>
+                </svg>
+            </article>
+        </section>
+    </section>
+    <section id="temp-ext" class="temperature-ext chart-separator">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Temperaturas "extremas"</h3>
+            <p class="chart-text">El título de extremo no es que sea muy preciso pero no sabía como denominar aquellas temperaturas que están por encima de los 35ºC.</p>
+            <p class="chart-text">En esta gráfica se puede ver las veces que se registraron temperaturas superiores a 35ºC en todas las estaciones.</p>
+        </section>
+        <section class="temperature-container-full">
+        <p class="select-text">Selecciona una temperatura</p>
+        <select class="temperatura-mensual-minima-select select-ext" id="select-ext"></select>
+            <article class="chart-temperature-ext">
+                <svg class="charts">
+                    <g class="chart-temperature-ext-container"></g>
                 </svg>
             </article>
         </section>
@@ -176,7 +228,7 @@
             <p class="metodology-text">Se han quedado fuera por falta de datos las estaciones de Teruel, Mérida, Lugo, Palencia, Ceuta, Guadalajara y Jaén.</p>
             <p class="metodology-text">La estación de Madrid es la que está ubicada en el Retiro.</p>
             <p class="metodology-text">¿El eje vertical no tiene 0? <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/"> Pues no y tampoco pasa nada.</a> </p>
-            <p class="metodology-text"><a href="https://github.com/jorgeatgu/vulturno/data">Aquí están todos los cripts que he utilizado para obtener todos los datasets.</a> </p>
+            <p class="metodology-text"><a href="https://github.com/jorgeatgu/vulturno/data">Aquí están todos los scripts que he ido creando para triar y obtener todos los datasets.</a> </p>
         </article>
         <article class="metodology-container">
             <h3 class="metodology-title">Créditos</h3>
@@ -184,7 +236,6 @@
             <p class="metodology-text">Para extraer los datos he usado <a href="https://github.com/jorgeatgu/lurte">Lurte</a>.</p>
             <p class="metodology-text">Para él dropdown he usado <a href="http://slimselectjs.com">SlimSelect</a>.</p>
             <p class="metodology-text">Para las anotaciones he usado <a href="d3-annotation.susielu.com/">d3 annotation</a>.</p>
-            <p class="metodology-text">La fotografía de la portada es en los Monegros, y la ha realizado <a href="https://www.flickr.com/photos/polgaroid/4531303205/in/album-72157626176625614/">Pato Hernán</a>.</p>
         </article>
     </section>
     <section class="data-viz">
