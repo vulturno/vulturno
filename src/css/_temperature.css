@@ -77,11 +77,16 @@
     }
 }
 
-.records-max {
+.records-max,
+.records-min {
     .chart-text-title,
     .chart-text {
         color: var(--white);
     }
+}
+
+.temperature-ext {
+    background-color: #dde8e0;
 }
 
 @media only screen and (min-width: 48rem) {

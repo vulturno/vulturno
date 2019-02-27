@@ -407,11 +407,11 @@
     }
 }
 
-.chart-force {
+.chart-force-maxima,
+.chart-force-minima {
     position: relative;
     .circles {
         cursor: pointer;
-        stroke: #3a403d;
         stroke-width: .1px;
         &:hover {
             stroke-width: 1px;
@@ -434,10 +434,33 @@
     background-color: #2c4050;
 }
 
+.records-min {
+    min-height: 100vh;
+    background-color: #191100;
+}
+
+.legend-minima,
+.legend-maxima {
+    text {
+        fill: var(--white);
+        stroke: none;
+    }
+}
+
 .lines-tropical {
     fill: none;
     stroke: #670509;
     stroke-width: 2px;
+}
+
+.area-ext {
+    fill: rgba(219, 69, 94, .9);
+    stroke: none;
+}
+
+.line-ext {
+    fill: none;
+    stroke: rgba(20, 3, 32, .5);
 }
 
 @media only screen and (min-width: 48rem) {
