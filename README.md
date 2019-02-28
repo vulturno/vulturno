@@ -11,6 +11,6 @@ Para recolectar todos los datos he usado [Lurte](https://github.com/vulturno/lur
 
 Los datos que he utilizado están disponibles en bruto [aquí](https://github.com/vulturno/data).
 
-## Limpiando datos
+## Analizando datos
 
-Todos los scripts que he utilizado para limpiar y extraer datos están disponibles en este repositorio [vulturno data](https://github.com/vulturno/data/).
+Todos los scripts que he utilizado para analizar datos y crear nuevos conjutos de datos están disponibles en este repositorio [vulturno data](https://github.com/vulturno/data/).
