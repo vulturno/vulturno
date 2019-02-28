@@ -61,7 +61,7 @@
     <section class="chart">
         <section class="chart-container">
             <section id="dia-a-dia" class="chart-text-container">
-                <h3 class="chart-text-title">Temperatura máxima y mínima día a día</h3>
+                <h3 class="chart-text-title nw">Temperatura máxima y mínima día a día</h3>
                 <p class="chart-text">En esta gráfica puedes consultar todas las máximas y minimas registradas en cada una de las estaciones entre 1950 y 2019.</p>
             </section>
             <article class="scatter-inputs">
@@ -101,8 +101,10 @@
                 <h4 class="chart-text chart-text-subtitle">¿Cómo se calcula la temperatura media anual?</h4>
                 <p class="chart-text">Para calcular la temperatura media anual lo que hay que hacer es sumar las temperaturas medias de todos los meses y dividirlo entre 12.</p>
             </article>
-            <p class="select-text">Selecciona una ciudad</p>
-            <select class="temperatura-mensual-minima-select" id="select-city"></select>
+            <div class="container-selects">
+                <p class="select-text">Selecciona una ciudad</p>
+                <select class="temperatura-mensual-minima-select" id="select-city"></select>
+            </div>
             <article id="evolucion" class="chart-vulturno">
                 <svg class="charts">
                     <g class="chart-vulturno-container"></g>
@@ -154,9 +156,9 @@
         <section id="noches-tropicales" class="chart-text-container">
             <h3 class="chart-text-title">Noches tropicales</h3>
             <p class="chart-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
-            <p class="chart-text">En la siguiente gráfica podemos ver el total de días por año en el que la mínima fue igual o superior a 20ºC.</p>
+            <p class="chart-text">En la siguiente gráfica podemos ver el total de días por año en el que la mínima fue igual o superior a 20ºC en todas las estaciones analizadas.</p>
         </section>
-        <section  class="temperature-container-full">
+        <section class="temperature-container-full">
             <article id="tropical" class="chart-tropical">
                 <svg class="charts">
                     <g class="chart-tropical-container"></g>
@@ -169,7 +171,10 @@
             <p class="chart-text">Se podría definir como una noche en la que la temperatura mínima es igual o superior a 20ºC.</p>
         </section>
         <section class="temperature-container-full">
-            <select class="temperatura-mensual-minima-select select-scatter-city" id="select-city-tropical"></select>
+            <div class="container-selects">
+                <p class="select-text">Selecciona una ciudad</p>
+                <select class="temperatura-mensual-minima-select select-scatter-city" id="select-city-tropical"></select>
+            </div>
             <article id="tropical" class="chart-cities-tropical">
                 <svg class="charts">
                     <g class="chart-cities-tropical-container"></g>
@@ -207,11 +212,13 @@
         <section class="chart-text-container">
             <h3 class="chart-text-title">Temperaturas "extremas"</h3>
             <p class="chart-text">El título de extremo no es que sea muy preciso pero no sabía como denominar aquellas temperaturas que están por encima de los 35ºC.</p>
-            <p class="chart-text">En esta gráfica se puede ver las veces que se registraron temperaturas superiores a 35ºC en todas las estaciones.</p>
+            <p class="chart-text">En esta gráfica se puede ver las veces que se registraron temperaturas superiores entre los 35ºC y 45ºC en todas las estaciones.</p>
         </section>
         <section class="temperature-container-full">
-        <p class="select-text">Selecciona una temperatura</p>
-        <select class="temperatura-mensual-minima-select select-ext" id="select-ext"></select>
+            <div class="container-selects">
+                <p class="select-text">Selecciona una temperatura</p>
+                <select class="temperatura-mensual-minima-select select-ext" id="select-ext"></select>
+            </div>
             <article class="chart-temperature-ext">
                 <svg class="charts">
                     <g class="chart-temperature-ext-container"></g>
@@ -228,7 +235,7 @@
             <p class="metodology-text">Se han quedado fuera por falta de datos las estaciones de Teruel, Mérida, Lugo, Palencia, Ceuta, Guadalajara y Jaén.</p>
             <p class="metodology-text">La estación de Madrid es la que está ubicada en el Retiro.</p>
             <p class="metodology-text">¿El eje vertical no tiene 0? <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/"> Pues no y tampoco pasa nada.</a> </p>
-            <p class="metodology-text"><a href="https://github.com/jorgeatgu/vulturno/data">Aquí están todos los scripts que he ido creando para triar y obtener todos los datasets.</a> </p>
+            <p class="metodology-text"><a href="https://github.com/vulturno/data">Aquí están todos los scripts que he ido creando para triar y obtener todos los datasets.</a> </p>
         </article>
         <article class="metodology-container">
             <h3 class="metodology-title">Créditos</h3>
@@ -267,7 +274,6 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.18.7/slimselect.min.js"></script>
     <script src="js/d3.min.js"></script>
-    <script src="js/anime.min.js"></script>
     <script src="js/d3-annotation.min.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/area.js"></script>
