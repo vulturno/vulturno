@@ -1,0 +1,93 @@
+.pink {
+    background-color: #FCA300;
+    img {
+        mix-blend-mode: darken;
+    }
+
+    &:after {
+        background: #282581;
+        mix-blend-mode: lighten;
+        -webkit-filter: contrast(1.1);
+        filter: contrast(1.1);
+    }
+}
+
+.data-title {
+    font-size: 2rem;
+    font-family: var(--title);
+    margin-bottom: .5rem;
+}
+
+.data-text {
+    font-family: var(--text);
+    max-width: 30rem;
+    margin-bottom: 2rem;
+}
+
+.data-grid {
+    grid-template-columns: 100%;
+    display: grid;
+    max-width: 58rem;
+    margin-top: 0;
+    grid-column-gap: 3rem;
+    grid-row-gap: 3rem;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.data-card {
+    background: linear-gradient(150deg, #e34f6f 70%, #fcde9c);
+    box-shadow: var(--shadowCard);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.data-card-name {
+    margin: .25rem;
+    margin-left: 0;
+    font-size: 1.25rem;
+    font-family: var(--roboto);
+    font-weight: bold;
+    color: var(--black);
+}
+
+.data-card-text {
+    font-size: 14px;
+    font-family: var(--roboto);
+    color: var(--black);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.data-card-link {
+    font-size: 12px;
+    border-radius: 3px;
+    font-family: var(--roboto);
+    color: var(--black);
+    display: inline-block;
+    background-color: var(--white);
+    padding: .5rem 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: .5rem;
+    transition: all .3s ease-in;
+    &:hover {
+        background-color: #FAD59E;
+    }
+}
+
+@media only screen and (min-width: 48rem) {
+
+    .data-grid {
+        grid-template-columns: 49% 49%;
+    }
+
+}
+
+@media only screen and (min-width: 64em) {
+
+    .data-grid {
+        grid-template-columns: 33% 33% 33%;
+    }
+
+}

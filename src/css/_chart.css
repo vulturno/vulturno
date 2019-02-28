@@ -3,32 +3,53 @@
 }
 
 .chart-container,
-.metodology-container {
-    max-width: 90vw;
+.metodology-container,
+.data-container {
+    max-width: 97vw;
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: .5rem 0;
 }
 
 .chart-text-container {
-    padding: 1.5rem;
-    margin: 1rem auto;
-    margin-top: 0;
-    max-width: 25rem;
+    padding: .5rem;
+    padding-bottom: 0;
+    margin: 0 auto;
+    max-width: 26rem;
     color: var(--black);
+}
+
+.chart-separator {
+    padding-top: 1.5rem;
 }
 
 .chart-text {
     font-family: var(--text);
 }
 
+.chart-text-subtitle {
+    font-size: .75rem;
+    margin-bottom: .25rem;
+
+    + .chart-text {
+        margin-top: .25rem;
+    }
+}
+
 .chart-text-title {
-    font-size: 1rem;
+    font-size: 1.25rem;
+
+    font-weight: 600;
     font-family: var(--title);
-    margin-top: 0;
+    margin: 0;
+
+    + .chart-text {
+        margin-top: .25rem;
+    }
 }
 
 .chart-vulturno {
     position: relative;
+
     .tooltip {
         position: absolute;
         bottom: 2.5rem;
@@ -37,39 +58,48 @@
         border-radius: 2px;
         box-shadow: var(--shadowTooltip);
         width: max-content;
+
         strong {
             font-size: 1rem;
         }
     }
+
     .tooltip-media-texto {
         margin: 0;
         font-size: .65rem;
         font-family: var(--roboto);
         color: #fafbfc;
     }
+
     .tooltip-media-anual-maxima {
         right: 2rem;
         bottom: 5rem;
+
         .tooltip-media-texto {
             color: var(--white);
         }
     }
+
     .tooltip-media-anual-minima {
         background-color: #2a7d97;
         right: 2rem;
         left: initial;
     }
+
     .tooltip-temp {
         top: 0;
         bottom: initial;
         background-color: #050b2c;
         width: max-content;
+
         .tooltip-media-texto {
             /* stylelint-disable */
             color: var(--white);
-            + p {
+
+            +p {
                 display: none;
             }
+
             /* stylelint-enable */
         }
     }
@@ -94,42 +124,385 @@
     stroke: #2d3065;
 }
 
-.chart-vulturno-container {
+.charts {
     .domain {
         stroke: none;
     }
+
     .axis-y {
         .tick {
             stroke-dasharray: 3px;
         }
     }
+
     text {
         font-family: var(--roboto);
-        font-size: 11px;
+        font-size: 10px;
+        stroke: none;
     }
+
+    .chart-temperature-min-container,
+    .chart-temperature-max-container {
+        .domain {
+            stroke: var(--black);
+        }
+    }
+}
+
+.scatter-chart {
+    .tick line {
+        stroke: #888;
+        stroke-dasharray: 3px 3px;
+    }
+}
+
+.scatter-inputs-filter {
+    width: fit-content;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: .5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: var(--shadowTooltip);
+}
+
+.scatter-inputs-filter-title {
+    font-size: 1rem;
+    font-family: var(--roboto);
+    color: var(--black);
+    margin: 0;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 2;
+    margin-left: 10px;
+    padding: .5rem .75rem;
+    background: var(--white);
+    border-radius: 4px;
+    width: 10rem;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, .2);
+
+    .tooltip-scatter-text {
+        font-family: var(--roboto);
+        margin: 0;
+        font-weight: bold;
+    }
+
+    p + p {
+        display: none;
+    }
+
+    &.tooltip-max {
+        background-color: #13042e;
+
+        .tooltip-scatter-text {
+            color: #D15B60;
+        }
+    }
+
+    &.tooltip-min {
+        background-color: #adffc6;
+        color: #000;
+
+        .tooltip-scatter-text {
+            color: #1E6782;
+        }
+    }
+
+    .tooltip-record-max {
+        margin: .25rem;
+        font-family: var(--roboto);
+        font-size: 14px;
+
+        .number {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    }
+}
+
+.tooltip-decade,
+.tooltip-record {
+    width: 15rem;
+    top: 78px;
+    left: 0;
+    margin-left: 0;
+}
+
+.tootlip-record {
+    width: auto;
+}
+
+.select-scatter-city {
+    display: inline-block;
+}
+
+.container-inputs {
+    display: inline-block;
+
+    &:not(:first-of-type) {
+        margin-left: .25rem;
+    }
+}
+
+.fail-scatter {
+    display: none;
+    margin: 2rem auto;
+    width: 30rem;
+    border-radius: 4px;
+    background-color: rgba(252, 13, 27, .5);
+    padding: 1rem;
+    box-shadow: var(--shadowCard);
+}
+
+.fail-active {
+    display: block;
+}
+
+.fail-scatter-text {
+    font-size: 1rem;
+    font-family: var(--text);
+    color: #0b0037;
+}
+
+.ss-main .ss-single-selected {
+    width: 10rem !important;
+    margin-left: 0 !important;
+}
+
+.ss-main .ss-content {
+    margin-left: 0 !important;
+}
+
+.ss-main {
+    width: auto !important;
+}
+
+.inputs-label {
+    display: block;
+    font-size: 14px;
+    font-family: var(--roboto);
+}
+
+.input-update-grafica {
+    font-size: 14px;
+    font-family: var(--roboto);
+    border: 1px solid #ddd;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    max-width: 3rem;
+    box-sizing: border-box;
+    padding: 0 .63rem;
+    display: inline-block;
+    min-height: 50px;
+}
+
+.btn-update-max,
+.btn-update-min {
+    -webkit-transition: border-color .4s, color .4s;
+    transition: border-color .4s, color .4s;
+}
+
+.btn-update-max:before,
+.btn-update-min:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #eafd8e;
+    z-index: -1;
+    opacity: 0;
+    -webkit-transform: scale3d(.7, 1, 1);
+    transform: scale3d(.7, 1, 1);
+    -webkit-transition: -webkit-transform 1s, opacity 1s;
+    transition: transform 1s, opacity 1s;
+    -webkit-transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+    transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+}
+
+.btn-update-min:before {
+    background: #67efb6;
+}
+
+.btn-update-max,
+.btn-update-max:before,
+.btn-update-min,
+.btn-update-min:before {
+    -webkit-transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+    transition-timing-function: cubic-bezier(.2, 1, .3, 1);
+}
+
+.btn-update-max:hover:before,
+.btn-update-min:hover:before {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.btn-update-grafica {
+    background-color: #CA2A4E;
+    display: inline-block;
+    cursor: pointer;
+    min-width: 8rem;
+    width: 30%;
+    max-width: 250px;
+    margin: .5rem;
+    margin-left: 0;
+    padding: 1rem 2rem;
+    border: 1px solid #eafd8e;
+    color: #eafd8e;
+    position: relative;
+    font-weight: bold;
+    letter-spacing: 1px;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.btn-update-min {
+        background-color: #3B5795;
+        border: 1px solid #67efb6;
+        color: #67efb6;
+    }
+}
+
+.btn-update-max:hover {
+    color: #CA2A4E;
+    border: 1px solid #CA2A4E;
+}
+
+.btn-update-min:hover {
+    color: #3B5795;
+    border: 1px solid #3B5795;
+}
+
+.area-tropical {
+    fill: #dd435c;
+}
+
+.area-frosty {
+    fill: #257d98;
+}
+
+.line-frosty {
+    stroke: #2e4e74;
+    fill: none;
+}
+
+.line-tropical {
+    stroke: #670509;
+    fill: none;
+}
+
+.area-cities-tropical {
+    fill: #E15171;
+}
+
+.line-cities-tropical {
+    fill: none;
+    stroke: #7b2647;
+}
+
+.chart-vulturno-container {
     .area {
         fill: var(--orange);
     }
+
     .lines {
         fill: none;
         stroke: #dd435c;
         stroke-width: 3px;
     }
+
     .circles {
         fill: var(--circles);
         r: 3.5px;
     }
 }
 
+.chart-force-maxima,
+.chart-force-minima {
+    position: relative;
+
+    .circle-minima,
+    .circle-maxima {
+        cursor: pointer;
+        stroke-width: .1px;
+        stroke: var(--white);
+
+        &:hover {
+            stroke-width: 1px;
+        }
+    }
+
+    .legend {
+        cursor: pointer;
+
+        text {
+            fill: var(--white);
+        }
+    }
+
+    .legend-title {
+        fill: var(--white);
+        font-size: 1rem;
+    }
+}
+
+.records-max {
+    background-color: #2c4050;
+}
+
+.records-min {
+    background-color: #191100;
+}
+
+.legend-minima,
+.legend-maxima {
+    cursor: pointer;
+
+    text {
+        fill: var(--white);
+        stroke: none;
+    }
+}
+
+.lines-tropical {
+    fill: none;
+    stroke: #670509;
+    stroke-width: 2px;
+}
+
+.area-ext {
+    fill: rgba(219, 69, 94, .9);
+    stroke: none;
+}
+
+.line-ext {
+    fill: none;
+    stroke: rgba(20, 3, 32, .5);
+}
+
+#noches-tropicales-ciudad {
+    padding-top: 1.5rem;
+}
+
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
-    .metodology-container {
+    .metodology-container,
+    .data-container {
         max-width: 45rem;
         padding: 3rem 0;
     }
 
-    .chart-vulturno-container {
+    .chart-separator {
+        padding-top: 3rem;
+    }
+
+    .charts {
         text {
             font-size: 14px;
         }
@@ -137,27 +510,38 @@
 
     .chart-text-title {
         font-size: 1.5rem;
+
     }
 
     .chart-vulturno {
         .tooltip {
             padding: 1rem .5rem;
+
             strong {
                 font-size: 1.25rem;
             }
         }
+
         .tooltip-media-texto {
             font-size: 12px;
         }
+
         .tooltip-media-anual-maxima {
             bottom: 2.5rem;
             right: 2rem;
             left: initial;
         }
+
         .tooltip-media-anual-minima {
             right: initial;
             left: 4rem;
         }
+    }
+
+    .tooltip-decade,
+    .tooltip-record {
+        top: 16px;
+        left: 50px;
     }
 
 }
@@ -165,17 +549,49 @@
 @media only screen and (min-width: 64em) {
 
     .chart-container,
-    .metodology-container {
+    .metodology-container,
+    .data-container {
         max-width: 65rem;
+        padding: 0 0 1rem;
+    }
+
+    .records-min,
+    .records-max {
+        min-height: 100vh;
+    }
+
+    .scatter-inputs-filter-title {
+        font-size: 1.25rem;
+    }
+
+    .chart-text-container {
+        padding: 1rem;
+        padding-top: 0;
+    }
+
+    .scatter-inputs-filter {
+        padding: 1rem;
     }
 
     .chart-vulturno {
         .tooltip {
             padding: 1rem;
         }
+
         .tooltip-media-texto {
             font-size: 14px;
         }
     }
 
+    .btn-update-grafica {
+        width: 23%;
+    }
+
+    .chart-text-subtitle {
+        font-size: 1rem;
+    }
+
+    .nw {
+        white-space: nowrap;
+    }
 }

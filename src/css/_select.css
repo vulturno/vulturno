@@ -12,6 +12,13 @@
     margin-left: 3rem;
 }
 
+.ss-main {
+    margin-bottom: .25rem;
+    .ss-content {
+        top: 65px;
+    }
+}
+
 .ss-option {
     font-family: var(--roboto) !important;
     color: var(--black) !important;
@@ -40,7 +47,22 @@
 
 .select-text {
     font-family: var(--roboto);
-    margin-left: 3rem;
     margin-top: 0;
     margin-bottom: .25rem;
+}
+
+.container-selects {
+    margin-left: .5rem;
+}
+
+@media only screen and (min-width: 48em) {
+
+    .ss-main {
+        margin-bottom: .25rem;
+    }
+
+    .container-selects {
+        margin-left: 28px;
+    }
+
 }

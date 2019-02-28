@@ -1,44 +1,51 @@
-export {
-    select, selectAll, mouse
-} from "d3-selection";
+import 'd3-transition';
+import 'd3-drag';
+import 'd3-fetch';
 
 export {
-    dispatch
-} from "d3-dispatch";
+    select, selectAll, mouse, event,
+} from 'd3-selection';
 
 export {
-    nest
-} from "d3-collection";
+    dispatch,
+} from 'd3-dispatch';
 
 export {
-    min, max, bisector
-} from "d3-array";
+    nest,
+} from 'd3-collection';
 
 export {
-    line, curveCardinal, arc, curveLinear
-} from "d3-shape";
+    min, max, bisector, range, group,
+} from 'd3-array';
 
 export {
-    scaleTime,scaleLinear
-} from "d3-scale";
+    line, curveCardinal, arc, curveLinear, area,
+} from 'd3-shape';
 
 export {
-    axisBottom,axisLeft
-} from "d3-axis";
+    scaleTime, scaleLinear, scaleOrdinal,
+} from 'd3-scale';
 
 export {
-    csv
-} from "d3-request";
+    axisBottom, axisLeft,
+} from 'd3-axis';
 
 export {
-    easeLinear
-} from "d3-ease";
+    csv,
+} from 'd3-request';
 
 export {
-    format
-} from "d3-format";
+    forceSimulation, forceManyBody, forceX, forceY, forceCollide, forceCenter,
+} from 'd3-force';
 
+export {
+    easeLinear,
+} from 'd3-ease';
 
-import "d3-transition";
-import "d3-drag";
+export {
+    format,
+} from 'd3-format';
 
+export {
+    timeFormat,
+} from 'd3-time-format';

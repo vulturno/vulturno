@@ -1,4 +1,4 @@
-/* Menu inspired: https://codepen.io/BeanBaag/pen/XZRewP remove jQuery for JavaScript */
+ /* Menu inspired: https://codepen.io/BeanBaag/pen/XZRewP remove jQuery for JavaScript */
 
 .burger {
   width: 50px;
@@ -133,7 +133,7 @@
   color: var(--black);
   font-family: var(--title);
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   display: block;
   font-weight: 600;
   padding: 10px 0;

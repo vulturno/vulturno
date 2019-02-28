@@ -9,6 +9,7 @@
   --black: #111;
   --white: #fff;
   --shadowTooltip: 0 2px 9px 0 rgba(0, 0, 0, .2);
+  --shadowCard: 0 2px 4px 0 rgba(0, 0, 0, .31), 0 2px 4px 0 rgba(50, 50, 58, .2);
   --project1bg: #FEE1C2;
   --project1txt: #952747;
   --project2bg: #354A57;
