@@ -16,7 +16,7 @@
 }
 
 .temperature-max {
-    background-color: #ebbfb0;
+    background-color: rgba(235, 191, 176, .8);
 }
 
 .temperature-min {

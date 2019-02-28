@@ -5,13 +5,13 @@
 .chart-container,
 .metodology-container,
 .data-container {
-    max-width: 90vw;
+    max-width: 97vw;
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: .5rem 0;
 }
 
 .chart-text-container {
-    padding: 1.5rem;
+    padding: .5rem;
     padding-bottom: 0;
     margin: 0 auto;
     max-width: 26rem;
@@ -19,7 +19,7 @@
 }
 
 .chart-separator {
-    padding-top: 3rem;
+    padding-top: 1.5rem;
 }
 
 .chart-text {
@@ -27,17 +27,21 @@
 }
 
 .chart-text-subtitle {
+    font-size: .75rem;
     margin-bottom: .25rem;
+
     + .chart-text {
         margin-top: .25rem;
     }
 }
 
 .chart-text-title {
-    font-size: 1rem;
+    font-size: 1.25rem;
+
     font-weight: 600;
     font-family: var(--title);
     margin: 0;
+
     + .chart-text {
         margin-top: .25rem;
     }
@@ -133,7 +137,7 @@
 
     text {
         font-family: var(--roboto);
-        font-size: 11px;
+        font-size: 10px;
         stroke: none;
     }
 
@@ -156,14 +160,14 @@
     width: fit-content;
     margin: 0 auto;
     background-color: var(--white);
-    padding: 1rem;
+    padding: .5rem;
     border-radius: 4px;
     border: 1px solid #ccc;
     box-shadow: var(--shadowTooltip);
 }
 
 .scatter-inputs-filter-title {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-family: var(--roboto);
     color: var(--black);
     margin: 0;
@@ -178,11 +182,13 @@
     border-radius: 4px;
     width: 10rem;
     box-shadow: 0 2px 9px 0 rgba(0, 0, 0, .2);
+
     .tooltip-scatter-text {
         font-family: var(--roboto);
         margin: 0;
         font-weight: bold;
     }
+
     p + p {
         display: none;
     }
@@ -203,21 +209,29 @@
             color: #1E6782;
         }
     }
+
     .tooltip-record-max {
         margin: .25rem;
         font-family: var(--roboto);
         font-size: 14px;
+
         .number {
             font-size: 1rem;
             font-weight: bold;
         }
     }
-    &.tooltip-decade {
-        width: 15rem;
-    }
-    &.tooltip-record {
-        width: auto;
-    }
+}
+
+.tooltip-decade,
+.tooltip-record {
+    width: 15rem;
+    top: 78px;
+    left: 0;
+    margin-left: 0;
+}
+
+.tootlip-record {
+    width: auto;
 }
 
 .select-scatter-city {
@@ -332,11 +346,12 @@
     background-color: #CA2A4E;
     display: inline-block;
     cursor: pointer;
-    min-width: 150px;
+    min-width: 8rem;
+    width: 30%;
     max-width: 250px;
-    margin: 1em;
+    margin: .5rem;
     margin-left: 0;
-    padding: 1em 2em;
+    padding: 1rem 2rem;
     border: 1px solid #eafd8e;
     color: #eafd8e;
     position: relative;
@@ -410,37 +425,44 @@
 .chart-force-maxima,
 .chart-force-minima {
     position: relative;
-    .circles {
+
+    .circle-minima,
+    .circle-maxima {
         cursor: pointer;
         stroke-width: .1px;
+        stroke: var(--white);
+
         &:hover {
             stroke-width: 1px;
         }
     }
+
     .legend {
         cursor: pointer;
+
         text {
-            fill: #d8cac6;
+            fill: var(--white);
         }
     }
+
     .legend-title {
-        fill: #d8cac6;
+        fill: var(--white);
         font-size: 1rem;
     }
 }
 
 .records-max {
-    min-height: 100vh;
     background-color: #2c4050;
 }
 
 .records-min {
-    min-height: 100vh;
     background-color: #191100;
 }
 
 .legend-minima,
 .legend-maxima {
+    cursor: pointer;
+
     text {
         fill: var(--white);
         stroke: none;
@@ -463,6 +485,10 @@
     stroke: rgba(20, 3, 32, .5);
 }
 
+#noches-tropicales-ciudad {
+    padding-top: 1.5rem;
+}
+
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
@@ -470,6 +496,10 @@
     .data-container {
         max-width: 45rem;
         padding: 3rem 0;
+    }
+
+    .chart-separator {
+        padding-top: 3rem;
     }
 
     .charts {
@@ -480,6 +510,7 @@
 
     .chart-text-title {
         font-size: 1.5rem;
+
     }
 
     .chart-vulturno {
@@ -507,6 +538,12 @@
         }
     }
 
+    .tooltip-decade,
+    .tooltip-record {
+        top: 16px;
+        left: 50px;
+    }
+
 }
 
 @media only screen and (min-width: 64em) {
@@ -515,6 +552,25 @@
     .metodology-container,
     .data-container {
         max-width: 65rem;
+        padding: 0 0 1rem;
+    }
+
+    .records-min,
+    .records-max {
+        min-height: 100vh;
+    }
+
+    .scatter-inputs-filter-title {
+        font-size: 1.25rem;
+    }
+
+    .chart-text-container {
+        padding: 1rem;
+        padding-top: 0;
+    }
+
+    .scatter-inputs-filter {
+        padding: 1rem;
     }
 
     .chart-vulturno {
@@ -527,4 +583,15 @@
         }
     }
 
+    .btn-update-grafica {
+        width: 23%;
+    }
+
+    .chart-text-subtitle {
+        font-size: 1rem;
+    }
+
+    .nw {
+        white-space: nowrap;
+    }
 }

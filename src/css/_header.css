@@ -1,9 +1,17 @@
 .header-title {
-    font-size: 5rem;
+    font-size: 4rem;
     font-family: var(--title);
     font-weight: 900;
     margin: .5rem 0 0;
     color: var(--black);
     text-align: center;
     letter-spacing: 1px;
+}
+
+@media only screen and (min-width: 48rem) {
+
+    .header-title {
+        font-size: 5rem;
+    }
+
 }
