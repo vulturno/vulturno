@@ -1,6 +1,7 @@
 const colorMax = d3.scaleOrdinal(['#f6d2d5', '#f0b7bc', '#ea969d', '#e16973', '#cc0011', '#a2000d', '#b8000f']);
 const colorMin = d3.scaleOrdinal(['#004d84', '#005da0', '#006bb7', '#0077cc', '#4a9eda', '#7db9e5', '#a5cfed']);
 const colores = [colorMax, colorMin];
+const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
 const csvForce = ['csv/total-records-max.csv', 'csv/total-records-min.csv'];
 
@@ -10,6 +11,7 @@ function forceLayout(csvFile, record, color) {
     const chart = d3.select(`.chart-force-${record}`);
     const svg = chart.select('svg');
     const nodePadding = 1.5;
+    let dataz;
 
     const tooltip = chart.append('div')
         .attr('class', 'tooltip tooltip-record')
@@ -19,19 +21,26 @@ function forceLayout(csvFile, record, color) {
         .attr('class', 'tooltip tooltip-decade')
         .style('opacity', 0);
 
+    svg
+        .append('text')
+        .attr('class', 'legend-title')
+        .text('Décadas');
+
+    if (widthMobile > 544) {
+        svg.select('.legend-title')
+            .attr('transform', 'translate(50,110)');
+    } else {
+        svg.select('.legend-title')
+            .attr('transform', 'translate(0,30)');
+    }
+
     function updateChart(dataz) {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 570;
 
         svg
             .attr('width', w)
             .attr('height', h);
-
-        svg
-            .append('text')
-            .attr('class', 'legend-title')
-            .attr('transform', 'translate(50,110)')
-            .text('Décadas');
 
         const node = svg
             .selectAll(`.circle-${record}`).remove().exit()
@@ -49,14 +58,12 @@ function forceLayout(csvFile, record, color) {
                         return (this !== circleUnderMouse);
                     }).transition().duration(300)
                     .ease(d3.easeLinear)
-                    .style('opacity', 0.2);
+                    .style('opacity', 0.1);
 
                 tooltip.transition();
                 tooltip.style('opacity', 1)
                     .html(`<p class="tooltip-record-max">En <span class="number">${d.year}</span> se establecieron <span class="number">${d.total}</span> récords.<p/>
-                        `)
-                    .style('left', `${50}px`)
-                    .style('top', `${16}px`);
+                        `);
             })
             .on('mouseout', () => {
                 d3.selectAll(`.circle-${record}`).transition().duration(800).ease(d3.easeLinear)
@@ -88,18 +95,26 @@ function forceLayout(csvFile, record, color) {
             .enter()
             .append('g')
             .attr('class', `legend-${record}`)
-            .attr('year', d => d)
-            .attr('transform', (d, i) => `translate(${50},${(i + 5) * 25})`);
+            .attr('year', d => d);
+
+        if (widthMobile > 544) {
+            legend.attr('transform', (d, i) => `translate(${50},${(i + 5) * 25})`);
+            legend.append('text')
+                .attr('x', 20)
+                .attr('y', 10)
+                .text(d => d);
+        } else {
+            legend.attr('transform', (d, i) => `translate(${(i) * 45},${50})`);
+            legend.append('text')
+                .attr('x', 14)
+                .attr('y', 9)
+                .text(d => d);
+        }
 
         legend.append('rect')
             .attr('width', 10)
             .attr('height', 10)
             .style('fill', d => color(d));
-
-        legend.append('text')
-            .attr('x', 20)
-            .attr('y', 10)
-            .text(d => d);
 
         function tooltipLast(leyenda) {
             const valueYear = leyenda.attr('year');
@@ -117,9 +132,7 @@ function forceLayout(csvFile, record, color) {
                             + 9}</span> se establecieron <span class="number">${
                             d.totaldecade
                         }</span> récords de temperatura ${record}.<p/>`,
-                    )
-                    .style('left', `${50}px`)
-                    .style('top', `${16}px`);
+                    );
             });
         }
 
@@ -139,7 +152,7 @@ function forceLayout(csvFile, record, color) {
                     .duration(300)
                     .ease(d3.easeLinear)
                     .style('opacity', 1);
-                d3.select(this).call(tooltipLast);
+                d3.select(this).call(tooltipLast)
             })
             .on('mouseout', () => {
                 d3.selectAll(`.legend-${record}`)
@@ -164,7 +177,11 @@ function forceLayout(csvFile, record, color) {
             } else {
                 dataz = data;
                 dataz.forEach((d) => {
-                    d.size = +d.total / 10;
+                    if (widthMobile > 544) {
+                        d.size = +d.total / 10;
+                    } else {
+                        d.size = +d.total / 17;
+                    }
                     d.radius = +d.size;
                     d.year = d.year;
                 });
@@ -186,24 +203,12 @@ forceLayout(csvForce[0], records[0], colores[0]);
 forceLayout(csvForce[1], records[1], colores[1]);
 
 const vulturno = () => {
-    const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-    if (widthMobile > 544) {
-        const margin = {
-            top: 8,
-            right: 16,
-            bottom: 24,
-            left: 48,
-        };
-    } else {
-        const margin = {
-            top: 8,
-            right: 16,
-            bottom: 24,
-            left: 32,
-        };
-    }
-
+    const margin = {
+        top: 0,
+        right: 16,
+        bottom: 24,
+        left: 24,
+    };
     let width = 0;
     let height = 0;
     const chart = d3.select('.chart-vulturno');
@@ -317,7 +322,7 @@ const vulturno = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 544;
 
 
         width = w - margin.left - margin.right;
@@ -825,7 +830,7 @@ const minvul = () => {
 const tropicalTotal = () => {
     const margin = {
         top: 0,
-        right: 24,
+        right: 16,
         bottom: 24,
         left: 32,
     };
@@ -881,7 +886,7 @@ const tropicalTotal = () => {
 
     const updateChart = (dataz) => {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 544;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -967,7 +972,7 @@ const tropicalTotal = () => {
 const frostyTotal = () => {
     const margin = {
         top: 0,
-        right: 24,
+        right: 16,
         bottom: 24,
         left: 32,
     };
@@ -1023,7 +1028,7 @@ const frostyTotal = () => {
 
     const updateChart = (dataz) => {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 544;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1109,7 +1114,7 @@ const frostyTotal = () => {
 
 const scatterInput = () => {
     const margin = {
-        top: 48,
+        top: 16,
         right: 16,
         bottom: 24,
         left: 32,
@@ -1131,12 +1136,10 @@ const scatterInput = () => {
 
     const setupScales = () => {
         const countX = d3.scaleLinear()
-            .domain(
-                [d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
+            .domain([d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
 
         const countY = d3.scaleLinear()
             .domain([d3.min(dataz, d => d.minima), d3.max(dataz, d => d.minima)]);
-
 
         scales.count = { x: countX, y: countY };
     };
@@ -1184,7 +1187,7 @@ const scatterInput = () => {
 
     const updateChart = (dataz) => {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 544;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1210,12 +1213,14 @@ const scatterInput = () => {
             .append('circle')
             .attr('class', 'scatter-inputs-circles');
 
+        const ciudad = selectCity.property('value');
+
         layer.merge(newLayer)
             .on('mouseover', (d) => {
                 tooltip.transition();
                 tooltip.attr('class', 'tooltip tooltip-scatter tooltip-min');
                 tooltip.style('opacity', 1)
-                    .html(`<p class="tooltip-scatter-text">La temperatura mínima en ${d.year} fue de ${d.minima}ºC<p/>`)
+                    .html(`<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`)
                     .style('left', `${d3.event.pageX}px`)
                     .style('top', `${d3.event.pageY - 28}px`);
             })
@@ -1330,7 +1335,7 @@ const scatterInput = () => {
                     tooltip.transition();
                     tooltip.attr('class', 'tooltip tooltip-scatter tooltip-max');
                     tooltip.style('opacity', 1)
-                        .html(`<p class="tooltip-scatter-text">La temperatura máxima en ${d.year} fue de ${d.maxima}ºC<p/>`)
+                        .html(`<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`)
                         .style('left', `${d3.event.pageX}px`)
                         .style('top', `${d3.event.pageY - 28}px`);
                 })
@@ -1463,24 +1468,12 @@ const scatterInput = () => {
 };
 
 const tropicalCities = () => {
-    const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-    if (widthMobile > 544) {
-        margin = {
-            top: 8,
-            right: 16,
-            bottom: 24,
-            left: 48,
-        };
-    } else {
-        margin = {
-            top: 8,
-            right: 16,
-            bottom: 24,
-            left: 32,
-        };
-    }
-
+    const margin = {
+        top: 0,
+        right: 16,
+        bottom: 24,
+        left: 24,
+    };
     let width = 0;
     let height = 0;
     const chart = d3.select('.chart-cities-tropical');
@@ -1541,7 +1534,7 @@ const tropicalCities = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 544;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1635,7 +1628,7 @@ const tropicalCities = () => {
             .replace(/ú/g, 'u')
             .replace(/ñ/g, 'n');
 
-        d3.csv(`csv/${stationResize}.csv`, (error, data) => {
+        d3.csv(`csv/tropicales/${stationResize}-total-tropicales.csv`, (error, data) => {
             datos = data;
             updateChart(datos);
         });
@@ -1699,24 +1692,12 @@ const tropicalCities = () => {
 };
 
 const tempExt = () => {
-    const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-    if (widthMobile > 544) {
-        margin = {
-            top: 8,
-            right: 16,
-            bottom: 24,
-            left: 48,
-        };
-    } else {
-        margin = {
-            top: 8,
-            right: 16,
-            bottom: 24,
-            left: 32,
-        };
-    }
-
+    const margin = {
+        top: 0,
+        right: 16,
+        bottom: 24,
+        left: 24,
+    };
     let width = 0;
     let height = 0;
     const chart = d3.select('.chart-temperature-ext');
@@ -1777,7 +1758,7 @@ const tempExt = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 608;
+        const h = 544;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1871,7 +1852,7 @@ const tempExt = () => {
             .replace(/ú/g, 'u')
             .replace(/ñ/g, 'n');
 
-        d3.csv(`csv/${stationResize}.csv`, (error, data) => {
+        d3.csv(`csv/total-temp-${stationResize}.csv`, (error, data) => {
             datos = data;
             updateChart(datos);
         });
