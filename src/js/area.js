@@ -207,7 +207,7 @@ const vulturno = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 24,
+        left: 32,
     };
     let width = 0;
     let height = 0;
@@ -1696,7 +1696,7 @@ const tempExt = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 24,
+        left: 32,
     };
     let width = 0;
     let height = 0;
