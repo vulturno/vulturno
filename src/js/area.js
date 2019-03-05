@@ -36,7 +36,7 @@ function forceLayout(csvFile, record, color) {
 
     function updateChart(dataz) {
         const w = chart.node().offsetWidth;
-        const h = 570;
+        const h = 600;
 
         svg
             .attr('width', w)
@@ -1215,13 +1215,19 @@ const scatterInput = () => {
 
         const ciudad = selectCity.property('value');
 
+        console.log(ciudad)
+
         layer.merge(newLayer)
             .on('mouseover', (d) => {
+                const positionX = scales.count.x(d.year) + 60;
+                const postionWidthTooltip = positionX + 300;
+                const positionRightTooltip = 1200 - positionX;
                 tooltip.transition();
                 tooltip.attr('class', 'tooltip tooltip-scatter tooltip-min');
                 tooltip.style('opacity', 1)
                     .html(`<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`)
-                    .style('left', `${d3.event.pageX}px`)
+                    .style("left", postionWidthTooltip > 1200 ? 'auto' : `${d3.event.pageX}px`)
+                    .style("right", postionWidthTooltip > 1200 ? positionRightTooltip + 'px' : 'auto')
                     .style('top', `${d3.event.pageY - 28}px`);
             })
             .on('mouseout', () => {
@@ -1229,17 +1235,13 @@ const scatterInput = () => {
                     .duration(200)
                     .style('opacity', 0);
             })
-            .attr('cx', w / 2)
-            .attr('cy', h / 2)
+            .attr('cx', d => scales.count.x(d.year))
+            .attr('cy', d => scales.count.y(d.minima))
             .transition()
             .duration(500)
             .ease(d3.easeLinear)
             .attr('cx', d => scales.count.x(d.year))
             .attr('cy', d => scales.count.y(d.minima))
-            .attr('r', 0)
-            .transition()
-            .duration(100)
-            .ease(d3.easeLinear)
             .attr('r', 6)
             .style('fill', '#257d98');
 
@@ -1330,22 +1332,28 @@ const scatterInput = () => {
                 .append('circle')
                 .attr('class', 'scatter-inputs-circles');
 
+            const ciudad = selectCity.property('value')
+
             layer.merge(newLayer)
                 .on('mouseover', d => {
+                    const positionX = scales.count.x(d.year) + 60;
+                    const postionWidthTooltip = positionX + 300;
+                    const positionRightTooltip = 1200 - positionX;
                     tooltip.transition();
                     tooltip.attr('class', 'tooltip tooltip-scatter tooltip-max');
                     tooltip.style('opacity', 1)
                         .html(`<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`)
-                        .style('left', `${d3.event.pageX}px`)
-                        .style('top', `${d3.event.pageY - 28}px`);
+                        .style('top', `${d3.event.pageY - 28}px`)
+                        .style("left", postionWidthTooltip > 1200 ? 'auto' : `${d3.event.pageX}px`)
+                        .style("right", postionWidthTooltip > 1200 ? positionRightTooltip + 'px' : 'auto');
                 })
                 .on('mouseout', () => {
                     tooltip.transition()
                         .duration(200)
                         .style('opacity', 0);
                 })
-                .attr('cx', width / 2)
-                .attr('cy', height / 2)
+                .attr('cx', d => scales.count.x(d.year))
+                .attr('cy', d => scales.count.y(d.minima))
                 .transition()
                 .duration(500)
                 .ease(d3.easeLinear)
