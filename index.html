@@ -73,11 +73,11 @@
                     </div>
                     <div class="container-inputs">
                         <label class="inputs-label" r="0" fodata-r="updateButtonDay">Día</label>
-                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text" value="10" />
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text"/>
                     </div>
                     <div class="container-inputs">
                         <label class="inputs-label" r="0" fodata-r="updateButtonMonth">Mes</label>
-                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text" value="12" />
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text"/>
                     </div>
                     <button class="btn-update-grafica roboto btn-update-max" id="update">MÁXIMAS</button>
                     <button class="btn-update-grafica roboto btn-update-min" id="updateMin"> MÍNIMAS</button>
@@ -116,7 +116,7 @@
         <section class="chart-container">
             <section class="chart-text-container">
                 <h3 class="chart-text-title">Récords de temperaturas máximas</h3>
-                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día del año en las 45 estaciones analizadas.</p>
+                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día del año en las 47 estaciones analizadas.</p>
             </section>
             <section class="temperature-container-full">
                 <article id="force-maxima" class="chart-force-maxima">
@@ -130,7 +130,7 @@
         <section class="chart-container">
             <section class="chart-text-container">
                 <h3 class="chart-text-title">Récords de temperaturas mínimas</h3>
-                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura mínima de cada día del año en las 45 estaciones analizadas.</p>
+                <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura mínima de cada día del año en las 47 estaciones analizadas.</p>
             </section>
             <section class="temperature-container-full">
                 <article id="force-minima" class="chart-force-minima">
@@ -143,7 +143,7 @@
     <section id="max" class="temperature-max chart-separator">
         <section class="chart-text-container">
             <h3 class="chart-text-title">Temperaturas máxima anual</h3>
-            <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura máxima anual en cada una de las 45 estaciones analizadas.</p>
+            <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura máxima anual en cada una de las 47 estaciones analizadas.</p>
             <p class="chart-text">La mayoría de estaciones marcaron <strong>sus récords en el siglo XXI</strong>, sobre todo en la última década.</p>
         </section>
         <section class="temperature-container">
@@ -185,7 +185,7 @@
     <section id="min" class="temperature-min chart-separator">
         <section class="chart-text-container">
             <h3 class="chart-text-title">Temperaturas mínimas</h3>
-            <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura mínima anual en cada una de las 45 estaciones analizadas.</p>
+            <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura mínima anual en cada una de las 47 estaciones analizadas.</p>
             <p class="chart-text">Esta gráfica es <strong>totalmente contraria a la anterior</strong>. Si los récords de temperaturas máximas se concentran en el siglo XXI, los récords de temperaturas mínimas lo <strong>hacen en el siglo XX</strong>. Desde 1986 no se ha <strong>batido ningún récord</strong>. Y la mayoría de récords se concentran en 1956 y 1972.</p>
         </section>
         <section class="temperature-container">
@@ -198,7 +198,7 @@
         <section id="heladas" class="chart-text-container chart-separator">
             <h3 class="chart-text-title">Heladas</h3>
             <p class="chart-text">Se considera helada cuando la temperatura del aire, registrada a 1,50 metros sobre el nivel del suelo, es de 0ºC.</p>
-            <p class="chart-text">En la siguiente gráfica podemos ver el total anual de heladas en las 45 estaciones de la AEMET.</p>
+            <p class="chart-text">En la siguiente gráfica podemos ver el total anual de heladas en las 47 estaciones de la AEMET.</p>
         </section>
         <section class="temperature-container-full">
             <article class="chart-frosty">
@@ -222,6 +222,29 @@
             <article class="chart-temperature-ext">
                 <svg class="charts">
                     <g class="chart-temperature-ext-container"></g>
+                </svg>
+            </article>
+        </section>
+    </section>
+    <section id="two-records" class="two-records chart-separator">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Diferencias</h3>
+            <p class="chart-text">Sentía curiosidad por ver las diferencias en grados y años que hay entre el primer y segundo registro de temperatura más alta. Así que he montado una gráfica que muestra las diferencias en años y grados.</p>
+        </section>
+        <section class="temperature-container-full">
+            <div class="container-select-double">
+                <div class="container-selects">
+                    <p class="select-text">Selecciona una ciudad</p>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-cities-records"></select>
+                </div>
+                <div class="container-selects">
+                    <p class="select-text">Selecciona un mes</p>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-month"></select>
+                </div>
+            </div>
+            <article class="chart-diff-records">
+                <svg class="charts">
+                    <g class="chart-diff-records-container"></g>
                 </svg>
             </article>
         </section>

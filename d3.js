@@ -8914,6 +8914,7 @@ exports.area = area;
 exports.scaleTime = time;
 exports.scaleLinear = linear$2;
 exports.scaleOrdinal = ordinal;
+exports.scaleBand = band;
 exports.axisBottom = axisBottom;
 exports.axisLeft = axisLeft;
 exports.csv = csv$2;
