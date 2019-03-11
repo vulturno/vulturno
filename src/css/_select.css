@@ -55,6 +55,13 @@
     margin-left: .5rem;
 }
 
+.container-select-double {
+    display: inline-block;
+    .container-selects {
+        display: inline-block;
+    }
+}
+
 @media only screen and (min-width: 48em) {
 
     .ss-main {

@@ -425,13 +425,11 @@
 .chart-force-maxima,
 .chart-force-minima {
     position: relative;
-
     .circle-minima,
     .circle-maxima {
         cursor: pointer;
         stroke-width: .1px;
         stroke: var(--white);
-
         &:hover {
             stroke-width: 1px;
         }
@@ -489,6 +487,43 @@
     padding-top: 1.5rem;
 }
 
+.chart-diff-records {
+    .axis-x {
+        .domain {
+            stroke: var(--black);
+        }
+    }
+    /*stylelint-disable*/
+    .axis-y {
+        .tick {
+            line {
+                stroke: #7b7b7b;
+            }
+        }
+    }
+    /*stylelint-enable*/
+}
+
+.tooltip-diff {
+    background-color: #2C404F;
+}
+
+.tooltip-diff-text {
+    color: var(--white);
+    margin: 0;
+    font-family: var(--roboto);
+}
+
+.circle-primero {
+    fill: #b8000f;
+    r: 3;
+}
+
+.circle-segundo {
+    fill: #e16973;
+    r: 3;
+}
+
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
@@ -544,6 +579,10 @@
         left: 50px;
     }
 
+    .circle-primero,
+    .circle-segundo {
+        r: 6;
+    }
 }
 
 @media only screen and (min-width: 64em) {
