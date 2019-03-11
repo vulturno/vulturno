@@ -7,6 +7,17 @@ const csvForce = ['csv/total-records-max.csv', 'csv/total-records-min.csv'];
 
 const records = ['maxima', 'minima'];
 
+function formatDate() {
+    const d = new Date();
+    const dayString = d.getDate();
+    const monthString = d.getMonth() + 1;
+
+    document.getElementById('updateButtonDay').value = dayString;
+    document.getElementById('updateButtonMonth').value = monthString;
+}
+
+formatDate();
+
 function forceLayout(csvFile, record, color) {
     const chart = d3.select(`.chart-force-${record}`);
     const svg = chart.select('svg');
@@ -52,11 +63,11 @@ function forceLayout(csvFile, record, color) {
             .attr('fill', d => color(d.decade))
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .on('mouseover', function(d) {
+            .on('mouseover', function (d) {
                 const circleUnderMouse = this;
-                d3.selectAll(`.circle-${record}`).filter(function(d, i) {
-                        return (this !== circleUnderMouse);
-                    }).transition().duration(300)
+                d3.selectAll(`.circle-${record}`).filter(function (d, i) {
+                    return (this !== circleUnderMouse);
+                }).transition().duration(300)
                     .ease(d3.easeLinear)
                     .style('opacity', 0.1);
 
@@ -136,7 +147,7 @@ function forceLayout(csvFile, record, color) {
             });
         }
 
-        legend.on('mouseover', function(tipo) {
+        legend.on('mouseover', function (tipo) {
                 const legendThis = d3.select(this);
                 d3.selectAll(`.legend-${record}`)
                     .transition().duration(300).ease(d3.easeLinear)
@@ -152,7 +163,7 @@ function forceLayout(csvFile, record, color) {
                     .duration(300)
                     .ease(d3.easeLinear)
                     .style('opacity', 1);
-                d3.select(this).call(tooltipLast)
+                d3.select(this).call(tooltipLast);
             })
             .on('mouseout', () => {
                 d3.selectAll(`.legend-${record}`)
@@ -1215,19 +1226,17 @@ const scatterInput = () => {
 
         const ciudad = selectCity.property('value');
 
-        console.log(ciudad)
-
         layer.merge(newLayer)
-            .on('mouseover', (d) => {
-                const positionX = scales.count.x(d.year) + 60;
-                const postionWidthTooltip = positionX + 300;
-                const positionRightTooltip = 1200 - positionX;
+            .on('mouseover', d => {
+                const positionX = scales.count.x(d.fecha) + 33;
+                const postionWidthTooltip = positionX + 200;
+                const positionRightTooltip = w - positionX;
                 tooltip.transition();
                 tooltip.attr('class', 'tooltip tooltip-scatter tooltip-min');
                 tooltip.style('opacity', 1)
                     .html(`<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`)
-                    .style("left", postionWidthTooltip > 1200 ? 'auto' : `${d3.event.pageX}px`)
-                    .style("right", postionWidthTooltip > 1200 ? positionRightTooltip + 'px' : 'auto')
+                    .style('left', postionWidthTooltip > w ? 'auto' : `${d3.event.pageX}px`)
+                    .style('right', postionWidthTooltip > w ? `${positionRightTooltip}px` : 'auto')
                     .style('top', `${d3.event.pageY - 28}px`);
             })
             .on('mouseout', () => {
@@ -1267,13 +1276,8 @@ const scatterInput = () => {
                     .attr('value', d => d.key)
                     .text(d => d.key);
 
-                selectCity.on('change', function() {
-                    const ciudad = d3.select(this)
-                        .property('value')
-                        .replace(/ /g, '_')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '');
-                    update(ciudad);
+                selectCity.on('change', () => {
+                    update();
                 });
             }
         });
@@ -1332,20 +1336,21 @@ const scatterInput = () => {
                 .append('circle')
                 .attr('class', 'scatter-inputs-circles');
 
-            const ciudad = selectCity.property('value')
+            const ciudad = selectCity.property('value');
 
             layer.merge(newLayer)
                 .on('mouseover', d => {
-                    const positionX = scales.count.x(d.year) + 60;
-                    const postionWidthTooltip = positionX + 300;
-                    const positionRightTooltip = 1200 - positionX;
+                    const w = chart.node().offsetWidth;
+                    const positionX = scales.count.x(d.fecha) + 33;
+                    const postionWidthTooltip = positionX + 600;
+                    const positionRightTooltip = w - positionX;
                     tooltip.transition();
                     tooltip.attr('class', 'tooltip tooltip-scatter tooltip-max');
                     tooltip.style('opacity', 1)
                         .html(`<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`)
                         .style('top', `${d3.event.pageY - 28}px`)
-                        .style("left", postionWidthTooltip > 1200 ? 'auto' : `${d3.event.pageX}px`)
-                        .style("right", postionWidthTooltip > 1200 ? positionRightTooltip + 'px' : 'auto');
+                        .style('left', postionWidthTooltip > w ? 'auto' : `${d3.event.pageX}px`)
+                        .style('right', postionWidthTooltip > w ? `${positionRightTooltip}px` : 'auto');
                 })
                 .on('mouseout', () => {
                     tooltip.transition()
@@ -1442,7 +1447,7 @@ const scatterInput = () => {
             updateMin();
         });
 
-    function update(ciudad) {
+    function update() {
         updateMax();
     }
 
@@ -1922,9 +1927,320 @@ const tempExt = () => {
     menuMes();
 };
 
+function directionalDot() {
+    const margin = {
+        top: 16,
+        right: 16,
+        bottom: 32,
+        left: 48,
+    };
+    let width = 0;
+    let height = 0;
+    const chart = d3.select('.chart-diff-records');
+    const svg = chart.select('svg');
+    const scales = {};
+    const temp = 'ºC';
+    let dataz;
+    const tooltip = d3.select('.chart-diff-records')
+        .append('div')
+        .attr('class', 'tooltip tooltip-diff')
+        .style('opacity', 0);
+    const selectMonth = d3.select('#select-month');
+    const selectCity = d3.select('#select-cities-records');
+
+    const setupScales = () => {
+        const countX = d3.scaleTime()
+            .domain([d3.min(dataz, d => d.dia), d3.max(dataz, d => d.dia)]);
+
+        const countY = d3.scaleLinear()
+            .domain([d3.min(dataz, d => d.segundo - 1), d3.max(dataz, d => d.primero + 1)]);
+
+        scales.count = { x: countX, y: countY };
+    };
+
+    const setupElements = () => {
+        const g = svg.select('.chart-diff-records-container');
+
+        g.append('g').attr('class', 'axis axis-x');
+
+        g.append('g').attr('class', 'axis axis-y');
+
+        g.append('g').attr('class', 'chart-diff-records-container-bis');
+    };
+
+    const updateScales = (width, height) => {
+        scales.count.x.range([15, width]);
+        scales.count.y.range([height, 0]);
+    };
+
+    const drawAxes = (g) => {
+        const axisX = d3.axisBottom(scales.count.x)
+            .tickPadding(5)
+            .tickFormat(d3.format('d'))
+            .ticks(31);
+
+        g.select('.axis-x')
+            .attr('transform', `translate(0,${height})`)
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .call(axisX);
+
+        const axisY = d3.axisLeft(scales.count.y)
+            .tickPadding(5)
+            .tickFormat(d => d + temp)
+            .ticks(15)
+            .tickSizeInner(-width);
+
+        g.select('.axis-y')
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .call(axisY);
+    };
+
+    const updateChart = (dataz) => {
+        const w = chart.node().offsetWidth;
+        const h = 600;
+
+        width = w - margin.left - margin.right;
+        height = h - margin.top - margin.bottom;
+
+        svg
+            .attr('width', w)
+            .attr('height', h);
+
+        const translate = `translate(${margin.left},${margin.top})`;
+
+        const g = svg.select('.chart-diff-records-container');
+
+        g.attr('transform', translate);
+
+        updateScales(width, height);
+
+        const container = chart.select('.chart-diff-records-container-bis');
+
+        const layer = container.selectAll('.circle-primero')
+            .data(dataz);
+
+        layer.exit().remove();
+
+        const layerDos = container.selectAll('.circle-segundo')
+            .data(dataz);
+
+        layerDos.exit().remove();
+
+        const layerLine = container.selectAll('.circle-lines')
+            .data(dataz);
+
+        layerLine.exit().remove();
+
+        const newLayer = layer.enter()
+            .append('circle')
+            .attr('class', 'circle-primero');
+
+        const newLayerDos = layerDos.enter()
+            .append('circle')
+            .attr('class', 'circle-segundo');
+
+        const newLayerLines = layerLine.enter()
+            .append('line')
+            .attr('class', 'circle-lines');
+
+        layerLine.merge(newLayerLines)
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .attr('x1', d => scales.count.x(d.dia))
+            .attr('y1', d => scales.count.y(d.primero) + 6)
+            .attr('x2', d => scales.count.x(d.dia))
+            .attr('y2', d => scales.count.y(d.segundo) - 6)
+            .attr('stroke', (d) => {
+                if (d.diff === 0) {
+                    return 'none';
+                }
+                return '#111';
+            });
+
+        const city = selectCity.property('value');
+
+        layer.merge(newLayer)
+            .on('mouseover', d => {
+                const positionX = scales.count.x(d.dia) + 33;
+                const postionWidthTooltip = positionX + 200;
+                const positionRightTooltip = w - positionX;
+                tooltip.transition();
+                tooltip.style('opacity', 1)
+                    .html(`<p class="tooltip-diff-text">La temperatura máxima en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`)
+                    .style('left', postionWidthTooltip > w ? 'auto' : `${d3.event.pageX}px`)
+                    .style('right', postionWidthTooltip > w ? `${positionRightTooltip}px` : 'auto')
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', () => {
+                tooltip.transition()
+                    .duration(200)
+                    .style('opacity', 0);
+            })
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .attr('cy', d => scales.count.y(d.primero))
+            .attr('cx', d => scales.count.x(d.dia));
+
+        layerDos.merge(newLayerDos)
+            .on('mouseover', d => {
+                const positionX = scales.count.x(d.dia) + 33;
+                const postionWidthTooltip = positionX + 200;
+                const positionRightTooltip = w - positionX;
+                tooltip.transition();
+                tooltip.style('opacity', 1)
+                    .html(`<p class="tooltip-diff-text">La segunda temperatura máxima en ${city} se registro en ${d.yearsegundo} y fue de ${d.segundo}ºC<p/>`)
+                    .style('left', postionWidthTooltip > 1200 ? 'auto' : `${d3.event.pageX}px`)
+                    .style('right', postionWidthTooltip > 1200 ? `${positionRightTooltip}px` : 'auto')
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', () => {
+                tooltip.transition()
+                    .duration(200)
+                    .style('opacity', 0);
+            })
+            .transition()
+            .duration(500)
+            .ease(d3.easeLinear)
+            .attr('r', (d) => {
+                if (d.diff === 0) {
+                    return 0;
+                }
+                return 6;
+            })
+            .attr('cy', d => scales.count.y(d.segundo))
+            .attr('cx', d => scales.count.x(d.dia));
+
+        drawAxes(g);
+    };
+
+    const resize = () => {
+        updateChart(dataz);
+    };
+    const updateMes = () => {
+        const mes = selectMonth.property('value');
+        const city = selectCity.property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        d3.csv(`csv/max/dos-records/${city}-dos-records.csv`, (error, dataz) => {
+            dataz = dataz.filter(d => String(d.mes).match(mes));
+
+
+            dataz.forEach((d) => {
+                d.fecha = +d.fecha;
+                d.primero = +d.primero;
+                d.segundo = +d.segundo;
+                d.diff = d.primero - d.segundo;
+                d.dia = +d.dia;
+            });
+
+            scales.count.x.range([15, width]);
+            scales.count.y.range([height, 0]);
+
+            const countX = d3.scaleTime()
+                .domain([d3.min(dataz, d => d.dia), d3.max(dataz, d => d.dia)]);
+
+            const countY = d3.scaleLinear()
+                .domain([d3.min(dataz, d => d.segundo - 1), d3.max(dataz, d => d.primero + 1)]);
+
+            scales.count = { x: countX, y: countY };
+
+            updateChart(dataz);
+        });
+    };
+
+    const menuMes = () => {
+        d3.csv('csv/mes.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const datos = data;
+
+                const nest = d3.nest()
+                    .key(d => d.Mes)
+                    .entries(datos);
+
+                selectMonth
+                    .selectAll('option')
+                    .data(nest)
+                    .enter()
+                    .append('option')
+                    .attr('value', d => d.key)
+                    .attr('number', (d, i) => i + 1)
+                    .text(d => d.key);
+
+                selectMonth.on('change', () => {
+                    updateMes();
+                });
+            }
+        });
+    };
+
+    const menuCities = () => {
+        d3.csv('csv/stations.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const datos = data;
+
+                const nest = d3.nest()
+                    .key(d => d.Name)
+                    .entries(datos);
+
+                selectCity
+                    .selectAll('option')
+                    .data(nest)
+                    .enter()
+                    .append('option')
+                    .attr('value', d => d.key)
+                    .text(d => d.key);
+
+                selectCity.on('change', () => {
+                    updateMes();
+                });
+            }
+        });
+    };
+
+    // LOAD THE DATA
+    const loadData = () => {
+        const mes = 'Enero';
+        d3.csv('csv/max/dos-records/Albacete-dos-records.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data.filter(d => String(d.mes).match(mes));
+                dataz.forEach((d) => {
+                    d.fecha = +d.fecha;
+                    d.primero = +d.primero;
+                    d.segundo = +d.segundo;
+                    d.diff = d.primero - d.segundo;
+                    d.dia = +d.dia;
+                });
+                setupElements();
+                setupScales();
+                updateChart(dataz);
+                menuMes();
+                menuCities();
+            }
+        });
+    };
+
+    window.addEventListener('resize', resize);
+
+    loadData();
+}
+
 tropicalCities();
 scatterInput();
 vulturno();
+directionalDot();
 
 new SlimSelect({
     select: '#select-city',
@@ -1944,6 +2260,16 @@ new SlimSelect({
 new SlimSelect({
     select: '#select-ext',
     searchPlaceholder: 'Selecciona temperatura',
+});
+
+new SlimSelect({
+    select: '#select-month',
+    searchPlaceholder: 'Selecciona un mes',
+});
+
+new SlimSelect({
+    select: '#select-cities-records',
+    searchPlaceholder: 'Selecciona una ciudad',
 });
 
 maxvul();

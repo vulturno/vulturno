@@ -23,11 +23,11 @@ export {
 } from 'd3-shape';
 
 export {
-    scaleTime, scaleLinear, scaleOrdinal,
+    scaleTime, scaleLinear, scaleOrdinal, scaleBand
 } from 'd3-scale';
 
 export {
-    axisBottom, axisLeft,
+    axisBottom, axisLeft
 } from 'd3-axis';
 
 export {
