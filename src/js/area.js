@@ -1228,9 +1228,9 @@ const scatterInput = () => {
 
         layer.merge(newLayer)
             .on('mouseover', d => {
-                const positionX = scales.count.x(d.fecha) + 33;
-                const postionWidthTooltip = positionX + 200;
-                const positionRightTooltip = w - positionX;
+                const positionX = scales.count.x(d.year);
+                const postionWidthTooltip = positionX + 250;
+                const positionRightTooltip = w - positionX + 100;
                 tooltip.transition();
                 tooltip.attr('class', 'tooltip tooltip-scatter tooltip-min');
                 tooltip.style('opacity', 1)
@@ -1341,9 +1341,9 @@ const scatterInput = () => {
             layer.merge(newLayer)
                 .on('mouseover', d => {
                     const w = chart.node().offsetWidth;
-                    const positionX = scales.count.x(d.fecha) + 33;
-                    const postionWidthTooltip = positionX + 600;
-                    const positionRightTooltip = w - positionX;
+                    const positionX = scales.count.x(d.year);
+                    const postionWidthTooltip = positionX + 250;
+                    const positionRightTooltip = w - positionX + 100;
                     tooltip.transition();
                     tooltip.attr('class', 'tooltip tooltip-scatter tooltip-max');
                     tooltip.style('opacity', 1)
@@ -2066,9 +2066,9 @@ function directionalDot() {
 
         layer.merge(newLayer)
             .on('mouseover', d => {
-                const positionX = scales.count.x(d.dia) + 33;
-                const postionWidthTooltip = positionX + 200;
-                const positionRightTooltip = w - positionX;
+                const positionX = scales.count.x(d.dia);
+                const postionWidthTooltip = positionX + 270;
+                const positionRightTooltip = w - positionX + 100;
                 tooltip.transition();
                 tooltip.style('opacity', 1)
                     .html(`<p class="tooltip-diff-text">La temperatura máxima en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`)
@@ -2089,9 +2089,9 @@ function directionalDot() {
 
         layerDos.merge(newLayerDos)
             .on('mouseover', d => {
-                const positionX = scales.count.x(d.dia) + 33;
-                const postionWidthTooltip = positionX + 200;
-                const positionRightTooltip = w - positionX;
+                const positionX = scales.count.x(d.dia);
+                const postionWidthTooltip = positionX + 270;
+                const positionRightTooltip = w - positionX + 100;
                 tooltip.transition();
                 tooltip.style('opacity', 1)
                     .html(`<p class="tooltip-diff-text">La segunda temperatura máxima en ${city} se registro en ${d.yearsegundo} y fue de ${d.segundo}ºC<p/>`)
