@@ -1490,6 +1490,14 @@ const scatterInput = () => {
                     d3.max(dataz, (d) => d.maxima),
                 ]);
 
+            const w = chart.node().offsetWidth;
+            const h = 544;
+
+            width = w - margin.left - margin.right;
+            height = h - margin.top - margin.bottom;
+
+            svg.attr('width', w).attr('height', h);
+
             scales.count = { x: countX, y: countY };
 
             const translate = `translate(${margin.left},${margin.top})`;
@@ -1527,14 +1535,14 @@ const scatterInput = () => {
                     tooltip.transition();
                     tooltip.attr(
                         'class',
-                        'tooltip tooltip-scatter tooltip-min'
+                        'tooltip tooltip-scatter tooltip-max'
                     );
                     tooltip
                         .style('opacity', 1)
                         .html(
-                            `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${
+                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${
                                 d.year
-                            } fue de ${d.minima}ºC<p/>`
+                            } fue de ${d.maxima}ºC<p/>`
                         )
                         .style(
                             'left',
