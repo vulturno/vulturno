@@ -226,23 +226,46 @@
             </article>
         </section>
     </section>
-    <section id="two-records" class="two-records chart-separator">
+    <section id="two-records-max" class="two-records chart-separator">
         <section class="chart-text-container">
-            <h3 class="chart-text-title">Diferencias</h3>
+            <h3 class="chart-text-title">Diferencias entre máximas</h3>
             <p class="chart-text">Sentía curiosidad por ver las diferencias en grados y años que hay entre el primer y segundo registro de temperatura más alta. Así que he montado una gráfica que muestra las diferencias en años y grados.</p>
         </section>
         <section class="temperature-container-full">
             <div class="container-select-double">
                 <div class="container-selects">
                     <p class="select-text">Selecciona una ciudad</p>
-                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-cities-records"></select>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-cities-records-max"></select>
                 </div>
                 <div class="container-selects">
                     <p class="select-text">Selecciona un mes</p>
-                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-month"></select>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-month-max"></select>
                 </div>
             </div>
-            <article class="chart-diff-records">
+            <article class="chart-diff-records chart-diff-records-max">
+                <svg class="charts">
+                    <g class="chart-diff-records-container"></g>
+                </svg>
+            </article>
+        </section>
+    </section>
+    <section id="two-records-min" class="two-records chart-separator">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Diferencias entre mínimas</h3>
+            <p class="chart-text">Exactamente igual que la anterior gráfica pero con los records de temperaturas mínimas.</p>
+        </section>
+        <section class="temperature-container-full">
+            <div class="container-select-double">
+                <div class="container-selects">
+                    <p class="select-text">Selecciona una ciudad</p>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-cities-records-min"></select>
+                </div>
+                <div class="container-selects">
+                    <p class="select-text">Selecciona un mes</p>
+                    <select class="temperatura-mensual-minima-select select-scatter-city" id="select-month-min"></select>
+                </div>
+            </div>
+            <article class="chart-diff-records chart-diff-records-min">
                 <svg class="charts">
                     <g class="chart-diff-records-container"></g>
                 </svg>
