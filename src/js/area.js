@@ -1,11 +1,29 @@
-const colorMax = d3.scaleOrdinal(['#f6d2d5', '#f0b7bc', '#ea969d', '#e16973', '#cc0011', '#a2000d', '#b8000f']);
-const colorMin = d3.scaleOrdinal(['#004d84', '#005da0', '#006bb7', '#0077cc', '#4a9eda', '#7db9e5', '#a5cfed']);
+const colorMax = d3.scaleOrdinal([
+    '#f6d2d5',
+    '#f0b7bc',
+    '#ea969d',
+    '#e16973',
+    '#cc0011',
+    '#a2000d',
+    '#b8000f',
+]);
+const colorMin = d3.scaleOrdinal([
+    '#004d84',
+    '#005da0',
+    '#006bb7',
+    '#0077cc',
+    '#4a9eda',
+    '#7db9e5',
+    '#a5cfed',
+]);
 const colores = [colorMax, colorMin];
-const widthMobile = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+const widthMobile = window.innerWidth > 0 ? window.innerWidth : screen.width;
 
 const csvForce = ['csv/total-records-max.csv', 'csv/total-records-min.csv'];
 
 const records = ['maxima', 'minima'];
+
+const maxmin = ['max', 'min'];
 
 function formatDate() {
     const d = new Date();
@@ -24,141 +42,186 @@ function forceLayout(csvFile, record, color) {
     const nodePadding = 1.5;
     let dataz;
 
-    const tooltip = chart.append('div')
+    const tooltip = chart
+        .append('div')
         .attr('class', 'tooltip tooltip-record')
         .style('opacity', 0);
 
-    const tooltipDecade = chart.append('div')
+    const tooltipDecade = chart
+        .append('div')
         .attr('class', 'tooltip tooltip-decade')
         .style('opacity', 0);
 
-    svg
-        .append('text')
+    svg.append('text')
         .attr('class', 'legend-title')
         .text('Décadas');
 
     if (widthMobile > 544) {
-        svg.select('.legend-title')
-            .attr('transform', 'translate(50,110)');
+        svg.select('.legend-title').attr('transform', 'translate(50,110)');
     } else {
-        svg.select('.legend-title')
-            .attr('transform', 'translate(0,30)');
+        svg.select('.legend-title').attr('transform', 'translate(0,30)');
     }
 
     function updateChart(dataz) {
         const w = chart.node().offsetWidth;
         const h = 600;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const node = svg
-            .selectAll(`.circle-${record}`).remove().exit()
+            .selectAll(`.circle-${record}`)
+            .remove()
+            .exit()
             .data(dataz)
             .enter()
             .append('circle')
             .attr('class', `circle-${record}`)
-            .attr('r', d => d.radius)
-            .attr('fill', d => color(d.decade))
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
-            .on('mouseover', function (d) {
+            .attr('r', (d) => d.radius)
+            .attr('fill', (d) => color(d.decade))
+            .attr('cx', (d) => d.x)
+            .attr('cy', (d) => d.y)
+            .on('mouseover', function(d) {
                 const circleUnderMouse = this;
-                d3.selectAll(`.circle-${record}`).filter(function (d, i) {
-                    return (this !== circleUnderMouse);
-                }).transition().duration(300)
+                d3.selectAll(`.circle-${record}`)
+                    .filter(function(d, i) {
+                        return this !== circleUnderMouse;
+                    })
+                    .transition()
+                    .duration(300)
                     .ease(d3.easeLinear)
                     .style('opacity', 0.1);
 
                 tooltip.transition();
-                tooltip.style('opacity', 1)
-                    .html(`<p class="tooltip-record-max">En <span class="number">${d.year}</span> se establecieron <span class="number">${d.total}</span> récords.<p/>
+                tooltip.style(
+                    'opacity',
+                    1
+                ).html(`<p class="tooltip-record-max">En <span class="number">${d.year}</span> se establecieron <span class="number">${d.total}</span> récords.<p/>
                         `);
             })
             .on('mouseout', () => {
-                d3.selectAll(`.circle-${record}`).transition().duration(800).ease(d3.easeLinear)
+                d3.selectAll(`.circle-${record}`)
+                    .transition()
+                    .duration(800)
+                    .ease(d3.easeLinear)
                     .style('opacity', 1);
-                tooltip.transition()
+                tooltip
+                    .transition()
                     .duration(200)
                     .style('opacity', 0);
             });
 
-        const simulation = d3.forceSimulation()
+        const simulation = d3
+            .forceSimulation()
             .force('forceX', d3.forceX().x(w * 0.5))
             .force('forceY', d3.forceY().y(h * 0.5))
-            .force('center', d3.forceCenter().x(w * 0.5).y(h * 0.5))
+            .force(
+                'center',
+                d3
+                    .forceCenter()
+                    .x(w * 0.5)
+                    .y(h * 0.5)
+            )
             .force('charge', d3.forceManyBody().strength(5))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 1));
+            .force('collision', d3.forceCollide().radius((d) => d.radius + 1));
 
         simulation
             .nodes(dataz)
-            .force('collide', d3.forceCollide().strength(0.5).radius(d => d.radius + nodePadding).iterations(1))
-            .on('tick', () => node.attr('cx', ({ x }) => x).attr('cy', ({ y }) => y));
+            .force(
+                'collide',
+                d3
+                    .forceCollide()
+                    .strength(0.5)
+                    .radius((d) => d.radius + nodePadding)
+                    .iterations(1)
+            )
+            .on('tick', () =>
+                node.attr('cx', ({ x }) => x).attr('cy', ({ y }) => y)
+            );
 
-        const legendData = d3.group(dataz.map(d => d.decade));
-        let unique = legendData.filter((elem, pos) => legendData.indexOf(elem) === pos);
+        const legendData = d3.group(dataz.map((d) => d.decade));
+        let unique = legendData.filter(
+            (elem, pos) => legendData.indexOf(elem) === pos
+        );
 
-        unique = unique.reverse(d => d.decade);
+        unique = unique.reverse((d) => d.decade);
 
-        const legend = svg.selectAll(`.legend-${record}`).remove().exit()
-            .data(unique, d => d)
+        const legend = svg
+            .selectAll(`.legend-${record}`)
+            .remove()
+            .exit()
+            .data(unique, (d) => d)
             .enter()
             .append('g')
             .attr('class', `legend-${record}`)
-            .attr('year', d => d);
+            .attr('year', (d) => d);
 
         if (widthMobile > 544) {
-            legend.attr('transform', (d, i) => `translate(${50},${(i + 5) * 25})`);
-            legend.append('text')
+            legend.attr(
+                'transform',
+                (d, i) => `translate(${50},${(i + 5) * 25})`
+            );
+            legend
+                .append('text')
                 .attr('x', 20)
                 .attr('y', 10)
-                .text(d => d);
+                .text((d) => d);
         } else {
-            legend.attr('transform', (d, i) => `translate(${(i) * 45},${50})`);
-            legend.append('text')
+            legend.attr('transform', (d, i) => `translate(${i * 45},${50})`);
+            legend
+                .append('text')
                 .attr('x', 14)
                 .attr('y', 9)
-                .text(d => d);
+                .text((d) => d);
         }
 
-        legend.append('rect')
+        legend
+            .append('rect')
             .attr('width', 10)
             .attr('height', 10)
-            .style('fill', d => color(d));
+            .style('fill', (d) => color(d));
 
         function tooltipLast(leyenda) {
             const valueYear = leyenda.attr('year');
 
             d3.csv(csvFile, (error, data) => {
-                const dataz = data.filter(d => String(d.decade).match(valueYear));
+                const dataz = data.filter((d) =>
+                    String(d.decade).match(valueYear)
+                );
 
                 tooltipDecade
                     .data(dataz)
                     .style('opacity', 1)
                     .html(
-                        d => `<p class="tooltip-record-max">Entre <span class="number">${
-                            d.decade
-                        }</span> y <span class="number">${Number(d.decade)
-                            + 9}</span> se establecieron <span class="number">${
-                            d.totaldecade
-                        }</span> récords de temperatura ${record}.<p/>`,
+                        (d) =>
+                            `<p class="tooltip-record-max">Entre <span class="number">${
+                                d.decade
+                            }</span> y <span class="number">${Number(d.decade) +
+                                9}</span> se establecieron <span class="number">${
+                                d.totaldecade
+                            }</span> récords de temperatura ${record}.<p/>`
                     );
             });
         }
 
-        legend.on('mouseover', function (tipo) {
+        legend
+            .on('mouseover', function(tipo) {
                 const legendThis = d3.select(this);
                 d3.selectAll(`.legend-${record}`)
-                    .transition().duration(300).ease(d3.easeLinear)
+                    .transition()
+                    .duration(300)
+                    .ease(d3.easeLinear)
                     .style('opacity', 0.1);
                 legendThis
-                    .transition().duration(300).ease(d3.easeLinear)
+                    .transition()
+                    .duration(300)
+                    .ease(d3.easeLinear)
                     .style('opacity', 1);
                 d3.selectAll(`.circle-${record}`)
-                    .transition().duration(200).ease(d3.easeLinear)
+                    .transition()
+                    .duration(200)
+                    .ease(d3.easeLinear)
                     .style('opacity', 0.1)
-                    .filter(d => d.decade === tipo)
+                    .filter((d) => d.decade === tipo)
                     .transition()
                     .duration(300)
                     .ease(d3.easeLinear)
@@ -176,8 +239,7 @@ function forceLayout(csvFile, record, color) {
                     .duration(300)
                     .ease(d3.easeLinear)
                     .style('opacity', 1);
-                tooltipDecade
-                    .style('opacity', 0);
+                tooltipDecade.style('opacity', 0);
             });
     }
 
@@ -227,18 +289,26 @@ const vulturno = () => {
     const scales = {};
     const temp = 'ºC';
     let datos;
-    const tooltipTemp = chart.append('div')
+    const tooltipTemp = chart
+        .append('div')
         .attr('class', 'tooltip tooltip-temp')
         .style('opacity', 0);
-    const bisectDate = d3.bisector(d => d.year).left;
-
+    const bisectDate = d3.bisector((d) => d.year).left;
 
     const setupScales = () => {
-        const countX = d3.scaleTime()
-            .domain([d3.min(datos, d => d.year), d3.max(datos, d => d.year)]);
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(datos, (d) => d.year),
+                d3.max(datos, (d) => d.year),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([d3.min(datos, d => d.temp - 1), d3.max(datos, d => d.temp + 1)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([
+                d3.min(datos, (d) => d.temp - 1),
+                d3.max(datos, (d) => d.temp + 1),
+            ]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -252,8 +322,7 @@ const vulturno = () => {
 
         g.append('g').attr('class', 'chart-vulturno-container-bis');
 
-        g.append('rect')
-            .attr('class', 'overlay');
+        g.append('rect').attr('class', 'overlay');
 
         g.append('g')
             .attr('class', 'focus')
@@ -262,7 +331,8 @@ const vulturno = () => {
             .attr('class', 'x-hover-line hover-line')
             .attr('y1', 0);
 
-        g.select('.focus').append('text')
+        g.select('.focus')
+            .append('text')
             .attr('class', 'text-focus');
     };
 
@@ -272,7 +342,8 @@ const vulturno = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
             .ticks(13);
@@ -284,9 +355,10 @@ const vulturno = () => {
             .ease(d3.easeLinear)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
+        const axisY = d3
+            .axisLeft(scales.count.y)
             .tickPadding(5)
-            .tickFormat(d => d + temp)
+            .tickFormat((d) => d + temp)
             .tickSize(-width)
             .ticks(6);
 
@@ -304,22 +376,33 @@ const vulturno = () => {
 
         function mousemove() {
             const w = chart.node().offsetWidth;
-            const positionTooltip = w / 2 - (352 / 2);
+            const positionTooltip = w / 2 - 352 / 2;
             const x0 = scales.count.x.invert(d3.mouse(this)[0]);
             const i = bisectDate(datos, x0, 1);
             const d0 = datos[i - 1];
             const d1 = datos[i];
             const d = x0 - d0.fecha > d1.fecha - x0 ? d1 : d0;
-            tooltipTemp.style('opacity', 1)
-                .html(`<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`)
+            tooltipTemp
+                .style('opacity', 1)
+                .html(
+                    `<p class="tooltip-media-texto">En <strong>${
+                        d.year
+                    }</strong> la temperatura media fue de <strong>${
+                        d.temp
+                    } ºC</strong>.<p/>`
+                )
                 .style('left', `${positionTooltip}px`);
 
-            focus.select('.x-hover-line')
-                .attr('transform',
-                    `translate(${scales.count.x(d.fecha)},${0})`);
+            focus
+                .select('.x-hover-line')
+                .attr(
+                    'transform',
+                    `translate(${scales.count.x(d.fecha)},${0})`
+                );
         }
 
-        overlay.attr('width', width + margin.left + margin.right)
+        overlay
+            .attr('width', width + margin.left + margin.right)
             .attr('height', height)
             .on('mouseover', () => {
                 focus.style('display', null);
@@ -335,13 +418,10 @@ const vulturno = () => {
         const w = chart.node().offsetWidth;
         const h = 544;
 
-
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -349,45 +429,49 @@ const vulturno = () => {
 
         g.attr('transform', translate);
 
-        const line = d3.line()
-            .x(d => scales.count.x(d.year))
-            .y(d => scales.count.y(d.temp));
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.temp));
 
         updateScales(width, height);
 
         const container = chart.select('.chart-vulturno-container-bis');
 
-        const lines = container.selectAll('.lines')
-            .data([datos]);
+        const lines = container.selectAll('.lines').data([datos]);
 
-        const newLines = lines.enter()
+        const newLines = lines
+            .enter()
             .append('path')
             .attr('class', 'lines');
 
-        const dots = container.selectAll('.circles').remove().exit()
+        const dots = container
+            .selectAll('.circles')
+            .remove()
+            .exit()
             .data(datos);
 
-        const dotsLayer = dots.enter()
+        const dotsLayer = dots
+            .enter()
             .append('circle')
             .attr('class', 'circles');
 
-
-        lines.merge(newLines)
+        lines
+            .merge(newLines)
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', line);
 
-
         dots.merge(dotsLayer)
-            .attr('cx', d => scales.count.x(d.year))
+            .attr('cx', (d) => scales.count.x(d.year))
             .attr('cy', 0)
             .transition()
             .delay((d, i) => i * 10)
             .duration(500)
             .ease(d3.easeLinear)
-            .attr('cx', d => scales.count.x(d.year))
-            .attr('cy', d => scales.count.y(d.temp));
+            .attr('cx', (d) => scales.count.x(d.year))
+            .attr('cy', (d) => scales.count.y(d.temp));
 
         drawAxes(g);
     }
@@ -409,11 +493,19 @@ const vulturno = () => {
             scales.count.x.range([0, width]);
             scales.count.y.range([height, 0]);
 
-            const countX = d3.scaleTime()
-                .domain([d3.min(datos, d => d.year), d3.max(datos, d => d.year)]);
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(datos, (d) => d.year),
+                    d3.max(datos, (d) => d.year),
+                ]);
 
-            const countY = d3.scaleLinear()
-                .domain([d3.min(datos, d => d.temp - 1), d3.max(datos, d => d.temp + 1)]);
+            const countY = d3
+                .scaleLinear()
+                .domain([
+                    d3.min(datos, (d) => d.temp - 1),
+                    d3.max(datos, (d) => d.temp + 1),
+                ]);
 
             scales.count = { x: countX, y: countY };
             updateChart(datos);
@@ -421,7 +513,8 @@ const vulturno = () => {
     }
 
     const resize = () => {
-        const stationResize = d3.select('#select-city')
+        const stationResize = d3
+            .select('#select-city')
             .property('value')
             .replace(/[\u00f1-\u036f]/g, '')
             .replace(/ /g, '_')
@@ -447,8 +540,9 @@ const vulturno = () => {
             } else {
                 datos = data;
 
-                const nest = d3.nest()
-                    .key(d => d.Name)
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
                     .entries(datos);
 
                 const selectCity = d3.select('#select-city');
@@ -458,11 +552,12 @@ const vulturno = () => {
                     .data(nest)
                     .enter()
                     .append('option')
-                    .attr('value', d => d.key)
-                    .text(d => d.key);
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
 
                 selectCity.on('change', function() {
-                    const mes = d3.select(this)
+                    const mes = d3
+                        .select(this)
                         .property('value')
                         .replace(/ /g, '_')
                         .normalize('NFD')
@@ -513,11 +608,19 @@ const maxvul = () => {
 
     // Escala para los ejes X e Y
     const setupScales = () => {
-        const countX = d3.scaleLinear()
-            .domain([d3.min(dataz, d => d.fecha), d3.max(dataz, d => d.fecha)]);
+        const countX = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([d3.min(dataz, d => d.total), d3.max(dataz, d => d.total)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.total),
+                d3.max(dataz, (d) => d.total),
+            ]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -527,7 +630,6 @@ const maxvul = () => {
 
         g.append('g').attr('class', 'axis axis-x');
 
-
         g.append('g').attr('class', 'chart-temperature-max-container-bis');
     };
 
@@ -536,7 +638,8 @@ const maxvul = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
             .ticks(6)
             .tickPadding(30);
@@ -556,38 +659,48 @@ const maxvul = () => {
                     d.fecha = d.yearmax;
                     d.total = d.totalmax;
                 });
-                const labels = [{
-                    data: { year: 2012 },
-                    y: 100,
-                    dy: -50,
-                    dx: -52,
-                    note: {
-                        title: 'Entre 2009 y 2018 se establecen el 78% de los récords de máximas',
-                        wrap: 230,
-                        align: 'middle',
+                const labels = [
+                    {
+                        data: { year: 2012 },
+                        y: 100,
+                        dy: -50,
+                        dx: -52,
+                        note: {
+                            title:
+                                'Entre 2009 y 2018 se establecen el 78% de los récords de máximas',
+                            wrap: 230,
+                            align: 'middle',
+                        },
                     },
-                }].map((l) => {
+                ].map((l) => {
                     this.subject = { radius: 4 };
                     return l;
                 });
 
-                window.makeAnnotations = d3.annotation()
+                window.makeAnnotations = d3
+                    .annotation()
                     .annotations(labels)
                     .type(d3.annotationCalloutCircle)
                     .accessors({
-                        x: d => scales.count.x(d.year),
-                        y: d => scales.count.y(d.total),
+                        x: (d) => scales.count.x(d.year),
+                        y: (d) => scales.count.y(d.total),
                     })
                     .accessorsInverse({
-                        year: d => scales.count.x.invert(d.x),
-                        total: d => scales.count.y.invert(d.y),
+                        year: (d) => scales.count.x.invert(d.x),
+                        total: (d) => scales.count.y.invert(d.y),
                     })
                     .on('subjectover', (annotation) => {
-                        annotation.type.a.selectAll('g.annotation-connector, g.annotation-note')
+                        annotation.type.a
+                            .selectAll(
+                                'g.annotation-connector, g.annotation-note'
+                            )
                             .classed('hidden', false);
                     })
                     .on('subjectout', (annotation) => {
-                        annotation.type.a.selectAll('g.annotation-connector, g.annotation-note')
+                        annotation.type.a
+                            .selectAll(
+                                'g.annotation-connector, g.annotation-note'
+                            )
                             .classed('hidden', true);
                     });
 
@@ -607,9 +720,7 @@ const maxvul = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -621,22 +732,22 @@ const maxvul = () => {
 
         const container = chart.select('.chart-temperature-max-container-bis');
 
-        const layer = container.selectAll('.circles-max')
-            .data(dataz);
+        const layer = container.selectAll('.circles-max').data(dataz);
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('circle')
             .attr('class', 'circles-max');
 
-
-        layer.merge(newLayer)
-            .attr('cx', d => scales.count.x(d.fecha))
-            .attr('cy', (height / 2))
+        layer
+            .merge(newLayer)
+            .attr('cx', (d) => scales.count.x(d.fecha))
+            .attr('cy', height / 2)
             .attr('r', 0)
             .transition()
             .delay((d, i) => i * 10)
             .duration(500)
-            .attr('r', d => 3 * d.total)
+            .attr('r', (d) => 3 * d.total)
             .attr('fill-opacity', 0.6);
 
         drawAxes(g);
@@ -685,8 +796,12 @@ const minvul = () => {
     let dataz;
 
     const setupScales = () => {
-        const countX = d3.scaleLinear()
-            .domain([d3.min(dataz, d => d.fecha), d3.max(dataz, d => d.fecha)]);
+        const countX = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha),
+            ]);
         scales.count = { x: countX };
     };
 
@@ -694,7 +809,6 @@ const minvul = () => {
         const g = svg.select('.chart-temperature-min-container');
 
         g.append('g').attr('class', 'axis axis-x');
-
 
         g.append('g').attr('class', 'chart-temperature-min-container-bis');
     };
@@ -715,37 +829,47 @@ const minvul = () => {
                 });
 
                 // Add annotations
-                const labels = [{
-                    data: { year: 1988 },
-                    y: 100,
-                    dy: -50,
-                    note: {
-                        title: 'Desde 1986 no se ha batido ni un solo récord de temperatura mínima',
-                        wrap: 230,
-                        align: 'middle',
+                const labels = [
+                    {
+                        data: { year: 1988 },
+                        y: 100,
+                        dy: -50,
+                        note: {
+                            title:
+                                'Desde 1986 no se ha batido ni un solo récord de temperatura mínima',
+                            wrap: 230,
+                            align: 'middle',
+                        },
                     },
-                }].map((l) => {
+                ].map((l) => {
                     this.subject = { radius: 4 };
                     return l;
                 });
 
-                window.makeAnnotations = d3.annotation()
+                window.makeAnnotations = d3
+                    .annotation()
                     .annotations(labels)
                     .type(d3.annotationCalloutCircle)
                     .accessors({
-                        x: d => scales.count.x(d.year),
-                        y: d => scales.count.y(d.total),
+                        x: (d) => scales.count.x(d.year),
+                        y: (d) => scales.count.y(d.total),
                     })
                     .accessorsInverse({
-                        year: d => scales.count.x.invert(d.x),
-                        total: d => scales.count.y.invert(d.y),
+                        year: (d) => scales.count.x.invert(d.x),
+                        total: (d) => scales.count.y.invert(d.y),
                     })
                     .on('subjectover', (annotation) => {
-                        annotation.type.a.selectAll('g.annotation-connector, g.annotation-note')
+                        annotation.type.a
+                            .selectAll(
+                                'g.annotation-connector, g.annotation-note'
+                            )
                             .classed('hidden', false);
                     })
                     .on('subjectout', (annotation) => {
-                        annotation.type.a.selectAll('g.annotation-connector, g.annotation-note')
+                        annotation.type.a
+                            .selectAll(
+                                'g.annotation-connector, g.annotation-note'
+                            )
                             .classed('hidden', true);
                     });
 
@@ -759,7 +883,8 @@ const minvul = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
             .ticks(6)
             .tickPadding(30);
@@ -776,9 +901,7 @@ const minvul = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -792,22 +915,22 @@ const minvul = () => {
 
         const container = chart.select('.chart-temperature-min-container-bis');
 
-        const layer = container.selectAll('.circles-min')
-            .data(dataz);
+        const layer = container.selectAll('.circles-min').data(dataz);
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('circle')
             .attr('class', 'circles-min');
 
-
-        layer.merge(newLayer)
-            .attr('cx', d => scales.count.x(d.fecha))
-            .attr('cy', (height / 2))
+        layer
+            .merge(newLayer)
+            .attr('cx', (d) => scales.count.x(d.fecha))
+            .attr('cy', height / 2)
             .attr('r', 0)
             .transition()
             .delay((d, i) => i * 10)
             .duration(500)
-            .attr('r', d => 3 * d.total)
+            .attr('r', (d) => 3 * d.total)
             .attr('fill-opacity', 0.6);
     };
 
@@ -853,11 +976,16 @@ const tropicalTotal = () => {
     let dataz;
 
     const setupScales = () => {
-        const countX = d3.scaleTime()
-            .domain([d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([0, d3.max(dataz, d => d.total * 1.25)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([0, d3.max(dataz, (d) => d.total * 1.25)]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -878,7 +1006,8 @@ const tropicalTotal = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
             .ticks(13);
 
@@ -886,13 +1015,13 @@ const tropicalTotal = () => {
             .attr('transform', `translate(0,${height})`)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
+        const axisY = d3
+            .axisLeft(scales.count.y)
             .tickFormat(d3.format('d'))
             .ticks(5)
             .tickSizeInner(-width);
 
-        g.select('.axis-y')
-            .call(axisY);
+        g.select('.axis-y').call(axisY);
     };
 
     const updateChart = (dataz) => {
@@ -902,9 +1031,7 @@ const tropicalTotal = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -912,40 +1039,44 @@ const tropicalTotal = () => {
 
         g.attr('transform', translate);
 
-        const area = d3.area()
-            .x(d => scales.count.x(d.year))
+        const area = d3
+            .area()
+            .x((d) => scales.count.x(d.year))
             .y0(height)
-            .y1(d => scales.count.y(d.total));
+            .y1((d) => scales.count.y(d.total));
 
-        const line = d3.line()
-            .x(d => scales.count.x(d.year))
-            .y(d => scales.count.y(d.total));
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.total));
 
         updateScales(width, height);
 
         const container = chart.select('.chart-tropical-container-bis');
 
-        const layer = container.selectAll('.area-tropical')
-            .data([dataz]);
+        const layer = container.selectAll('.area-tropical').data([dataz]);
 
-        const layerLine = container.selectAll('.line-tropical')
-            .data([dataz]);
+        const layerLine = container.selectAll('.line-tropical').data([dataz]);
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('path')
             .attr('class', 'area-tropical');
 
-        const newlayerLine = layerLine.enter()
+        const newlayerLine = layerLine
+            .enter()
             .append('path')
             .attr('class', 'line-tropical');
 
-        layer.merge(newLayer)
+        layer
+            .merge(newLayer)
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
 
-        layerLine.merge(newlayerLine)
+        layerLine
+            .merge(newlayerLine)
             .transition(600)
             .ease(d3.easeLinear)
             .attr('d', line);
@@ -995,11 +1126,16 @@ const frostyTotal = () => {
     let dataz;
 
     const setupScales = () => {
-        const countX = d3.scaleTime()
-            .domain([d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([0, d3.max(dataz, d => d.total * 1.25)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([0, d3.max(dataz, (d) => d.total * 1.25)]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -1020,7 +1156,8 @@ const frostyTotal = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
             .ticks(13);
 
@@ -1028,13 +1165,13 @@ const frostyTotal = () => {
             .attr('transform', `translate(0,${height})`)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
+        const axisY = d3
+            .axisLeft(scales.count.y)
             .tickFormat(d3.format('d'))
             .ticks(5)
             .tickSizeInner(-width);
 
-        g.select('.axis-y')
-            .call(axisY);
+        g.select('.axis-y').call(axisY);
     };
 
     const updateChart = (dataz) => {
@@ -1044,9 +1181,7 @@ const frostyTotal = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -1054,41 +1189,44 @@ const frostyTotal = () => {
 
         g.attr('transform', translate);
 
-        const area = d3.area()
-            .x(d => scales.count.x(d.year))
+        const area = d3
+            .area()
+            .x((d) => scales.count.x(d.year))
             .y0(height)
-            .y1(d => scales.count.y(d.total));
+            .y1((d) => scales.count.y(d.total));
 
-        const line = d3.line()
-            .x(d => scales.count.x(d.year))
-            .y(d => scales.count.y(d.total));
-
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.total));
 
         updateScales(width, height);
 
         const container = chart.select('.chart-frosty-container-bis');
 
-        const layer = container.selectAll('.area-frosty')
-            .data([dataz]);
+        const layer = container.selectAll('.area-frosty').data([dataz]);
 
-        const layerLine = container.selectAll('.line-frosty')
-            .data([dataz]);
+        const layerLine = container.selectAll('.line-frosty').data([dataz]);
 
-        const newlayerLine = layerLine.enter()
+        const newlayerLine = layerLine
+            .enter()
             .append('path')
             .attr('class', 'line-frosty');
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('path')
             .attr('class', 'area-frosty');
 
-        layer.merge(newLayer)
+        layer
+            .merge(newLayer)
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
 
-        layerLine.merge(newlayerLine)
+        layerLine
+            .merge(newlayerLine)
             .transition(600)
             .ease(d3.easeLinear)
             .attr('d', line);
@@ -1138,19 +1276,28 @@ const scatterInput = () => {
     let dataz;
     const temp = 'ºC';
     const selectCity = d3.select('#select-scatter-city');
-    const tooltip = d3.select('.scatter-inputs')
+    const tooltip = d3
+        .select('.scatter-inputs')
         .append('div')
         .attr('class', 'tooltip tooltip-scatter')
         .style('opacity', 0);
 
-    const getYear = stringDate => stringDate.split('-')[0];
+    const getYear = (stringDate) => stringDate.split('-')[0];
 
     const setupScales = () => {
-        const countX = d3.scaleLinear()
-            .domain([d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
+        const countX = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([d3.min(dataz, d => d.minima), d3.max(dataz, d => d.minima)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.minima),
+                d3.max(dataz, (d) => d.minima),
+            ]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -1171,7 +1318,8 @@ const scatterInput = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickPadding(10)
             .tickFormat(d3.format('d'))
             .tickSize(-height)
@@ -1184,8 +1332,9 @@ const scatterInput = () => {
             .ease(d3.easeLinear)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
-            .tickFormat(d => d + temp)
+        const axisY = d3
+            .axisLeft(scales.count.y)
+            .tickFormat((d) => d + temp)
             .tickSize(-width)
             .ticks(6);
 
@@ -1203,9 +1352,7 @@ const scatterInput = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -1217,40 +1364,55 @@ const scatterInput = () => {
 
         const container = chart.select('.scatter-inputs-container-dos');
 
-        const layer = container.selectAll('.scatter-inputs-circles').remove().exit()
+        const layer = container
+            .selectAll('.scatter-inputs-circles')
+            .remove()
+            .exit()
             .data(dataz);
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('circle')
             .attr('class', 'scatter-inputs-circles');
 
         const ciudad = selectCity.property('value');
 
-        layer.merge(newLayer)
-            .on('mouseover', d => {
+        layer
+            .merge(newLayer)
+            .on('mouseover', (d) => {
                 const positionX = scales.count.x(d.year);
-                const postionWidthTooltip = positionX + 250;
-                const positionRightTooltip = w - positionX + 100;
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
                 tooltip.transition();
                 tooltip.attr('class', 'tooltip tooltip-scatter tooltip-min');
-                tooltip.style('opacity', 1)
-                    .html(`<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`)
-                    .style('left', postionWidthTooltip > w ? 'auto' : `${d3.event.pageX}px`)
-                    .style('right', postionWidthTooltip > w ? `${positionRightTooltip}px` : 'auto')
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${
+                            d.year
+                        } fue de ${d.minima}ºC<p/>`
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
                     .style('top', `${d3.event.pageY - 28}px`);
             })
             .on('mouseout', () => {
-                tooltip.transition()
+                tooltip
+                    .transition()
                     .duration(200)
                     .style('opacity', 0);
             })
-            .attr('cx', d => scales.count.x(d.year))
-            .attr('cy', d => scales.count.y(d.minima))
+            .attr('cx', (d) => scales.count.x(d.year))
+            .attr('cy', (d) => scales.count.y(d.minima))
             .transition()
             .duration(500)
             .ease(d3.easeLinear)
-            .attr('cx', d => scales.count.x(d.year))
-            .attr('cy', d => scales.count.y(d.minima))
+            .attr('cx', (d) => scales.count.x(d.year))
+            .attr('cy', (d) => scales.count.y(d.minima))
             .attr('r', 6)
             .style('fill', '#257d98');
 
@@ -1264,8 +1426,9 @@ const scatterInput = () => {
             } else {
                 datos = data;
 
-                const nest = d3.nest()
-                    .key(d => d.Name)
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
                     .entries(datos);
 
                 selectCity
@@ -1273,8 +1436,8 @@ const scatterInput = () => {
                     .data(nest)
                     .enter()
                     .append('option')
-                    .attr('value', d => d.key)
-                    .text(d => d.key);
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
 
                 selectCity.on('change', () => {
                     update();
@@ -1286,20 +1449,22 @@ const scatterInput = () => {
     const updateMax = () => {
         let valueDateDay = d3.select('#updateButtonDay').property('value');
         let valueDateMonth = d3.select('#updateButtonMonth').property('value');
-        if (valueDateDay < 10) valueDateDay = (`0${valueDateDay}`).slice(-2);
-        if (valueDateMonth < 10) valueDateMonth = (`0${valueDateMonth}`).slice(-2);
+        if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
+        if (valueDateMonth < 10)
+            valueDateMonth = `0${valueDateMonth}`.slice(-2);
         let valueDate = `${valueDateMonth}-${valueDateDay}`;
         let reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
 
         errorDate();
 
-        const ciudad = selectCity.property('value')
+        const ciudad = selectCity
+            .property('value')
             .replace(/ /g, '_')
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '');
 
         d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`, (error, dataz) => {
-            dataz = dataz.filter(d => String(d.fecha).match(reValueDate));
+            dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
 
             dataz.forEach((d) => {
                 d.fecha = d.fecha;
@@ -1311,11 +1476,27 @@ const scatterInput = () => {
             scales.count.x.range([0, width]);
             scales.count.y.range([height, 0]);
 
-            const countX = d3.scaleTime()
-                .domain([d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(dataz, (d) => d.year),
+                    d3.max(dataz, (d) => d.year),
+                ]);
 
-            const countY = d3.scaleLinear()
-                .domain([d3.min(dataz, d => d.maxima), d3.max(dataz, d => d.maxima)]);
+            const countY = d3
+                .scaleLinear()
+                .domain([
+                    d3.min(dataz, (d) => d.maxima),
+                    d3.max(dataz, (d) => d.maxima),
+                ]);
+
+            const w = chart.node().offsetWidth;
+            const h = 544;
+
+            width = w - margin.left - margin.right;
+            height = h - margin.top - margin.bottom;
+
+            svg.attr('width', w).attr('height', h);
 
             scales.count = { x: countX, y: countY };
 
@@ -1329,41 +1510,61 @@ const scatterInput = () => {
 
             const container = chart.select('.scatter-inputs-container-dos');
 
-            const layer = container.selectAll('.scatter-inputs-circles').remove().exit()
+            const layer = container
+                .selectAll('.scatter-inputs-circles')
+                .remove()
+                .exit()
                 .data(dataz);
 
-            const newLayer = layer.enter()
+            const newLayer = layer
+                .enter()
                 .append('circle')
                 .attr('class', 'scatter-inputs-circles');
 
             const ciudad = selectCity.property('value');
 
-            layer.merge(newLayer)
-                .on('mouseover', d => {
+            layer
+                .merge(newLayer)
+                .on('mouseover', (d) => {
                     const w = chart.node().offsetWidth;
                     const positionX = scales.count.x(d.year);
-                    const postionWidthTooltip = positionX + 250;
-                    const positionRightTooltip = w - positionX + 100;
+                    const postionWidthTooltip = positionX + 270;
+                    const tooltipWidth = 210;
+                    const positionleft = `${d3.event.pageX}px`;
+                    const positionright = `${d3.event.pageX - tooltipWidth}px`;
                     tooltip.transition();
-                    tooltip.attr('class', 'tooltip tooltip-scatter tooltip-max');
-                    tooltip.style('opacity', 1)
-                        .html(`<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`)
-                        .style('top', `${d3.event.pageY - 28}px`)
-                        .style('left', postionWidthTooltip > w ? 'auto' : `${d3.event.pageX}px`)
-                        .style('right', postionWidthTooltip > w ? `${positionRightTooltip}px` : 'auto');
+                    tooltip.attr(
+                        'class',
+                        'tooltip tooltip-scatter tooltip-max'
+                    );
+                    tooltip
+                        .style('opacity', 1)
+                        .html(
+                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${
+                                d.year
+                            } fue de ${d.maxima}ºC<p/>`
+                        )
+                        .style(
+                            'left',
+                            postionWidthTooltip > w
+                                ? positionright
+                                : positionleft
+                        )
+                        .style('top', `${d3.event.pageY - 28}px`);
                 })
                 .on('mouseout', () => {
-                    tooltip.transition()
+                    tooltip
+                        .transition()
                         .duration(200)
                         .style('opacity', 0);
                 })
-                .attr('cx', d => scales.count.x(d.year))
-                .attr('cy', d => scales.count.y(d.minima))
+                .attr('cx', (d) => scales.count.x(d.year))
+                .attr('cy', (d) => scales.count.y(d.minima))
                 .transition()
                 .duration(500)
                 .ease(d3.easeLinear)
-                .attr('cx', d => scales.count.x(d.year))
-                .attr('cy', d => scales.count.y(d.maxima))
+                .attr('cx', (d) => scales.count.x(d.year))
+                .attr('cy', (d) => scales.count.y(d.maxima))
                 .attr('r', 0)
                 .transition()
                 .duration(100)
@@ -1378,7 +1579,9 @@ const scatterInput = () => {
     const errorDate = () => {
         const monthFail = document.getElementById('fail-month');
         const valueDateDay = d3.select('#updateButtonDay').property('value');
-        const valueDateMonth = d3.select('#updateButtonMonth').property('value');
+        const valueDateMonth = d3
+            .select('#updateButtonMonth')
+            .property('value');
         const year = '2020'; // Hardcodeamos el año a 2020 por ser bisiesto y permitir 29 febrero
         if (!isValidDate(valueDateDay, valueDateMonth, year)) {
             monthFail.classList.add('fail-active');
@@ -1390,26 +1593,32 @@ const scatterInput = () => {
     const isValidDate = (day, month, year) => {
         const date = new Date();
         date.setFullYear(year, month - 1, day); // month - 1 porque empiezan en 0 (enero = 0)
-        return (date.getFullYear() == year) && (date.getMonth() == month - 1) && (date.getDate() == day);
+        return (
+            date.getFullYear() == year &&
+            date.getMonth() == month - 1 &&
+            date.getDate() == day
+        );
     };
 
     const updateMin = () => {
         let valueDateDay = d3.select('#updateButtonDay').property('value');
         let valueDateMonth = d3.select('#updateButtonMonth').property('value');
-        if (valueDateDay < 10) valueDateDay = (`0${valueDateDay}`).slice(-2);
-        if (valueDateMonth < 10) valueDateMonth = (`0${valueDateMonth}`).slice(-2);
+        if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
+        if (valueDateMonth < 10)
+            valueDateMonth = `0${valueDateMonth}`.slice(-2);
         const valueDate = `${valueDateMonth}-${valueDateDay}`;
         const reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
 
         errorDate();
 
-
-        const ciudad = selectCity.property('value')
+        const ciudad = selectCity
+            .property('value')
             .replace(/ /g, '_')
-            .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
 
         d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`, (error, dataz) => {
-            dataz = dataz.filter(d => String(d.fecha).match(reValueDate));
+            dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
 
             dataz.forEach((d) => {
                 d.fecha = d.fecha;
@@ -1421,11 +1630,19 @@ const scatterInput = () => {
             scales.count.x.range([0, width]);
             scales.count.y.range([height, 0]);
 
-            const countX = d3.scaleTime()
-                .domain([d3.min(dataz, d => d.year), d3.max(dataz, d => d.year)]);
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(dataz, (d) => d.year),
+                    d3.max(dataz, (d) => d.year),
+                ]);
 
-            const countY = d3.scaleLinear()
-                .domain([d3.min(dataz, d => d.minima), d3.max(dataz, d => d.minima)]);
+            const countY = d3
+                .scaleLinear()
+                .domain([
+                    d3.min(dataz, (d) => d.minima),
+                    d3.max(dataz, (d) => d.minima),
+                ]);
 
             scales.count = { x: countX, y: countY };
 
@@ -1437,15 +1654,13 @@ const scatterInput = () => {
         updateMax();
     };
 
-    d3.select('#update')
-        .on('click', (dataz) => {
-            updateMax();
-        });
+    d3.select('#update').on('click', (dataz) => {
+        updateMax();
+    });
 
-    d3.select('#updateMin')
-        .on('click', (dataz) => {
-            updateMin();
-        });
+    d3.select('#updateMin').on('click', (dataz) => {
+        updateMin();
+    });
 
     function update() {
         updateMax();
@@ -1459,7 +1674,7 @@ const scatterInput = () => {
             } else {
                 dataz = data;
 
-                dataz = data.filter(d => String(d.fecha).match(/08-01$/));
+                dataz = data.filter((d) => String(d.fecha).match(/08-01$/));
 
                 dataz.forEach((d) => {
                     d.fecha = d.fecha;
@@ -1495,11 +1710,16 @@ const tropicalCities = () => {
     let datos;
 
     const setupScales = () => {
-        const countX = d3.scaleTime()
-            .domain([d3.min(datos, d => d.fecha), d3.max(datos, d => d.fecha)]);
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(datos, (d) => d.fecha),
+                d3.max(datos, (d) => d.fecha),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([0, d3.max(datos, d => d.tropical * 1.25)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -1520,7 +1740,8 @@ const tropicalCities = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
             .ticks(13);
@@ -1532,9 +1753,10 @@ const tropicalCities = () => {
             .ease(d3.easeLinear)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
+        const axisY = d3
+            .axisLeft(scales.count.y)
             .tickPadding(5)
-            .tickFormat(d => d)
+            .tickFormat((d) => d)
             .tickSize(-width)
             .ticks(6);
 
@@ -1552,9 +1774,7 @@ const tropicalCities = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -1562,44 +1782,51 @@ const tropicalCities = () => {
 
         g.attr('transform', translate);
 
-        const area = d3.area()
-            .x(d => scales.count.x(d.year))
+        const area = d3
+            .area()
+            .x((d) => scales.count.x(d.year))
             .y0(height)
-            .y1(d => scales.count.y(d.total));
+            .y1((d) => scales.count.y(d.total));
 
-        const line = d3.line()
-            .x(d => scales.count.x(d.year))
-            .y(d => scales.count.y(d.total));
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.total));
 
         updateScales(width, height);
 
         const container = chart.select('.chart-cities-tropical-container-bis');
 
-        const layer = container.selectAll('.area-cities-tropical')
+        const layer = container
+            .selectAll('.area-cities-tropical')
             .data([datos]);
 
-        const layerLine = container.selectAll('.line-cities-tropical')
+        const layerLine = container
+            .selectAll('.line-cities-tropical')
             .data([datos]);
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('path')
             .attr('class', 'area-cities-tropical');
 
-        const newlayerLine = layerLine.enter()
+        const newlayerLine = layerLine
+            .enter()
             .append('path')
             .attr('class', 'line-cities-tropical');
 
-        layer.merge(newLayer)
+        layer
+            .merge(newLayer)
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
 
-        layerLine.merge(newlayerLine)
+        layerLine
+            .merge(newlayerLine)
             .transition(600)
             .ease(d3.easeLinear)
             .attr('d', line);
-
 
         drawAxes(g);
     }
@@ -1616,11 +1843,16 @@ const tropicalCities = () => {
             scales.count.x.range([0, width]);
             scales.count.y.range([height, 0]);
 
-            const countX = d3.scaleTime()
-                .domain([d3.min(datos, d => d.fecha), d3.max(datos, d => d.fecha)]);
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(datos, (d) => d.fecha),
+                    d3.max(datos, (d) => d.fecha),
+                ]);
 
-            const countY = d3.scaleLinear()
-                .domain([0, d3.max(datos, d => d.tropical * 1.25)]);
+            const countY = d3
+                .scaleLinear()
+                .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
 
             scales.count = { x: countX, y: countY };
             updateChart(datos);
@@ -1628,7 +1860,8 @@ const tropicalCities = () => {
     }
 
     const resize = () => {
-        const stationResize = d3.select('#select-city-tropical')
+        const stationResize = d3
+            .select('#select-city-tropical')
             .property('value')
             .replace(/[\u00f1-\u036f]/g, '')
             .replace(/ /g, '_')
@@ -1641,10 +1874,13 @@ const tropicalCities = () => {
             .replace(/ú/g, 'u')
             .replace(/ñ/g, 'n');
 
-        d3.csv(`csv/tropicales/${stationResize}-total-tropicales.csv`, (error, data) => {
-            datos = data;
-            updateChart(datos);
-        });
+        d3.csv(
+            `csv/tropicales/${stationResize}-total-tropicales.csv`,
+            (error, data) => {
+                datos = data;
+                updateChart(datos);
+            }
+        );
     };
 
     const menuMes = () => {
@@ -1654,8 +1890,9 @@ const tropicalCities = () => {
             } else {
                 datos = data;
 
-                const nest = d3.nest()
-                    .key(d => d.Name)
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
                     .entries(datos);
 
                 const selectCity = d3.select('#select-city-tropical');
@@ -1665,11 +1902,12 @@ const tropicalCities = () => {
                     .data(nest)
                     .enter()
                     .append('option')
-                    .attr('value', d => d.key)
-                    .text(d => d.key);
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
 
                 selectCity.on('change', function() {
-                    const mes = d3.select(this)
+                    const mes = d3
+                        .select(this)
                         .property('value')
                         .replace(/ /g, '_')
                         .normalize('NFD')
@@ -1682,22 +1920,25 @@ const tropicalCities = () => {
 
     // LOAD THE DATA
     const loadData = () => {
-        d3.csv('csv/tropicales/Albacete-total-tropicales.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-                datos.forEach((d) => {
-                    d.fecha = +d.year;
-                    d.tropical = +d.total;
-                });
-                setupElements();
-                setupScales();
-                updateChart(datos);
-                const mes = 'Albacete';
-                update(mes);
+        d3.csv(
+            'csv/tropicales/Albacete-total-tropicales.csv',
+            (error, data) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    datos = data;
+                    datos.forEach((d) => {
+                        d.fecha = +d.year;
+                        d.tropical = +d.total;
+                    });
+                    setupElements();
+                    setupScales();
+                    updateChart(datos);
+                    const mes = 'Albacete';
+                    update(mes);
+                }
             }
-        });
+        );
     };
     window.addEventListener('resize', resize);
     loadData();
@@ -1719,11 +1960,16 @@ const tempExt = () => {
     let datos;
 
     const setupScales = () => {
-        const countX = d3.scaleTime()
-            .domain([d3.min(datos, d => d.fecha), d3.max(datos, d => d.fecha)]);
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(datos, (d) => d.fecha),
+                d3.max(datos, (d) => d.fecha),
+            ]);
 
-        const countY = d3.scaleLinear()
-            .domain([0, d3.max(datos, d => d.tropical * 1.25)]);
+        const countY = d3
+            .scaleLinear()
+            .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
 
         scales.count = { x: countX, y: countY };
     };
@@ -1744,7 +1990,8 @@ const tempExt = () => {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
             .ticks(13);
@@ -1756,9 +2003,10 @@ const tempExt = () => {
             .ease(d3.easeLinear)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
+        const axisY = d3
+            .axisLeft(scales.count.y)
             .tickPadding(5)
-            .tickFormat(d => d)
+            .tickFormat((d) => d)
             .tickSize(-width)
             .ticks(6);
 
@@ -1776,9 +2024,7 @@ const tempExt = () => {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -1786,44 +2032,47 @@ const tempExt = () => {
 
         g.attr('transform', translate);
 
-        const area = d3.area()
-            .x(d => scales.count.x(d.year))
+        const area = d3
+            .area()
+            .x((d) => scales.count.x(d.year))
             .y0(height)
-            .y1(d => scales.count.y(d.total));
+            .y1((d) => scales.count.y(d.total));
 
-        const line = d3.line()
-            .x(d => scales.count.x(d.year))
-            .y(d => scales.count.y(d.total));
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.total));
 
         updateScales(width, height);
 
         const container = chart.select('.chart-temperature-ext-container-bis');
 
-        const layer = container.selectAll('.area-ext')
-            .data([datos]);
+        const layer = container.selectAll('.area-ext').data([datos]);
 
-        const layerLine = container.selectAll('.line-ext')
-            .data([datos]);
+        const layerLine = container.selectAll('.line-ext').data([datos]);
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('path')
             .attr('class', 'area-ext');
 
-        const newlayerLine = layerLine.enter()
+        const newlayerLine = layerLine
+            .enter()
             .append('path')
             .attr('class', 'line-ext');
 
-        layer.merge(newLayer)
+        layer
+            .merge(newLayer)
             .transition()
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
 
-        layerLine.merge(newlayerLine)
+        layerLine
+            .merge(newlayerLine)
             .transition(600)
             .ease(d3.easeLinear)
             .attr('d', line);
-
 
         drawAxes(g);
     }
@@ -1840,11 +2089,16 @@ const tempExt = () => {
             scales.count.x.range([0, width]);
             scales.count.y.range([height, 0]);
 
-            const countX = d3.scaleTime()
-                .domain([d3.min(datos, d => d.fecha), d3.max(datos, d => d.fecha)]);
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(datos, (d) => d.fecha),
+                    d3.max(datos, (d) => d.fecha),
+                ]);
 
-            const countY = d3.scaleLinear()
-                .domain([0, d3.max(datos, d => d.tropical * 1.25)]);
+            const countY = d3
+                .scaleLinear()
+                .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
 
             scales.count = { x: countX, y: countY };
             updateChart(datos);
@@ -1852,7 +2106,8 @@ const tempExt = () => {
     }
 
     const resize = () => {
-        const stationResize = d3.select('#select-ext')
+        const stationResize = d3
+            .select('#select-ext')
             .property('value')
             .replace(/[\u00f1-\u036f]/g, '')
             .replace(/ /g, '_')
@@ -1878,13 +2133,15 @@ const tempExt = () => {
             } else {
                 datos = data;
 
-                const nest = d3.nest()
-                    .key(d => d.Name)
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
                     .entries(datos);
 
                 const selectCity = d3.select('#select-ext');
 
-                selectCity.selectAll('option')
+                selectCity
+                    .selectAll('option')
                     .data(nest)
                     .enter()
                     .append('option')
@@ -1892,7 +2149,8 @@ const tempExt = () => {
                     .text(({ key }) => `${key}ºC`);
 
                 selectCity.on('change', function() {
-                    const mes = d3.select(this)
+                    const mes = d3
+                        .select(this)
                         .property('value')
                         .replace(/ /g, '_')
                         .normalize('NFD')
@@ -1927,7 +2185,7 @@ const tempExt = () => {
     menuMes();
 };
 
-function directionalDot() {
+function directionalDot(maxmins) {
     const margin = {
         top: 16,
         right: 16,
@@ -1936,26 +2194,52 @@ function directionalDot() {
     };
     let width = 0;
     let height = 0;
-    const chart = d3.select('.chart-diff-records');
+    const chart = d3.select(`.chart-diff-records-${maxmins}`);
     const svg = chart.select('svg');
     const scales = {};
     const temp = 'ºC';
     let dataz;
-    const tooltip = d3.select('.chart-diff-records')
+    const tooltip = d3
+        .select(`.chart-diff-records-${maxmins}`)
         .append('div')
         .attr('class', 'tooltip tooltip-diff')
         .style('opacity', 0);
-    const selectMonth = d3.select('#select-month');
-    const selectCity = d3.select('#select-cities-records');
+    const selectMonth = d3.select(`#select-month-${maxmins}`);
+    const selectCity = d3.select(`#select-cities-records-${maxmins}`);
+    const tempThis = `${maxmins}`;
 
     const setupScales = () => {
-        const countX = d3.scaleTime()
-            .domain([d3.min(dataz, d => d.dia), d3.max(dataz, d => d.dia)]);
+        if (tempThis === 'max') {
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(dataz, (d) => d.dia),
+                    d3.max(dataz, (d) => d.dia),
+                ]);
 
-        const countY = d3.scaleLinear()
-            .domain([d3.min(dataz, d => d.segundo - 1), d3.max(dataz, d => d.primero + 1)]);
+            const countY = d3
+                .scaleLinear()
+                .domain([
+                    d3.min(dataz, (d) => d.segundo - 1),
+                    d3.max(dataz, (d) => d.primero + 1),
+                ]);
+            scales.count = { x: countX, y: countY };
+        } else {
+            const countX = d3
+                .scaleTime()
+                .domain([
+                    d3.min(dataz, (d) => d.dia),
+                    d3.max(dataz, (d) => d.dia),
+                ]);
 
-        scales.count = { x: countX, y: countY };
+            const countY = d3
+                .scaleLinear()
+                .domain([
+                    d3.min(dataz, (d) => d.primero - 1),
+                    d3.max(dataz, (d) => d.segundo + 1),
+                ]);
+            scales.count = { x: countX, y: countY };
+        }
     };
 
     const setupElements = () => {
@@ -1974,7 +2258,8 @@ function directionalDot() {
     };
 
     const drawAxes = (g) => {
-        const axisX = d3.axisBottom(scales.count.x)
+        const axisX = d3
+            .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
             .ticks(31);
@@ -1986,9 +2271,10 @@ function directionalDot() {
             .ease(d3.easeLinear)
             .call(axisX);
 
-        const axisY = d3.axisLeft(scales.count.y)
+        const axisY = d3
+            .axisLeft(scales.count.y)
             .tickPadding(5)
-            .tickFormat(d => d + temp)
+            .tickFormat((d) => d + temp)
             .ticks(15)
             .tickSizeInner(-width);
 
@@ -2006,9 +2292,7 @@ function directionalDot() {
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
 
-        svg
-            .attr('width', w)
-            .attr('height', h);
+        svg.attr('width', w).attr('height', h);
 
         const translate = `translate(${margin.left},${margin.top})`;
 
@@ -2020,41 +2304,56 @@ function directionalDot() {
 
         const container = chart.select('.chart-diff-records-container-bis');
 
-        const layer = container.selectAll('.circle-primero')
+        const layer = container
+            .selectAll(`.circle-primero-${maxmins}`)
             .data(dataz);
 
         layer.exit().remove();
 
-        const layerDos = container.selectAll('.circle-segundo')
+        const layerDos = container
+            .selectAll(`.circle-segundo-${maxmins}`)
             .data(dataz);
 
         layerDos.exit().remove();
 
-        const layerLine = container.selectAll('.circle-lines')
-            .data(dataz);
+        const layerLine = container.selectAll('.circle-lines').data(dataz);
 
         layerLine.exit().remove();
 
-        const newLayer = layer.enter()
+        const newLayer = layer
+            .enter()
             .append('circle')
-            .attr('class', 'circle-primero');
+            .attr('class', `circle-primero-${maxmins}`);
 
-        const newLayerDos = layerDos.enter()
+        const newLayerDos = layerDos
+            .enter()
             .append('circle')
-            .attr('class', 'circle-segundo');
+            .attr('class', `circle-segundo-${maxmins}`);
 
-        const newLayerLines = layerLine.enter()
+        const newLayerLines = layerLine
+            .enter()
             .append('line')
             .attr('class', 'circle-lines');
 
-        layerLine.merge(newLayerLines)
+        layerLine
+            .merge(newLayerLines)
             .transition()
             .duration(500)
             .ease(d3.easeLinear)
-            .attr('x1', d => scales.count.x(d.dia))
-            .attr('y1', d => scales.count.y(d.primero) + 6)
-            .attr('x2', d => scales.count.x(d.dia))
-            .attr('y2', d => scales.count.y(d.segundo) - 6)
+            .attr('x1', (d) => scales.count.x(d.dia))
+            .attr('y1', (d) => {
+                if (tempThis === 'max') {
+                    return scales.count.y(d.primero) + 6;
+                }
+                return scales.count.y(d.primero) - 6;
+            })
+            .attr('x2', (d) => scales.count.x(d.dia))
+            .attr('y2', (d) => {
+                if (tempThis === 'max') {
+                    return scales.count.y(d.segundo) - 6;
+                }
+                return scales.count.y(d.segundo) + 6;
+            })
             .attr('stroke', (d) => {
                 if (d.diff === 0) {
                     return 'none';
@@ -2064,57 +2363,80 @@ function directionalDot() {
 
         const city = selectCity.property('value');
 
-        layer.merge(newLayer)
-            .on('mouseover', d => {
+        layer
+            .merge(newLayer)
+            .on('mouseover', (d) => {
                 const positionX = scales.count.x(d.dia);
                 const postionWidthTooltip = positionX + 270;
-                const positionRightTooltip = w - positionX + 100;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
                 tooltip.transition();
-                tooltip.style('opacity', 1)
-                    .html(`<p class="tooltip-diff-text">La temperatura máxima en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`)
-                    .style('left', postionWidthTooltip > w ? 'auto' : `${d3.event.pageX}px`)
-                    .style('right', postionWidthTooltip > w ? `${positionRightTooltip}px` : 'auto')
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${
+                            d.yearprimera
+                        } y fue de ${d.primero}ºC<p/>`
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
                     .style('top', `${d3.event.pageY - 28}px`);
             })
             .on('mouseout', () => {
-                tooltip.transition()
+                tooltip
+                    .transition()
                     .duration(200)
                     .style('opacity', 0);
             })
             .transition()
             .duration(500)
             .ease(d3.easeLinear)
-            .attr('cy', d => scales.count.y(d.primero))
-            .attr('cx', d => scales.count.x(d.dia));
+            .attr('cy', (d) => scales.count.y(d.primero))
+            .attr('cx', (d) => scales.count.x(d.dia))
+            .attr('r', 6);
 
-        layerDos.merge(newLayerDos)
-            .on('mouseover', d => {
+        layerDos
+            .merge(newLayerDos)
+            .on('mouseover', (d) => {
                 const positionX = scales.count.x(d.dia);
                 const postionWidthTooltip = positionX + 270;
-                const positionRightTooltip = w - positionX + 100;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
                 tooltip.transition();
-                tooltip.style('opacity', 1)
-                    .html(`<p class="tooltip-diff-text">La segunda temperatura máxima en ${city} se registro en ${d.yearsegundo} y fue de ${d.segundo}ºC<p/>`)
-                    .style('left', postionWidthTooltip > 1200 ? 'auto' : `${d3.event.pageX}px`)
-                    .style('right', postionWidthTooltip > 1200 ? `${positionRightTooltip}px` : 'auto')
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${
+                            d.yearprimera
+                        } y fue de ${d.segundo}ºC<p/>`
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
                     .style('top', `${d3.event.pageY - 28}px`);
             })
             .on('mouseout', () => {
-                tooltip.transition()
+                tooltip
+                    .transition()
                     .duration(200)
                     .style('opacity', 0);
             })
             .transition()
             .duration(500)
             .ease(d3.easeLinear)
+            .attr('cy', (d) => scales.count.y(d.segundo))
+            .attr('cx', (d) => scales.count.x(d.dia))
             .attr('r', (d) => {
                 if (d.diff === 0) {
                     return 0;
                 }
                 return 6;
-            })
-            .attr('cy', d => scales.count.y(d.segundo))
-            .attr('cx', d => scales.count.x(d.dia));
+            });
 
         drawAxes(g);
     };
@@ -2124,35 +2446,59 @@ function directionalDot() {
     };
     const updateMes = () => {
         const mes = selectMonth.property('value');
-        const city = selectCity.property('value')
+        const city = selectCity
+            .property('value')
             .replace(/ /g, '_')
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '');
-        d3.csv(`csv/max/dos-records/${city}-dos-records.csv`, (error, dataz) => {
-            dataz = dataz.filter(d => String(d.mes).match(mes));
+        d3.csv(
+            `csv/${maxmins}/dos-records/${city}-dos-records.csv`,
+            (error, dataz) => {
+                dataz = dataz.filter((d) => String(d.mes).match(mes));
 
+                dataz.forEach((d) => {
+                    d.fecha = +d.fecha;
+                    d.primero = +d.primero;
+                    d.segundo = +d.segundo;
+                    d.diff = d.primero - d.segundo;
+                    d.dia = +d.dia;
+                });
 
-            dataz.forEach((d) => {
-                d.fecha = +d.fecha;
-                d.primero = +d.primero;
-                d.segundo = +d.segundo;
-                d.diff = d.primero - d.segundo;
-                d.dia = +d.dia;
-            });
+                if (tempThis === 'max') {
+                    const countX = d3
+                        .scaleTime()
+                        .domain([
+                            d3.min(dataz, (d) => d.dia),
+                            d3.max(dataz, (d) => d.dia),
+                        ]);
 
-            scales.count.x.range([15, width]);
-            scales.count.y.range([height, 0]);
+                    const countY = d3
+                        .scaleLinear()
+                        .domain([
+                            d3.min(dataz, (d) => d.segundo - 1),
+                            d3.max(dataz, (d) => d.primero + 1),
+                        ]);
+                    scales.count = { x: countX, y: countY };
+                } else {
+                    const countX = d3
+                        .scaleTime()
+                        .domain([
+                            d3.min(dataz, (d) => d.dia),
+                            d3.max(dataz, (d) => d.dia),
+                        ]);
 
-            const countX = d3.scaleTime()
-                .domain([d3.min(dataz, d => d.dia), d3.max(dataz, d => d.dia)]);
+                    const countY = d3
+                        .scaleLinear()
+                        .domain([
+                            d3.min(dataz, (d) => d.primero - 1),
+                            d3.max(dataz, (d) => d.segundo + 1),
+                        ]);
+                    scales.count = { x: countX, y: countY };
+                }
 
-            const countY = d3.scaleLinear()
-                .domain([d3.min(dataz, d => d.segundo - 1), d3.max(dataz, d => d.primero + 1)]);
-
-            scales.count = { x: countX, y: countY };
-
-            updateChart(dataz);
-        });
+                updateChart(dataz);
+            }
+        );
     };
 
     const menuMes = () => {
@@ -2162,8 +2508,9 @@ function directionalDot() {
             } else {
                 const datos = data;
 
-                const nest = d3.nest()
-                    .key(d => d.Mes)
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Mes)
                     .entries(datos);
 
                 selectMonth
@@ -2171,9 +2518,9 @@ function directionalDot() {
                     .data(nest)
                     .enter()
                     .append('option')
-                    .attr('value', d => d.key)
+                    .attr('value', (d) => d.key)
                     .attr('number', (d, i) => i + 1)
-                    .text(d => d.key);
+                    .text((d) => d.key);
 
                 selectMonth.on('change', () => {
                     updateMes();
@@ -2189,8 +2536,9 @@ function directionalDot() {
             } else {
                 const datos = data;
 
-                const nest = d3.nest()
-                    .key(d => d.Name)
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
                     .entries(datos);
 
                 selectCity
@@ -2198,8 +2546,8 @@ function directionalDot() {
                     .data(nest)
                     .enter()
                     .append('option')
-                    .attr('value', d => d.key)
-                    .text(d => d.key);
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
 
                 selectCity.on('change', () => {
                     updateMes();
@@ -2211,25 +2559,28 @@ function directionalDot() {
     // LOAD THE DATA
     const loadData = () => {
         const mes = 'Enero';
-        d3.csv('csv/max/dos-records/Albacete-dos-records.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                dataz = data.filter(d => String(d.mes).match(mes));
-                dataz.forEach((d) => {
-                    d.fecha = +d.fecha;
-                    d.primero = +d.primero;
-                    d.segundo = +d.segundo;
-                    d.diff = d.primero - d.segundo;
-                    d.dia = +d.dia;
-                });
-                setupElements();
-                setupScales();
-                updateChart(dataz);
-                menuMes();
-                menuCities();
+        d3.csv(
+            `csv/${maxmins}/dos-records/Albacete-dos-records.csv`,
+            (error, data) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    dataz = data.filter((d) => String(d.mes).match(mes));
+                    dataz.forEach((d) => {
+                        d.fecha = +d.fecha;
+                        d.primero = +d.primero;
+                        d.segundo = +d.segundo;
+                        d.diff = d.primero - d.segundo;
+                        d.dia = +d.dia;
+                    });
+                    setupElements();
+                    setupScales();
+                    updateChart(dataz);
+                    menuMes();
+                    menuCities();
+                }
             }
-        });
+        );
     };
 
     window.addEventListener('resize', resize);
@@ -2241,6 +2592,8 @@ tropicalCities();
 scatterInput();
 vulturno();
 directionalDot();
+directionalDot(maxmin[0]);
+directionalDot(maxmin[1]);
 
 new SlimSelect({
     select: '#select-city',
@@ -2263,12 +2616,22 @@ new SlimSelect({
 });
 
 new SlimSelect({
-    select: '#select-month',
+    select: '#select-month-max',
     searchPlaceholder: 'Selecciona un mes',
 });
 
 new SlimSelect({
-    select: '#select-cities-records',
+    select: '#select-month-min',
+    searchPlaceholder: 'Selecciona un mes',
+});
+
+new SlimSelect({
+    select: '#select-cities-records-max',
+    searchPlaceholder: 'Selecciona una ciudad',
+});
+
+new SlimSelect({
+    select: '#select-cities-records-min',
     searchPlaceholder: 'Selecciona una ciudad',
 });
 

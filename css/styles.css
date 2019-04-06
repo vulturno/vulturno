@@ -1127,10 +1127,10 @@ template {
         font-size: 1rem;
     }
 .records-max {
-    background-color: #2c4050;
+    background-color: #191100;
 }
 .records-min {
-    background-color: #191100;
+    background-color: #2c4050;
 }
 .legend-minima,
 .legend-maxima {
@@ -1178,13 +1178,17 @@ template {
     font-family: 'Roboto Condensed', sans-serif;
     font-family: var(--roboto);
 }
-.circle-primero {
+.circle-primero-max {
     fill: #b8000f;
-    r: 3;
 }
-.circle-segundo {
+.circle-segundo-max {
     fill: #e16973;
-    r: 3;
+}
+.circle-primero-min {
+    fill: #0583a0;
+}
+.circle-segundo-min {
+    fill: #63A3B2;
 }
 @media only screen and (min-width: 48rem) {
 
@@ -1235,10 +1239,6 @@ template {
         left: 50px;
     }
 
-    .circle-primero,
-    .circle-segundo {
-        r: 6;
-    }
 }
 @media only screen and (min-width: 64em) {
 

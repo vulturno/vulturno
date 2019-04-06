@@ -11,7 +11,8 @@
   ],
   "author": "Jorge Aznar",
   "lint-staged": {
-    "src/css/*.css": "stylelint"
+    "src/css/*.css": "stylelint",
+    "src/js/*.js": "prettier --write"
   },
   "pre-commit": "lint-staged",
   "scripts": {
@@ -64,6 +65,7 @@
     "postcss-reporter": "^6.0.1",
     "postcss-sorting": "^4.0.0",
     "pre-commit": "^1.2.2",
+    "prettier": "1.16.4",
     "rollup": "0.36",
     "rollup-plugin-node-resolve": "2",
     "stylelint": "^9.10.1",
