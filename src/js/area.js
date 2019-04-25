@@ -2411,7 +2411,7 @@ function directionalDot(maxmins) {
                     .style('opacity', 1)
                     .html(
                         `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearprimera
+                            d.yearsegundo
                         } y fue de ${d.segundo}ºC<p/>`
                     )
                     .style(
