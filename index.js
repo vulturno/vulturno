@@ -19,7 +19,7 @@ export {
 } from 'd3-array';
 
 export {
-    line, curveCardinal, arc, curveLinear, area,
+    line, curveCardinal, arc, curveLinear, area, curveStep
 } from 'd3-shape';
 
 export {

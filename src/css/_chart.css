@@ -530,6 +530,20 @@
     fill: #63A3B2;
 }
 
+.line-average {
+    .line {
+        fill: none;
+        stroke: var(--black);
+        stroke-width: 2px;
+    }
+    .up {
+        fill: #b8000f;
+    }
+    .down {
+        fill: #0583a0;
+    }
+}
+
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
