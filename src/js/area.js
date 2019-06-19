@@ -385,11 +385,7 @@ const vulturno = () => {
             tooltipTemp
                 .style('opacity', 1)
                 .html(
-                    `<p class="tooltip-media-texto">En <strong>${
-                        d.year
-                    }</strong> la temperatura media fue de <strong>${
-                        d.temp
-                    } ºC</strong>.<p/>`
+                    `<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`
                 )
                 .style('left', `${positionTooltip}px`);
 
@@ -1390,9 +1386,7 @@ const scatterInput = () => {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${
-                            d.year
-                        } fue de ${d.minima}ºC<p/>`
+                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -1540,9 +1534,7 @@ const scatterInput = () => {
                     tooltip
                         .style('opacity', 1)
                         .html(
-                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${
-                                d.year
-                            } fue de ${d.maxima}ºC<p/>`
+                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`
                         )
                         .style(
                             'left',
@@ -2375,9 +2367,7 @@ function directionalDot(maxmins) {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearprimera
-                        } y fue de ${d.primero}ºC<p/>`
+                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -2410,9 +2400,7 @@ function directionalDot(maxmins) {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearsegundo
-                        } y fue de ${d.segundo}ºC<p/>`
+                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${d.yearsegundo} y fue de ${d.segundo}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -2652,7 +2640,12 @@ const average = () => {
     let dataz;
 
     const setupScales = () => {
-        const countX = d3.scaleBand().domain(dataz.map((d) => d.fecha));
+        const countX = d3
+        .scaleTime()
+        .domain([
+            d3.min(dataz, (d) => d.fecha),
+            d3.max(dataz, (d) => d.fecha),
+        ]);
 
         const countY = d3
             .scaleLinear()
@@ -2675,7 +2668,7 @@ const average = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]).paddingInner(0.2);
+        scales.count.x.range([16, width]);
         scales.count.y.range([height, 0]);
     };
 
@@ -2683,7 +2676,7 @@ const average = () => {
         const axisX = d3
             .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .ticks(33);
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -2692,20 +2685,20 @@ const average = () => {
         const axisY = d3
             .axisLeft(scales.count.y)
             .tickFormat((d) => d + temp)
-            .ticks(5)
+            .ticks(10)
             .tickSizeInner(-width);
 
         g.select('.axis-y').call(axisY);
 
         g.append('text')
             .attr('class', 'legend-aragon')
-            .attr('y', '10%')
+            .attr('y', '1%')
             .attr('x', '3%')
-            .text('Media de temperatura máxima entre 1980-2009');
+            .text('Promedio de temperatura media entre 1980-2009');
 
         g.append('rect')
             .attr('class', 'legend-line')
-            .attr('y', '9%')
+            .attr('y', '0')
             .attr('x', '1%')
             .attr('height', '3px')
             .attr('width', '16px');
@@ -2728,7 +2721,7 @@ const average = () => {
 
         const line = d3
             .line()
-            .x((d) => scales.count.x(d.fecha) + 16)
+            .x((d) => scales.count.x(d.fecha))
             .y((d) => scales.count.y(d.mediaXX))
             .curve(d3.curveStep);
 
@@ -2743,6 +2736,7 @@ const average = () => {
         const newLayer2 = layer2
             .enter()
             .append('rect')
+            .attr('id', (d, i) => 'rect' + i)
             .attr('class', (d) => {
                 if (d.diff < 0) {
                     return 'up';
@@ -2759,16 +2753,21 @@ const average = () => {
 
         layer2
             .merge(newLayer2)
-            .attr('width', (d) => scales.count.x.bandwidth())
-            .attr('x', (d) => scales.count.x(d.fecha) + 3)
+            .attr('width', width / dataz.length - 4)
+            .attr('x', (d) => scales.count.x(d.fecha) - 14)
             .attr('y', (d) => {
                 if (d.diff > 0) {
                     return scales.count.y(d.mediaXX);
                 } else {
-                    return scales.count.y(d.mediaXX) - Math.abs(scales.count.y(d.diff) - scales.count.y(0));
+                    return (
+                        scales.count.y(d.mediaXX) -
+                        Math.abs(scales.count.y(d.diff) - scales.count.y(0))
+                    );
                 }
             })
-            .attr('height', (d) => Math.abs(scales.count.y(d.diff) - scales.count.y(0)));
+            .attr('height', (d) =>
+                Math.abs(scales.count.y(d.diff) - scales.count.y(0))
+            );
 
         layer.merge(newLayer).attr('d', line);
 
