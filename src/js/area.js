@@ -2641,11 +2641,11 @@ const average = () => {
 
     const setupScales = () => {
         const countX = d3
-        .scaleTime()
-        .domain([
-            d3.min(dataz, (d) => d.fecha),
-            d3.max(dataz, (d) => d.fecha),
-        ]);
+            .scaleTime()
+            .domain([
+                d3.min(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha),
+            ]);
 
         const countY = d3
             .scaleLinear()
@@ -2779,7 +2779,7 @@ const average = () => {
     };
 
     const loadData = () => {
-        d3.csv('csv/julio-1980-2019.csv', (error, data) => {
+        d3.csv('csv/junio-1980-2019.csv', (error, data) => {
             if (error) {
                 console.log(error);
             } else {
