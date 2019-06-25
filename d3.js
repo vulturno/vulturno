@@ -7311,7 +7311,7 @@ function formatUnixTimestampSeconds(d) {
 
 var locale$2;
 
-var timeParse;
+
 var utcFormat;
 var utcParse;
 
@@ -7329,7 +7329,7 @@ defaultLocale$1({
 function defaultLocale$1(definition) {
   locale$2 = formatLocale$1(definition);
   exports.timeFormat = locale$2.format;
-  timeParse = locale$2.parse;
+  exports.timeParse = locale$2.parse;
   utcFormat = locale$2.utcFormat;
   utcParse = locale$2.utcParse;
   return locale$2;

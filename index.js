@@ -47,5 +47,5 @@ export {
 } from 'd3-format';
 
 export {
-    timeFormat,
+    timeFormat, timeParse
 } from 'd3-time-format';
