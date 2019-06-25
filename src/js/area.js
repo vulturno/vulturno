@@ -385,11 +385,7 @@ const vulturno = () => {
             tooltipTemp
                 .style('opacity', 1)
                 .html(
-                    `<p class="tooltip-media-texto">En <strong>${
-                        d.year
-                    }</strong> la temperatura media fue de <strong>${
-                        d.temp
-                    } ºC</strong>.<p/>`
+                    `<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`
                 )
                 .style('left', `${positionTooltip}px`);
 
@@ -1390,9 +1386,7 @@ const scatterInput = () => {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${
-                            d.year
-                        } fue de ${d.minima}ºC<p/>`
+                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -1540,9 +1534,7 @@ const scatterInput = () => {
                     tooltip
                         .style('opacity', 1)
                         .html(
-                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${
-                                d.year
-                            } fue de ${d.maxima}ºC<p/>`
+                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`
                         )
                         .style(
                             'left',
@@ -2375,9 +2367,7 @@ function directionalDot(maxmins) {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearprimera
-                        } y fue de ${d.primero}ºC<p/>`
+                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -2410,9 +2400,7 @@ function directionalDot(maxmins) {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearsegundo
-                        } y fue de ${d.segundo}ºC<p/>`
+                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${d.yearsegundo} y fue de ${d.segundo}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -2635,8 +2623,261 @@ new SlimSelect({
     searchPlaceholder: 'Selecciona una ciudad',
 });
 
+new SlimSelect({
+    select: '#select-heat-wave',
+    searchPlaceholder: 'Selecciona una ciudad',
+});
+
 maxvul();
 tropicalTotal();
 frostyTotal();
 minvul();
 tempExt();
+
+const average = () => {
+    const margin = { top: 24, right: 24, bottom: 24, left: 40 };
+    let width = 0;
+    let height = 0;
+    const chart = d3.select('.line-average');
+    const svg = chart.select('svg');
+    const scales = {};
+    const temp = 'ºC';
+    let dataz;
+
+    const setupScales = () => {
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha),
+            ]);
+
+        const countY = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.mediaXX - 4),
+                d3.max(dataz, (d) => d.mediaXX + 4),
+            ]);
+
+        scales.count = { x: countX, y: countY };
+    };
+
+    const setupElements = () => {
+        const g = svg.select('.line-average-container');
+
+        g.append('g').attr('class', 'axis axis-x');
+
+        g.append('g').attr('class', 'axis axis-y');
+
+        g.append('g').attr('class', 'line-average-container-dos');
+    };
+
+    const updateScales = (width, height) => {
+        scales.count.x.range([16, width]);
+        scales.count.y.range([height, 0]);
+    };
+
+    const drawAxes = (g) => {
+        const axisX = d3
+            .axisBottom(scales.count.x)
+            .tickFormat(d3.format('d'))
+            .ticks(33);
+
+        g.select('.axis-x')
+            .attr('transform', `translate(0,${height})`)
+            .call(axisX);
+
+        const axisY = d3
+            .axisLeft(scales.count.y)
+            .tickFormat((d) => d + temp)
+            .ticks(10)
+            .tickSizeInner(-width);
+
+        g.select('.axis-y').call(axisY);
+
+        g.append('text')
+            .attr('class', 'legend-aragon')
+            .attr('y', '1%')
+            .attr('x', '3%')
+            .text('Promedio de temperatura media entre 1980-2009');
+
+        g.append('rect')
+            .attr('class', 'legend-line')
+            .attr('y', '0')
+            .attr('x', '1%')
+            .attr('height', '3px')
+            .attr('width', '16px');
+    };
+
+    const updateChart = (dataz) => {
+        const w = chart.node().offsetWidth;
+        const h = 600;
+
+        width = w - margin.left - margin.right;
+        height = h - margin.top - margin.bottom;
+
+        svg.attr('width', w).attr('height', h);
+
+        const translate = `translate(${margin.left},${margin.top})`;
+
+        const g = svg.select('.line-average-container');
+
+        g.attr('transform', translate);
+
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.fecha))
+            .y((d) => scales.count.y(d.mediaXX))
+            .curve(d3.curveStep);
+
+        updateScales(width, height);
+
+        const container = chart.select('.line-average-container-dos');
+
+        const layer = container.selectAll('.line').data([dataz]);
+
+        const layer2 = container.selectAll('.bar-vertical').data(dataz);
+
+        const newLayer2 = layer2
+            .enter()
+            .append('rect')
+            .attr('id', (d, i) => 'rect' + i)
+            .attr('class', (d) => {
+                if (d.diff < 0) {
+                    return 'up';
+                } else {
+                    return 'down';
+                }
+            });
+
+        const newLayer = layer
+            .enter()
+            .append('path')
+            .attr('class', 'line')
+            .attr('stroke-width', '1.5');
+
+        layer2
+            .merge(newLayer2)
+            .attr('width', width / dataz.length - 4)
+            .attr('x', (d) => scales.count.x(d.fecha) - 14)
+            .attr('y', (d) => {
+                if (d.diff > 0) {
+                    return scales.count.y(d.mediaXX);
+                } else {
+                    return (
+                        scales.count.y(d.mediaXX) -
+                        Math.abs(scales.count.y(d.diff) - scales.count.y(0))
+                    );
+                }
+            })
+            .attr('height', (d) =>
+                Math.abs(scales.count.y(d.diff) - scales.count.y(0))
+            );
+
+        layer.merge(newLayer).attr('d', line);
+
+        drawAxes(g);
+    };
+
+    const resize = () => {
+        updateChart(dataz);
+    };
+
+    const loadData = () => {
+        d3.csv('csv/junio-1980-2019.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data;
+                dataz.forEach((d) => {
+                    d.mediaXX = +d.mediaXX;
+                    d.mediaXXI = +d.mediaXXI;
+                    d.diff = +d.diff;
+                });
+                setupElements();
+                setupScales();
+                updateChart(dataz);
+            }
+        });
+    };
+
+    window.addEventListener('resize', resize);
+
+    loadData();
+};
+
+average();
+
+const heatWave = () => {
+    const selectCity = d3.select('#select-heat-wave');
+
+    const updateMes = () => {
+        const city = selectCity
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        loadData(city);
+    };
+
+    const menuCities = () => {
+        d3.csv('csv/stations.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const datos = data;
+
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
+                    .entries(datos);
+
+                selectCity
+                    .selectAll('option')
+                    .data(nest)
+                    .enter()
+                    .append('option')
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
+
+                selectCity.on('change', () => {
+                    updateMes();
+                });
+            }
+        });
+    };
+
+    menuCities();
+
+    // LOAD THE DATA
+    const loadData = (mes) => {
+        d3.csv(`csv/max/junio/${mes}-junio.csv`, (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const container = d3.select('.forno-container');
+
+                container
+                    .selectAll('.forno-element')
+                    .remove()
+                    .exit()
+                    .data(data)
+                    .enter()
+                    .append('section')
+                    .attr('class', 'forno-element')
+                    .html(
+                        (d) => `
+                              <span class="forno-day forno-text">${d.fecha}</span>
+                              <span class="forno-year forno-text">${d.yearprimera}</span>
+                            <span class="forno-record forno-text">${d.primero}ºC</span>`
+                    );
+            }
+        });
+    };
+
+    const selected = 'Albacete';
+
+    loadData(selected);
+};
+
+heatWave();
