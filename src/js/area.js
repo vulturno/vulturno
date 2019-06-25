@@ -2849,43 +2849,35 @@ const heatWave = () => {
 
     menuCities();
 
-
     // LOAD THE DATA
     const loadData = (mes) => {
-        d3.csv(
-            `csv/max/junio/${mes}-junio.csv`,
-            (error, data) => {
-                if (error) {
-                    console.log(error);
-                } else {
+        d3.csv(`csv/max/junio/${mes}-junio.csv`, (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const container = d3.select('.forno-container');
 
-
-
-
-                    const container = d3.select('.forno-container');
-
-                    container
-                        .selectAll('.forno-element')
-                        .remove()
-                        .exit()
-                        .data(data)
-                        .enter()
-                        .append('section')
-                        .attr('class', 'forno-element')
-                        .html((d) => `
+                container
+                    .selectAll('.forno-element')
+                    .remove()
+                    .exit()
+                    .data(data)
+                    .enter()
+                    .append('section')
+                    .attr('class', 'forno-element')
+                    .html(
+                        (d) => `
                               <span class="forno-day forno-text">${d.fecha}</span>
                               <span class="forno-year forno-text">${d.yearprimera}</span>
-                            <span class="forno-record forno-text">${d.primero}ºC</span>`);
-
-
-                }
+                            <span class="forno-record forno-text">${d.primero}ºC</span>`
+                    );
             }
-        );
+        });
     };
 
+    const selected = 'Albacete';
 
-    loadData();
-
-}
+    loadData(selected);
+};
 
 heatWave();
