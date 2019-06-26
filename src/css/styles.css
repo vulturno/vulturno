@@ -21,7 +21,6 @@ body {
 
 .forno {
     background-color: #cff330;
-    min-height: 100vh;
     padding: 2rem 0;
 }
 
@@ -62,17 +61,29 @@ body {
     padding-top: 1rem;
 }
 
-
 @media only screen and (min-width: 48rem) {
 
     .forno-container {
-        width: 60rem;
         grid-template-columns: 1fr 1fr;
     }
+
+}
+
+@media only screen and (min-width: 64em) {
+
+    .forno-container {
+        width: 60rem;
+    }
+
     .forno-record {
         font-size: 8rem;
     }
+
     .forno-year {
         font-size: 3rem;
+    }
+
+    .forno {
+        min-height: 100vh;
     }
 }
