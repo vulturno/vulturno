@@ -2576,63 +2576,77 @@ function directionalDot(maxmins) {
     loadData();
 }
 
-tropicalCities();
-scatterInput();
-vulturno();
-directionalDot();
-directionalDot(maxmin[0]);
-directionalDot(maxmin[1]);
+/*const heatWave = () => {
+    const selectCity = d3.select('#select-heat-wave');
 
-new SlimSelect({
-    select: '#select-city',
-    searchPlaceholder: 'Busca tu ciudad',
-});
+    const updateMes = () => {
+        const city = selectCity
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        loadData(city);
+    };
 
-new SlimSelect({
-    select: '#select-scatter-city',
-    searchPlaceholder: 'Busca tu ciudad',
-});
+    const menuCities = () => {
+        d3.csv('csv/stations.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const datos = data;
 
-new SlimSelect({
-    select: '#select-city-tropical',
-    searchPlaceholder: 'Busca tu ciudad',
-});
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
+                    .entries(datos);
 
-new SlimSelect({
-    select: '#select-ext',
-    searchPlaceholder: 'Selecciona temperatura',
-});
+                selectCity
+                    .selectAll('option')
+                    .data(nest)
+                    .enter()
+                    .append('option')
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
 
-new SlimSelect({
-    select: '#select-month-max',
-    searchPlaceholder: 'Selecciona un mes',
-});
+                selectCity.on('change', () => {
+                    updateMes();
+                });
+            }
+        });
+    };
 
-new SlimSelect({
-    select: '#select-month-min',
-    searchPlaceholder: 'Selecciona un mes',
-});
+    menuCities();
 
-new SlimSelect({
-    select: '#select-cities-records-max',
-    searchPlaceholder: 'Selecciona una ciudad',
-});
+    // LOAD THE DATA
+    const loadData = (mes) => {
+        d3.csv(`csv/max/junio/${mes}-junio.csv`, (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const container = d3.select('.forno-container');
 
-new SlimSelect({
-    select: '#select-cities-records-min',
-    searchPlaceholder: 'Selecciona una ciudad',
-});
+                container
+                    .selectAll('.forno-element')
+                    .remove()
+                    .exit()
+                    .data(data)
+                    .enter()
+                    .append('section')
+                    .attr('class', 'forno-element')
+                    .html(
+                        (d) => `
+                              <span class="forno-day forno-text">${d.fecha}</span>
+                              <span class="forno-year forno-text">${d.yearprimera}</span>
+                            <span class="forno-record forno-text">${d.primero}ºC</span>`
+                    );
+            }
+        });
+    };
 
-new SlimSelect({
-    select: '#select-heat-wave',
-    searchPlaceholder: 'Selecciona una ciudad',
-});
+    const selected = 'Albacete';
 
-maxvul();
-tropicalTotal();
-frostyTotal();
-minvul();
-tempExt();
+    loadData(selected);
+};*/
 
 const average = () => {
     const margin = { top: 24, right: 24, bottom: 24, left: 40 };
@@ -2806,78 +2820,62 @@ const average = () => {
     loadData();
 };
 
+tropicalCities();
+scatterInput();
+vulturno();
+directionalDot();
+directionalDot(maxmin[0]);
+directionalDot(maxmin[1]);
+
+maxvul();
+tropicalTotal();
+frostyTotal();
+minvul();
+tempExt();
 average();
+/*heatWave();*/
 
-const heatWave = () => {
-    const selectCity = d3.select('#select-heat-wave');
+new SlimSelect({
+    select: '#select-city',
+    searchPlaceholder: 'Busca tu ciudad',
+});
 
-    const updateMes = () => {
-        const city = selectCity
-            .property('value')
-            .replace(/ /g, '_')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '');
-        loadData(city);
-    };
+new SlimSelect({
+    select: '#select-scatter-city',
+    searchPlaceholder: 'Busca tu ciudad',
+});
 
-    const menuCities = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                const datos = data;
+new SlimSelect({
+    select: '#select-city-tropical',
+    searchPlaceholder: 'Busca tu ciudad',
+});
 
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
+new SlimSelect({
+    select: '#select-ext',
+    searchPlaceholder: 'Selecciona temperatura',
+});
 
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
+new SlimSelect({
+    select: '#select-month-max',
+    searchPlaceholder: 'Selecciona un mes',
+});
 
-                selectCity.on('change', () => {
-                    updateMes();
-                });
-            }
-        });
-    };
+new SlimSelect({
+    select: '#select-month-min',
+    searchPlaceholder: 'Selecciona un mes',
+});
 
-    menuCities();
+new SlimSelect({
+    select: '#select-cities-records-max',
+    searchPlaceholder: 'Selecciona una ciudad',
+});
 
-    // LOAD THE DATA
-    const loadData = (mes) => {
-        d3.csv(`csv/max/junio/${mes}-junio.csv`, (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                const container = d3.select('.forno-container');
+new SlimSelect({
+    select: '#select-cities-records-min',
+    searchPlaceholder: 'Selecciona una ciudad',
+});
 
-                container
-                    .selectAll('.forno-element')
-                    .remove()
-                    .exit()
-                    .data(data)
-                    .enter()
-                    .append('section')
-                    .attr('class', 'forno-element')
-                    .html(
-                        (d) => `
-                              <span class="forno-day forno-text">${d.fecha}</span>
-                              <span class="forno-year forno-text">${d.yearprimera}</span>
-                            <span class="forno-record forno-text">${d.primero}ºC</span>`
-                    );
-            }
-        });
-    };
-
-    const selected = 'Albacete';
-
-    loadData(selected);
-};
-
-heatWave();
+new SlimSelect({
+    select: '#select-heat-wave',
+    searchPlaceholder: 'Selecciona una ciudad',
+});
