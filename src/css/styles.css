@@ -20,7 +20,7 @@ body {
 }
 
 .forno {
-    background-color: #cff330;
+    background-color: #DED7A7;
     padding: 2rem 0;
 }
 
@@ -33,7 +33,7 @@ body {
     grid-column-gap: 1rem;
     justify-items: stretch;
     align-items: stretch;
-    color: #890d16;
+    color: #AC1545;
 }
 
 .forno-element {

@@ -5,7 +5,7 @@ const colorMax = d3.scaleOrdinal([
     '#e16973',
     '#cc0011',
     '#a2000d',
-    '#b8000f',
+    '#b8000f'
 ]);
 const colorMin = d3.scaleOrdinal([
     '#004d84',
@@ -14,7 +14,7 @@ const colorMin = d3.scaleOrdinal([
     '#0077cc',
     '#4a9eda',
     '#7db9e5',
-    '#a5cfed',
+    '#a5cfed'
 ]);
 const colores = [colorMax, colorMin];
 const widthMobile = window.innerWidth > 0 ? window.innerWidth : screen.width;
@@ -280,7 +280,7 @@ const vulturno = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -300,14 +300,14 @@ const vulturno = () => {
             .scaleTime()
             .domain([
                 d3.min(datos, (d) => d.year),
-                d3.max(datos, (d) => d.year),
+                d3.max(datos, (d) => d.year)
             ]);
 
         const countY = d3
             .scaleLinear()
             .domain([
                 d3.min(datos, (d) => d.temp - 1),
-                d3.max(datos, (d) => d.temp + 1),
+                d3.max(datos, (d) => d.temp + 1)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -493,14 +493,14 @@ const vulturno = () => {
                 .scaleTime()
                 .domain([
                     d3.min(datos, (d) => d.year),
-                    d3.max(datos, (d) => d.year),
+                    d3.max(datos, (d) => d.year)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(datos, (d) => d.temp - 1),
-                    d3.max(datos, (d) => d.temp + 1),
+                    d3.max(datos, (d) => d.temp + 1)
                 ]);
 
             scales.count = { x: countX, y: countY };
@@ -591,7 +591,7 @@ const maxvul = () => {
         top: 0,
         right: 48,
         bottom: 24,
-        left: 24,
+        left: 24
     };
     let width = 0;
     let height = 0;
@@ -608,14 +608,14 @@ const maxvul = () => {
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.fecha),
-                d3.max(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha)
             ]);
 
         const countY = d3
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.total),
-                d3.max(dataz, (d) => d.total),
+                d3.max(dataz, (d) => d.total)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -665,9 +665,9 @@ const maxvul = () => {
                             title:
                                 'Entre 2009 y 2018 se establecen el 78% de los récords de máximas',
                             wrap: 230,
-                            align: 'middle',
-                        },
-                    },
+                            align: 'middle'
+                        }
+                    }
                 ].map((l) => {
                     this.subject = { radius: 4 };
                     return l;
@@ -679,11 +679,11 @@ const maxvul = () => {
                     .type(d3.annotationCalloutCircle)
                     .accessors({
                         x: (d) => scales.count.x(d.year),
-                        y: (d) => scales.count.y(d.total),
+                        y: (d) => scales.count.y(d.total)
                     })
                     .accessorsInverse({
                         year: (d) => scales.count.x.invert(d.x),
-                        total: (d) => scales.count.y.invert(d.y),
+                        total: (d) => scales.count.y.invert(d.y)
                     })
                     .on('subjectover', (annotation) => {
                         annotation.type.a
@@ -780,7 +780,7 @@ const minvul = () => {
         top: 0,
         right: 48,
         bottom: 24,
-        left: 24,
+        left: 24
     };
     let width = 0;
     let height = 0;
@@ -796,7 +796,7 @@ const minvul = () => {
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.fecha),
-                d3.max(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha)
             ]);
         scales.count = { x: countX };
     };
@@ -834,9 +834,9 @@ const minvul = () => {
                             title:
                                 'Desde 1986 no se ha batido ni un solo récord de temperatura mínima',
                             wrap: 230,
-                            align: 'middle',
-                        },
-                    },
+                            align: 'middle'
+                        }
+                    }
                 ].map((l) => {
                     this.subject = { radius: 4 };
                     return l;
@@ -848,11 +848,11 @@ const minvul = () => {
                     .type(d3.annotationCalloutCircle)
                     .accessors({
                         x: (d) => scales.count.x(d.year),
-                        y: (d) => scales.count.y(d.total),
+                        y: (d) => scales.count.y(d.total)
                     })
                     .accessorsInverse({
                         year: (d) => scales.count.x.invert(d.x),
-                        total: (d) => scales.count.y.invert(d.y),
+                        total: (d) => scales.count.y.invert(d.y)
                     })
                     .on('subjectover', (annotation) => {
                         annotation.type.a
@@ -962,7 +962,7 @@ const tropicalTotal = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -976,7 +976,7 @@ const tropicalTotal = () => {
             .scaleTime()
             .domain([
                 d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year)
             ]);
 
         const countY = d3
@@ -1112,7 +1112,7 @@ const frostyTotal = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -1126,7 +1126,7 @@ const frostyTotal = () => {
             .scaleTime()
             .domain([
                 d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year)
             ]);
 
         const countY = d3
@@ -1262,7 +1262,7 @@ const scatterInput = () => {
         top: 16,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -1285,14 +1285,14 @@ const scatterInput = () => {
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year)
             ]);
 
         const countY = d3
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.minima),
-                d3.max(dataz, (d) => d.minima),
+                d3.max(dataz, (d) => d.minima)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -1401,9 +1401,11 @@ const scatterInput = () => {
                     .style('opacity', 0);
             })
             .attr('cx', (d) => scales.count.x(d.year))
-            .attr('cy', (d) => scales.count.y(d.minima))
+            .attr('cy', (d, i) => i * (Math.random() * i))
+            .attr('fill-opacity', 1)
             .transition()
-            .duration(500)
+            .delay((d, i) => i * 10)
+            .duration(450)
             .ease(d3.easeLinear)
             .attr('cx', (d) => scales.count.x(d.year))
             .attr('cy', (d) => scales.count.y(d.minima))
@@ -1474,14 +1476,14 @@ const scatterInput = () => {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.year),
-                    d3.max(dataz, (d) => d.year),
+                    d3.max(dataz, (d) => d.year)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.maxima),
-                    d3.max(dataz, (d) => d.maxima),
+                    d3.max(dataz, (d) => d.maxima)
                 ]);
 
             const w = chart.node().offsetWidth;
@@ -1552,15 +1554,13 @@ const scatterInput = () => {
                 })
                 .attr('cx', (d) => scales.count.x(d.year))
                 .attr('cy', (d) => scales.count.y(d.minima))
+                .attr('fill-opacity', 1)
                 .transition()
-                .duration(500)
+                .delay((d, i) => i * 10)
+                .duration(450)
                 .ease(d3.easeLinear)
                 .attr('cx', (d) => scales.count.x(d.year))
                 .attr('cy', (d) => scales.count.y(d.maxima))
-                .attr('r', 0)
-                .transition()
-                .duration(100)
-                .ease(d3.easeLinear)
                 .attr('r', 6)
                 .style('fill', '#dc7176');
 
@@ -1626,14 +1626,14 @@ const scatterInput = () => {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.year),
-                    d3.max(dataz, (d) => d.year),
+                    d3.max(dataz, (d) => d.year)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.minima),
-                    d3.max(dataz, (d) => d.minima),
+                    d3.max(dataz, (d) => d.minima)
                 ]);
 
             scales.count = { x: countX, y: countY };
@@ -1692,7 +1692,7 @@ const tropicalCities = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 24,
+        left: 24
     };
     let width = 0;
     let height = 0;
@@ -1703,10 +1703,10 @@ const tropicalCities = () => {
 
     const setupScales = () => {
         const countX = d3
-            .scaleTime()
+            .scaleLinear()
             .domain([
                 d3.min(datos, (d) => d.fecha),
-                d3.max(datos, (d) => d.fecha),
+                d3.max(datos, (d) => d.fecha)
             ]);
 
         const countY = d3
@@ -1774,51 +1774,26 @@ const tropicalCities = () => {
 
         g.attr('transform', translate);
 
-        const area = d3
-            .area()
-            .x((d) => scales.count.x(d.year))
-            .y0(height)
-            .y1((d) => scales.count.y(d.total));
-
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-cities-tropical-container-bis');
 
-        const layer = container
-            .selectAll('.area-cities-tropical')
-            .data([datos]);
-
-        const layerLine = container
-            .selectAll('.line-cities-tropical')
-            .data([datos]);
+        const layer = container.selectAll('.bar-cities-tropical').data(datos);
 
         const newLayer = layer
             .enter()
-            .append('path')
-            .attr('class', 'area-cities-tropical');
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-cities-tropical');
+            .append('rect')
+            .attr('class', 'bar-cities-tropical');
 
         layer
             .merge(newLayer)
             .transition()
-            .duration(600)
+            .duration(500)
             .ease(d3.easeLinear)
-            .attr('d', area);
-
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
+            .attr('width', width / datos.length)
+            .attr('x', (d) => scales.count.x(d.year))
+            .attr('y', (d) => scales.count.y(d.total))
+            .attr('height', (d) => height - scales.count.y(d.total));
 
         drawAxes(g);
     }
@@ -1839,7 +1814,7 @@ const tropicalCities = () => {
                 .scaleTime()
                 .domain([
                     d3.min(datos, (d) => d.fecha),
-                    d3.max(datos, (d) => d.fecha),
+                    d3.max(datos, (d) => d.fecha)
                 ]);
 
             const countY = d3
@@ -1942,7 +1917,7 @@ const tempExt = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -1956,7 +1931,7 @@ const tempExt = () => {
             .scaleTime()
             .domain([
                 d3.min(datos, (d) => d.fecha),
-                d3.max(datos, (d) => d.fecha),
+                d3.max(datos, (d) => d.fecha)
             ]);
 
         const countY = d3
@@ -2085,7 +2060,7 @@ const tempExt = () => {
                 .scaleTime()
                 .domain([
                     d3.min(datos, (d) => d.fecha),
-                    d3.max(datos, (d) => d.fecha),
+                    d3.max(datos, (d) => d.fecha)
                 ]);
 
             const countY = d3
@@ -2182,7 +2157,7 @@ function directionalDot(maxmins) {
         top: 16,
         right: 16,
         bottom: 32,
-        left: 48,
+        left: 48
     };
     let width = 0;
     let height = 0;
@@ -2206,14 +2181,14 @@ function directionalDot(maxmins) {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.dia),
-                    d3.max(dataz, (d) => d.dia),
+                    d3.max(dataz, (d) => d.dia)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.segundo - 1),
-                    d3.max(dataz, (d) => d.primero + 1),
+                    d3.max(dataz, (d) => d.primero + 1)
                 ]);
             scales.count = { x: countX, y: countY };
         } else {
@@ -2221,14 +2196,14 @@ function directionalDot(maxmins) {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.dia),
-                    d3.max(dataz, (d) => d.dia),
+                    d3.max(dataz, (d) => d.dia)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.primero - 1),
-                    d3.max(dataz, (d) => d.segundo + 1),
+                    d3.max(dataz, (d) => d.segundo + 1)
                 ]);
             scales.count = { x: countX, y: countY };
         }
@@ -2457,14 +2432,14 @@ function directionalDot(maxmins) {
                         .scaleTime()
                         .domain([
                             d3.min(dataz, (d) => d.dia),
-                            d3.max(dataz, (d) => d.dia),
+                            d3.max(dataz, (d) => d.dia)
                         ]);
 
                     const countY = d3
                         .scaleLinear()
                         .domain([
                             d3.min(dataz, (d) => d.segundo - 1),
-                            d3.max(dataz, (d) => d.primero + 1),
+                            d3.max(dataz, (d) => d.primero + 1)
                         ]);
                     scales.count = { x: countX, y: countY };
                 } else {
@@ -2472,14 +2447,14 @@ function directionalDot(maxmins) {
                         .scaleTime()
                         .domain([
                             d3.min(dataz, (d) => d.dia),
-                            d3.max(dataz, (d) => d.dia),
+                            d3.max(dataz, (d) => d.dia)
                         ]);
 
                     const countY = d3
                         .scaleLinear()
                         .domain([
                             d3.min(dataz, (d) => d.primero - 1),
-                            d3.max(dataz, (d) => d.segundo + 1),
+                            d3.max(dataz, (d) => d.segundo + 1)
                         ]);
                     scales.count = { x: countX, y: countY };
                 }
@@ -2576,7 +2551,7 @@ function directionalDot(maxmins) {
     loadData();
 }
 
-/*const heatWave = () => {
+const heatWave = () => {
     const selectCity = d3.select('#select-heat-wave');
 
     const updateMes = () => {
@@ -2619,7 +2594,7 @@ function directionalDot(maxmins) {
 
     // LOAD THE DATA
     const loadData = (mes) => {
-        d3.csv(`csv/max/junio/${mes}-junio.csv`, (error, data) => {
+        d3.csv(`csv/max/julio/${mes}-julio.csv`, (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -2646,9 +2621,9 @@ function directionalDot(maxmins) {
     const selected = 'Albacete';
 
     loadData(selected);
-};*/
+};
 
-const average = () => {
+/*const average = () => {
     const margin = { top: 24, right: 24, bottom: 24, left: 40 };
     let width = 0;
     let height = 0;
@@ -2818,12 +2793,11 @@ const average = () => {
     window.addEventListener('resize', resize);
 
     loadData();
-};
+};*/
 
 tropicalCities();
 scatterInput();
 vulturno();
-directionalDot();
 directionalDot(maxmin[0]);
 directionalDot(maxmin[1]);
 
@@ -2832,50 +2806,50 @@ tropicalTotal();
 frostyTotal();
 minvul();
 tempExt();
-average();
-/*heatWave();*/
+/*average();*/
+heatWave();
 
 new SlimSelect({
     select: '#select-city',
-    searchPlaceholder: 'Busca tu ciudad',
+    searchPlaceholder: 'Busca tu ciudad'
 });
 
 new SlimSelect({
     select: '#select-scatter-city',
-    searchPlaceholder: 'Busca tu ciudad',
+    searchPlaceholder: 'Busca tu ciudad'
 });
 
 new SlimSelect({
     select: '#select-city-tropical',
-    searchPlaceholder: 'Busca tu ciudad',
+    searchPlaceholder: 'Busca tu ciudad'
 });
 
 new SlimSelect({
     select: '#select-ext',
-    searchPlaceholder: 'Selecciona temperatura',
+    searchPlaceholder: 'Selecciona temperatura'
 });
 
 new SlimSelect({
     select: '#select-month-max',
-    searchPlaceholder: 'Selecciona un mes',
+    searchPlaceholder: 'Selecciona un mes'
 });
 
 new SlimSelect({
     select: '#select-month-min',
-    searchPlaceholder: 'Selecciona un mes',
+    searchPlaceholder: 'Selecciona un mes'
 });
 
 new SlimSelect({
     select: '#select-cities-records-max',
-    searchPlaceholder: 'Selecciona una ciudad',
+    searchPlaceholder: 'Selecciona una ciudad'
 });
 
 new SlimSelect({
     select: '#select-cities-records-min',
-    searchPlaceholder: 'Selecciona una ciudad',
+    searchPlaceholder: 'Selecciona una ciudad'
 });
 
 new SlimSelect({
     select: '#select-heat-wave',
-    searchPlaceholder: 'Selecciona una ciudad',
+    searchPlaceholder: 'Selecciona una ciudad'
 });

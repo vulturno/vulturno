@@ -378,7 +378,8 @@
     border: 1px solid #3B5795;
 }
 
-.area-tropical {
+.area-tropical,
+.bar-cities-tropical {
     fill: #dd435c;
 }
 
@@ -394,15 +395,6 @@
 .line-tropical {
     stroke: #670509;
     fill: none;
-}
-
-.area-cities-tropical {
-    fill: #E15171;
-}
-
-.line-cities-tropical {
-    fill: none;
-    stroke: #7b2647;
 }
 
 .chart-vulturno-container {
@@ -626,6 +618,7 @@
 
     .scatter-inputs-filter {
         padding: 1rem;
+        margin-bottom: 2rem;
     }
 
     .chart-vulturno {
