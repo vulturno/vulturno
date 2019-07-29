@@ -959,7 +959,7 @@ const minvul = () => {
 
 const tropicalTotal = () => {
     const margin = {
-        top: 0,
+        top: 16,
         right: 16,
         bottom: 24,
         left: 32
@@ -996,7 +996,7 @@ const tropicalTotal = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]);
+        scales.count.x.range([0, width]).paddingInner(-0.1);
         scales.count.y.range([height, 0]);
     };
 
@@ -1058,7 +1058,7 @@ const tropicalTotal = () => {
                 const tooltipWidth = 210;
                 const positionleft = `${d3.event.pageX}px`;
                 const positionright = `${d3.event.pageX - tooltipWidth}px`;
-                tooltip.transition()
+                tooltip.transition();
                 tooltip
                     .style('opacity', 1)
                     .html(
@@ -1087,7 +1087,6 @@ const tropicalTotal = () => {
             .attr('height', (d) => height - scales.count.y(d.total));
 
         drawAxes(g);
-
 
         drawAxes(g);
     };
@@ -1132,7 +1131,6 @@ const frostyTotal = () => {
     const svg = chart.select('svg');
     const scales = {};
     let dataz;
-
 
     const setupScales = () => {
         const countX = d3
@@ -1203,7 +1201,6 @@ const frostyTotal = () => {
             .x((d) => scales.count.x(d.year))
             .y0(height)
             .y1((d) => scales.count.y(d.total));
-
 
         updateScales(width, height);
 
@@ -1685,7 +1682,7 @@ const scatterInput = () => {
 
 const tropicalCities = () => {
     const margin = {
-        top: 0,
+        top: 16,
         right: 16,
         bottom: 24,
         left: 24
@@ -1792,7 +1789,7 @@ const tropicalCities = () => {
                 const tooltipWidth = 210;
                 const positionleft = `${d3.event.pageX}px`;
                 const positionright = `${d3.event.pageX - tooltipWidth}px`;
-                tooltip.transition()
+                tooltip.transition();
                 tooltip
                     .style('opacity', 1)
                     .html(
@@ -1925,7 +1922,7 @@ const tropicalCities = () => {
 
 const tempExt = () => {
     const margin = {
-        top: 0,
+        top: 16,
         right: 16,
         bottom: 24,
         left: 32
@@ -1936,14 +1933,13 @@ const tempExt = () => {
     const svg = chart.select('svg');
     const scales = {};
     let datos;
+    const tooltip = chart
+        .append('div')
+        .attr('class', 'tooltip tooltip-tropical')
+        .style('opacity', 0);
 
     const setupScales = () => {
-        const countX = d3
-            .scaleTime()
-            .domain([
-                d3.min(datos, (d) => d.fecha),
-                d3.max(datos, (d) => d.fecha)
-            ]);
+        const countX = d3.scaleBand().domain(datos.map((d) => d.fecha));
 
         const countY = d3
             .scaleLinear()
@@ -1963,7 +1959,7 @@ const tempExt = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]);
+        scales.count.x.range([0, width]).paddingInner(-0.1);
         scales.count.y.range([height, 0]);
     };
 
@@ -1972,7 +1968,12 @@ const tempExt = () => {
             .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .ticks(13)
+            .tickValues(
+                scales.count.x.domain().filter(function(d, i) {
+                    return !(i % 5);
+                })
+            );
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -2010,29 +2011,55 @@ const tempExt = () => {
 
         g.attr('transform', translate);
 
-        const area = d3
-            .area()
-            .x((d) => scales.count.x(d.year))
-            .y0(height)
-            .y1((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-temperature-ext-container-bis');
 
-        const layer = container.selectAll('.area-ext').data([datos]);
+        const layer = container.selectAll('.rect-ext').data(datos);
 
         const newLayer = layer
             .enter()
-            .append('path')
-            .attr('class', 'area-ext');
+            .append('rect')
+            .attr('class', 'rect-ext');
 
         layer
             .merge(newLayer)
+            .on('mouseover', function(d) {
+                const stationResize = d3
+                    .select('#select-ext')
+                    .property('value');
+                const positionX = scales.count.x(d.fecha);
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
+                tooltip.transition();
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `
+                                <p class="tooltip-year">En <strong>${d.fecha}</strong> hubo <strong>${d.tropical}</strong> días en los que la máxima fue superior a <strong>${stationResize}ºC</strong>.</p>
+                                `
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', function(d) {
+                tooltip
+                    .transition()
+                    .duration(300)
+                    .style('opacity', 0);
+            })
             .transition()
-            .duration(600)
+            .duration(500)
             .ease(d3.easeLinear)
-            .attr('d', area);
+            .attr('width', scales.count.x.bandwidth())
+            .attr('x', (d) => scales.count.x(d.fecha))
+            .attr('y', (d) => scales.count.y(d.tropical))
+            .attr('height', (d) => height - scales.count.y(d.tropical));
 
         drawAxes(g);
     }
@@ -2046,21 +2073,7 @@ const tempExt = () => {
                 d.tropical = +d.total;
             });
 
-            scales.count.x.range([0, width]);
-            scales.count.y.range([height, 0]);
-
-            const countX = d3
-                .scaleTime()
-                .domain([
-                    d3.min(datos, (d) => d.fecha),
-                    d3.max(datos, (d) => d.fecha)
-                ]);
-
-            const countY = d3
-                .scaleLinear()
-                .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
-
-            scales.count = { x: countX, y: countY };
+            setupScales();
             updateChart(datos);
         });
     }
@@ -2322,9 +2335,6 @@ function directionalDot(maxmins) {
             });
 
         const city = selectCity.property('value');
-        console.log(city);
-
-        console.log('La ciudad es ' + city)
 
         layer
             .merge(newLayer)

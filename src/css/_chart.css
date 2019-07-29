@@ -400,16 +400,6 @@
     fill: #257d98;
 }
 
-.line-frosty {
-    stroke: #2e4e74;
-    fill: none;
-}
-
-.line-tropical {
-    stroke: #670509;
-    fill: none;
-}
-
 .chart-vulturno-container {
     .area {
         fill: var(--orange);
@@ -472,20 +462,9 @@
     }
 }
 
-.lines-tropical {
-    fill: none;
-    stroke: #670509;
-    stroke-width: 2px;
-}
-
-.area-ext {
-    fill: rgba(219, 69, 94, .9);
+.rect-ext {
+    fill: #b8000f;
     stroke: none;
-}
-
-.line-ext {
-    fill: none;
-    stroke: rgba(20, 3, 32, .5);
 }
 
 #noches-tropicales-ciudad {
