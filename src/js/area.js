@@ -970,14 +970,13 @@ const tropicalTotal = () => {
     const svg = chart.select('svg');
     const scales = {};
     let dataz;
+    const tooltip = chart
+        .append('div')
+        .attr('class', 'tooltip tooltip-tropical')
+        .style('opacity', 0);
 
     const setupScales = () => {
-        const countX = d3
-            .scaleTime()
-            .domain([
-                d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year)
-            ]);
+        const countX = d3.scaleBand().domain(dataz.map((d) => d.year));
 
         const countY = d3
             .scaleLinear()
@@ -1005,7 +1004,12 @@ const tropicalTotal = () => {
         const axisX = d3
             .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .ticks(13)
+            .tickValues(
+                scales.count.x.domain().filter(function(d, i) {
+                    return !(i % 5);
+                })
+            );
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -1035,47 +1039,55 @@ const tropicalTotal = () => {
 
         g.attr('transform', translate);
 
-        const area = d3
-            .area()
-            .x((d) => scales.count.x(d.year))
-            .y0(height)
-            .y1((d) => scales.count.y(d.total));
-
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-tropical-container-bis');
 
-        const layer = container.selectAll('.area-tropical').data([dataz]);
-
-        const layerLine = container.selectAll('.line-tropical').data([dataz]);
+        const layer = container.selectAll('.bar-tropical').data(dataz);
 
         const newLayer = layer
             .enter()
-            .append('path')
-            .attr('class', 'area-tropical');
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-tropical');
+            .append('rect')
+            .attr('class', 'bar-tropical');
 
         layer
             .merge(newLayer)
+            .on('mouseover', function(d) {
+                const positionX = scales.count.x(d.year);
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
+                tooltip.transition()
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `
+                        <p class="tooltip-year">En <strong>${d.year}</strong> hubo un total de <strong>${d.total}</strong> noches tropicales.</p>
+                        `
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', function(d) {
+                tooltip
+                    .transition()
+                    .duration(300)
+                    .style('opacity', 0);
+            })
             .transition()
-            .duration(600)
+            .duration(500)
             .ease(d3.easeLinear)
-            .attr('d', area);
+            .attr('width', scales.count.x.bandwidth())
+            .attr('x', (d) => scales.count.x(d.year))
+            .attr('y', (d) => scales.count.y(d.total))
+            .attr('height', (d) => height - scales.count.y(d.total));
 
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
+        drawAxes(g);
+
 
         drawAxes(g);
     };
@@ -1092,7 +1104,7 @@ const tropicalTotal = () => {
             } else {
                 dataz = data;
                 dataz.forEach((d) => {
-                    d.year = d.year;
+                    d.year = +d.year;
                     d.total = +d.total;
                 });
                 setupElements();
@@ -1120,6 +1132,7 @@ const frostyTotal = () => {
     const svg = chart.select('svg');
     const scales = {};
     let dataz;
+
 
     const setupScales = () => {
         const countX = d3
@@ -1191,23 +1204,12 @@ const frostyTotal = () => {
             .y0(height)
             .y1((d) => scales.count.y(d.total));
 
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
 
         updateScales(width, height);
 
         const container = chart.select('.chart-frosty-container-bis');
 
         const layer = container.selectAll('.area-frosty').data([dataz]);
-
-        const layerLine = container.selectAll('.line-frosty').data([dataz]);
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-frosty');
 
         const newLayer = layer
             .enter()
@@ -1220,12 +1222,6 @@ const frostyTotal = () => {
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
-
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
 
         drawAxes(g);
     };
@@ -1700,14 +1696,13 @@ const tropicalCities = () => {
     const svg = chart.select('svg');
     const scales = {};
     let datos;
+    const tooltip = chart
+        .append('div')
+        .attr('class', 'tooltip tooltip-tropical')
+        .style('opacity', 0);
 
     const setupScales = () => {
-        const countX = d3
-            .scaleLinear()
-            .domain([
-                d3.min(datos, (d) => d.fecha),
-                d3.max(datos, (d) => d.fecha)
-            ]);
+        const countX = d3.scaleBand().domain(datos.map((d) => d.fecha));
 
         const countY = d3
             .scaleLinear()
@@ -1727,7 +1722,7 @@ const tropicalCities = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]);
+        scales.count.x.range([0, width]).paddingInner(-0.1);
         scales.count.y.range([height, 0]);
     };
 
@@ -1736,7 +1731,11 @@ const tropicalCities = () => {
             .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .tickValues(
+                scales.count.x.domain().filter(function(d, i) {
+                    return !(i % 5);
+                })
+            );
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -1787,10 +1786,36 @@ const tropicalCities = () => {
 
         layer
             .merge(newLayer)
+            .on('mouseover', function(d) {
+                const positionX = scales.count.x(d.fecha);
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
+                tooltip.transition()
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `
+                        <p class="tooltip-year">En <strong>${d.fecha}</strong> hubo un total de <strong>${d.tropical}</strong> noches tropicales.</p>
+                        `
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', function(d) {
+                tooltip
+                    .transition()
+                    .duration(300)
+                    .style('opacity', 0);
+            })
             .transition()
             .duration(500)
             .ease(d3.easeLinear)
-            .attr('width', width / datos.length)
+            .attr('width', scales.count.x.bandwidth())
             .attr('x', (d) => scales.count.x(d.year))
             .attr('y', (d) => scales.count.y(d.total))
             .attr('height', (d) => height - scales.count.y(d.total));
@@ -1798,8 +1823,8 @@ const tropicalCities = () => {
         drawAxes(g);
     }
 
-    function update(mes) {
-        d3.csv(`csv/tropicales/${mes}-total-tropicales.csv`, (error, data) => {
+    function update(city) {
+        d3.csv(`csv/tropicales/${city}-total-tropicales.csv`, (error, data) => {
             datos = data;
 
             datos.forEach((d) => {
@@ -1807,21 +1832,7 @@ const tropicalCities = () => {
                 d.tropical = +d.total;
             });
 
-            scales.count.x.range([0, width]);
-            scales.count.y.range([height, 0]);
-
-            const countX = d3
-                .scaleTime()
-                .domain([
-                    d3.min(datos, (d) => d.fecha),
-                    d3.max(datos, (d) => d.fecha)
-                ]);
-
-            const countY = d3
-                .scaleLinear()
-                .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
-
-            scales.count = { x: countX, y: countY };
+            setupScales();
             updateChart(datos);
         });
     }
@@ -1850,7 +1861,7 @@ const tropicalCities = () => {
         );
     };
 
-    const menuMes = () => {
+    const menuCity = () => {
         d3.csv('csv/stations.csv', (error, data) => {
             if (error) {
                 console.log(error);
@@ -1873,13 +1884,13 @@ const tropicalCities = () => {
                     .text((d) => d.key);
 
                 selectCity.on('change', function() {
-                    const mes = d3
+                    const city = d3
                         .select(this)
                         .property('value')
                         .replace(/ /g, '_')
                         .normalize('NFD')
                         .replace(/[\u0300-\u036f]/g, '');
-                    update(mes);
+                    update(city);
                 });
             }
         });
@@ -1901,15 +1912,15 @@ const tropicalCities = () => {
                     setupElements();
                     setupScales();
                     updateChart(datos);
-                    const mes = 'Albacete';
-                    update(mes);
+                    const city = 'Albacete';
+                    update(city);
                 }
             }
         );
     };
     window.addEventListener('resize', resize);
     loadData();
-    menuMes();
+    menuCity();
 };
 
 const tempExt = () => {
@@ -2005,28 +2016,16 @@ const tempExt = () => {
             .y0(height)
             .y1((d) => scales.count.y(d.total));
 
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-temperature-ext-container-bis');
 
         const layer = container.selectAll('.area-ext').data([datos]);
 
-        const layerLine = container.selectAll('.line-ext').data([datos]);
-
         const newLayer = layer
             .enter()
             .append('path')
             .attr('class', 'area-ext');
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-ext');
 
         layer
             .merge(newLayer)
@@ -2034,12 +2033,6 @@ const tempExt = () => {
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
-
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
 
         drawAxes(g);
     }
@@ -2329,6 +2322,9 @@ function directionalDot(maxmins) {
             });
 
         const city = selectCity.property('value');
+        console.log(city);
+
+        console.log('La ciudad es ' + city)
 
         layer
             .merge(newLayer)
@@ -2551,7 +2547,7 @@ function directionalDot(maxmins) {
     loadData();
 }
 
-const heatWave = () => {
+/*const heatWave = () => {
     const selectCity = d3.select('#select-heat-wave');
 
     const updateMes = () => {
@@ -2621,7 +2617,7 @@ const heatWave = () => {
     const selected = 'Albacete';
 
     loadData(selected);
-};
+};*/
 
 /*const average = () => {
     const margin = { top: 24, right: 24, bottom: 24, left: 40 };
@@ -2807,7 +2803,7 @@ frostyTotal();
 minvul();
 tempExt();
 /*average();*/
-heatWave();
+/*heatWave();*/
 
 new SlimSelect({
     select: '#select-city',
@@ -2849,7 +2845,8 @@ new SlimSelect({
     searchPlaceholder: 'Selecciona una ciudad'
 });
 
-new SlimSelect({
+/*new SlimSelect({
     select: '#select-heat-wave',
     searchPlaceholder: 'Selecciona una ciudad'
 });
+*/

@@ -220,6 +220,19 @@
             font-weight: bold;
         }
     }
+    strong {
+        font-weight: bold;
+
+    }
+    &.tooltip-tropical {
+        background-color: #060241;
+        color: var(--white);
+    }
+    .tooltip-year {
+        margin: 0;
+        font-family: var(--roboto);
+        font-size: 1rem;
+    }
 }
 
 .tooltip-decade,
@@ -378,7 +391,7 @@
     border: 1px solid #3B5795;
 }
 
-.area-tropical,
+.bar-tropical,
 .bar-cities-tropical {
     fill: #dd435c;
 }
