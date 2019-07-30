@@ -15,18 +15,17 @@ function menu() {
     document.querySelector('.burger').addEventListener('click', classToggle);
     document.querySelector('.overlay').addEventListener('click', classToggle);
 
-    for(i=0; i<elementBtn.length; i++){
-        elementBtn[i].addEventListener("click", function(){
+    for (i = 0; i < elementBtn.length; i++) {
+        elementBtn[i].addEventListener('click', function() {
             removeClass();
-            console.log('click')
+            console.log('click');
         });
     }
 
     function removeClass() {
-        overlay.classList.remove("show");
-        navigation.classList.remove("show");
-        burger.classList.remove("clicked");
-
+        overlay.classList.remove('show');
+        navigation.classList.remove('show');
+        burger.classList.remove('clicked');
     }
 }
 
@@ -34,14 +33,14 @@ menu();
 
 function quotes() {
     const list = [
-    '<span class="notas-text">La Central Térmica de <strong>AS Pontes</strong> propiedad de <strong>Endesa</strong> es el <strong>mayor emisor de CO2<strong> en España.',
-    '<span class="notas-text">La Central Térmica de <strong>Aboño</strong> propiedad de <strong>Endesa</strong> es el <strong>segundo mayor emisor de CO2<strong> en España.',
-    '<span class="notas-text">La Central Térmica de <strong>Litoral</strong> propiedad de <strong>Endesa</strong> es el <strong>tercer emisor de CO2<strong> en España.',
-    '<span class="notas-text">La Siderurgica de <strong>ArcelorMittal</strong> es el <strong>cuarto emisor de CO2<strong> en España.',
-    '<span class="notas-text">La Central Térmica de <strong>Teruel</strong> propiedad de <strong>Endesa</strong> es el <strong>quinto emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>AS Pontes</strong> propiedad de <strong>Endesa</strong> es el <strong>mayor emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>Aboño</strong> propiedad de <strong>Endesa</strong> es el <strong>segundo mayor emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>Litoral</strong> propiedad de <strong>Endesa</strong> es el <strong>tercer emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Siderurgica de <strong>ArcelorMittal</strong> es el <strong>cuarto emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>Teruel</strong> propiedad de <strong>Endesa</strong> es el <strong>quinto emisor de CO2<strong> en España.'
     ];
 
-    const randomQuote = Math.floor(Math.random() * (list.length));
+    const randomQuote = Math.floor(Math.random() * list.length);
     document.getElementById('notas').innerHTML = list[randomQuote];
 }
 
@@ -2142,7 +2141,6 @@ const tempExt = () => {
             .replace(/ñ/g, 'n');
 
         d3.csv(`csv/total-temp-${stationResize}.csv`, (error, data) => {
-
             datos = data;
             datos.forEach((d) => {
                 d.fecha = +d.year;
