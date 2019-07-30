@@ -1,3 +1,52 @@
+function menu() {
+    var overlay = document.querySelector('.overlay');
+    var navigation = document.querySelector('.navegacion');
+    var body = document.querySelector('body');
+    var elementBtn = document.querySelectorAll('.navegacion-btn');
+    var burger = document.querySelector('.burger');
+
+    function classToggle() {
+        burger.classList.toggle('clicked');
+        overlay.classList.toggle('show');
+        navigation.classList.toggle('show');
+        body.classList.toggle('overflow');
+    }
+
+    document.querySelector('.burger').addEventListener('click', classToggle);
+    document.querySelector('.overlay').addEventListener('click', classToggle);
+
+    for(i=0; i<elementBtn.length; i++){
+        elementBtn[i].addEventListener("click", function(){
+            removeClass();
+            console.log('click')
+        });
+    }
+
+    function removeClass() {
+        overlay.classList.remove("show");
+        navigation.classList.remove("show");
+        burger.classList.remove("clicked");
+
+    }
+}
+
+menu();
+
+function quotes() {
+    const list = [
+    '<span class="notas-text">La Central Térmica de <strong>AS Pontes</strong> propiedad de <strong>Endesa</strong> es el <strong>mayor emisor de CO2<strong> en España.',
+    '<span class="notas-text">La Central Térmica de <strong>Aboño</strong> propiedad de <strong>Endesa</strong> es el <strong>segundo mayor emisor de CO2<strong> en España.',
+    '<span class="notas-text">La Central Térmica de <strong>Litoral</strong> propiedad de <strong>Endesa</strong> es el <strong>tercer emisor de CO2<strong> en España.',
+    '<span class="notas-text">La Siderurgica de <strong>ArcelorMittal</strong> es el <strong>cuarto emisor de CO2<strong> en España.',
+    '<span class="notas-text">La Central Térmica de <strong>Teruel</strong> propiedad de <strong>Endesa</strong> es el <strong>quinto emisor de CO2<strong> en España.',
+    ];
+
+    const randomQuote = Math.floor(Math.random() * (list.length));
+    document.getElementById('notas').innerHTML = list[randomQuote];
+}
+
+quotes();
+
 const colorMax = d3.scaleOrdinal([
     '#f6d2d5',
     '#f0b7bc',
@@ -1402,7 +1451,6 @@ const scatterInput = () => {
             .ease(d3.easeLinear)
             .attr('cx', (d) => scales.count.x(d.year))
             .attr('cy', (d) => scales.count.y(d.minima))
-            .attr('r', 6)
             .style('fill', '#257d98');
 
         drawAxes(g);
@@ -1757,7 +1805,7 @@ const tropicalCities = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 544;
+        const h = 450;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -2094,7 +2142,13 @@ const tempExt = () => {
             .replace(/ñ/g, 'n');
 
         d3.csv(`csv/total-temp-${stationResize}.csv`, (error, data) => {
+
             datos = data;
+            datos.forEach((d) => {
+                d.fecha = +d.year;
+                d.tropical = +d.total;
+            });
+
             updateChart(datos);
         });
     };

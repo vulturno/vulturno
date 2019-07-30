@@ -5,7 +5,7 @@
 }
 
 .temperature-container-full {
-    max-width: 65rem;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -90,6 +90,10 @@
     padding: 2rem 0;
 }
 
+.scatter-inputs-circles {
+    r: 4px;
+}
+
 @media only screen and (min-width: 48rem) {
 
     .temperature-max-number {
@@ -109,6 +113,15 @@
                 font-family: var(--roboto);
             }
         }
+    }
+
+    .temperature-container-full {
+        width: 75rem;
+        margin: 0 auto;
+    }
+
+    .scatter-inputs-circles {
+        r: 6px;
     }
 
 }

@@ -2,6 +2,27 @@
     background-color: rgba(253, 230, 167, .15);
 }
 
+.notas {
+    padding: 4rem 0;
+    background-image: url('../img/notas.jpg');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    height: 50vh;
+    background-position-y: 60%;
+
+}
+
+.notas-text {
+    font-size: 1.25rem;
+    font-family: var(--roboto);
+    color: var(--black);
+    max-width: 80%;
+    display: inline-block;
+    background-color: var(--white);
+    padding: 1rem;
+}
+
 .chart-container,
 .metodology-container,
 .data-container {
@@ -581,6 +602,12 @@
     .tooltip-record {
         top: 16px;
         left: 50px;
+    }
+
+    .notas-text {
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        max-width: 35rem;
     }
 
 }
