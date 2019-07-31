@@ -46,6 +46,95 @@ function quotes() {
 
 quotes();
 
+function quotesTemp() {
+    const list = [
+    '<span class="notas-text-temp">Temperatura más alta registrada en Zaragoza.</span><span class="notas-text-number">44.5ºC</span><span class="notas-text-date">07/07/2015</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Albacete.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">17/07/1978</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Alicante.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">04/07/1994</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Almería.</span><span class="notas-text-number">41.2ºC</span><span class="notas-text-date">30/07/1981</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Avila.</span><span class="notas-text-number">37.6ºC</span><span class="notas-text-date">24/07/1995</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Badajoz.</span><span class="notas-text-number">45.4ºC</span><span class="notas-text-date">13/07/2017</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Barcelona.</span><span class="notas-text-number">37.4ºC</span><span class="notas-text-date">28/08/2010</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Bilbao.</span><span class="notas-text-number">41.9ºC</span><span class="notas-text-date">04/08/2003</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Burgos.</span><span class="notas-text-number">38.8ºC</span><span class="notas-text-date">04/08/2003</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Caceres.</span><span class="notas-text-number">43.2ºC</span><span class="notas-text-date">13/07/2017</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Castellón.</span><span class="notas-text-number">40.6ºC</span><span class="notas-text-date">23/07/2009</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Ciudad Real.</span><span class="notas-text-number">43.7ºC</span><span class="notas-text-date">13/07/2009</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Cordoba.</span><span class="notas-text-number">46.9ºC</span><span class="notas-text-date">13/07/2009</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en A Coruña.</span><span class="notas-text-number">39.6ºC</span><span class="notas-text-date">28/08/1961</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Donostia.</span><span class="notas-text-number">38.6ºC</span><span class="notas-text-date">04/08/2003</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Girona.</span><span class="notas-text-number">43ºC</span><span class="notas-text-date">28/06/2019</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Gran Canaria.</span><span class="notas-text-number">44.2ºC</span><span class="notas-text-date">13/07/1952</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Granada.</span><span class="notas-text-number">43.5ºC</span><span class="notas-text-date">13/07/2017</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Huelva.</span><span class="notas-text-number">43.8ºC</span><span class="notas-text-date">25/07/2004</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Huesca.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">07/07/1982</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Jerez.</span><span class="notas-text-number">45.1ºC</span><span class="notas-text-date">07/08/2003</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en León.</span><span class="notas-text-number">38.2ºC</span><span class="notas-text-date">13/08/1987</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Lleida.</span><span class="notas-text-number">43.4ºC</span><span class="notas-text-date">29/06/2019</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Logroño.</span><span class="notas-text-number">42.8ºC</span><span class="notas-text-date">07/07/1982</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Madrid.</span><span class="notas-text-number">40.7ºC</span><span class="notas-text-date">28/06/2019</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Málaga.</span><span class="notas-text-number">44.2ºC</span><span class="notas-text-date">18/07/2019</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Mallorca.</span><span class="notas-text-number">41.4ºC</span><span class="notas-text-date">25/06/2001</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Melilla.</span><span class="notas-text-number">41.8ºC</span><span class="notas-text-date">06/07/1994</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Murcia.</span><span class="notas-text-number">40.5ºC</span><span class="notas-text-date">12/07/1961</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Ourense.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">20/07/1990</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Oviedo.</span><span class="notas-text-number">37ºC</span><span class="notas-text-date">18/07/2016</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Palencia.</span><span class="notas-text-number">40ºC</span><span class="notas-text-date">28/06/2019</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Pamplona.</span><span class="notas-text-number">40ºC</span><span class="notas-text-date">18/08/2012</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Pontevedra.</span><span class="notas-text-number">40ºC</span><span class="notas-text-date">14/06/2012</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Reus.</span><span class="notas-text-number">39.8ºC</span><span class="notas-text-date">04/08/2012</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Salamanca.</span><span class="notas-text-number">41ºC</span><span class="notas-text-date">10/08/2012</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Santander.</span><span class="notas-text-number">37.6ºC</span><span class="notas-text-date">30/06/1968</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Santiago.</span><span class="notas-text-number">39.4ºC</span><span class="notas-text-date">20/07/1990</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Segovia.</span><span class="notas-text-number">39.2ºC</span><span class="notas-text-date">15/07/1967</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Sevilla.</span><span class="notas-text-number">46.6ºC</span><span class="notas-text-date">23/07/1995</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Soria.</span><span class="notas-text-number">38ºC</span><span class="notas-text-date">28/07/1951</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Tenerife.</span><span class="notas-text-number">41.4ºC</span><span class="notas-text-date">31/07/2009</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Toledo.</span><span class="notas-text-number">43.1ºC</span><span class="notas-text-date">10/08/2012</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Valencia.</span><span class="notas-text-number">43ºC</span><span class="notas-text-date">27/08/2010</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Valladolid.</span><span class="notas-text-number">39.4ºC</span><span class="notas-text-date">24/07/1995</span>',
+    '<span class="notas-text-temp">Temperatura más alta registrada en Vitoria.</span><span class="notas-text-number">40.8ºC</span><span class="notas-text-date">10/08/2012</span>',
+    ]
+
+    const randomQuote = Math.floor(Math.random() * list.length);
+    document.getElementById('notas-temp').innerHTML = list[randomQuote];
+}
+quotesTemp();
+
+const reloadQuotes = document.getElementById("btn-notas");
+
+reloadQuotes.addEventListener("click", quotesTemp);
+
+const selectVulturno = document.getElementById("select-city");
+const selectScatter = document.getElementById("select-scatter-city");
+const selectTropical = document.getElementById("select-city-tropical");
+
+function menuSelect(selector) {
+    d3.csv('csv/stations.csv', (error, data) => {
+        if (error) {
+            console.log(error);
+        } else {
+            datos = data;
+
+            const nest = d3
+                .nest()
+                .key((d) => d.Name)
+                .entries(datos);
+
+            const selectCity = d3.select(selector);
+
+            selectCity
+                .selectAll('option')
+                .data(nest)
+                .enter()
+                .append('option')
+                .attr('value', (d) => d.key)
+                .text((d) => d.key);
+        }
+    });
+};
+
+
 const colorMax = d3.scaleOrdinal([
     '#f6d2d5',
     '#f0b7bc',
@@ -577,40 +666,6 @@ const vulturno = () => {
         });
     };
 
-    const menuMes = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
-
-                const selectCity = d3.select('#select-city');
-
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
-
-                selectCity.on('change', function() {
-                    const mes = d3
-                        .select(this)
-                        .property('value')
-                        .replace(/ /g, '_')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '');
-                    update(mes);
-                });
-            }
-        });
-    };
 
     const loadData = () => {
         d3.csv('csv/Albacete.csv', (data) => {
@@ -630,7 +685,17 @@ const vulturno = () => {
     window.addEventListener('resize', resize);
 
     loadData();
-    menuMes();
+    menuSelect(selectVulturno);
+    const selectCity = d3.select('#select-city');
+    selectCity.on('change', function() {
+        const mes = d3
+            .select(this)
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        update(mes);
+    });
 };
 
 const maxvul = () => {
@@ -1455,33 +1520,6 @@ const scatterInput = () => {
         drawAxes(g);
     };
 
-    const menuCiudad = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
-
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
-
-                selectCity.on('change', () => {
-                    update();
-                });
-            }
-        });
-    };
-
     const updateMax = () => {
         let valueDateDay = d3.select('#updateButtonDay').property('value');
         let valueDateMonth = d3.select('#updateButtonMonth').property('value');
@@ -1724,7 +1762,16 @@ const scatterInput = () => {
     window.addEventListener('resize', resize);
 
     loadData();
-    menuCiudad();
+    menuSelect(selectScatter);
+    selectCity.on('change', function() {
+        const mes = d3
+            .select(this)
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        update(mes);
+    });
 };
 
 const tropicalCities = () => {
@@ -1804,7 +1851,7 @@ const tropicalCities = () => {
 
     function updateChart(data) {
         const w = chart.node().offsetWidth;
-        const h = 450;
+        const h = 544;
 
         width = w - margin.left - margin.right;
         height = h - margin.top - margin.bottom;
@@ -1905,41 +1952,6 @@ const tropicalCities = () => {
         );
     };
 
-    const menuCity = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
-
-                const selectCity = d3.select('#select-city-tropical');
-
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
-
-                selectCity.on('change', function() {
-                    const city = d3
-                        .select(this)
-                        .property('value')
-                        .replace(/ /g, '_')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '');
-                    update(city);
-                });
-            }
-        });
-    };
-
     // LOAD THE DATA
     const loadData = () => {
         d3.csv(
@@ -1964,7 +1976,17 @@ const tropicalCities = () => {
     };
     window.addEventListener('resize', resize);
     loadData();
-    menuCity();
+    menuSelect(selectTropical);
+    const selectCity = d3.select('#select-city-tropical');
+    selectCity.on('change', function() {
+        const mes = d3
+            .select(this)
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        update(mes);
+    });
 };
 
 const tempExt = () => {

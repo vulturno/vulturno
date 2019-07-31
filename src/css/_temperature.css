@@ -94,7 +94,35 @@
     r: 4px;
 }
 
-@media only screen and (min-width: 48rem) {
+.notes-temp {
+    background-color: #F4E467;
+    padding: 3rem 0;
+}
+
+.notas-text-number {
+    background-color: var(--black);
+    font-size: 6rem;
+    font-family: var(--roboto);
+    color: #F4E467;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 1rem;
+}
+
+.notas-text-date {
+    font-size: 3rem;
+    font-family: var(--roboto);
+    font-weight: bold;
+    display: block;
+}
+
+.notas-text-temp {
+    font-size: 1rem;
+    font-family: var(--roboto);
+    display: block;
+}
+
+@media only screen and (min-width: 48em) {
 
     .temperature-max-number {
         font-size: 10rem;
@@ -115,13 +143,15 @@
         }
     }
 
-    .temperature-container-full {
-        width: 75rem;
-        margin: 0 auto;
-    }
-
     .scatter-inputs-circles {
         r: 6px;
     }
 
+}
+
+@media only screen and (min-width: 64em) {
+    .temperature-container-full {
+        width: 75rem;
+        margin: 0 auto;
+    }
 }
