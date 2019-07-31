@@ -549,6 +549,21 @@
     }
 }
 
+#btn-notas {
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid var(--black);
+    font-size: 1rem;
+    font-family: var(--roboto);
+    background-color: #0a2160;
+    color: var(--white);
+    transition: background-color .3s ease-in;
+    border-radius: 2px;
+    &:hover {
+        background-color: #2547a7;
+    }
+}
+
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
