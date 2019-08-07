@@ -120,6 +120,9 @@
     font-size: 1rem;
     font-family: var(--roboto);
     display: block;
+    strong {
+        font-size: 1.5rem;
+    }
 }
 
 @media only screen and (min-width: 48em) {
