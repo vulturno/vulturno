@@ -168,6 +168,7 @@ function formatDate() {
 
     document.getElementById('updateButtonDay').value = dayString;
     document.getElementById('updateButtonMonth').value = monthString;
+
 }
 
 formatDate();
@@ -2566,6 +2567,7 @@ function directionalDot(maxmins) {
                 selectMonth.on('change', () => {
                     updateMes();
                 });
+
             }
         });
     };
@@ -2593,9 +2595,11 @@ function directionalDot(maxmins) {
                 selectCity.on('change', () => {
                     updateMes();
                 });
+
             }
         });
     };
+
 
     // LOAD THE DATA
     const loadData = () => {
@@ -2619,6 +2623,7 @@ function directionalDot(maxmins) {
                     updateChart(dataz);
                     menuMes();
                     menuCities();
+
                 }
             }
         );
@@ -2627,6 +2632,7 @@ function directionalDot(maxmins) {
     window.addEventListener('resize', resize);
 
     loadData();
+
 }
 
 /*const heatWave = () => {
