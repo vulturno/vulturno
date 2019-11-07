@@ -1,34 +1,35 @@
 {
-    "env":
+  "env":
+  {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "globals":
+  {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "d3": false,
+    "react": true,
+    "customElements": true,
+    "HTMLImports": true,
+    "Polymer": true,
+    "ShadyDOM": true
+  },
+  "parserOptions":
+  {
+    "ecmaVersion": 6,
+    "ecmaFeatures":
     {
-        "browser": true,
-        "es6": true
-    },
-    "extends": [
-        "standard",
-        "prettier"
-    ],
-    "globals":
-    {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly",
-        "d3": false,
-        "react": true,
-        "customElements": true,
-        "HTMLImports": true,
-        "Polymer": true,
-        "ShadyDOM": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "ecmaFeatures": {
-        "experimentalObjectRestSpread": true
-      }
-    },
-    "rules":
-    {
-        "indent": ["error", 4],
-        "semi": ["error", "always"],
-        "space-before-function-paren": ["error", "never"]
+      "experimentalObjectRestSpread": true
     }
+  },
+  "rules":
+  {
+    "indent": ["error", 4],
+    "semi": ["error", "always"],
+    "space-before-function-paren": ["error", "never"]
+  }
 }
