@@ -15,7 +15,7 @@ function menu() {
     document.querySelector('.burger').addEventListener('click', classToggle);
     document.querySelector('.overlay').addEventListener('click', classToggle);
 
-    for (i = 0; i < elementBtn.length; i++) {
+    for (let i = 0; i < elementBtn.length; i++) {
         elementBtn[i].addEventListener('click', function() {
             removeClass();
             console.log('click');
@@ -101,9 +101,8 @@ function quotesTemp() {
 }
 quotesTemp();
 
-const reloadQuotes = document.getElementById('btn-notas');
+setInterval(() => { quotesTemp(); }, 3000);
 
-reloadQuotes.addEventListener('click', quotesTemp);
 
 const selectVulturno = document.getElementById('select-city');
 const selectScatter = document.getElementById('select-scatter-city');
@@ -114,7 +113,7 @@ function menuSelect(selector) {
         if (error) {
             console.log(error);
         } else {
-            datos = data;
+            const datos = data;
 
             const nest = d3
                 .nest()
