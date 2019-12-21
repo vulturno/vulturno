@@ -26,8 +26,7 @@
   },
   "rules":
   {
-    "indent": ["error", 4],
-    "semi": ["error", "always"],
+    "indent": ["error", 2],
     "space-before-function-paren": ["error", "never"]
   }
 }
