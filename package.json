@@ -23,7 +23,6 @@
   "browserslist": "last 2 versions",
   "license": "MIT",
   "devDependencies": {
-    "rollup-plugin-postcss": "^2.0.3",
     "@babel/core": "^7.5.0",
     "@babel/preset-env": "^7.5.2",
     "browser-sync": "^2.26.7",
@@ -55,8 +54,12 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-stylelint": "^0.0.4",
     "rollup-plugin-terser": "^5.1.2",
     "stylelint": "^12.0.0"
+  },
+  "dependencies": {
+    "prettier": "^1.19.1"
   }
 }

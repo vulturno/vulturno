@@ -18,7 +18,6 @@ function menu() {
     for (let i = 0; i < elementBtn.length; i++) {
         elementBtn[i].addEventListener('click', function() {
             removeClass();
-            console.log('click');
         });
     }
 
@@ -101,8 +100,7 @@ function quotesTemp() {
 }
 quotesTemp();
 
-setInterval(() => { quotesTemp(); }, 3000);
-
+setInterval(() => { quotesTemp() }, 3000);
 
 const selectVulturno = document.getElementById('select-city');
 const selectScatter = document.getElementById('select-scatter-city');
@@ -560,27 +558,27 @@ const vulturno = () => {
 
         g.attr('transform', translate);
 
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.temp));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-vulturno-container-bis');
 
         const lines = container.selectAll('.lines').data([datos]);
 
-        const newLines = lines
-            .enter()
-            .append('path')
-            .attr('class', 'lines');
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.temp));
 
         const dots = container
             .selectAll('.circles')
             .remove()
             .exit()
             .data(datos);
+
+        const newLines = lines
+            .enter()
+            .append('path')
+            .attr('class', 'lines');
 
         const dotsLayer = dots
             .enter()
@@ -634,8 +632,8 @@ const vulturno = () => {
             const countY = d3
                 .scaleLinear()
                 .domain([
-                    d3.min(datos, (d) => d.temp - 1),
-                    d3.max(datos, (d) => d.temp + 1)
+                    d3.min(datos, (d) => d.temp - 2),
+                    d3.max(datos, (d) => d.temp + 2)
                 ]);
 
             scales.count = { x: countX, y: countY };
@@ -1364,7 +1362,7 @@ const scatterInput = () => {
     const margin = {
         top: 16,
         right: 16,
-        bottom: 24,
+        bottom: 32,
         left: 32
     };
     let width = 0;
@@ -1394,8 +1392,8 @@ const scatterInput = () => {
         const countY = d3
             .scaleLinear()
             .domain([
-                d3.min(dataz, (d) => d.minima),
-                d3.max(dataz, (d) => d.minima)
+                d3.min(dataz, (d) => d.minima - 2),
+                d3.max(dataz, (d) => d.minima + 2)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -1421,7 +1419,6 @@ const scatterInput = () => {
             .axisBottom(scales.count.x)
             .tickPadding(10)
             .tickFormat(d3.format('d'))
-            .tickSize(-height)
             .ticks(10);
 
         g.select('.axis-x')
@@ -1459,6 +1456,11 @@ const scatterInput = () => {
 
         g.attr('transform', translate);
 
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.year))
+            .y((d) => scales.count.y(d.minima));
+
         updateScales(width, height);
 
         const container = chart.select('.scatter-inputs-container-dos');
@@ -1469,12 +1471,26 @@ const scatterInput = () => {
             .exit()
             .data(dataz);
 
+        const lines = container.selectAll('.lines').data([dataz]);
+
         const newLayer = layer
             .enter()
             .append('circle')
             .attr('class', 'scatter-inputs-circles');
 
         const ciudad = selectCity.property('value');
+
+        const newLines = lines
+            .enter()
+            .append('path')
+            .attr('class', 'lines');
+
+        lines
+            .merge(newLines)
+            .transition()
+            .duration(600)
+            .ease(d3.easeLinear)
+            .attr('d', line);
 
         layer
             .merge(newLayer)
@@ -1557,8 +1573,8 @@ const scatterInput = () => {
             const countY = d3
                 .scaleLinear()
                 .domain([
-                    d3.min(dataz, (d) => d.maxima),
-                    d3.max(dataz, (d) => d.maxima)
+                    d3.min(dataz, (d) => d.maxima - 2),
+                    d3.max(dataz, (d) => d.maxima + 2)
                 ]);
 
             const w = chart.node().offsetWidth;
@@ -1579,7 +1595,26 @@ const scatterInput = () => {
 
             updateScales(width, height);
 
+            const line = d3
+                .line()
+                .x((d) => scales.count.x(d.year))
+                .y((d) => scales.count.y(d.maxima));
+
             const container = chart.select('.scatter-inputs-container-dos');
+
+            const lines = container.selectAll('.lines').data([dataz]);
+
+            const newLines = lines
+                .enter()
+                .append('path')
+                .attr('class', 'lines');
+
+            lines
+                .merge(newLines)
+                .transition()
+                .duration(600)
+                .ease(d3.easeLinear)
+                .attr('d', line);
 
             const layer = container
                 .selectAll('.scatter-inputs-circles')
@@ -1707,8 +1742,8 @@ const scatterInput = () => {
             const countY = d3
                 .scaleLinear()
                 .domain([
-                    d3.min(dataz, (d) => d.minima),
-                    d3.max(dataz, (d) => d.minima)
+                    d3.min(dataz, (d) => d.minima - 2),
+                    d3.max(dataz, (d) => d.minima + 2)
                 ]);
 
             scales.count = { x: countX, y: countY };

@@ -45,7 +45,8 @@ const plugins = [
       baseDir: ['./']
     },
     files: [
-      'src/**',
+      'css/*.**',
+      'js/*.**',
       'data/*.*',
       './*.html'
     ],
@@ -83,7 +84,7 @@ export default [{
   {
     input: paths.css + '/styles.css',
     output: {
-      file: paths.distCss + '/style.css',
+      file: paths.distCss + '/styles.css',
       format: 'es'
     },
     plugins: [
@@ -105,7 +106,7 @@ export default [{
   },
   {
     watch: {
-      include: ['src/**', './*.html', 'data/**']
+      include: ['css/*.css', 'js/*.js', './*.html', 'data/**']
     }
   }
 ];
