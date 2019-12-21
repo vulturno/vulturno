@@ -21,7 +21,8 @@
     "ecmaFeatures":
     {
       "experimentalObjectRestSpread": true
-    }
+    },
+    "sourceType": "module"
   },
   "rules":
   {
