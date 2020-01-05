@@ -14,7 +14,6 @@ import directionalDot from './components/directionalDots.js'
 import scatterTemp from './components/scatterTemp.js'
 
 const maxmin = ['max', 'min']
-const colores = [colorMax, colorMin]
 const csvForce = ['csv/total-records-max.csv', 'csv/total-records-min.csv']
 const records = ['maxima', 'minima']
 const colorMax = d3.scaleOrdinal([
@@ -35,21 +34,21 @@ const colorMin = d3.scaleOrdinal([
   '#7db9e5',
   '#a5cfed'
 ])
+const colores = [colorMax, colorMin]
 
-
-menu()
-quotes()
-tempExt()
-formatDate()
-tempMed()
-recordsMax()
-recordsMin()
-tropicalTotal()
-frostyTotal()
-scatterTemp()
-directionalDot(maxmin[0])
-directionalDot(maxmin[1])
-tropicalCities()
+menu();
+quotes();
+tempExt();
+formatDate();
+tempMed();
+recordsMax();
+recordsMin();
+tropicalTotal();
+frostyTotal();
+scatterTemp();
+directionalDot(maxmin[0]);
+directionalDot(maxmin[1]);
+tropicalCities();
 
 setInterval(() => {
   quotesTemp();
