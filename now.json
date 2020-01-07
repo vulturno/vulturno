@@ -1,7 +1,11 @@
 {
     "name": "Vulturno",
-    "version": 2,
+    "env":
+    {
+        "NODE_ENV": "production"
+    },
     "alias": [
         "vulturno.co"
-    ]
+    ],
+    "version": 2
 }
