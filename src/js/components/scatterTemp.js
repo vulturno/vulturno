@@ -35,8 +35,8 @@ const scatterTemp = () => {
     const countY = d3
       .scaleLinear()
       .domain([
-        d3.min(dataz, (d) => d.minima - 2),
-        d3.max(dataz, (d) => d.minima + 2)
+        d3.min(dataz, (d) => d.minima - 10),
+        d3.max(dataz, (d) => d.minima + 10)
       ]);
 
     scales.count = { x: countX, y: countY };
@@ -216,8 +216,8 @@ const scatterTemp = () => {
       const countY = d3
         .scaleLinear()
         .domain([
-          d3.min(dataz, (d) => d.maxima - 2),
-          d3.max(dataz, (d) => d.maxima + 2)
+          d3.min(dataz, (d) => d.maxima - 10),
+          d3.max(dataz, (d) => d.maxima + 10)
         ]);
 
       const w = chart.node().offsetWidth;
@@ -294,8 +294,8 @@ const scatterTemp = () => {
             .style(
               'left',
               postionWidthTooltip > w ?
-              positionright :
-              positionleft
+                positionright :
+                positionleft
             )
             .style('top', `${d3.event.pageY - 28}px`);
         })
@@ -306,7 +306,7 @@ const scatterTemp = () => {
             .style('opacity', 0);
         })
         .attr('cx', (d) => scales.count.x(d.year))
-        .attr('cy', (d) => scales.count.y(d.minima))
+        .attr('cy', (d, i) => i * (Math.random() * i))
         .attr('fill-opacity', 1)
         .transition()
         .delay((d, i) => i * 10)
@@ -385,8 +385,8 @@ const scatterTemp = () => {
       const countY = d3
         .scaleLinear()
         .domain([
-          d3.min(dataz, (d) => d.minima - 2),
-          d3.max(dataz, (d) => d.minima + 2)
+          d3.min(dataz, (d) => d.minima - 10),
+          d3.max(dataz, (d) => d.minima + 10)
         ]);
 
       scales.count = { x: countX, y: countY };
@@ -419,7 +419,15 @@ const scatterTemp = () => {
       } else {
         dataz = data;
 
-        dataz = data.filter((d) => String(d.fecha).match(/08-01$/));
+        let valueDateDay = d3.select('#updateButtonDay').property('value');
+        let valueDateMonth = d3.select('#updateButtonMonth').property('value');
+        if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
+        if (valueDateMonth < 10)
+          valueDateMonth = `0${valueDateMonth}`.slice(-2);
+        const valueDate = `${valueDateMonth}-${valueDateDay}`;
+        const reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
+
+        dataz = data.filter((d) => String(d.fecha).match(reValueDate));
 
         dataz.forEach((d) => {
           d.fecha = d.fecha;
@@ -436,7 +444,8 @@ const scatterTemp = () => {
 
   window.addEventListener('resize', resize);
 
-  loadData();
+  loadData()
+
   menuSelect(selectScatter);
   selectCity.on('change', function() {
     const mes = d3
