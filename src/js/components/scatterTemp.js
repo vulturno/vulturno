@@ -1,7 +1,7 @@
 import menuSelect from './menuSelect.js'
 const selectScatter = document.getElementById('select-scatter-city')
 
-const scatterTemp = () => {
+function scatterTemp() {
   const margin = {
     top: 16,
     right: 16,
@@ -21,6 +21,19 @@ const scatterTemp = () => {
     .append('div')
     .attr('class', 'tooltip tooltip-scatter')
     .style('opacity', 0);
+
+  let returnDate = function() {
+    let valueDateDay = d3.select('#updateButtonDay').property('value');
+    let valueDateMonth = d3.select('#updateButtonMonth').property('value');
+    if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
+    if (valueDateMonth < 10)
+      valueDateMonth = `0${valueDateMonth}`.slice(-2);
+    const valueDate = `${valueDateMonth}-${valueDateDay}`;
+    const reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
+    return reValueDate;
+  }
+
+  let reValueDate = returnDate()
 
   const getYear = (stringDate) => stringDate.split('-')[0];
 
@@ -50,6 +63,7 @@ const scatterTemp = () => {
     g.append('g').attr('class', 'axis axis-y');
 
     g.append('g').attr('class', 'scatter-inputs-container-dos');
+
   };
 
   const updateScales = (width, height) => {
@@ -82,6 +96,8 @@ const scatterTemp = () => {
       .duration(500)
       .ease(d3.easeLinear)
       .call(axisY);
+
+
   };
 
   const updateChart = (dataz) => {
@@ -177,13 +193,6 @@ const scatterTemp = () => {
   };
 
   const updateMax = () => {
-    let valueDateDay = d3.select('#updateButtonDay').property('value');
-    let valueDateMonth = d3.select('#updateButtonMonth').property('value');
-    if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
-    if (valueDateMonth < 10)
-      valueDateMonth = `0${valueDateMonth}`.slice(-2);
-    let valueDate = `${valueDateMonth}-${valueDateDay}`;
-    let reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
 
     errorDate();
 
@@ -346,13 +355,6 @@ const scatterTemp = () => {
   };
 
   const updateMin = () => {
-    let valueDateDay = d3.select('#updateButtonDay').property('value');
-    let valueDateMonth = d3.select('#updateButtonMonth').property('value');
-    if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
-    if (valueDateMonth < 10)
-      valueDateMonth = `0${valueDateMonth}`.slice(-2);
-    const valueDate = `${valueDateMonth}-${valueDateDay}`;
-    const reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
 
     errorDate();
 
@@ -417,16 +419,6 @@ const scatterTemp = () => {
       if (error) {
         console.log(error);
       } else {
-        dataz = data;
-
-        let valueDateDay = d3.select('#updateButtonDay').property('value');
-        let valueDateMonth = d3.select('#updateButtonMonth').property('value');
-        if (valueDateDay < 10) valueDateDay = `0${valueDateDay}`.slice(-2);
-        if (valueDateMonth < 10)
-          valueDateMonth = `0${valueDateMonth}`.slice(-2);
-        const valueDate = `${valueDateMonth}-${valueDateDay}`;
-        const reValueDate = new RegExp(`^.*${valueDate}$`, 'gi');
-
         dataz = data.filter((d) => String(d.fecha).match(reValueDate));
 
         dataz.forEach((d) => {
