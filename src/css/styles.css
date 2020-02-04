@@ -24,7 +24,8 @@ body {
     padding: 2rem 0;
 }
 
-.forno-container, .hola {
+.forno-container,
+.hola {
     width: 100%;
     grid-template-columns: 1fr;
     display: grid;

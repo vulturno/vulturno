@@ -15,6 +15,14 @@
     padding: 1rem 0;
 }
 
+.scatter-chart {
+  .lines {
+    fill: none;
+    stroke: #111;
+    stroke-width: 2px;
+  }
+}
+
 .temperature-max {
     background-color: rgba(235, 191, 176, .8);
 }
@@ -144,10 +152,6 @@
                 font-family: var(--roboto);
             }
         }
-    }
-
-    .scatter-inputs-circles {
-        r: 6px;
     }
 
 }

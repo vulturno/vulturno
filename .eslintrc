@@ -4,9 +4,6 @@
     "browser": true,
     "es6": true
   },
-  "extends": [
-    "standard"
-  ],
   "globals":
   {
     "Atomics": "readonly",
@@ -24,12 +21,12 @@
     "ecmaFeatures":
     {
       "experimentalObjectRestSpread": true
-    }
+    },
+    "sourceType": "module"
   },
   "rules":
   {
-    "indent": ["error", 4],
-    "semi": ["error", "always"],
+    "indent": ["error", 2],
     "space-before-function-paren": ["error", "never"]
   }
 }
