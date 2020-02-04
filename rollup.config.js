@@ -106,7 +106,7 @@ export default [{
   },
   {
     watch: {
-      include: ['css/*.css', 'js/*.js', './*.html', 'data/**']
+      include: ['css/*.css', 'js/*.js', './*.html', 'csv/**']
     }
   }
 ];

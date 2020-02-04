@@ -14,6 +14,7 @@ function scatterTemp() {
   const svg = chart.select('svg');
   const scales = {};
   let dataz;
+  let reValueDate;
   const temp = 'ºC';
   const selectCity = d3.select('#select-scatter-city');
   const tooltip = d3
@@ -33,7 +34,7 @@ function scatterTemp() {
     return reValueDate;
   }
 
-  let reValueDate = returnDate()
+  reValueDate = returnDate()
 
   const getYear = (stringDate) => stringDate.split('-')[0];
 
@@ -193,6 +194,8 @@ function scatterTemp() {
   };
 
   const updateMax = () => {
+
+    reValueDate = returnDate()
 
     errorDate();
 
@@ -355,6 +358,8 @@ function scatterTemp() {
   };
 
   const updateMin = () => {
+
+    reValueDate = returnDate()
 
     errorDate();
 
