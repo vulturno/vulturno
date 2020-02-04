@@ -2,6 +2,27 @@
     background-color: rgba(253, 230, 167, .15);
 }
 
+.notas {
+    padding: 4rem 0;
+    background-image: url('../img/notas.jpg');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    height: 50vh;
+    background-position-y: 60%;
+
+}
+
+.notas-text {
+    font-size: 1.25rem;
+    font-family: var(--roboto);
+    color: var(--black);
+    max-width: 80%;
+    display: inline-block;
+    background-color: var(--white);
+    padding: 1rem;
+}
+
 .chart-container,
 .metodology-container,
 .data-container {
@@ -220,6 +241,19 @@
             font-weight: bold;
         }
     }
+    strong {
+        font-weight: bold;
+
+    }
+    &.tooltip-tropical {
+        background-color: #060241;
+        color: var(--white);
+    }
+    .tooltip-year {
+        margin: 0;
+        font-family: var(--roboto);
+        font-size: 1rem;
+    }
 }
 
 .tooltip-decade,
@@ -378,31 +412,13 @@
     border: 1px solid #3B5795;
 }
 
-.area-tropical {
+.bar-tropical,
+.bar-cities-tropical {
     fill: #dd435c;
 }
 
 .area-frosty {
     fill: #257d98;
-}
-
-.line-frosty {
-    stroke: #2e4e74;
-    fill: none;
-}
-
-.line-tropical {
-    stroke: #670509;
-    fill: none;
-}
-
-.area-cities-tropical {
-    fill: #E15171;
-}
-
-.line-cities-tropical {
-    fill: none;
-    stroke: #7b2647;
 }
 
 .chart-vulturno-container {
@@ -467,20 +483,9 @@
     }
 }
 
-.lines-tropical {
-    fill: none;
-    stroke: #670509;
-    stroke-width: 2px;
-}
-
-.area-ext {
-    fill: rgba(219, 69, 94, .9);
+.rect-ext {
+    fill: #b8000f;
     stroke: none;
-}
-
-.line-ext {
-    fill: none;
-    stroke: rgba(20, 3, 32, .5);
 }
 
 #noches-tropicales-ciudad {
@@ -528,6 +533,35 @@
 
 .circle-segundo-min {
     fill: #63A3B2;
+}
+
+.line-average {
+    .line {
+        fill: none;
+        stroke: var(--black);
+        stroke-width: 2px;
+    }
+    .up {
+        fill: #b8000f;
+    }
+    .down {
+        fill: #0583a0;
+    }
+}
+
+#btn-notas {
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid var(--black);
+    font-size: 1rem;
+    font-family: var(--roboto);
+    background-color: #0a2160;
+    color: var(--white);
+    transition: background-color .3s ease-in;
+    border-radius: 2px;
+    &:hover {
+        background-color: #2547a7;
+    }
 }
 
 @media only screen and (min-width: 48rem) {
@@ -585,6 +619,12 @@
         left: 50px;
     }
 
+    .notas-text {
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        max-width: 35rem;
+    }
+
 }
 
 @media only screen and (min-width: 64em) {
@@ -612,6 +652,7 @@
 
     .scatter-inputs-filter {
         padding: 1rem;
+        margin-bottom: 2rem;
     }
 
     .chart-vulturno {

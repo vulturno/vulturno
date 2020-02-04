@@ -44,15 +44,13 @@
         <a href="#temp-ext" class="navegacion-btn menu__item">
             <span class="menu__item-name">Temperaturas "extremas"</span>
         </a>
-        <a href="/data.html" class="navegacion-btn menu__item">
-            <span class="menu__item-name">Data</span>
-        </a>
     </nav>
     <div class="overlay"></div>
     <section class="chart">
         <section class="chart-container">
             <article class="chart-text-container">
                 <h1 class="header-title">Vulturno</h1>
+                <span class="author">Por <a href="https://jorgeatgu.com">Jorge Aznar</a></span>
                 <p class="chart-text">Una visualización de datos para ver como han ido evolucionando las temperaturas en casi todas las capitales de provincia de España.</p>
                 <p class="chart-text">A lo largo del proyecto podrás consultar la temperatura máxima y mínima registrada de cualquier día del año. El total de las noches tropicales. Las heladas registradas. La temperatura media mínima y la temperatura media máxima anual.</p>
             </article>
@@ -73,11 +71,11 @@
                     </div>
                     <div class="container-inputs">
                         <label class="inputs-label" r="0" fodata-r="updateButtonDay">Día</label>
-                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text"/>
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonDay" type="text" />
                     </div>
                     <div class="container-inputs">
                         <label class="inputs-label" r="0" fodata-r="updateButtonMonth">Mes</label>
-                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text"/>
+                        <input maxlength="2" class="input-update-grafica" id="updateButtonMonth" type="text" />
                     </div>
                     <button class="btn-update-grafica roboto btn-update-max" id="update">MÁXIMAS</button>
                     <button class="btn-update-grafica roboto btn-update-min" id="updateMin"> MÍNIMAS</button>
@@ -93,6 +91,24 @@
             </article>
         </section>
     </section>
+    <!-- <section id="temp-june" class="forno">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Temperaturas máximas en julio</h3>
+            <p class="chart-text">El 22 de julio de 2019 se espera la entrada de otra ola de calor. Esta nueva ola al igual que la anterior batirá decenas de récords de temperaturas máximas. A continuación los récords que todavía están vigentes.</p>
+        </section>
+        <div class="temperature-container-full">
+            <div class="container-select-double">
+                <div class="container-selects">
+                    <p class="select-text">Selecciona una ciudad</p>
+                    <select class="temperatura-mensual-minima-select select-heat-wave-city" id="select-heat-wave"></select>
+                </div>
+            </div>
+        </div>
+        <div class="forno-container">
+
+        </div>
+
+    </section> -->
     <section class="chart chart-separator">
         <section class="chart-container">
             <article id="media-anual" class="chart-text-container">
@@ -112,18 +128,21 @@
             </article>
         </section>
     </section>
+    <section class="chart-separator notas">
+        <section id="notas" class="chart-container">
+
+        </section>
+    </section>
     <section id="records-max" class="records-max chart-separator">
         <section class="chart-container">
             <section class="chart-text-container">
                 <h3 class="chart-text-title">Récords de temperaturas máximas</h3>
                 <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día del año en las 47 estaciones analizadas.</p>
             </section>
-            <section class="temperature-container-full">
                 <article id="force-maxima" class="chart-force-maxima">
                     <svg class="charts">
                     </svg>
                 </article>
-            </section>
         </section>
     </section>
     <section id="records-min" class="records-min chart-separator">
@@ -132,12 +151,10 @@
                 <h3 class="chart-text-title">Récords de temperaturas mínimas</h3>
                 <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura mínima de cada día del año en las 47 estaciones analizadas.</p>
             </section>
-            <section class="temperature-container-full">
                 <article id="force-minima" class="chart-force-minima">
                     <svg class="charts">
                     </svg>
                 </article>
-            </section>
         </section>
     </section>
     <section id="max" class="temperature-max chart-separator">
@@ -147,11 +164,11 @@
             <p class="chart-text">La mayoría de estaciones marcaron <strong>sus récords en el siglo XXI</strong>, sobre todo en la última década.</p>
         </section>
         <section class="temperature-container">
-        <article class="chart-temperature-max">
-            <svg class="charts">
-                <g class="chart-temperature-max-container"></g>
-            </svg>
-        </article>
+            <article class="chart-temperature-max">
+                <svg class="charts">
+                    <g class="chart-temperature-max-container"></g>
+                </svg>
+            </article>
         </section>
         <section id="noches-tropicales" class="chart-text-container">
             <h3 class="chart-text-title">Noches tropicales</h3>
@@ -180,6 +197,14 @@
                     <g class="chart-cities-tropical-container"></g>
                 </svg>
             </article>
+        </section>
+    </section>
+    <section class="chart-separator notes-temp">
+        <section id="notas-temp" class="chart-container">
+
+        </section>
+        <section class="chart-container">
+            <button id="btn-notas">RECARGAR</button>
         </section>
     </section>
     <section id="min" class="temperature-min chart-separator">
@@ -272,6 +297,19 @@
             </article>
         </section>
     </section>
+    <!-- <section id="two-records-min" class="two-records chart-separator">
+        <section class="chart-text-container">
+            <h3 class="chart-text-title">Promedio de temperatura media</h3>
+            <p class="chart-text">La línea negra vertical representa el promedio de la temperatura media del período 1980-2009. Y las barras verticales representan el aumento(rojo) o dismunición(azul) al compararlo con el promedio de la temperatura media entre 2010-2019.</p>
+        </section>
+        <section class="temperature-container-full">
+            <article class="line-average">
+                <svg class="charts">
+                    <g class="line-average-container"></g>
+                </svg>
+            </article>
+        </section>
+    </section> -->
     <section class="metodology">
         <article class="metodology-container">
             <h3 class="metodology-title">Metodología</h3>
@@ -282,6 +320,7 @@
             <p class="metodology-text">La estación de Madrid es la que está ubicada en el Retiro.</p>
             <p class="metodology-text">¿El eje vertical no tiene 0? <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/"> Pues no y tampoco pasa nada.</a> </p>
             <p class="metodology-text"><a href="https://github.com/vulturno/data">Aquí están todos los scripts que he ido creando para triar y obtener todos los datasets.</a> </p>
+            <p class="metodology-text">Los datos sobre las empresas más contaminantes están <a href="https://cincodias.elpais.com/cincodias/2019/04/02/companias/1554207426_395244.html">aquí</a></p>
         </article>
         <article class="metodology-container">
             <h3 class="metodology-title">Créditos</h3>
@@ -289,28 +328,43 @@
             <p class="metodology-text">Para extraer los datos he usado <a href="https://github.com/jorgeatgu/lurte">Lurte</a>.</p>
             <p class="metodology-text">Para él dropdown he usado <a href="http://slimselectjs.com">SlimSelect</a>.</p>
             <p class="metodology-text">Para las anotaciones he usado <a href="d3-annotation.susielu.com/">d3 annotation</a>.</p>
+            <p class="metodology-text">La fotografía de la central térmica es de <a href="https://unsplash.com/@tomlaudiophile">Thomas Millot</a>.</p>
         </article>
     </section>
-    <section class="data-viz">
-        <article class="metodology-container">
-            <h3 class="metodology-title">Otros proyectos</h3>
-            <a href="https://bislai.co" class="proyectos-element proyecto-1">
-                <h2 class="proyectos-element-title proyecto-1-text">BISLAI </h2>
-                <span class="proyectos-element-subtitle proyecto-1-text">[ DATAVIZ - OPENDATA ]</span>
-                <p class="proyectos-element-text proyecto-1-text">Fiscalización de las mociones que presentan los grupos politicos en el Ayuntamiento de Zaragoza.</p>
-            </a>
-            <a href="https://casacaida.co" class="proyectos-element proyecto-2">
-                <h2 class="proyectos-element-title proyecto-2-text">CASA CAÍDA</h2>
-                <span class="proyectos-element-subtitle proyecto-2-text">[ DATAVIZ ]</span>
-                <p class="proyectos-element-text proyecto-2-text">Casa caída es una visualización de datos sobre la despoblación en Aragón.</p>
-            </a>
-            <a href="https://jorgeatgu.com/data-mestika" class="proyectos-element proyecto-4">
-                <h2 class="proyectos-element-title proyecto-4-text">DATA-MESTIKA</h2>
-                <span class="proyectos-element-subtitle proyecto-4-text">[ DATAVIZ ]</span>
-                <p class="proyectos-element-text proyecto-4-text">Una visualización de datos sobre todas las ofertas de trabajo ofertadas en Domestika a lo largo de 10 años.</p>
-            </a>
-        </article>
-    </section>
+    <h3 class="proyectos-title">Otros proyectos</h3>
+    <article class="proyectos">
+
+        <a href="https://casacaida.co" class="proyectos-element proyecto-9">
+            <h2 class="proyectos-element-title proyecto-9-text">LA CASA CAÍDA</h2>
+            <span class="proyectos-element-subtitle proyecto-9-text">[ DATAVIZ ]</span>
+            <p class="proyectos-element-text proyecto-9-text">Una visualización de datos sobre la evolución(despoblación) de la población a lo largo del último siglo en los municipios de Aragón.</p>
+        </a>
+        <a href="https://demasiadas.now.sh" class="proyectos-element proyecto-10">
+            <h2 class="proyectos-element-title proyecto-10-text">DEMASIADAS</h2>
+            <span class="proyectos-element-subtitle proyecto-10-text">[ DATAVIZ ]</span>
+            <p class="proyectos-element-text proyecto-10-text">Una visualización de datos sobre la violencia de género. Desde el año 2000 más de 1000 mujeres han sido asesinadas.</p>
+        </a>
+        <a href="https://bislai.co" class="proyectos-element proyecto-1">
+            <h2 class="proyectos-element-title proyecto-1-text">BISLAI </h2>
+            <span class="proyectos-element-subtitle proyecto-1-text">[ DATAVIZ - OPENDATA ]</span>
+            <p class="proyectos-element-text proyecto-1-text">Fiscalización de las mociones que presentan los grupos politicos en el Ayuntamiento de Zaragoza.</p>
+        </a>
+        <a href="https://28a-zaragoza.now.sh" class="proyectos-element proyecto-12">
+            <h2 class="proyectos-element-title proyecto-12-text">ELECCIONES 28A - 2019</h2>
+            <span class="proyectos-element-subtitle proyecto-12-text">[ DATAVIZ ]</span>
+            <p class="proyectos-element-text proyecto-12-text">Una visualización de datos con los votos a cada una de las secciones censales de la ciudad de Zaragoza.</p>
+        </a>
+        <a href="https://wiki-cachitos.now.sh" class="proyectos-element proyecto-2">
+            <h2 class="proyectos-element-title proyecto-2-text">WIKI CACHITOS</h2>
+            <span class="proyectos-element-subtitle proyecto-2-text">[ DATAVIZ ]</span>
+            <p class="proyectos-element-text proyecto-2-text">¿Cuánto aumentan las visitas a la Wikipedia cuando un artista sale en Cachitos? </p>
+        </a>
+        <a href="https://jorgeatgu.com/data-mestika" class="proyectos-element proyecto-4">
+            <h2 class="proyectos-element-title proyecto-4-text">DATA-MESTIKA</h2>
+            <span class="proyectos-element-subtitle proyecto-4-text">[ DATAVIZ ]</span>
+            <p class="proyectos-element-text proyecto-4-text">Una visualización de datos sobre todas las ofertas de trabajo ofertadas en Domestika a lo largo de 10 años.</p>
+        </a>
+    </article>
     <footer class="footer">
         <div class="chart-container">
             <p class="footer-texto">Hecho en Zaragoza con mucha maña por un <a class="footer-links" href="http://jorgeatgu.com" target="_blank">maño</a> - MMXIX</p>
@@ -321,7 +375,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.18.7/slimselect.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/d3-annotation.min.js"></script>
-    <script src="js/menu.js"></script>
     <script src="js/area.js"></script>
 </body>
 

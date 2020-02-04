@@ -1,3 +1,139 @@
+function menu() {
+    var overlay = document.querySelector('.overlay');
+    var navigation = document.querySelector('.navegacion');
+    var body = document.querySelector('body');
+    var elementBtn = document.querySelectorAll('.navegacion-btn');
+    var burger = document.querySelector('.burger');
+
+    function classToggle() {
+        burger.classList.toggle('clicked');
+        overlay.classList.toggle('show');
+        navigation.classList.toggle('show');
+        body.classList.toggle('overflow');
+    }
+
+    document.querySelector('.burger').addEventListener('click', classToggle);
+    document.querySelector('.overlay').addEventListener('click', classToggle);
+
+    for (i = 0; i < elementBtn.length; i++) {
+        elementBtn[i].addEventListener('click', function() {
+            removeClass();
+            console.log('click');
+        });
+    }
+
+    function removeClass() {
+        overlay.classList.remove('show');
+        navigation.classList.remove('show');
+        burger.classList.remove('clicked');
+    }
+}
+
+menu();
+
+function quotes() {
+    const list = [
+        '<span class="notas-text">La Central Térmica de <strong>AS Pontes</strong> propiedad de <strong>Endesa</strong> es el <strong>mayor emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>Aboño</strong> propiedad de <strong>Endesa</strong> es el <strong>segundo mayor emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>Litoral</strong> propiedad de <strong>Endesa</strong> es el <strong>tercer emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Siderurgica de <strong>ArcelorMittal</strong> es el <strong>cuarto emisor de CO2<strong> en España.',
+        '<span class="notas-text">La Central Térmica de <strong>Teruel</strong> propiedad de <strong>Endesa</strong> es el <strong>quinto emisor de CO2<strong> en España.'
+    ];
+
+    const randomQuote = Math.floor(Math.random() * list.length);
+    document.getElementById('notas').innerHTML = list[randomQuote];
+}
+
+quotes();
+
+function quotesTemp() {
+    const list = [
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Zaragoza</strong>.</span><span class="notas-text-number">44.5ºC</span><span class="notas-text-date">07/07/2015</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Albacete</strong>.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">17/07/1978</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Alicante</strong>.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">04/07/1994</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Almería</strong>.</span><span class="notas-text-number">41.2ºC</span><span class="notas-text-date">30/07/1981</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Avila</strong>.</span><span class="notas-text-number">37.6ºC</span><span class="notas-text-date">24/07/1995</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Badajoz</strong>.</span><span class="notas-text-number">45.4ºC</span><span class="notas-text-date">13/07/2017</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Barcelona</strong>.</span><span class="notas-text-number">37.4ºC</span><span class="notas-text-date">28/08/2010</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Bilbao</strong>.</span><span class="notas-text-number">41.9ºC</span><span class="notas-text-date">04/08/2003</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Burgos</strong>.</span><span class="notas-text-number">38.8ºC</span><span class="notas-text-date">04/08/2003</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Caceres</strong>.</span><span class="notas-text-number">43.2ºC</span><span class="notas-text-date">13/07/2017</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Castellón</strong>.</span><span class="notas-text-number">40.6ºC</span><span class="notas-text-date">23/07/2009</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Ciudad Real</strong>.</span><span class="notas-text-number">43.7ºC</span><span class="notas-text-date">13/07/2009</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Cordoba</strong>.</span><span class="notas-text-number">46.9ºC</span><span class="notas-text-date">13/07/2009</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>A Coruña</strong>.</span><span class="notas-text-number">39.6ºC</span><span class="notas-text-date">28/08/1961</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Donostia</strong>.</span><span class="notas-text-number">38.6ºC</span><span class="notas-text-date">04/08/2003</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Girona</strong>.</span><span class="notas-text-number">43ºC</span><span class="notas-text-date">28/06/2019</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Gran Canaria</strong>.</span><span class="notas-text-number">44.2ºC</span><span class="notas-text-date">13/07/1952</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Granada</strong>.</span><span class="notas-text-number">43.5ºC</span><span class="notas-text-date">13/07/2017</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Huelva</strong>.</span><span class="notas-text-number">43.8ºC</span><span class="notas-text-date">25/07/2004</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Huesca</strong>.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">07/07/1982</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Jerez</strong>.</span><span class="notas-text-number">45.1ºC</span><span class="notas-text-date">07/08/2003</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>León</strong>.</span><span class="notas-text-number">38.2ºC</span><span class="notas-text-date">13/08/1987</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Lleida</strong>.</span><span class="notas-text-number">43.4ºC</span><span class="notas-text-date">29/06/2019</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Logroño</strong>.</span><span class="notas-text-number">42.8ºC</span><span class="notas-text-date">07/07/1982</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Madrid</strong>.</span><span class="notas-text-number">40.7ºC</span><span class="notas-text-date">28/06/2019</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Málaga</strong>.</span><span class="notas-text-number">44.2ºC</span><span class="notas-text-date">18/07/2019</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Mallorca</strong>.</span><span class="notas-text-number">41.4ºC</span><span class="notas-text-date">25/06/2001</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Melilla</strong>.</span><span class="notas-text-number">41.8ºC</span><span class="notas-text-date">06/07/1994</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Murcia</strong>.</span><span class="notas-text-number">40.5ºC</span><span class="notas-text-date">12/07/1961</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Ourense</strong>.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">20/07/1990</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Oviedo</strong>.</span><span class="notas-text-number">37ºC</span><span class="notas-text-date">18/07/2016</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Palencia</strong>.</span><span class="notas-text-number">40ºC</span><span class="notas-text-date">28/06/2019</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Pamplona</strong>.</span><span class="notas-text-number">40ºC</span><span class="notas-text-date">18/08/2012</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Pontevedra</strong>.</span><span class="notas-text-number">40ºC</span><span class="notas-text-date">14/06/2012</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Reus</strong>.</span><span class="notas-text-number">39.8ºC</span><span class="notas-text-date">04/08/2012</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Salamanca</strong>.</span><span class="notas-text-number">41ºC</span><span class="notas-text-date">10/08/2012</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Santander</strong>.</span><span class="notas-text-number">37.6ºC</span><span class="notas-text-date">30/06/1968</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Santiago</strong>.</span><span class="notas-text-number">39.4ºC</span><span class="notas-text-date">20/07/1990</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Segovia</strong>.</span><span class="notas-text-number">39.2ºC</span><span class="notas-text-date">15/07/1967</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Sevilla</strong>.</span><span class="notas-text-number">46.6ºC</span><span class="notas-text-date">23/07/1995</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Soria</strong>.</span><span class="notas-text-number">38ºC</span><span class="notas-text-date">28/07/1951</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Tenerife</strong>.</span><span class="notas-text-number">41.4ºC</span><span class="notas-text-date">31/07/2009</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Toledo</strong>.</span><span class="notas-text-number">43.1ºC</span><span class="notas-text-date">10/08/2012</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Valencia</strong>.</span><span class="notas-text-number">43ºC</span><span class="notas-text-date">27/08/2010</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Valladolid</strong>.</span><span class="notas-text-number">39.4ºC</span><span class="notas-text-date">24/07/1995</span>',
+        '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Vitoria</strong>.</span><span class="notas-text-number">40.8ºC</span><span class="notas-text-date">10/08/2012</span>'
+    ];
+
+    const randomQuote = Math.floor(Math.random() * list.length);
+    document.getElementById('notas-temp').innerHTML = list[randomQuote];
+}
+quotesTemp();
+
+const reloadQuotes = document.getElementById('btn-notas');
+
+reloadQuotes.addEventListener('click', quotesTemp);
+
+const selectVulturno = document.getElementById('select-city');
+const selectScatter = document.getElementById('select-scatter-city');
+const selectTropical = document.getElementById('select-city-tropical');
+
+function menuSelect(selector) {
+    d3.csv('csv/stations.csv', (error, data) => {
+        if (error) {
+            console.log(error);
+        } else {
+            datos = data;
+
+            const nest = d3
+                .nest()
+                .key((d) => d.Name)
+                .entries(datos);
+
+            const selectCity = d3.select(selector);
+
+            selectCity
+                .selectAll('option')
+                .data(nest)
+                .enter()
+                .append('option')
+                .attr('value', (d) => d.key)
+                .text((d) => d.key);
+        }
+    });
+}
+
 const colorMax = d3.scaleOrdinal([
     '#f6d2d5',
     '#f0b7bc',
@@ -5,7 +141,7 @@ const colorMax = d3.scaleOrdinal([
     '#e16973',
     '#cc0011',
     '#a2000d',
-    '#b8000f',
+    '#b8000f'
 ]);
 const colorMin = d3.scaleOrdinal([
     '#004d84',
@@ -14,7 +150,7 @@ const colorMin = d3.scaleOrdinal([
     '#0077cc',
     '#4a9eda',
     '#7db9e5',
-    '#a5cfed',
+    '#a5cfed'
 ]);
 const colores = [colorMax, colorMin];
 const widthMobile = window.innerWidth > 0 ? window.innerWidth : screen.width;
@@ -280,7 +416,7 @@ const vulturno = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -300,14 +436,14 @@ const vulturno = () => {
             .scaleTime()
             .domain([
                 d3.min(datos, (d) => d.year),
-                d3.max(datos, (d) => d.year),
+                d3.max(datos, (d) => d.year)
             ]);
 
         const countY = d3
             .scaleLinear()
             .domain([
                 d3.min(datos, (d) => d.temp - 1),
-                d3.max(datos, (d) => d.temp + 1),
+                d3.max(datos, (d) => d.temp + 1)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -385,11 +521,7 @@ const vulturno = () => {
             tooltipTemp
                 .style('opacity', 1)
                 .html(
-                    `<p class="tooltip-media-texto">En <strong>${
-                        d.year
-                    }</strong> la temperatura media fue de <strong>${
-                        d.temp
-                    } ºC</strong>.<p/>`
+                    `<p class="tooltip-media-texto">En <strong>${d.year}</strong> la temperatura media fue de <strong>${d.temp} ºC</strong>.<p/>`
                 )
                 .style('left', `${positionTooltip}px`);
 
@@ -497,14 +629,14 @@ const vulturno = () => {
                 .scaleTime()
                 .domain([
                     d3.min(datos, (d) => d.year),
-                    d3.max(datos, (d) => d.year),
+                    d3.max(datos, (d) => d.year)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(datos, (d) => d.temp - 1),
-                    d3.max(datos, (d) => d.temp + 1),
+                    d3.max(datos, (d) => d.temp + 1)
                 ]);
 
             scales.count = { x: countX, y: countY };
@@ -533,41 +665,6 @@ const vulturno = () => {
         });
     };
 
-    const menuMes = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
-
-                const selectCity = d3.select('#select-city');
-
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
-
-                selectCity.on('change', function() {
-                    const mes = d3
-                        .select(this)
-                        .property('value')
-                        .replace(/ /g, '_')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '');
-                    update(mes);
-                });
-            }
-        });
-    };
-
     const loadData = () => {
         d3.csv('csv/Albacete.csv', (data) => {
             datos = data;
@@ -586,7 +683,17 @@ const vulturno = () => {
     window.addEventListener('resize', resize);
 
     loadData();
-    menuMes();
+    menuSelect(selectVulturno);
+    const selectCity = d3.select('#select-city');
+    selectCity.on('change', function() {
+        const mes = d3
+            .select(this)
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        update(mes);
+    });
 };
 
 const maxvul = () => {
@@ -595,7 +702,7 @@ const maxvul = () => {
         top: 0,
         right: 48,
         bottom: 24,
-        left: 24,
+        left: 24
     };
     let width = 0;
     let height = 0;
@@ -612,14 +719,14 @@ const maxvul = () => {
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.fecha),
-                d3.max(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha)
             ]);
 
         const countY = d3
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.total),
-                d3.max(dataz, (d) => d.total),
+                d3.max(dataz, (d) => d.total)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -669,9 +776,9 @@ const maxvul = () => {
                             title:
                                 'Entre 2009 y 2018 se establecen el 78% de los récords de máximas',
                             wrap: 230,
-                            align: 'middle',
-                        },
-                    },
+                            align: 'middle'
+                        }
+                    }
                 ].map((l) => {
                     this.subject = { radius: 4 };
                     return l;
@@ -683,11 +790,11 @@ const maxvul = () => {
                     .type(d3.annotationCalloutCircle)
                     .accessors({
                         x: (d) => scales.count.x(d.year),
-                        y: (d) => scales.count.y(d.total),
+                        y: (d) => scales.count.y(d.total)
                     })
                     .accessorsInverse({
                         year: (d) => scales.count.x.invert(d.x),
-                        total: (d) => scales.count.y.invert(d.y),
+                        total: (d) => scales.count.y.invert(d.y)
                     })
                     .on('subjectover', (annotation) => {
                         annotation.type.a
@@ -784,7 +891,7 @@ const minvul = () => {
         top: 0,
         right: 48,
         bottom: 24,
-        left: 24,
+        left: 24
     };
     let width = 0;
     let height = 0;
@@ -800,7 +907,7 @@ const minvul = () => {
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.fecha),
-                d3.max(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha)
             ]);
         scales.count = { x: countX };
     };
@@ -838,9 +945,9 @@ const minvul = () => {
                             title:
                                 'Desde 1986 no se ha batido ni un solo récord de temperatura mínima',
                             wrap: 230,
-                            align: 'middle',
-                        },
-                    },
+                            align: 'middle'
+                        }
+                    }
                 ].map((l) => {
                     this.subject = { radius: 4 };
                     return l;
@@ -852,11 +959,11 @@ const minvul = () => {
                     .type(d3.annotationCalloutCircle)
                     .accessors({
                         x: (d) => scales.count.x(d.year),
-                        y: (d) => scales.count.y(d.total),
+                        y: (d) => scales.count.y(d.total)
                     })
                     .accessorsInverse({
                         year: (d) => scales.count.x.invert(d.x),
-                        total: (d) => scales.count.y.invert(d.y),
+                        total: (d) => scales.count.y.invert(d.y)
                     })
                     .on('subjectover', (annotation) => {
                         annotation.type.a
@@ -963,10 +1070,10 @@ const minvul = () => {
 
 const tropicalTotal = () => {
     const margin = {
-        top: 0,
+        top: 16,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -974,14 +1081,13 @@ const tropicalTotal = () => {
     const svg = chart.select('svg');
     const scales = {};
     let dataz;
+    const tooltip = chart
+        .append('div')
+        .attr('class', 'tooltip tooltip-tropical')
+        .style('opacity', 0);
 
     const setupScales = () => {
-        const countX = d3
-            .scaleTime()
-            .domain([
-                d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year),
-            ]);
+        const countX = d3.scaleBand().domain(dataz.map((d) => d.year));
 
         const countY = d3
             .scaleLinear()
@@ -1001,7 +1107,7 @@ const tropicalTotal = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]);
+        scales.count.x.range([0, width]).paddingInner(-0.1);
         scales.count.y.range([height, 0]);
     };
 
@@ -1009,7 +1115,12 @@ const tropicalTotal = () => {
         const axisX = d3
             .axisBottom(scales.count.x)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .ticks(13)
+            .tickValues(
+                scales.count.x.domain().filter(function(d, i) {
+                    return !(i % 5);
+                })
+            );
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -1039,47 +1150,54 @@ const tropicalTotal = () => {
 
         g.attr('transform', translate);
 
-        const area = d3
-            .area()
-            .x((d) => scales.count.x(d.year))
-            .y0(height)
-            .y1((d) => scales.count.y(d.total));
-
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-tropical-container-bis');
 
-        const layer = container.selectAll('.area-tropical').data([dataz]);
-
-        const layerLine = container.selectAll('.line-tropical').data([dataz]);
+        const layer = container.selectAll('.bar-tropical').data(dataz);
 
         const newLayer = layer
             .enter()
-            .append('path')
-            .attr('class', 'area-tropical');
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-tropical');
+            .append('rect')
+            .attr('class', 'bar-tropical');
 
         layer
             .merge(newLayer)
+            .on('mouseover', function(d) {
+                const positionX = scales.count.x(d.year);
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
+                tooltip.transition();
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `
+                        <p class="tooltip-year">En <strong>${d.year}</strong> hubo un total de <strong>${d.total}</strong> noches tropicales.</p>
+                        `
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', function(d) {
+                tooltip
+                    .transition()
+                    .duration(300)
+                    .style('opacity', 0);
+            })
             .transition()
-            .duration(600)
+            .duration(500)
             .ease(d3.easeLinear)
-            .attr('d', area);
+            .attr('width', scales.count.x.bandwidth())
+            .attr('x', (d) => scales.count.x(d.year))
+            .attr('y', (d) => scales.count.y(d.total))
+            .attr('height', (d) => height - scales.count.y(d.total));
 
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
+        drawAxes(g);
 
         drawAxes(g);
     };
@@ -1096,7 +1214,7 @@ const tropicalTotal = () => {
             } else {
                 dataz = data;
                 dataz.forEach((d) => {
-                    d.year = d.year;
+                    d.year = +d.year;
                     d.total = +d.total;
                 });
                 setupElements();
@@ -1116,7 +1234,7 @@ const frostyTotal = () => {
         top: 0,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -1130,7 +1248,7 @@ const frostyTotal = () => {
             .scaleTime()
             .domain([
                 d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year)
             ]);
 
         const countY = d3
@@ -1195,23 +1313,11 @@ const frostyTotal = () => {
             .y0(height)
             .y1((d) => scales.count.y(d.total));
 
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-frosty-container-bis');
 
         const layer = container.selectAll('.area-frosty').data([dataz]);
-
-        const layerLine = container.selectAll('.line-frosty').data([dataz]);
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-frosty');
 
         const newLayer = layer
             .enter()
@@ -1224,12 +1330,6 @@ const frostyTotal = () => {
             .duration(600)
             .ease(d3.easeLinear)
             .attr('d', area);
-
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
 
         drawAxes(g);
     };
@@ -1266,7 +1366,7 @@ const scatterInput = () => {
         top: 16,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -1289,14 +1389,14 @@ const scatterInput = () => {
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.year),
-                d3.max(dataz, (d) => d.year),
+                d3.max(dataz, (d) => d.year)
             ]);
 
         const countY = d3
             .scaleLinear()
             .domain([
                 d3.min(dataz, (d) => d.minima),
-                d3.max(dataz, (d) => d.minima),
+                d3.max(dataz, (d) => d.minima)
             ]);
 
         scales.count = { x: countX, y: countY };
@@ -1390,9 +1490,7 @@ const scatterInput = () => {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${
-                            d.year
-                        } fue de ${d.minima}ºC<p/>`
+                        `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} en ${d.year} fue de ${d.minima}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -1407,43 +1505,17 @@ const scatterInput = () => {
                     .style('opacity', 0);
             })
             .attr('cx', (d) => scales.count.x(d.year))
-            .attr('cy', (d) => scales.count.y(d.minima))
+            .attr('cy', (d, i) => i * (Math.random() * i))
+            .attr('fill-opacity', 1)
             .transition()
-            .duration(500)
+            .delay((d, i) => i * 10)
+            .duration(450)
             .ease(d3.easeLinear)
             .attr('cx', (d) => scales.count.x(d.year))
             .attr('cy', (d) => scales.count.y(d.minima))
-            .attr('r', 6)
             .style('fill', '#257d98');
 
         drawAxes(g);
-    };
-
-    const menuCiudad = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
-
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
-
-                selectCity.on('change', () => {
-                    update();
-                });
-            }
-        });
     };
 
     const updateMax = () => {
@@ -1480,14 +1552,14 @@ const scatterInput = () => {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.year),
-                    d3.max(dataz, (d) => d.year),
+                    d3.max(dataz, (d) => d.year)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.maxima),
-                    d3.max(dataz, (d) => d.maxima),
+                    d3.max(dataz, (d) => d.maxima)
                 ]);
 
             const w = chart.node().offsetWidth;
@@ -1540,9 +1612,7 @@ const scatterInput = () => {
                     tooltip
                         .style('opacity', 1)
                         .html(
-                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${
-                                d.year
-                            } fue de ${d.maxima}ºC<p/>`
+                            `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`
                         )
                         .style(
                             'left',
@@ -1560,15 +1630,13 @@ const scatterInput = () => {
                 })
                 .attr('cx', (d) => scales.count.x(d.year))
                 .attr('cy', (d) => scales.count.y(d.minima))
+                .attr('fill-opacity', 1)
                 .transition()
-                .duration(500)
+                .delay((d, i) => i * 10)
+                .duration(450)
                 .ease(d3.easeLinear)
                 .attr('cx', (d) => scales.count.x(d.year))
                 .attr('cy', (d) => scales.count.y(d.maxima))
-                .attr('r', 0)
-                .transition()
-                .duration(100)
-                .ease(d3.easeLinear)
                 .attr('r', 6)
                 .style('fill', '#dc7176');
 
@@ -1634,14 +1702,14 @@ const scatterInput = () => {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.year),
-                    d3.max(dataz, (d) => d.year),
+                    d3.max(dataz, (d) => d.year)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.minima),
-                    d3.max(dataz, (d) => d.minima),
+                    d3.max(dataz, (d) => d.minima)
                 ]);
 
             scales.count = { x: countX, y: countY };
@@ -1692,15 +1760,24 @@ const scatterInput = () => {
     window.addEventListener('resize', resize);
 
     loadData();
-    menuCiudad();
+    menuSelect(selectScatter);
+    selectCity.on('change', function() {
+        const mes = d3
+            .select(this)
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        update(mes);
+    });
 };
 
 const tropicalCities = () => {
     const margin = {
-        top: 0,
+        top: 16,
         right: 16,
         bottom: 24,
-        left: 24,
+        left: 24
     };
     let width = 0;
     let height = 0;
@@ -1708,14 +1785,13 @@ const tropicalCities = () => {
     const svg = chart.select('svg');
     const scales = {};
     let datos;
+    const tooltip = chart
+        .append('div')
+        .attr('class', 'tooltip tooltip-tropical')
+        .style('opacity', 0);
 
     const setupScales = () => {
-        const countX = d3
-            .scaleTime()
-            .domain([
-                d3.min(datos, (d) => d.fecha),
-                d3.max(datos, (d) => d.fecha),
-            ]);
+        const countX = d3.scaleBand().domain(datos.map((d) => d.fecha));
 
         const countY = d3
             .scaleLinear()
@@ -1735,7 +1811,7 @@ const tropicalCities = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]);
+        scales.count.x.range([0, width]).paddingInner(-0.1);
         scales.count.y.range([height, 0]);
     };
 
@@ -1744,7 +1820,11 @@ const tropicalCities = () => {
             .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .tickValues(
+                scales.count.x.domain().filter(function(d, i) {
+                    return !(i % 5);
+                })
+            );
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -1782,57 +1862,58 @@ const tropicalCities = () => {
 
         g.attr('transform', translate);
 
-        const area = d3
-            .area()
-            .x((d) => scales.count.x(d.year))
-            .y0(height)
-            .y1((d) => scales.count.y(d.total));
-
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-cities-tropical-container-bis');
 
-        const layer = container
-            .selectAll('.area-cities-tropical')
-            .data([datos]);
-
-        const layerLine = container
-            .selectAll('.line-cities-tropical')
-            .data([datos]);
+        const layer = container.selectAll('.bar-cities-tropical').data(datos);
 
         const newLayer = layer
             .enter()
-            .append('path')
-            .attr('class', 'area-cities-tropical');
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-cities-tropical');
+            .append('rect')
+            .attr('class', 'bar-cities-tropical');
 
         layer
             .merge(newLayer)
+            .on('mouseover', function(d) {
+                const positionX = scales.count.x(d.fecha);
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
+                tooltip.transition();
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `
+                        <p class="tooltip-year">En <strong>${d.fecha}</strong> hubo un total de <strong>${d.tropical}</strong> noches tropicales.</p>
+                        `
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', function(d) {
+                tooltip
+                    .transition()
+                    .duration(300)
+                    .style('opacity', 0);
+            })
             .transition()
-            .duration(600)
+            .duration(500)
             .ease(d3.easeLinear)
-            .attr('d', area);
-
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
+            .attr('width', scales.count.x.bandwidth())
+            .attr('x', (d) => scales.count.x(d.year))
+            .attr('y', (d) => scales.count.y(d.total))
+            .attr('height', (d) => height - scales.count.y(d.total));
 
         drawAxes(g);
     }
 
-    function update(mes) {
-        d3.csv(`csv/tropicales/${mes}-total-tropicales.csv`, (error, data) => {
+    function update(city) {
+        d3.csv(`csv/tropicales/${city}-total-tropicales.csv`, (error, data) => {
             datos = data;
 
             datos.forEach((d) => {
@@ -1840,21 +1921,7 @@ const tropicalCities = () => {
                 d.tropical = +d.total;
             });
 
-            scales.count.x.range([0, width]);
-            scales.count.y.range([height, 0]);
-
-            const countX = d3
-                .scaleTime()
-                .domain([
-                    d3.min(datos, (d) => d.fecha),
-                    d3.max(datos, (d) => d.fecha),
-                ]);
-
-            const countY = d3
-                .scaleLinear()
-                .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
-
-            scales.count = { x: countX, y: countY };
+            setupScales();
             updateChart(datos);
         });
     }
@@ -1883,41 +1950,6 @@ const tropicalCities = () => {
         );
     };
 
-    const menuMes = () => {
-        d3.csv('csv/stations.csv', (error, data) => {
-            if (error) {
-                console.log(error);
-            } else {
-                datos = data;
-
-                const nest = d3
-                    .nest()
-                    .key((d) => d.Name)
-                    .entries(datos);
-
-                const selectCity = d3.select('#select-city-tropical');
-
-                selectCity
-                    .selectAll('option')
-                    .data(nest)
-                    .enter()
-                    .append('option')
-                    .attr('value', (d) => d.key)
-                    .text((d) => d.key);
-
-                selectCity.on('change', function() {
-                    const mes = d3
-                        .select(this)
-                        .property('value')
-                        .replace(/ /g, '_')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '');
-                    update(mes);
-                });
-            }
-        });
-    };
-
     // LOAD THE DATA
     const loadData = () => {
         d3.csv(
@@ -1934,23 +1966,33 @@ const tropicalCities = () => {
                     setupElements();
                     setupScales();
                     updateChart(datos);
-                    const mes = 'Albacete';
-                    update(mes);
+                    const city = 'Albacete';
+                    update(city);
                 }
             }
         );
     };
     window.addEventListener('resize', resize);
     loadData();
-    menuMes();
+    menuSelect(selectTropical);
+    const selectCity = d3.select('#select-city-tropical');
+    selectCity.on('change', function() {
+        const mes = d3
+            .select(this)
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        update(mes);
+    });
 };
 
 const tempExt = () => {
     const margin = {
-        top: 0,
+        top: 16,
         right: 16,
         bottom: 24,
-        left: 32,
+        left: 32
     };
     let width = 0;
     let height = 0;
@@ -1958,14 +2000,13 @@ const tempExt = () => {
     const svg = chart.select('svg');
     const scales = {};
     let datos;
+    const tooltip = chart
+        .append('div')
+        .attr('class', 'tooltip tooltip-tropical')
+        .style('opacity', 0);
 
     const setupScales = () => {
-        const countX = d3
-            .scaleTime()
-            .domain([
-                d3.min(datos, (d) => d.fecha),
-                d3.max(datos, (d) => d.fecha),
-            ]);
+        const countX = d3.scaleBand().domain(datos.map((d) => d.fecha));
 
         const countY = d3
             .scaleLinear()
@@ -1985,7 +2026,7 @@ const tempExt = () => {
     };
 
     const updateScales = (width, height) => {
-        scales.count.x.range([0, width]);
+        scales.count.x.range([0, width]).paddingInner(-0.1);
         scales.count.y.range([height, 0]);
     };
 
@@ -1994,7 +2035,12 @@ const tempExt = () => {
             .axisBottom(scales.count.x)
             .tickPadding(5)
             .tickFormat(d3.format('d'))
-            .ticks(13);
+            .ticks(13)
+            .tickValues(
+                scales.count.x.domain().filter(function(d, i) {
+                    return !(i % 5);
+                })
+            );
 
         g.select('.axis-x')
             .attr('transform', `translate(0,${height})`)
@@ -2032,47 +2078,55 @@ const tempExt = () => {
 
         g.attr('transform', translate);
 
-        const area = d3
-            .area()
-            .x((d) => scales.count.x(d.year))
-            .y0(height)
-            .y1((d) => scales.count.y(d.total));
-
-        const line = d3
-            .line()
-            .x((d) => scales.count.x(d.year))
-            .y((d) => scales.count.y(d.total));
-
         updateScales(width, height);
 
         const container = chart.select('.chart-temperature-ext-container-bis');
 
-        const layer = container.selectAll('.area-ext').data([datos]);
-
-        const layerLine = container.selectAll('.line-ext').data([datos]);
+        const layer = container.selectAll('.rect-ext').data(datos);
 
         const newLayer = layer
             .enter()
-            .append('path')
-            .attr('class', 'area-ext');
-
-        const newlayerLine = layerLine
-            .enter()
-            .append('path')
-            .attr('class', 'line-ext');
+            .append('rect')
+            .attr('class', 'rect-ext');
 
         layer
             .merge(newLayer)
+            .on('mouseover', function(d) {
+                const stationResize = d3
+                    .select('#select-ext')
+                    .property('value');
+                const positionX = scales.count.x(d.fecha);
+                const postionWidthTooltip = positionX + 270;
+                const tooltipWidth = 210;
+                const positionleft = `${d3.event.pageX}px`;
+                const positionright = `${d3.event.pageX - tooltipWidth}px`;
+                tooltip.transition();
+                tooltip
+                    .style('opacity', 1)
+                    .html(
+                        `
+                                <p class="tooltip-year">En <strong>${d.fecha}</strong> hubo <strong>${d.tropical}</strong> días en los que la máxima fue superior a <strong>${stationResize}ºC</strong>.</p>
+                                `
+                    )
+                    .style(
+                        'left',
+                        postionWidthTooltip > w ? positionright : positionleft
+                    )
+                    .style('top', `${d3.event.pageY - 28}px`);
+            })
+            .on('mouseout', function(d) {
+                tooltip
+                    .transition()
+                    .duration(300)
+                    .style('opacity', 0);
+            })
             .transition()
-            .duration(600)
+            .duration(500)
             .ease(d3.easeLinear)
-            .attr('d', area);
-
-        layerLine
-            .merge(newlayerLine)
-            .transition(600)
-            .ease(d3.easeLinear)
-            .attr('d', line);
+            .attr('width', scales.count.x.bandwidth())
+            .attr('x', (d) => scales.count.x(d.fecha))
+            .attr('y', (d) => scales.count.y(d.tropical))
+            .attr('height', (d) => height - scales.count.y(d.tropical));
 
         drawAxes(g);
     }
@@ -2086,21 +2140,7 @@ const tempExt = () => {
                 d.tropical = +d.total;
             });
 
-            scales.count.x.range([0, width]);
-            scales.count.y.range([height, 0]);
-
-            const countX = d3
-                .scaleTime()
-                .domain([
-                    d3.min(datos, (d) => d.fecha),
-                    d3.max(datos, (d) => d.fecha),
-                ]);
-
-            const countY = d3
-                .scaleLinear()
-                .domain([0, d3.max(datos, (d) => d.tropical * 1.25)]);
-
-            scales.count = { x: countX, y: countY };
+            setupScales();
             updateChart(datos);
         });
     }
@@ -2122,6 +2162,11 @@ const tempExt = () => {
 
         d3.csv(`csv/total-temp-${stationResize}.csv`, (error, data) => {
             datos = data;
+            datos.forEach((d) => {
+                d.fecha = +d.year;
+                d.tropical = +d.total;
+            });
+
             updateChart(datos);
         });
     };
@@ -2190,7 +2235,7 @@ function directionalDot(maxmins) {
         top: 16,
         right: 16,
         bottom: 32,
-        left: 48,
+        left: 48
     };
     let width = 0;
     let height = 0;
@@ -2214,14 +2259,14 @@ function directionalDot(maxmins) {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.dia),
-                    d3.max(dataz, (d) => d.dia),
+                    d3.max(dataz, (d) => d.dia)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.segundo - 1),
-                    d3.max(dataz, (d) => d.primero + 1),
+                    d3.max(dataz, (d) => d.primero + 1)
                 ]);
             scales.count = { x: countX, y: countY };
         } else {
@@ -2229,14 +2274,14 @@ function directionalDot(maxmins) {
                 .scaleTime()
                 .domain([
                     d3.min(dataz, (d) => d.dia),
-                    d3.max(dataz, (d) => d.dia),
+                    d3.max(dataz, (d) => d.dia)
                 ]);
 
             const countY = d3
                 .scaleLinear()
                 .domain([
                     d3.min(dataz, (d) => d.primero - 1),
-                    d3.max(dataz, (d) => d.segundo + 1),
+                    d3.max(dataz, (d) => d.segundo + 1)
                 ]);
             scales.count = { x: countX, y: countY };
         }
@@ -2375,9 +2420,7 @@ function directionalDot(maxmins) {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearprimera
-                        } y fue de ${d.primero}ºC<p/>`
+                        `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -2410,9 +2453,7 @@ function directionalDot(maxmins) {
                 tooltip
                     .style('opacity', 1)
                     .html(
-                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${
-                            d.yearprimera
-                        } y fue de ${d.segundo}ºC<p/>`
+                        `<p class="tooltip-diff-text">La segunda temperatura ${maxmins} en ${city} se registro en ${d.yearsegundo} y fue de ${d.segundo}ºC<p/>`
                     )
                     .style(
                         'left',
@@ -2469,14 +2510,14 @@ function directionalDot(maxmins) {
                         .scaleTime()
                         .domain([
                             d3.min(dataz, (d) => d.dia),
-                            d3.max(dataz, (d) => d.dia),
+                            d3.max(dataz, (d) => d.dia)
                         ]);
 
                     const countY = d3
                         .scaleLinear()
                         .domain([
                             d3.min(dataz, (d) => d.segundo - 1),
-                            d3.max(dataz, (d) => d.primero + 1),
+                            d3.max(dataz, (d) => d.primero + 1)
                         ]);
                     scales.count = { x: countX, y: countY };
                 } else {
@@ -2484,14 +2525,14 @@ function directionalDot(maxmins) {
                         .scaleTime()
                         .domain([
                             d3.min(dataz, (d) => d.dia),
-                            d3.max(dataz, (d) => d.dia),
+                            d3.max(dataz, (d) => d.dia)
                         ]);
 
                     const countY = d3
                         .scaleLinear()
                         .domain([
                             d3.min(dataz, (d) => d.primero - 1),
-                            d3.max(dataz, (d) => d.segundo + 1),
+                            d3.max(dataz, (d) => d.segundo + 1)
                         ]);
                     scales.count = { x: countX, y: countY };
                 }
@@ -2588,55 +2629,306 @@ function directionalDot(maxmins) {
     loadData();
 }
 
+/*const heatWave = () => {
+    const selectCity = d3.select('#select-heat-wave');
+
+    const updateMes = () => {
+        const city = selectCity
+            .property('value')
+            .replace(/ /g, '_')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        loadData(city);
+    };
+
+    const menuCities = () => {
+        d3.csv('csv/stations.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const datos = data;
+
+                const nest = d3
+                    .nest()
+                    .key((d) => d.Name)
+                    .entries(datos);
+
+                selectCity
+                    .selectAll('option')
+                    .data(nest)
+                    .enter()
+                    .append('option')
+                    .attr('value', (d) => d.key)
+                    .text((d) => d.key);
+
+                selectCity.on('change', () => {
+                    updateMes();
+                });
+            }
+        });
+    };
+
+    menuCities();
+
+    // LOAD THE DATA
+    const loadData = (mes) => {
+        d3.csv(`csv/max/julio/${mes}-julio.csv`, (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                const container = d3.select('.forno-container');
+
+                container
+                    .selectAll('.forno-element')
+                    .remove()
+                    .exit()
+                    .data(data)
+                    .enter()
+                    .append('section')
+                    .attr('class', 'forno-element')
+                    .html(
+                        (d) => `
+                              <span class="forno-day forno-text">${d.fecha}</span>
+                              <span class="forno-year forno-text">${d.yearprimera}</span>
+                            <span class="forno-record forno-text">${d.primero}ºC</span>`
+                    );
+            }
+        });
+    };
+
+    const selected = 'Albacete';
+
+    loadData(selected);
+};*/
+
+/*const average = () => {
+    const margin = { top: 24, right: 24, bottom: 24, left: 40 };
+    let width = 0;
+    let height = 0;
+    const chart = d3.select('.line-average');
+    const svg = chart.select('svg');
+    const scales = {};
+    const temp = 'ºC';
+    let dataz;
+
+    const setupScales = () => {
+        const countX = d3
+            .scaleTime()
+            .domain([
+                d3.min(dataz, (d) => d.fecha),
+                d3.max(dataz, (d) => d.fecha),
+            ]);
+
+        const countY = d3
+            .scaleLinear()
+            .domain([
+                d3.min(dataz, (d) => d.mediaXX - 4),
+                d3.max(dataz, (d) => d.mediaXX + 4),
+            ]);
+
+        scales.count = { x: countX, y: countY };
+    };
+
+    const setupElements = () => {
+        const g = svg.select('.line-average-container');
+
+        g.append('g').attr('class', 'axis axis-x');
+
+        g.append('g').attr('class', 'axis axis-y');
+
+        g.append('g').attr('class', 'line-average-container-dos');
+    };
+
+    const updateScales = (width, height) => {
+        scales.count.x.range([16, width]);
+        scales.count.y.range([height, 0]);
+    };
+
+    const drawAxes = (g) => {
+        const axisX = d3
+            .axisBottom(scales.count.x)
+            .tickFormat(d3.format('d'))
+            .ticks(33);
+
+        g.select('.axis-x')
+            .attr('transform', `translate(0,${height})`)
+            .call(axisX);
+
+        const axisY = d3
+            .axisLeft(scales.count.y)
+            .tickFormat((d) => d + temp)
+            .ticks(10)
+            .tickSizeInner(-width);
+
+        g.select('.axis-y').call(axisY);
+
+        g.append('text')
+            .attr('class', 'legend-aragon')
+            .attr('y', '1%')
+            .attr('x', '3%')
+            .text('Promedio de temperatura media entre 1980-2009');
+
+        g.append('rect')
+            .attr('class', 'legend-line')
+            .attr('y', '0')
+            .attr('x', '1%')
+            .attr('height', '3px')
+            .attr('width', '16px');
+    };
+
+    const updateChart = (dataz) => {
+        const w = chart.node().offsetWidth;
+        const h = 600;
+
+        width = w - margin.left - margin.right;
+        height = h - margin.top - margin.bottom;
+
+        svg.attr('width', w).attr('height', h);
+
+        const translate = `translate(${margin.left},${margin.top})`;
+
+        const g = svg.select('.line-average-container');
+
+        g.attr('transform', translate);
+
+        const line = d3
+            .line()
+            .x((d) => scales.count.x(d.fecha))
+            .y((d) => scales.count.y(d.mediaXX))
+            .curve(d3.curveStep);
+
+        updateScales(width, height);
+
+        const container = chart.select('.line-average-container-dos');
+
+        const layer = container.selectAll('.line').data([dataz]);
+
+        const layer2 = container.selectAll('.bar-vertical').data(dataz);
+
+        const newLayer2 = layer2
+            .enter()
+            .append('rect')
+            .attr('id', (d, i) => 'rect' + i)
+            .attr('class', (d) => {
+                if (d.diff < 0) {
+                    return 'up';
+                } else {
+                    return 'down';
+                }
+            });
+
+        const newLayer = layer
+            .enter()
+            .append('path')
+            .attr('class', 'line')
+            .attr('stroke-width', '1.5');
+
+        layer2
+            .merge(newLayer2)
+            .attr('width', width / dataz.length - 4)
+            .attr('x', (d) => scales.count.x(d.fecha) - 14)
+            .attr('y', (d) => {
+                if (d.diff > 0) {
+                    return scales.count.y(d.mediaXX);
+                } else {
+                    return (
+                        scales.count.y(d.mediaXX) -
+                        Math.abs(scales.count.y(d.diff) - scales.count.y(0))
+                    );
+                }
+            })
+            .attr('height', (d) =>
+                Math.abs(scales.count.y(d.diff) - scales.count.y(0))
+            );
+
+        layer.merge(newLayer).attr('d', line);
+
+        drawAxes(g);
+    };
+
+    const resize = () => {
+        updateChart(dataz);
+    };
+
+    const loadData = () => {
+        d3.csv('csv/junio-1980-2019.csv', (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                dataz = data;
+                dataz.forEach((d) => {
+                    d.mediaXX = +d.mediaXX;
+                    d.mediaXXI = +d.mediaXXI;
+                    d.diff = +d.diff;
+                });
+                setupElements();
+                setupScales();
+                updateChart(dataz);
+            }
+        });
+    };
+
+    window.addEventListener('resize', resize);
+
+    loadData();
+};*/
+
 tropicalCities();
 scatterInput();
 vulturno();
-directionalDot();
 directionalDot(maxmin[0]);
 directionalDot(maxmin[1]);
-
-new SlimSelect({
-    select: '#select-city',
-    searchPlaceholder: 'Busca tu ciudad',
-});
-
-new SlimSelect({
-    select: '#select-scatter-city',
-    searchPlaceholder: 'Busca tu ciudad',
-});
-
-new SlimSelect({
-    select: '#select-city-tropical',
-    searchPlaceholder: 'Busca tu ciudad',
-});
-
-new SlimSelect({
-    select: '#select-ext',
-    searchPlaceholder: 'Selecciona temperatura',
-});
-
-new SlimSelect({
-    select: '#select-month-max',
-    searchPlaceholder: 'Selecciona un mes',
-});
-
-new SlimSelect({
-    select: '#select-month-min',
-    searchPlaceholder: 'Selecciona un mes',
-});
-
-new SlimSelect({
-    select: '#select-cities-records-max',
-    searchPlaceholder: 'Selecciona una ciudad',
-});
-
-new SlimSelect({
-    select: '#select-cities-records-min',
-    searchPlaceholder: 'Selecciona una ciudad',
-});
 
 maxvul();
 tropicalTotal();
 frostyTotal();
 minvul();
 tempExt();
+/*average();*/
+/*heatWave();*/
+
+new SlimSelect({
+    select: '#select-city',
+    searchPlaceholder: 'Busca tu ciudad'
+});
+
+new SlimSelect({
+    select: '#select-scatter-city',
+    searchPlaceholder: 'Busca tu ciudad'
+});
+
+new SlimSelect({
+    select: '#select-city-tropical',
+    searchPlaceholder: 'Busca tu ciudad'
+});
+
+new SlimSelect({
+    select: '#select-ext',
+    searchPlaceholder: 'Selecciona temperatura'
+});
+
+new SlimSelect({
+    select: '#select-month-max',
+    searchPlaceholder: 'Selecciona un mes'
+});
+
+new SlimSelect({
+    select: '#select-month-min',
+    searchPlaceholder: 'Selecciona un mes'
+});
+
+new SlimSelect({
+    select: '#select-cities-records-max',
+    searchPlaceholder: 'Selecciona una ciudad'
+});
+
+new SlimSelect({
+    select: '#select-cities-records-min',
+    searchPlaceholder: 'Selecciona una ciudad'
+});
+
+/*new SlimSelect({
+    select: '#select-heat-wave',
+    searchPlaceholder: 'Selecciona una ciudad'
+});
+*/

@@ -1,13 +1,29 @@
-.data-viz {
-    padding: 1rem 0;
+.proyectos {
+    padding: 2rem 0;
+    padding-top: 0;
+    max-width: 90%;
+    display: grid;
+    margin: 2rem auto;
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    grid-column-gap: 4rem;
+    grid-row-gap: 4rem;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.proyectos-title {
+    font-size: 1.5rem;
+    max-width: 90%;
+    font-family: var(--title);
+    margin: 1rem auto;
+    padding-top: 2rem;
 }
 
 .proyectos-element {
     padding: 1rem;
     border-radius: 4px;
-    margin-bottom: 1.5rem;
-    width: 90%;
-    max-width: 30rem;
+    width: 100%;
     display: inline-block;
     text-decoration: none;
     transition: all .3s ease-in;
@@ -19,7 +35,7 @@
 }
 
 .proyectos-element-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-family: var(--roboto);
     font-weight: bold;
     letter-spacing: 1px;
@@ -30,7 +46,7 @@
 
 .proyectos-element-subtitle {
     font-size: .75rem;
-    font-family: var(--roboto);
+    font-family: var(--monospace);
     font-weight: bold;
     text-transform: uppercase;
     display: inline-block;
@@ -39,7 +55,7 @@
 .proyectos-element-text {
     font-size: 1rem;
     font-family: var(--text);
-    margin-top: .5rem;
+    margin-top: 0;
     margin-bottom: 0;
     width: 100%;
 }
@@ -60,6 +76,14 @@
     color: var(--project2txt);
 }
 
+.proyecto-3 {
+    background-color: var(--project3bg);
+}
+
+.proyecto-3-text {
+    color: var(--project3txt);
+}
+
 .proyecto-4 {
     background-color: var(--project4bg);
 }
@@ -68,14 +92,99 @@
     color: var(--project4txt);
 }
 
-@media only screen and (min-width: 48rem) {
+.proyecto-5 {
+    background-color: var(--project5bg);
+}
+
+.proyecto-5-text {
+    color: var(--project5txt);
+}
+
+.proyecto-6 {
+    background-color: var(--project6bg);
+}
+
+.proyecto-6-text {
+    color: var(--project6txt);
+}
+
+.proyecto-7 {
+    background-color: var(--project7bg);
+}
+
+.proyecto-7-text {
+    color: var(--project7txt);
+}
+
+.proyecto-8 {
+    background-color: var(--project8bg);
+}
+
+.proyecto-8-text {
+    color: var(--project8txt);
+}
+
+.proyecto-9 {
+    background-color: var(--project9bg);
+}
+
+.proyecto-9-text {
+    color: var(--project9txt);
+}
+
+.proyecto-10 {
+    background-color: var(--black);
+}
+
+.proyecto-10-text {
+    color: var(--white);
+}
+
+.proyecto-11 {
+    background-color: var(--project11bg);
+}
+
+.proyecto-11-text {
+    color: var(--project11txt);
+}
+
+.proyecto-12 {
+    background-color: var(--project12bg);
+}
+
+.proyecto-12-text {
+    color: var(--project12txt);
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+@media only screen and (min-width: 48em) {
+
+    .proyectos {
+        grid-template-columns: 1fr 1fr;
+        max-width: 42rem;
+    }
+
+    .proyectos-title {
+        max-width: 42rem;
+    }
 
     .proyectos-element {
         padding: 2rem;
     }
 
-    .data-viz {
-        padding: 3rem 0;
+}
+
+@media only screen and (min-width: 64em) {
+
+    .proyectos {
+        grid-template-columns: 1fr 1fr;
+        max-width: 58rem;
     }
 
+    .proyectos-title {
+        max-width: 58rem;
+    }
 }

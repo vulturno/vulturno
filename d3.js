@@ -3438,10 +3438,10 @@ var extent = function(values, valueof) {
   let min;
   let max;
   if (valueof === undefined) {
-    for (let value of values) {
-      if (value != null && value >= value) {
+    for (const value of values) {
+      if (value != null) {
         if (min === undefined) {
-          min = max = value;
+          if (value >= value) min = max = value;
         } else {
           if (min > value) min = value;
           if (max < value) max = value;
@@ -3451,9 +3451,9 @@ var extent = function(values, valueof) {
   } else {
     let index = -1;
     for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null && value >= value) {
+      if ((value = valueof(value, ++index, values)) != null) {
         if (min === undefined) {
-          min = max = value;
+          if (value >= value) min = max = value;
         } else {
           if (min > value) min = value;
           if (max < value) max = value;
@@ -3468,28 +3468,33 @@ var identity$1 = function(x) {
   return x;
 };
 
-function dogroup(values, keyof) {
-  const map = new Map();
-  let index = -1;
-  for (const value of values) {
-    const key = keyof(value, ++index, values);
-    const group = map.get(key);
-    if (group) group.push(value);
-    else map.set(key, [value]);
-  }
-  return map;
+function group(values, ...keys) {
+  return nest$1(values, identity$1, identity$1, keys);
 }
 
-function rollup(values, reduce, ...keys) {
+
+
+
+
+
+
+function nest$1(values, map, reduce, keys) {
   return (function regroup(values, i) {
     if (i >= keys.length) return reduce(values);
-    const map = dogroup(values, keys[i]);
-    return new Map(Array.from(map, ([k, v]) => [k, regroup(v, i + 1)]));
+    const groups = new Map();
+    const keyof = keys[i++];
+    let index = -1;
+    for (const value of values) {
+      const key = keyof(value, ++index, values);
+      const group = groups.get(key);
+      if (group) group.push(value);
+      else groups.set(key, [value]);
+    }
+    for (const [key, values] of groups) {
+      groups.set(key, regroup(values, i));
+    }
+    return map(groups);
   })(values, 0);
-}
-
-function group(values, ...keys) {
-  return rollup(values, identity$1, ...keys);
 }
 
 var array$1 = Array.prototype;
@@ -3563,10 +3568,9 @@ function quantile(values, p, valueof = number) {
 function max(values, valueof) {
   let max;
   if (valueof === undefined) {
-    for (let value of values) {
+    for (const value of values) {
       if (value != null
-          && value >= value
-          && (max === undefined || max < value)) {
+          && (max < value || (max === undefined && value >= value))) {
         max = value;
       }
     }
@@ -3574,8 +3578,7 @@ function max(values, valueof) {
     let index = -1;
     for (let value of values) {
       if ((value = valueof(value, ++index, values)) != null
-          && value >= value
-          && (max === undefined || max < value)) {
+          && (max < value || (max === undefined && value >= value))) {
         max = value;
       }
     }
@@ -3646,10 +3649,9 @@ function* numbers(values, valueof) {
 function min(values, valueof) {
   let min;
   if (valueof === undefined) {
-    for (let value of values) {
+    for (const value of values) {
       if (value != null
-          && value >= value
-          && (min === undefined || min > value)) {
+          && (min > value || (min === undefined && value >= value))) {
         min = value;
       }
     }
@@ -3657,8 +3659,7 @@ function min(values, valueof) {
     let index = -1;
     for (let value of values) {
       if ((value = valueof(value, ++index, values)) != null
-          && value >= value
-          && (min === undefined || min > value)) {
+          && (min > value || (min === undefined && value >= value))) {
         min = value;
       }
     }
@@ -5009,6 +5010,52 @@ function controlPoints(x) {
   for (i = 0; i < n - 1; ++i) b[i] = 2 * x[i + 1] - a[i + 1];
   return [a, b];
 }
+
+function Step(context, t) {
+  this._context = context;
+  this._t = t;
+}
+
+Step.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._x = this._y = NaN;
+    this._point = 0;
+  },
+  lineEnd: function() {
+    if (0 < this._t && this._t < 1 && this._point === 2) this._context.lineTo(this._x, this._y);
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    if (this._line >= 0) this._t = 1 - this._t, this._line = 1 - this._line;
+  },
+  point: function(x, y) {
+    x = +x, y = +y;
+    switch (this._point) {
+      case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+      case 1: this._point = 2; // proceed
+      default: {
+        if (this._t <= 0) {
+          this._context.lineTo(this._x, y);
+          this._context.lineTo(x, y);
+        } else {
+          var x1 = this._x * (1 - this._t) + x * this._t;
+          this._context.lineTo(x1, this._y);
+          this._context.lineTo(x1, y);
+        }
+        break;
+      }
+    }
+    this._x = x, this._y = y;
+  }
+};
+
+var step = function(context) {
+  return new Step(context, 0.5);
+};
 
 var none$1 = function(series, order) {
   if (!((n = series.length) > 1)) return;
@@ -7264,7 +7311,7 @@ function formatUnixTimestampSeconds(d) {
 
 var locale$2;
 
-var timeParse;
+
 var utcFormat;
 var utcParse;
 
@@ -7282,7 +7329,7 @@ defaultLocale$1({
 function defaultLocale$1(definition) {
   locale$2 = formatLocale$1(definition);
   exports.timeFormat = locale$2.format;
-  timeParse = locale$2.parse;
+  exports.timeParse = locale$2.parse;
   utcFormat = locale$2.utcFormat;
   utcParse = locale$2.utcParse;
   return locale$2;
@@ -8618,8 +8665,8 @@ var simulation = function(nodes) {
   function initializeNodes() {
     for (var i = 0, n = nodes.length, node; i < n; ++i) {
       node = nodes[i], node.index = i;
-      if (!isNaN(node.fx)) node.x = node.fx;
-      if (!isNaN(node.fy)) node.y = node.fy;
+      if (node.fx != null) node.x = node.fx;
+      if (node.fy != null) node.y = node.fy;
       if (isNaN(node.x) || isNaN(node.y)) {
         var radius = initialRadius * Math.sqrt(i), angle = i * initialAngle;
         node.x = radius * Math.cos(angle);
@@ -8911,6 +8958,7 @@ exports.curveCardinal = cardinal;
 exports.arc = arc;
 exports.curveLinear = curveLinear;
 exports.area = area;
+exports.curveStep = step;
 exports.scaleTime = time;
 exports.scaleLinear = linear$2;
 exports.scaleOrdinal = ordinal;

@@ -360,23 +360,40 @@ template {
   display: none;
 }
 :root {
-  --fontSystem: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, sans-serif;
-  --monospace: 'SFMono-Regular', Consolas, Menlo, Courier, monospace;
-  --title: 'Playfair Display', serif;
-  --text: 'Adamina', serif;
-  --roboto: 'Roboto Condensed', sans-serif;
-  --orange: #F35F3D;
-  --circles: #261a41;
-  --black: #111;
-  --white: #fff;
-  --shadowTooltip: 0 2px 9px 0 rgba(0, 0, 0, .2);
-  --shadowCard: 0 2px 4px 0 rgba(0, 0, 0, .31), 0 2px 4px 0 rgba(50, 50, 58, .2);
-  --project1bg: #FEE1C2;
-  --project1txt: #952747;
-  --project2bg: #354A57;
-  --project2txt: #a5cf80;
-  --project4bg: #798780;
-  --project4txt: #1a182a;
+    --fontSystem: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, sans-serif;
+    --monospace: 'SFMono-Regular', Consolas, Menlo, Courier, monospace;
+    --title: 'Playfair Display', serif;
+    --text: 'Adamina', serif;
+    --roboto: 'Roboto Condensed', sans-serif;
+    --orange: #F35F3D;
+    --circles: #261a41;
+    --black: #111;
+    --white: #fff;
+    --shadowTooltip: 0 2px 9px 0 rgba(0, 0, 0, .2);
+    --shadowCard: 0 2px 4px 0 rgba(0, 0, 0, .31), 0 2px 4px 0 rgba(50, 50, 58, .2);
+    --fondoproyectos: #0c1e44;
+    --project1bg: #FEE1C2;
+    --project1txt: #952747;
+    --project2bg: #354A57;
+    --project2txt: #a5cf80;
+    --project3bg: #EABAAB;
+    --project3txt: #36152f;
+    --project4bg: #798780;
+    --project4txt: #1a182a;
+    --project5bg: #995243;
+    --project5txt: #e5f9fb;
+    --project6bg: #A37E49;
+    --project6txt: #05183f;
+    --project7bg: #AAD7C7;
+    --project7txt: #145669;
+    --project8bg: #EABFB1;
+    --project8txt: #670509;
+    --project9bg: #fff6cb;
+    --project9txt: #0e2153;
+    --project11bg: #DF9245;
+    --project11txt: #231736;
+    --project12bg: #F4E467;
+    --project12txt: #111;
 }
 /* Menu inspired: https://codepen.io/BeanBaag/pen/XZRewP remove jQuery for JavaScript */
 .burger {
@@ -600,6 +617,13 @@ template {
     text-align: center;
     letter-spacing: 1px;
 }
+.author {
+    font-size: 12px;
+    font-family: 'Adamina', serif;
+    font-family: var(--text);
+    display: block;
+    text-align: center;
+}
 @media only screen and (min-width: 48rem) {
 
     .header-title {
@@ -733,6 +757,28 @@ template {
 }
 .chart {
     background-color: rgba(253, 230, 167, .15);
+}
+.notas {
+    padding: 4rem 0;
+    background-image: url('../img/notas.jpg');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    height: 50vh;
+    background-position-y: 60%;
+
+}
+.notas-text {
+    font-size: 1.25rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    color: #111;
+    color: var(--black);
+    max-width: 80%;
+    display: inline-block;
+    background-color: #fff;
+    background-color: var(--white);
+    padding: 1rem;
 }
 .chart-container,
 .metodology-container,
@@ -925,6 +971,21 @@ template {
             font-size: 1rem;
             font-weight: bold;
         }
+.tooltip strong {
+        font-weight: bold;
+
+    }
+.tooltip.tooltip-tropical {
+        background-color: #060241;
+        color: #fff;
+        color: var(--white);
+    }
+.tooltip .tooltip-year {
+        margin: 0;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-family: var(--roboto);
+        font-size: 1rem;
+    }
 .tooltip-decade,
 .tooltip-record {
     width: 15rem;
@@ -1063,26 +1124,12 @@ template {
     color: #3B5795;
     border: 1px solid #3B5795;
 }
-.area-tropical {
+.bar-tropical,
+.bar-cities-tropical {
     fill: #dd435c;
 }
 .area-frosty {
     fill: #257d98;
-}
-.line-frosty {
-    stroke: #2e4e74;
-    fill: none;
-}
-.line-tropical {
-    stroke: #670509;
-    fill: none;
-}
-.area-cities-tropical {
-    fill: #E15171;
-}
-.line-cities-tropical {
-    fill: none;
-    stroke: #7b2647;
 }
 .chart-vulturno-container .area {
         fill: #F35F3D;
@@ -1141,18 +1188,9 @@ template {
         fill: var(--white);
         stroke: none;
     }
-.lines-tropical {
-    fill: none;
-    stroke: #670509;
-    stroke-width: 2px;
-}
-.area-ext {
-    fill: rgba(219, 69, 94, .9);
+.rect-ext {
+    fill: #b8000f;
     stroke: none;
-}
-.line-ext {
-    fill: none;
-    stroke: rgba(20, 3, 32, .5);
 }
 #noches-tropicales-ciudad {
     padding-top: 1.5rem;
@@ -1190,6 +1228,35 @@ template {
 .circle-segundo-min {
     fill: #63A3B2;
 }
+.line-average .line {
+        fill: none;
+        stroke: #111;
+        stroke: var(--black);
+        stroke-width: 2px;
+    }
+.line-average .up {
+        fill: #b8000f;
+    }
+.line-average .down {
+        fill: #0583a0;
+    }
+#btn-notas {
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid #111;
+    border: 1px solid var(--black);
+    font-size: 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    background-color: #0a2160;
+    color: #fff;
+    color: var(--white);
+    transition: background-color .3s ease-in;
+    border-radius: 2px;
+}
+#btn-notas:hover {
+        background-color: #2547a7;
+    }
 @media only screen and (min-width: 48rem) {
 
     .chart-container,
@@ -1239,6 +1306,12 @@ template {
         left: 50px;
     }
 
+    .notas-text {
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        max-width: 35rem;
+    }
+
 }
 @media only screen and (min-width: 64em) {
 
@@ -1265,6 +1338,7 @@ template {
 
     .scatter-inputs-filter {
         padding: 1rem;
+        margin-bottom: 2rem;
     }
         .chart-vulturno .tooltip {
             padding: 1rem;
@@ -1292,7 +1366,7 @@ template {
     margin-bottom: 0;
 }
 .temperature-container-full {
-    max-width: 65rem;
+    width: 95%;
     margin: 0 auto;
 }
 .temperature-max,
@@ -1368,8 +1442,43 @@ template {
     }
 .temperature-ext {
     background-color: #dde8e0;
+    padding: 2rem 0;
 }
-@media only screen and (min-width: 48rem) {
+.scatter-inputs-circles {
+    r: 4px;
+}
+.notes-temp {
+    background-color: #F4E467;
+    padding: 3rem 0;
+}
+.notas-text-number {
+    background-color: #111;
+    background-color: var(--black);
+    font-size: 6rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    color: #F4E467;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 1rem;
+}
+.notas-text-date {
+    font-size: 3rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    font-weight: bold;
+    display: block;
+}
+.notas-text-temp {
+    font-size: 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    display: block;
+}
+.notas-text-temp strong {
+        font-size: 1.5rem;
+    }
+@media only screen and (min-width: 48em) {
 
     .temperature-max-number {
         font-size: 10rem;
@@ -1385,6 +1494,16 @@ template {
                 font-family: var(--roboto);
             }
 
+    .scatter-inputs-circles {
+        r: 6px;
+    }
+
+}
+@media only screen and (min-width: 64em) {
+    .temperature-container-full {
+        width: 75rem;
+        margin: 0 auto;
+    }
 }
 .metodology {
     background-color: #dde8e0;
@@ -1416,15 +1535,31 @@ template {
     }
 
 }
-.data-viz {
-    padding: 1rem 0;
+.proyectos {
+    padding: 2rem 0;
+    padding-top: 0;
+    max-width: 90%;
+    display: grid;
+    margin: 2rem auto;
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    grid-column-gap: 4rem;
+    grid-row-gap: 4rem;
+    justify-items: stretch;
+    align-items: stretch;
+}
+.proyectos-title {
+    font-size: 1.5rem;
+    max-width: 90%;
+    font-family: 'Playfair Display', serif;
+    font-family: var(--title);
+    margin: 1rem auto;
+    padding-top: 2rem;
 }
 .proyectos-element {
     padding: 1rem;
     border-radius: 4px;
-    margin-bottom: 1.5rem;
-    width: 90%;
-    max-width: 30rem;
+    width: 100%;
     display: inline-block;
     text-decoration: none;
     transition: all .3s ease-in;
@@ -1435,7 +1570,7 @@ template {
         opacity: .9;
     }
 .proyectos-element-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-family: 'Roboto Condensed', sans-serif;
     font-family: var(--roboto);
     font-weight: bold;
@@ -1446,8 +1581,8 @@ template {
 }
 .proyectos-element-subtitle {
     font-size: .75rem;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-family: var(--roboto);
+    font-family: 'SFMono-Regular', Consolas, Menlo, Courier, monospace;
+    font-family: var(--monospace);
     font-weight: bold;
     text-transform: uppercase;
     display: inline-block;
@@ -1456,7 +1591,7 @@ template {
     font-size: 1rem;
     font-family: 'Adamina', serif;
     font-family: var(--text);
-    margin-top: .5rem;
+    margin-top: 0;
     margin-bottom: 0;
     width: 100%;
 }
@@ -1476,6 +1611,14 @@ template {
     color: #a5cf80;
     color: var(--project2txt);
 }
+.proyecto-3 {
+    background-color: #EABAAB;
+    background-color: var(--project3bg);
+}
+.proyecto-3-text {
+    color: #36152f;
+    color: var(--project3txt);
+}
 .proyecto-4 {
     background-color: #798780;
     background-color: var(--project4bg);
@@ -1484,16 +1627,99 @@ template {
     color: #1a182a;
     color: var(--project4txt);
 }
-@media only screen and (min-width: 48rem) {
+.proyecto-5 {
+    background-color: #995243;
+    background-color: var(--project5bg);
+}
+.proyecto-5-text {
+    color: #e5f9fb;
+    color: var(--project5txt);
+}
+.proyecto-6 {
+    background-color: #A37E49;
+    background-color: var(--project6bg);
+}
+.proyecto-6-text {
+    color: #05183f;
+    color: var(--project6txt);
+}
+.proyecto-7 {
+    background-color: #AAD7C7;
+    background-color: var(--project7bg);
+}
+.proyecto-7-text {
+    color: #145669;
+    color: var(--project7txt);
+}
+.proyecto-8 {
+    background-color: #EABFB1;
+    background-color: var(--project8bg);
+}
+.proyecto-8-text {
+    color: #670509;
+    color: var(--project8txt);
+}
+.proyecto-9 {
+    background-color: #fff6cb;
+    background-color: var(--project9bg);
+}
+.proyecto-9-text {
+    color: #0e2153;
+    color: var(--project9txt);
+}
+.proyecto-10 {
+    background-color: #111;
+    background-color: var(--black);
+}
+.proyecto-10-text {
+    color: #fff;
+    color: var(--white);
+}
+.proyecto-11 {
+    background-color: #DF9245;
+    background-color: var(--project11bg);
+}
+.proyecto-11-text {
+    color: #231736;
+    color: var(--project11txt);
+}
+.proyecto-12 {
+    background-color: #F4E467;
+    background-color: var(--project12bg);
+}
+.proyecto-12-text {
+    color: #111;
+    color: var(--project12txt);
+}
+.line-through {
+    text-decoration: line-through;
+}
+@media only screen and (min-width: 48em) {
+
+    .proyectos {
+        grid-template-columns: 1fr 1fr;
+        max-width: 42rem;
+    }
+
+    .proyectos-title {
+        max-width: 42rem;
+    }
 
     .proyectos-element {
         padding: 2rem;
     }
 
-    .data-viz {
-        padding: 3rem 0;
+}
+@media only screen and (min-width: 64em) {
+
+    .proyectos {
+        grid-template-columns: 1fr 1fr;
+        max-width: 58rem;
     }
 
+    .proyectos-title {
+        max-width: 58rem;
+    }
 }
 .pink {
     background-color: #FCA300;
@@ -1607,6 +1833,73 @@ template {
 body {
     margin: 0;
     line-height: 1.4;
+}
+* {
+    box-sizing: border-box;
+}
+.forno {
+    background-color: #DED7A7;
+    padding: 2rem 0;
+}
+.forno-container, .hola {
+    width: 100%;
+    grid-template-columns: 1fr;
+    display: grid;
+    margin: 2rem auto;
+    margin-top: 0;
+    grid-column-gap: 1rem;
+    justify-items: stretch;
+    align-items: stretch;
+    color: #AC1545;
+}
+.forno-element {
+    border-radius: .5rem;
+    padding: 1rem;
+    text-align: right;
+}
+.forno-text {
+    font-size: 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--roboto);
+    display: block;
+}
+.forno-day {
+    text-align: right;
+    padding: .5rem;
+    border-bottom: 1px solid #111;
+}
+.forno-record {
+    font-size: 5rem;
+    font-weight: bold;
+}
+.forno-year {
+    font-size: 2rem;
+    padding-top: 1rem;
+}
+@media only screen and (min-width: 48rem) {
+
+    .forno-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+@media only screen and (min-width: 64em) {
+
+    .forno-container {
+        width: 60rem;
+    }
+
+    .forno-record {
+        font-size: 8rem;
+    }
+
+    .forno-year {
+        font-size: 3rem;
+    }
+
+    .forno {
+        min-height: 100vh;
+    }
 }
 
 /*# sourceMappingURL=styles.css.map */

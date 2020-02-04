@@ -1,9 +1,5 @@
 {
     "name": "Vulturno",
-    "env":
-    {
-        "NODE_ENV": "production"
-    },
     "alias": [
         "vulturno.co"
     ],

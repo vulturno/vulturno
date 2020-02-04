@@ -8,6 +8,13 @@
     letter-spacing: 1px;
 }
 
+.author {
+    font-size: 12px;
+    font-family: var(--text);
+    display: block;
+    text-align: center;
+}
+
 @media only screen and (min-width: 48rem) {
 
     .header-title {
