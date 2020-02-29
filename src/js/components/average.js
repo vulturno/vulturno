@@ -148,10 +148,8 @@ function average() {
   };
 
   const loadData = () => {
-    d3.csv('csv/junio-1980-2019.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/junio-1980-2019.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.mediaXX = +d.mediaXX;
@@ -161,8 +159,7 @@ function average() {
         setupElements();
         setupScales();
         updateChart(dataz);
-      }
-    });
+      });
   };
 
   window.addEventListener('resize', resize);

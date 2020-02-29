@@ -58,10 +58,8 @@ function maxRecords() {
   };
 
   const danotations = () => {
-    d3.csv('csv/max-record.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/max-record.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.fecha = d.yearmax;
@@ -114,8 +112,7 @@ function maxRecords() {
           .call(makeAnnotations);
 
         svg.selectAll('g.annotation-connector, g.annotation-note');
-      }
-    });
+      });
   };
 
   const updateChart = (dataz) => {
@@ -164,10 +161,8 @@ function maxRecords() {
 
   // LOAD THE DATA
   const loadData = () => {
-    d3.csv('csv/max-record.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/max-record.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.fecha = d.yearmax;
@@ -177,8 +172,7 @@ function maxRecords() {
         setupScales();
         danotations();
         updateChart(dataz);
-      }
-    });
+      });
   };
   window.addEventListener('resize', resize);
   loadData();
