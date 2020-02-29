@@ -138,10 +138,8 @@ function tropicalTotal() {
 
   // LOAD THE DATA
   const loadData = () => {
-    d3.csv('csv/total-tropicales.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/total-tropicales.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.year = +d.year;
@@ -150,8 +148,7 @@ function tropicalTotal() {
         setupElements();
         setupScales();
         updateChart(dataz);
-      }
-    });
+      });
   };
 
   window.addEventListener('resize', resize);

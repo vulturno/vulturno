@@ -200,39 +200,40 @@ function tempMed() {
   }
 
   function update(mes) {
-    d3.csv(`csv/${mes}.csv`, (error, data) => {
-      datos = data;
+    d3.csv(`csv/${mes}.csv`)
+      .then(function(data) {
+        datos = data;
 
-      datos.forEach((d) => {
-        d.temp = +d.temp;
-        d.year = d.year;
-        d.fecha = +d.year;
-        d.tempmax = +d.tempmax;
-        d.yearmax = d.yearmax;
-        d.tempmin = +d.tempmin;
-        d.yearmin = d.yearmin;
+        datos.forEach((d) => {
+          d.temp = +d.temp;
+          d.year = d.year;
+          d.fecha = +d.year;
+          d.tempmax = +d.tempmax;
+          d.yearmax = d.yearmax;
+          d.tempmin = +d.tempmin;
+          d.yearmin = d.yearmin;
+        });
+
+        scales.count.x.range([0, width]);
+        scales.count.y.range([height, 0]);
+
+        const countX = d3
+          .scaleTime()
+          .domain([
+            d3.min(datos, (d) => d.year),
+            d3.max(datos, (d) => d.year)
+          ]);
+
+        const countY = d3
+          .scaleLinear()
+          .domain([
+            d3.min(datos, (d) => d.temp - 2),
+            d3.max(datos, (d) => d.temp + 2)
+          ]);
+
+        scales.count = { x: countX, y: countY };
+        updateChart(datos);
       });
-
-      scales.count.x.range([0, width]);
-      scales.count.y.range([height, 0]);
-
-      const countX = d3
-        .scaleTime()
-        .domain([
-          d3.min(datos, (d) => d.year),
-          d3.max(datos, (d) => d.year)
-        ]);
-
-      const countY = d3
-        .scaleLinear()
-        .domain([
-          d3.min(datos, (d) => d.temp - 2),
-          d3.max(datos, (d) => d.temp + 2)
-        ]);
-
-      scales.count = { x: countX, y: countY };
-      updateChart(datos);
-    });
   }
 
   const resize = () => {
@@ -250,26 +251,28 @@ function tempMed() {
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n');
 
-    d3.csv(`csv/${stationResize}.csv`, (error, data) => {
-      datos = data;
-      updateChart(datos);
-    });
+    d3.csv(`csv/${stationResize}.csv`)
+      .then(function(data) {
+        datos = data;
+        updateChart(datos);
+      });
   };
 
   const loadData = () => {
-    d3.csv('csv/Albacete.csv', (data) => {
-      datos = data;
-      datos.forEach((d) => {
-        d.year = d.year;
-        d.temp = d.temp;
-        d.fecha = +d.year;
+    d3.csv('csv/Albacete.csv')
+      .then(function(data) {
+        datos = data;
+        datos.forEach((d) => {
+          d.year = d.year;
+          d.temp = d.temp;
+          d.fecha = +d.year;
+        });
+        setupElements();
+        setupScales();
+        updateChart(datos);
+        const mes = 'Albacete';
+        update(mes);
       });
-      setupElements();
-      setupScales();
-      updateChart(datos);
-      const mes = 'Albacete';
-      update(mes);
-    });
   };
   window.addEventListener('resize', resize);
 

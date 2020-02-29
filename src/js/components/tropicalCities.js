@@ -142,17 +142,18 @@ function tropicalCities() {
   }
 
   function update(city) {
-    d3.csv(`csv/tropicales/${city}-total-tropicales.csv`, (error, data) => {
-      datos = data;
+    d3.csv(`csv/tropicales/${city}-total-tropicales.csv`)
+      .then(function(data) {
+        datos = data;
 
-      datos.forEach((d) => {
-        d.fecha = +d.year;
-        d.tropical = +d.total;
+        datos.forEach((d) => {
+          d.fecha = +d.year;
+          d.tropical = +d.total;
+        });
+
+        setupScales();
+        updateChart(datos);
       });
-
-      setupScales();
-      updateChart(datos);
-    });
   }
 
   const resize = () => {
@@ -170,36 +171,28 @@ function tropicalCities() {
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n');
 
-    d3.csv(
-      `csv/tropicales/${stationResize}-total-tropicales.csv`,
-      (error, data) => {
+    d3.csv(`csv/tropicales/${stationResize}-total-tropicales.csv`)
+      .then(function(data) {
         datos = data;
         updateChart(datos);
-      }
-    );
+      });
   };
 
   // LOAD THE DATA
   const loadData = () => {
-    d3.csv(
-      'csv/tropicales/Albacete-total-tropicales.csv',
-      (error, data) => {
-        if (error) {
-          console.log(error);
-        } else {
-          datos = data;
-          datos.forEach((d) => {
-            d.fecha = +d.year;
-            d.tropical = +d.total;
-          });
-          setupElements();
-          setupScales();
-          updateChart(datos);
-          const city = 'Albacete';
-          update(city);
-        }
-      }
-    );
+    d3.csv('csv/tropicales/Albacete-total-tropicales.csv')
+      .then(function(data) {
+        datos = data;
+        datos.forEach((d) => {
+          d.fecha = +d.year;
+          d.tropical = +d.total;
+        });
+        setupElements();
+        setupScales();
+        updateChart(datos);
+        const city = 'Albacete';
+        update(city);
+      });
   };
   window.addEventListener('resize', resize);
   loadData();

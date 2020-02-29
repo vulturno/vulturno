@@ -1,8 +1,6 @@
 function menuSelect(selector) {
-  d3.csv('csv/stations.csv', (error, data) => {
-    if (error) {
-      console.log(error);
-    } else {
+  d3.csv('csv/stations.csv')
+    .then(function(data) {
       const datos = data;
 
       const nest = d3
@@ -19,8 +17,7 @@ function menuSelect(selector) {
         .append('option')
         .attr('value', (d) => d.key)
         .text((d) => d.key);
-    }
-  });
+    });
 }
 
 export default menuSelect;

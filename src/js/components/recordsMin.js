@@ -37,10 +37,8 @@ function recordsMin() {
   };
 
   const danotations = () => {
-    d3.csv('csv/min-record.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/min-record.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.fecha = d.yearmin;
@@ -94,8 +92,7 @@ function recordsMin() {
           .call(makeAnnotations);
 
         svg.selectAll('g.annotation-connector, g.annotation-note');
-      }
-    });
+      });
   };
 
   const drawAxes = (g) => {
@@ -156,10 +153,8 @@ function recordsMin() {
 
   // LOAD THE DATA
   const loadData = () => {
-    d3.csv('csv/min-record.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/min-record.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.fecha = d.yearmin;
@@ -169,8 +164,7 @@ function recordsMin() {
         setupScales();
         danotations();
         updateChart(dataz);
-      }
-    });
+      });
   };
 
   window.addEventListener('resize', resize);
