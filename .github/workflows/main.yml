@@ -1,26 +1,15 @@
-name: deploy - vulturno
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+name: deploy website
+on: [pull_request]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: build
-        id: now-deployment-staging
-        if: github.event_name == 'pull_request'
+      - uses: amondnet/now-deployment@v2
         with:
-          github-token: ${{ secrets.GITHUB }}
           zeit-token: ${{ secrets.ZEIT_TOKEN }}
-      - uses: ./
-        id: now-deployment-production
-        if: github.event_name == 'push'
-        with:
           github-token: ${{ secrets.GITHUB }}
-          zeit-token: ${{ secrets.ZEIT_TOKEN }}
-          now-args: '--prod '
+          now-args: '--prod' #Optional
+          now-org-id: 'example_org_id' #Required
+          now-project-id: 'example_project_id' #Required
+          working-directory: ./
