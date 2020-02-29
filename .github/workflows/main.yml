@@ -10,6 +10,6 @@ jobs:
           zeit-token: ${{ secrets.ZEIT_TOKEN }}
           github-token: ${{ secrets.GITHUB }}
           now-args: '--prod' #Optional
-          now-org-id: 'example_org_id' #Required
-          now-project-id: 'example_project_id' #Required
+          now-org-id: 'jorgeatgu' #Required
+          now-project-id: 'Vulturno' #Required
           working-directory: ./
