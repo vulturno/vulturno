@@ -196,7 +196,6 @@ function scatterTemp() {
   const updateMax = () => {
 
     reValueDate = returnDate()
-    console.log("reValueDate", typeof reValueDate);
 
     errorDate();
 
@@ -419,7 +418,6 @@ function scatterTemp() {
 
   function update() {
     updateMax();
-    console.log('updatemax')
   }
 
   // LOAD THE DATA
