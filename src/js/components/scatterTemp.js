@@ -196,6 +196,7 @@ function scatterTemp() {
   const updateMax = () => {
 
     reValueDate = returnDate()
+    console.log("reValueDate", typeof reValueDate);
 
     errorDate();
 
@@ -207,7 +208,7 @@ function scatterTemp() {
 
     d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`)
       .then(function(data) {
-        dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
+        dataz = data.filter((d) => String(d.fecha).match(reValueDate));
 
         dataz.forEach((d) => {
           d.fecha = d.fecha;
@@ -418,6 +419,7 @@ function scatterTemp() {
 
   function update() {
     updateMax();
+    console.log('updatemax')
   }
 
   // LOAD THE DATA
