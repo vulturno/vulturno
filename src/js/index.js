@@ -96,3 +96,5 @@ new SlimSelect({
   select: '#select-cities-records-min',
   searchPlaceholder: 'Selecciona una ciudad'
 });
+
+
