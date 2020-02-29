@@ -263,7 +263,7 @@ function directionalDot(maxmins) {
       .replace(/[\u0300-\u036f]/g, '');
     d3.csv(`csv/${maxmins}/dos-records/${city}-dos-records.csv`)
       .then(function(data) {
-        dataz = dataz.filter((d) => String(d.mes).match(mes));
+        dataz = data.filter((d) => String(d.mes).match(mes));
 
         dataz.forEach((d) => {
           d.fecha = +d.fecha;
