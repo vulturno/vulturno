@@ -205,132 +205,133 @@ function scatterTemp() {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
 
-    d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`, (error, dataz) => {
-      dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
+    d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`)
+      .then(function(data) {
+        dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
 
-      dataz.forEach((d) => {
-        d.fecha = d.fecha;
-        d.maxima = +d.maxima;
-        d.minima = +d.minima;
-        d.year = getYear(d.fecha);
+        dataz.forEach((d) => {
+          d.fecha = d.fecha;
+          d.maxima = +d.maxima;
+          d.minima = +d.minima;
+          d.year = getYear(d.fecha);
+        });
+
+        scales.count.x.range([0, width]);
+        scales.count.y.range([height, 0]);
+
+        const countX = d3
+          .scaleTime()
+          .domain([
+            d3.min(dataz, (d) => d.year),
+            d3.max(dataz, (d) => d.year)
+          ]);
+
+        const countY = d3
+          .scaleLinear()
+          .domain([
+            d3.min(dataz, (d) => d.maxima - 10),
+            d3.max(dataz, (d) => d.maxima + 10)
+          ]);
+
+        const w = chart.node().offsetWidth;
+        const h = 544;
+
+        width = w - margin.left - margin.right;
+        height = h - margin.top - margin.bottom;
+
+        svg.attr('width', w).attr('height', h);
+
+        scales.count = { x: countX, y: countY };
+
+        const translate = `translate(${margin.left},${margin.top})`;
+
+        const g = svg.select('.scatter-inputs-container');
+
+        g.attr('transform', translate);
+
+        updateScales(width, height);
+
+        const line = d3
+          .line()
+          .x((d) => scales.count.x(d.year))
+          .y((d) => scales.count.y(d.maxima));
+
+        const container = chart.select('.scatter-inputs-container-dos');
+
+        const lines = container.selectAll('.lines').data([dataz]);
+
+        const newLines = lines
+          .enter()
+          .append('path')
+          .attr('class', 'lines');
+
+        lines
+          .merge(newLines)
+          .transition()
+          .duration(600)
+          .ease(d3.easeLinear)
+          .attr('d', line);
+
+        const layer = container
+          .selectAll('.scatter-inputs-circles')
+          .remove()
+          .exit()
+          .data(dataz);
+
+        const newLayer = layer
+          .enter()
+          .append('circle')
+          .attr('class', 'scatter-inputs-circles');
+
+        const ciudad = selectCity.property('value');
+
+        layer
+          .merge(newLayer)
+          .on('mouseover', (d) => {
+            const w = chart.node().offsetWidth;
+            const positionX = scales.count.x(d.year);
+            const postionWidthTooltip = positionX + 270;
+            const tooltipWidth = 210;
+            const positionleft = `${d3.event.pageX}px`;
+            const positionright = `${d3.event.pageX - tooltipWidth}px`;
+            tooltip.transition();
+            tooltip.attr(
+              'class',
+              'tooltip tooltip-scatter tooltip-max'
+            );
+            tooltip
+              .style('opacity', 1)
+              .html(
+                `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`
+              )
+              .style(
+                'left',
+                postionWidthTooltip > w ?
+                  positionright :
+                  positionleft
+              )
+              .style('top', `${d3.event.pageY - 28}px`);
+          })
+          .on('mouseout', () => {
+            tooltip
+              .transition()
+              .duration(200)
+              .style('opacity', 0);
+          })
+          .attr('cx', (d) => scales.count.x(d.year))
+          .attr('cy', (d, i) => i * (Math.random() * i))
+          .attr('fill-opacity', 1)
+          .transition()
+          .delay((d, i) => i * 10)
+          .duration(450)
+          .ease(d3.easeLinear)
+          .attr('cx', (d) => scales.count.x(d.year))
+          .attr('cy', (d) => scales.count.y(d.maxima))
+          .attr('r', 6)
+          .style('fill', '#dc7176');
+
+        drawAxes(g);
       });
-
-      scales.count.x.range([0, width]);
-      scales.count.y.range([height, 0]);
-
-      const countX = d3
-        .scaleTime()
-        .domain([
-          d3.min(dataz, (d) => d.year),
-          d3.max(dataz, (d) => d.year)
-        ]);
-
-      const countY = d3
-        .scaleLinear()
-        .domain([
-          d3.min(dataz, (d) => d.maxima - 10),
-          d3.max(dataz, (d) => d.maxima + 10)
-        ]);
-
-      const w = chart.node().offsetWidth;
-      const h = 544;
-
-      width = w - margin.left - margin.right;
-      height = h - margin.top - margin.bottom;
-
-      svg.attr('width', w).attr('height', h);
-
-      scales.count = { x: countX, y: countY };
-
-      const translate = `translate(${margin.left},${margin.top})`;
-
-      const g = svg.select('.scatter-inputs-container');
-
-      g.attr('transform', translate);
-
-      updateScales(width, height);
-
-      const line = d3
-        .line()
-        .x((d) => scales.count.x(d.year))
-        .y((d) => scales.count.y(d.maxima));
-
-      const container = chart.select('.scatter-inputs-container-dos');
-
-      const lines = container.selectAll('.lines').data([dataz]);
-
-      const newLines = lines
-        .enter()
-        .append('path')
-        .attr('class', 'lines');
-
-      lines
-        .merge(newLines)
-        .transition()
-        .duration(600)
-        .ease(d3.easeLinear)
-        .attr('d', line);
-
-      const layer = container
-        .selectAll('.scatter-inputs-circles')
-        .remove()
-        .exit()
-        .data(dataz);
-
-      const newLayer = layer
-        .enter()
-        .append('circle')
-        .attr('class', 'scatter-inputs-circles');
-
-      const ciudad = selectCity.property('value');
-
-      layer
-        .merge(newLayer)
-        .on('mouseover', (d) => {
-          const w = chart.node().offsetWidth;
-          const positionX = scales.count.x(d.year);
-          const postionWidthTooltip = positionX + 270;
-          const tooltipWidth = 210;
-          const positionleft = `${d3.event.pageX}px`;
-          const positionright = `${d3.event.pageX - tooltipWidth}px`;
-          tooltip.transition();
-          tooltip.attr(
-            'class',
-            'tooltip tooltip-scatter tooltip-max'
-          );
-          tooltip
-            .style('opacity', 1)
-            .html(
-              `<p class="tooltip-scatter-text">La temperatura máxima de ${ciudad} en ${d.year} fue de ${d.maxima}ºC<p/>`
-            )
-            .style(
-              'left',
-              postionWidthTooltip > w ?
-                positionright :
-                positionleft
-            )
-            .style('top', `${d3.event.pageY - 28}px`);
-        })
-        .on('mouseout', () => {
-          tooltip
-            .transition()
-            .duration(200)
-            .style('opacity', 0);
-        })
-        .attr('cx', (d) => scales.count.x(d.year))
-        .attr('cy', (d, i) => i * (Math.random() * i))
-        .attr('fill-opacity', 1)
-        .transition()
-        .delay((d, i) => i * 10)
-        .duration(450)
-        .ease(d3.easeLinear)
-        .attr('cx', (d) => scales.count.x(d.year))
-        .attr('cy', (d) => scales.count.y(d.maxima))
-        .attr('r', 6)
-        .style('fill', '#dc7176');
-
-      drawAxes(g);
-    });
   };
 
   const errorDate = () => {
@@ -369,37 +370,38 @@ function scatterTemp() {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
 
-    d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`, (error, dataz) => {
-      dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
+    d3.csv(`csv/day-by-day/${ciudad}-diarias.csv`)
+      .then(function(data) {
+        dataz = dataz.filter((d) => String(d.fecha).match(reValueDate));
 
-      dataz.forEach((d) => {
-        d.fecha = d.fecha;
-        d.maxima = +d.maxima;
-        d.minima = +d.minima;
-        d.year = getYear(d.fecha);
+        dataz.forEach((d) => {
+          d.fecha = d.fecha;
+          d.maxima = +d.maxima;
+          d.minima = +d.minima;
+          d.year = getYear(d.fecha);
+        });
+
+        scales.count.x.range([0, width]);
+        scales.count.y.range([height, 0]);
+
+        const countX = d3
+          .scaleTime()
+          .domain([
+            d3.min(dataz, (d) => d.year),
+            d3.max(dataz, (d) => d.year)
+          ]);
+
+        const countY = d3
+          .scaleLinear()
+          .domain([
+            d3.min(dataz, (d) => d.minima - 10),
+            d3.max(dataz, (d) => d.minima + 10)
+          ]);
+
+        scales.count = { x: countX, y: countY };
+
+        updateChart(dataz);
       });
-
-      scales.count.x.range([0, width]);
-      scales.count.y.range([height, 0]);
-
-      const countX = d3
-        .scaleTime()
-        .domain([
-          d3.min(dataz, (d) => d.year),
-          d3.max(dataz, (d) => d.year)
-        ]);
-
-      const countY = d3
-        .scaleLinear()
-        .domain([
-          d3.min(dataz, (d) => d.minima - 10),
-          d3.max(dataz, (d) => d.minima + 10)
-        ]);
-
-      scales.count = { x: countX, y: countY };
-
-      updateChart(dataz);
-    });
   };
 
   const resize = () => {
@@ -420,10 +422,8 @@ function scatterTemp() {
 
   // LOAD THE DATA
   const loadData = () => {
-    d3.csv('csv/day-by-day/Albacete-diarias.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/day-by-day/Albacete-diarias.csv')
+      .then(function(data) {
         dataz = data.filter((d) => String(d.fecha).match(reValueDate));
 
         dataz.forEach((d) => {
@@ -435,8 +435,7 @@ function scatterTemp() {
         setupElements();
         setupScales();
         updateChart(dataz);
-      }
-    });
+      });
   };
 
   window.addEventListener('resize', resize);

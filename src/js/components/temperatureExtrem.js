@@ -143,17 +143,18 @@ function tempExt() {
   }
 
   function update(mes) {
-    d3.csv(`csv/total-temp-${mes}.csv`, (error, data) => {
-      datos = data;
+    d3.csv(`csv/total-temp-${mes}.csv`)
+      .then(function(data) {
+        datos = data;
 
-      datos.forEach((d) => {
-        d.fecha = +d.year;
-        d.tropical = +d.total;
+        datos.forEach((d) => {
+          d.fecha = +d.year;
+          d.tropical = +d.total;
+        });
+
+        setupScales();
+        updateChart(datos);
       });
-
-      setupScales();
-      updateChart(datos);
-    });
   }
 
   const resize = () => {
@@ -171,22 +172,21 @@ function tempExt() {
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n');
 
-    d3.csv(`csv/total-temp-${stationResize}.csv`, (error, data) => {
-      datos = data;
-      datos.forEach((d) => {
-        d.fecha = +d.year;
-        d.tropical = +d.total;
-      });
+    d3.csv(`csv/total-temp-${stationResize}.csv`)
+      .then(function(data) {
+        datos = data;
+        datos.forEach((d) => {
+          d.fecha = +d.year;
+          d.tropical = +d.total;
+        });
 
-      updateChart(datos);
-    });
+        updateChart(datos);
+      });
   };
 
   const menuMes = () => {
-    d3.csv('csv/temperature.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/temperature.csv')
+      .then(function(data) {
         datos = data;
 
         const nest = d3
@@ -213,16 +213,12 @@ function tempExt() {
             .replace(/[\u0300-\u036f]/g, '');
           update(mes);
         });
-      }
-    });
+      });
   };
 
-  // LOAD THE DATA
   const loadData = () => {
-    d3.csv('csv/total-temp-35.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/total-temp-35.csv')
+      .then(function(data) {
         datos = data;
         datos.forEach((d) => {
           d.fecha = +d.year;
@@ -233,9 +229,9 @@ function tempExt() {
         updateChart(datos);
         const mes = '35';
         update(mes);
-      }
-    });
+      });
   };
+
   window.addEventListener('resize', resize);
   loadData();
   menuMes();

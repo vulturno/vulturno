@@ -261,9 +261,8 @@ function directionalDot(maxmins) {
       .replace(/ /g, '_')
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
-    d3.csv(
-      `csv/${maxmins}/dos-records/${city}-dos-records.csv`,
-      (error, dataz) => {
+    d3.csv(`csv/${maxmins}/dos-records/${city}-dos-records.csv`)
+      .then(function(data) {
         dataz = dataz.filter((d) => String(d.mes).match(mes));
 
         dataz.forEach((d) => {
@@ -307,15 +306,12 @@ function directionalDot(maxmins) {
         }
 
         updateChart(dataz);
-      }
-    );
+      });
   };
 
   const menuMes = () => {
-    d3.csv('csv/mes.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/mes.csv')
+      .then(function(data) {
         const datos = data;
 
         const nest = d3
@@ -335,15 +331,12 @@ function directionalDot(maxmins) {
         selectMonth.on('change', () => {
           updateMes();
         });
-      }
-    });
+      });
   }
 
   const menuCities = () => {
-    d3.csv('csv/stations.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/stations.csv')
+      .then(function(data) {
         const datos = data;
 
         const nest = d3
@@ -362,35 +355,28 @@ function directionalDot(maxmins) {
         selectCity.on('change', () => {
           updateMes();
         });
-      }
-    });
+      });
   }
 
   // LOAD THE DATA
   const loadData = () => {
     const mes = 'Enero';
-    d3.csv(
-      `csv/${maxmins}/dos-records/Albacete-dos-records.csv`,
-      (error, data) => {
-        if (error) {
-          console.log(error);
-        } else {
-          dataz = data.filter((d) => String(d.mes).match(mes));
-          dataz.forEach((d) => {
-            d.fecha = +d.fecha;
-            d.primero = +d.primero;
-            d.segundo = +d.segundo;
-            d.diff = d.primero - d.segundo;
-            d.dia = +d.dia;
-          });
-          setupElements();
-          setupScales();
-          updateChart(dataz);
-          menuMes();
-          menuCities();
-        }
-      }
-    );
+    d3.csv(`csv/${maxmins}/dos-records/Albacete-dos-records.csv`)
+      .then(function(data) {
+        dataz = data.filter((d) => String(d.mes).match(mes));
+        dataz.forEach((d) => {
+          d.fecha = +d.fecha;
+          d.primero = +d.primero;
+          d.segundo = +d.segundo;
+          d.diff = d.primero - d.segundo;
+          d.dia = +d.dia;
+        });
+        setupElements();
+        setupScales();
+        updateChart(dataz);
+        menuMes();
+        menuCities();
+      });
   }
 
   window.addEventListener('resize', resize);

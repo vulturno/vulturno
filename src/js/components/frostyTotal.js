@@ -109,10 +109,8 @@ function frostyTotal() {
 
   // LOAD THE DATA
   const loadData = () => {
-    d3.csv('csv/total-heladas.csv', (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv('csv/total-heladas.csv')
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           d.year = d.year;
@@ -121,8 +119,7 @@ function frostyTotal() {
         setupElements();
         setupScales();
         updateChart(dataz);
-      }
-    });
+      });
   };
 
   window.addEventListener('resize', resize);

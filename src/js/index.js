@@ -7,11 +7,11 @@ import tempMed from './components/temperatureMed.js';
 import forceLayout from './components/forceLayout.js';
 import recordsMax from './components/recordsMax.js';
 import recordsMin from './components/recordsMin.js';
-import tropicalTotal from './components/tropicalTotal.js';
 import tropicalCities from './components/tropicalCities.js';
-import frostyTotal from './components/frostyTotal.js';
 import directionalDot from './components/directionalDots.js';
 import scatterTemp from './components/scatterTemp.js';
+import tropicalTotal from './components/tropicalTotal.js';
+import frostyTotal from './components/frostyTotal.js';
 
 const maxmin = ['max', 'min'];
 const csvForce = ['csv/total-records-max.csv', 'csv/total-records-min.csv'];

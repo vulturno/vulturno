@@ -78,12 +78,10 @@ function forceLayout(csvFile, record, color) {
       .forceSimulation()
       .force('forceX', d3.forceX().x(w * 0.5))
       .force('forceY', d3.forceY().y(h * 0.5))
-      .force(
-        'center',
-        d3
-        .forceCenter()
-        .x(w * 0.5)
-        .y(h * 0.5)
+      .force('center',
+        d3.forceCenter()
+          .x(w * 0.5)
+          .y(h * 0.5)
       )
       .force('charge', d3.forceManyBody().strength(5))
       .force(
@@ -93,13 +91,11 @@ function forceLayout(csvFile, record, color) {
 
     simulation
       .nodes(dataz)
-      .force(
-        'collide',
-        d3
-        .forceCollide()
-        .strength(0.5)
-        .radius((d) => d.radius + nodePadding)
-        .iterations(1)
+      .force('collide',
+        d3.forceCollide()
+          .strength(0.5)
+          .radius((d) => d.radius + nodePadding)
+          .iterations(1)
       )
       .on('tick', () =>
         node.attr('cx', ({ x }) => x).attr('cy', ({ y }) => y)
@@ -160,12 +156,9 @@ function forceLayout(csvFile, record, color) {
           .style('opacity', 1)
           .html(
             (d) =>
-            `<p class="tooltip-record-max">Entre <span class="number">${
-                                d.decade
-                            }</span> y <span class="number">${Number(d.decade) +
-                                9}</span> se establecieron <span class="number">${
-                                d.totaldecade
-                            }</span> récords de temperatura ${record}.<p/>`
+              `<p class="tooltip-record-max">Entre <span class="number">${d.decade}</span>
+                y <span class="number">${Number(d.decade) + 9}</span> se establecieron <span class="number">
+                ${d.totaldecade}</span> récords de temperatura ${record}.<p/>`
           );
       });
     }
@@ -211,10 +204,8 @@ function forceLayout(csvFile, record, color) {
   }
 
   function loadData() {
-    d3.csv(csvFile, (error, data) => {
-      if (error) {
-        console.log(error);
-      } else {
+    d3.csv(csvFile)
+      .then(function(data) {
         dataz = data;
         dataz.forEach((d) => {
           if (widthMobile > 544) {
@@ -226,8 +217,7 @@ function forceLayout(csvFile, record, color) {
           d.year = d.year;
         });
         updateChart(dataz);
-      }
-    });
+      });
   }
 
   const resize = () => {
