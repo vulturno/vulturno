@@ -1,31 +1,15 @@
-name: example - angular
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+name: deploy website
+on: [pull_request]
 jobs:
-  angular:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: build
-        run: |
-          cd example/angular
-          npm install
-          npx ng build --prod
-      - uses: ./
-        id: now-deployment-staging
-        if: github.event_name == 'pull_request'
+      - uses: amondnet/now-deployment@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           zeit-token: ${{ secrets.ZEIT_TOKEN }}
-      - uses: ./
-        id: now-deployment-production
-        if: github.event_name == 'push'
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          zeit-token: ${{ secrets.ZEIT_TOKEN }}
-          now-args: '--prod '
+          github-token: ${{ secrets.GITHUB }}
+          now-args: '--prod'
+          now-org-id: ${{ secrets.orgId }}
+          now-project-id: ${{ secrets.projectId }}
+          working-directory: ./
