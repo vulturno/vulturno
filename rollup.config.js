@@ -47,7 +47,7 @@ const plugins = [
     files: [
       'css/*.**',
       'js/*.**',
-      'data/*.*',
+      'csv/*.*',
       './*.html'
     ],
     open: true
@@ -65,6 +65,7 @@ export default [{
       {
         file: paths.distJs + '/index.min.js',
         format: 'iife',
+        moduleName: 'foo',
         name: 'version'
       }
     ],
@@ -85,6 +86,7 @@ export default [{
     input: paths.css + '/styles.css',
     output: {
       file: paths.distCss + '/styles.css',
+      moduleName: 'foo',
       format: 'es'
     },
     plugins: [
