@@ -1,32 +1,36 @@
 {
   "env":
   {
-    "browser": true,
-    "es6": true
+    "es6": true,
+    "browser": true
   },
   "globals":
   {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly",
-    "d3": false,
-    "react": true,
-    "customElements": true,
-    "HTMLImports": true,
-    "Polymer": true,
-    "ShadyDOM": true
+    "d3": false
   },
+  "extends": "standard",
   "parserOptions":
   {
-    "ecmaVersion": 6,
     "ecmaFeatures":
     {
       "experimentalObjectRestSpread": true
-    },
-    "sourceType": "module"
+    }
   },
   "rules":
   {
-    "indent": ["error", 2],
-    "space-before-function-paren": ["error", "never"]
+    "no-multiple-empty-lines": ["error",
+    {
+      "max": 2,
+      "maxEOF": 1
+    }],
+    "no-multi-spaces": "error",
+    "keyword-spacing": ["error",
+    {
+      "after": true,
+      "before": true
+    }],
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": ["error", "always"],
+    "no-console": "off"
   }
 }

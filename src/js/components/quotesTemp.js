@@ -1,4 +1,4 @@
-function quotesTemp() {
+function quotesTemp () {
   const list = [
     '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Zaragoza</strong>.</span><span class="notas-text-number">44.5ºC</span><span class="notas-text-date">07/07/2015</span>',
     '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Albacete</strong>.</span><span class="notas-text-number">42.6ºC</span><span class="notas-text-date">17/07/1978</span>',
@@ -46,10 +46,10 @@ function quotesTemp() {
     '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Valencia</strong>.</span><span class="notas-text-number">43ºC</span><span class="notas-text-date">27/08/2010</span>',
     '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Valladolid</strong>.</span><span class="notas-text-number">39.4ºC</span><span class="notas-text-date">24/07/1995</span>',
     '<span class="notas-text-temp">Temperatura más alta registrada en <strong>Vitoria</strong>.</span><span class="notas-text-number">40.8ºC</span><span class="notas-text-date">10/08/2012</span>'
-  ];
+  ]
 
-  const randomQuote = Math.floor(Math.random() * list.length);
-  document.getElementById('notas-temp').innerHTML = list[randomQuote];
+  const randomQuote = Math.floor(Math.random() * list.length)
+  document.getElementById('notas-temp').innerHTML = list[randomQuote]
 }
 
-export default quotesTemp;
+export default quotesTemp
