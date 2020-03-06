@@ -117,7 +117,7 @@
       /* stylelint-disable */
       color: var(--white);
 
-      +p {
+      + p {
         display: none;
       }
 
