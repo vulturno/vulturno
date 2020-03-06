@@ -1,190 +1,191 @@
 .proyectos {
-    padding: 2rem 0;
-    padding-top: 0;
-    max-width: 90%;
-    display: grid;
-    margin: 2rem auto;
-    margin-top: 0;
-    grid-template-columns: 1fr;
-    grid-column-gap: 4rem;
-    grid-row-gap: 4rem;
-    justify-items: stretch;
-    align-items: stretch;
+  padding: 2rem 0;
+  padding-top: 0;
+  max-width: 90%;
+  display: grid;
+  margin: 2rem auto;
+  margin-top: 0;
+  grid-template-columns: 1fr;
+  grid-column-gap: 4rem;
+  grid-row-gap: 4rem;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 .proyectos-title {
-    font-size: 1.5rem;
-    max-width: 90%;
-    font-family: var(--title);
-    margin: 1rem auto;
-    padding-top: 2rem;
+  font-size: 1.5rem;
+  max-width: 90%;
+  font-family: var(--title);
+  margin: 1rem auto;
+  padding-top: 2rem;
 }
 
 .proyectos-element {
-    padding: 1rem;
-    border-radius: 4px;
-    width: 100%;
-    display: inline-block;
-    text-decoration: none;
-    transition: all .3s ease-in;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .31), 0 2px 4px 0 rgba(50, 50, 58, .2);
-    &:hover {
-        transform: translateY(-.25rem);
-        opacity: .9;
-    }
+  padding: 1rem;
+  border-radius: 4px;
+  width: 100%;
+  display: inline-block;
+  text-decoration: none;
+  transition: all .3s ease-in;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .31), 0 2px 4px 0 rgba(50, 50, 58, .2);
+
+  &:hover {
+    transform: translateY(-.25rem);
+    opacity: .9;
+  }
 }
 
 .proyectos-element-title {
-    font-size: 1.5rem;
-    font-family: var(--roboto);
-    font-weight: bold;
-    letter-spacing: 1px;
-    display: block;
-    margin: 0;
-    padding-bottom: .25rem;
+  font-size: 1.5rem;
+  font-family: var(--roboto);
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: block;
+  margin: 0;
+  padding-bottom: .25rem;
 }
 
 .proyectos-element-subtitle {
-    font-size: .75rem;
-    font-family: var(--monospace);
-    font-weight: bold;
-    text-transform: uppercase;
-    display: inline-block;
+  font-size: .75rem;
+  font-family: var(--monospace);
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
 }
 
 .proyectos-element-text {
-    font-size: 1rem;
-    font-family: var(--text);
-    margin-top: 0;
-    margin-bottom: 0;
-    width: 100%;
+  font-size: 1rem;
+  font-family: var(--text);
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
 }
 
 .proyecto-1 {
-    background-color: var(--project1bg);
+  background-color: var(--project1bg);
 }
 
 .proyecto-1-text {
-    color: var(--project1txt);
+  color: var(--project1txt);
 }
 
 .proyecto-2 {
-    background-color: var(--project2bg);
+  background-color: var(--project2bg);
 }
 
 .proyecto-2-text {
-    color: var(--project2txt);
+  color: var(--project2txt);
 }
 
 .proyecto-3 {
-    background-color: var(--project3bg);
+  background-color: var(--project3bg);
 }
 
 .proyecto-3-text {
-    color: var(--project3txt);
+  color: var(--project3txt);
 }
 
 .proyecto-4 {
-    background-color: var(--project4bg);
+  background-color: var(--project4bg);
 }
 
 .proyecto-4-text {
-    color: var(--project4txt);
+  color: var(--project4txt);
 }
 
 .proyecto-5 {
-    background-color: var(--project5bg);
+  background-color: var(--project5bg);
 }
 
 .proyecto-5-text {
-    color: var(--project5txt);
+  color: var(--project5txt);
 }
 
 .proyecto-6 {
-    background-color: var(--project6bg);
+  background-color: var(--project6bg);
 }
 
 .proyecto-6-text {
-    color: var(--project6txt);
+  color: var(--project6txt);
 }
 
 .proyecto-7 {
-    background-color: var(--project7bg);
+  background-color: var(--project7bg);
 }
 
 .proyecto-7-text {
-    color: var(--project7txt);
+  color: var(--project7txt);
 }
 
 .proyecto-8 {
-    background-color: var(--project8bg);
+  background-color: var(--project8bg);
 }
 
 .proyecto-8-text {
-    color: var(--project8txt);
+  color: var(--project8txt);
 }
 
 .proyecto-9 {
-    background-color: var(--project9bg);
+  background-color: var(--project9bg);
 }
 
 .proyecto-9-text {
-    color: var(--project9txt);
+  color: var(--project9txt);
 }
 
 .proyecto-10 {
-    background-color: var(--black);
+  background-color: var(--black);
 }
 
 .proyecto-10-text {
-    color: var(--white);
+  color: var(--white);
 }
 
 .proyecto-11 {
-    background-color: var(--project11bg);
+  background-color: var(--project11bg);
 }
 
 .proyecto-11-text {
-    color: var(--project11txt);
+  color: var(--project11txt);
 }
 
 .proyecto-12 {
-    background-color: var(--project12bg);
+  background-color: var(--project12bg);
 }
 
 .proyecto-12-text {
-    color: var(--project12txt);
+  color: var(--project12txt);
 }
 
 .line-through {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 @media only screen and (min-width: 48em) {
 
-    .proyectos {
-        grid-template-columns: 1fr 1fr;
-        max-width: 42rem;
-    }
+  .proyectos {
+    grid-template-columns: 1fr 1fr;
+    max-width: 42rem;
+  }
 
-    .proyectos-title {
-        max-width: 42rem;
-    }
+  .proyectos-title {
+    max-width: 42rem;
+  }
 
-    .proyectos-element {
-        padding: 2rem;
-    }
+  .proyectos-element {
+    padding: 2rem;
+  }
 
 }
 
 @media only screen and (min-width: 64em) {
 
-    .proyectos {
-        grid-template-columns: 1fr 1fr;
-        max-width: 58rem;
-    }
+  .proyectos {
+    grid-template-columns: 1fr 1fr;
+    max-width: 58rem;
+  }
 
-    .proyectos-title {
-        max-width: 58rem;
-    }
+  .proyectos-title {
+    max-width: 58rem;
+  }
 }

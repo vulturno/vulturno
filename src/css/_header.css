@@ -1,24 +1,34 @@
 .header-title {
-    font-size: 4rem;
-    font-family: var(--title);
-    font-weight: 900;
-    margin: .5rem 0 0;
-    color: var(--black);
-    text-align: center;
-    letter-spacing: 1px;
+  font-size: 4rem;
+  font-family: var(--title);
+  font-weight: 900;
+  margin: .5rem 0 0;
+  color: var(--black);
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 .author {
-    font-size: 12px;
-    font-family: var(--text);
-    display: block;
-    text-align: center;
+  font-size: 12px;
+  font-family: var(--text);
+  display: block;
+  text-align: center;
+}
+
+.update {
+  font-family: var(--text);
+  font-size: 14px;
+  background-color: var(--white);
+  padding: .5rem;
+  border-left: 5px solid #000;
+  box-shadow: var(--shadowCard);
+  width: max-content;
 }
 
 @media only screen and (min-width: 48rem) {
 
-    .header-title {
-        font-size: 5rem;
-    }
+  .header-title {
+    font-size: 5rem;
+  }
 
 }
