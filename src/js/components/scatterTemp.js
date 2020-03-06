@@ -333,9 +333,12 @@ function scatterTemp () {
     const date = new Date()
     date.setFullYear(year, month - 1, day) // month - 1 porque empiezan en 0 (enero = 0)
     return (
-      date.getFullYear() === year &&
-      date.getMonth() === month - 1 &&
-      date.getDate() === day
+      // eslint-disable-next-line
+      date.getFullYear() == year &&
+      // eslint-disable-next-line
+      date.getMonth() == month - 1 &&
+      // eslint-disable-next-line
+      date.getDate() == day
     )
   }
 
