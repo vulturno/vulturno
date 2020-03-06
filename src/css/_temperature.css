@@ -1,18 +1,18 @@
 .temperature-container {
-    max-width: 45rem;
-    margin: 2rem auto;
-    margin-bottom: 0;
+  max-width: 45rem;
+  margin: 2rem auto;
+  margin-bottom: 0;
 }
 
 .temperature-container-full {
-    width: 95%;
-    margin: 0 auto;
+  width: 95%;
+  margin: 0 auto;
 }
 
 .temperature-max,
 .temperature-min {
-    background-color: var(--white);
-    padding: 1rem 0;
+  background-color: var(--white);
+  padding: 1rem 0;
 }
 
 .scatter-chart {
@@ -24,141 +24,153 @@
 }
 
 .temperature-max {
-    background-color: rgba(235, 191, 176, .8);
+  background-color: rgba(235, 191, 176, .8);
 }
 
 .temperature-min {
-    background-color: #B8DBDB;
+  background-color: #B8DBDB;
 }
 
 .chart-temperature-max {
-    width: 100%;
-    margin-top: 4rem;
-    .circles-max {
-        fill: #670509;
+  width: 100%;
+  margin-top: 4rem;
+
+  .circles-max {
+    fill: #670509;
+  }
+
+  .tick {
+    text {
+      font-size: 11px;
+      font-family: var(--roboto);
     }
-    .tick {
-        text {
-            font-size: 11px;
-            font-family: var(--roboto);
-        }
-    }
-    .annotation-note-title {
-        font-family: var(--roboto);
-        font-size: 14px;
-        font-weight: normal;
-        fill: #670509;
-    }
-    .note-line,
-    .connector {
-        stroke: #670509;
-    }
-    .subject {
-        display: none;
-    }
+  }
+
+  .annotation-note-title {
+    font-family: var(--roboto);
+    font-size: 14px;
+    font-weight: normal;
+    fill: #670509;
+  }
+
+  .note-line,
+  .connector {
+    stroke: #670509;
+  }
+
+  .subject {
+    display: none;
+  }
 }
 
 .chart-temperature-min {
-    width: 100%;
-    margin-top: 4rem;
-    .circles-min {
-        fill: #257d98;
+  width: 100%;
+  margin-top: 4rem;
+
+  .circles-min {
+    fill: #257d98;
+  }
+
+  .tick {
+    text {
+      font-size: 11px;
+      font-family: var(--roboto);
     }
-    .tick {
-        text {
-            font-size: 11px;
-            font-family: var(--roboto);
-        }
-    }
-    .annotation-note-title {
-        font-family: var(--roboto);
-        font-size: 14px;
-        font-weight: normal;
-        fill: #2e4e74;
-    }
-    .note-line,
-    .connector {
-        stroke: #2e4e74;
-    }
-    .subject {
-        display: none;
-    }
+  }
+
+  .annotation-note-title {
+    font-family: var(--roboto);
+    font-size: 14px;
+    font-weight: normal;
+    fill: #2e4e74;
+  }
+
+  .note-line,
+  .connector {
+    stroke: #2e4e74;
+  }
+
+  .subject {
+    display: none;
+  }
 }
 
 .records-max,
 .records-min {
-    .chart-text-title,
-    .chart-text {
-        color: var(--white);
-    }
+
+  .chart-text-title,
+  .chart-text {
+    color: var(--white);
+  }
 }
 
 .temperature-ext {
-    background-color: #dde8e0;
-    padding: 2rem 0;
+  background-color: #dde8e0;
+  padding: 2rem 0;
 }
 
 .scatter-inputs-circles {
-    r: 4px;
+  r: 4px;
 }
 
 .notes-temp {
-    background-color: #F4E467;
-    padding: 3rem 0;
+  background-color: #F4E467;
+  padding: 3rem 0;
 }
 
 .notas-text-number {
-    background-color: var(--black);
-    font-size: 6rem;
-    font-family: var(--roboto);
-    color: #F4E467;
-    font-weight: bold;
-    display: inline-block;
-    padding: 0 1rem;
+  background-color: var(--black);
+  font-size: 6rem;
+  font-family: var(--roboto);
+  color: #F4E467;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 1rem;
 }
 
 .notas-text-date {
-    font-size: 3rem;
-    font-family: var(--roboto);
-    font-weight: bold;
-    display: block;
+  font-size: 3rem;
+  font-family: var(--roboto);
+  font-weight: bold;
+  display: block;
 }
 
 .notas-text-temp {
-    font-size: 1rem;
-    font-family: var(--roboto);
-    display: block;
-    strong {
-        font-size: 1.5rem;
-    }
+  font-size: 1rem;
+  font-family: var(--roboto);
+  display: block;
+
+  strong {
+    font-size: 1.5rem;
+  }
 }
 
 @media only screen and (min-width: 48em) {
 
-    .temperature-max-number {
-        font-size: 10rem;
-    }
+  .temperature-max-number {
+    font-size: 10rem;
+  }
 
-    .temperature-max,
-    .temperature-min {
-        padding: 5rem 0;
-    }
+  .temperature-max,
+  .temperature-min {
+    padding: 5rem 0;
+  }
 
-    .chart-temperature-max,
-    .chart-temperature-min {
-        .tick {
-            text {
-                font-size: 14px;
-                font-family: var(--roboto);
-            }
-        }
+  .chart-temperature-max,
+  .chart-temperature-min {
+    .tick {
+      text {
+        font-size: 14px;
+        font-family: var(--roboto);
+      }
     }
+  }
 
 }
 
 @media only screen and (min-width: 64em) {
-    .temperature-container-full {
-        width: 75rem;
-        margin: 0 auto;
-    }
+  .temperature-container-full {
+    width: 75rem;
+    margin: 0 auto;
+  }
 }

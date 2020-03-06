@@ -1,75 +1,77 @@
 .ss-main .ss-single-selected {
-    max-width: 13rem !important;
-    border-radius: 5px;
-    height: auto !important;
-    padding: 1rem !important;
-    padding-right: .25rem !important;
-    border: 1px solid #ddd !important;
-    background-color: #f1f1f1 !important;
-    font-family: var(--roboto) !important;
-    color: var(--black) !important;
-    position: relative;
-    margin-left: 3rem;
+  max-width: 13rem !important;
+  border-radius: 5px;
+  height: auto !important;
+  padding: 1rem !important;
+  padding-right: .25rem !important;
+  border: 1px solid #ddd !important;
+  background-color: #f1f1f1 !important;
+  font-family: var(--roboto) !important;
+  color: var(--black) !important;
+  position: relative;
+  margin-left: 3rem;
 }
 
 .ss-main {
-    margin-bottom: .25rem;
-    .ss-content {
-        top: 65px;
-    }
+  margin-bottom: .25rem;
+
+  .ss-content {
+    top: 65px;
+  }
 }
 
 .ss-option {
-    font-family: var(--roboto) !important;
-    color: var(--black) !important;
+  font-family: var(--roboto) !important;
+  color: var(--black) !important;
 }
 
 .ss-main .ss-content .ss-list .ss-option.ss-disabled {
-    color: #bdbdbd !important;
+  color: #bdbdbd !important;
 }
 
 .ss-main .ss-single-selected .ss-arrow span {
-    border-color: var(--black) !important;
+  border-color: var(--black) !important;
 }
 
 .ss-main .ss-single-selected .placeholder,
 .ss-main .ss-single-selected .placeholder * {
-    overflow: initial !important;
+  overflow: initial !important;
 }
 
 .ss-content {
-    max-width: 13rem !important;
-    border: 1px solid #ddd !important;
-    box-shadow: var(--shadowTooltip);
-    margin-left: 3rem !important;
-    margin-top: -1rem !important;
+  max-width: 13rem !important;
+  border: 1px solid #ddd !important;
+  box-shadow: var(--shadowTooltip);
+  margin-left: 3rem !important;
+  margin-top: -1rem !important;
 }
 
 .select-text {
-    font-family: var(--roboto);
-    margin-top: 0;
-    margin-bottom: .25rem;
+  font-family: var(--roboto);
+  margin-top: 0;
+  margin-bottom: .25rem;
 }
 
 .container-selects {
-    margin-left: .5rem;
+  margin-left: .5rem;
 }
 
 .container-select-double {
+  display: inline-block;
+
+  .container-selects {
     display: inline-block;
-    .container-selects {
-        display: inline-block;
-    }
+  }
 }
 
 @media only screen and (min-width: 48em) {
 
-    .ss-main {
-        margin-bottom: .25rem;
-    }
+  .ss-main {
+    margin-bottom: .25rem;
+  }
 
-    .container-selects {
-        margin-left: 28px;
-    }
+  .container-selects {
+    margin-left: 28px;
+  }
 
 }

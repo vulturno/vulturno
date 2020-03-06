@@ -1,32 +1,32 @@
 .metodology {
-    background-color: #dde8e0;
-    padding: 1rem 0;
+  background-color: #dde8e0;
+  padding: 1rem 0;
 }
 
 .metodology-container {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .metodology-title {
-    font-size: 1.25rem;
-    font-family: var(--title);
-    margin-bottom: 1rem;
-    margin-top: 0;
+  font-size: 1.25rem;
+  font-family: var(--title);
+  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .metodology-text {
-    font-family: var(--text);
-    max-width: 30rem;
+  font-family: var(--text);
+  max-width: 30rem;
 }
 
 @media only screen and (min-width: 48rem) {
 
-    .metodology {
-        padding: 6rem 0;
-    }
+  .metodology {
+    padding: 6rem 0;
+  }
 
-    .metodology-title {
-        font-size: 2rem;
-    }
+  .metodology-title {
+    font-size: 2rem;
+  }
 
 }
