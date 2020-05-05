@@ -139,12 +139,9 @@ function forceLayout (csvFile, record, color) {
       .style('fill', d => color(d))
 
     function tooltipLast (leyenda) {
-      console.log("leyenda", leyenda);
       const valueYear = leyenda.attr('year')
-      console.log("valueYear", valueYear);
 
       d3.csv(csvFile, (data) => {
-        console.log("data", data);
         const dataz = data.filter(d => String(d.decade).match(valueYear))
 
         tooltipDecade
