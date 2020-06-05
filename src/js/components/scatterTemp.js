@@ -412,6 +412,7 @@ function scatterTemp () {
         d.month = getMonth(d.fecha)
         d.day = getDay(d.fecha)
       })
+
       setupElements()
       setupScales()
       updateChart(dataz)
