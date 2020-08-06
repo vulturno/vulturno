@@ -11,7 +11,7 @@
 
 .temperature-max,
 .temperature-min {
-  background-color: var(--white);
+  background-color: rgba(253, 230, 167, .15);
   padding: 1rem 0;
 }
 
@@ -21,14 +21,6 @@
     stroke: #111;
     stroke-width: 2px;
   }
-}
-
-.temperature-max {
-  background-color: rgba(235, 191, 176, .8);
-}
-
-.temperature-min {
-  background-color: #B8DBDB;
 }
 
 .chart-temperature-max {
@@ -105,7 +97,6 @@
 }
 
 .temperature-ext {
-  background-color: #dde8e0;
   padding: 2rem 0;
 }
 

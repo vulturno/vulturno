@@ -37,7 +37,7 @@ function tempExt () {
   }
 
   const updateScales = (width, height) => {
-    scales.count.x.range([0, width]).paddingInner(-0.1)
+    scales.count.x.range([0, width]).paddingInner(0.05)
     scales.count.y.range([height, 0])
   }
 

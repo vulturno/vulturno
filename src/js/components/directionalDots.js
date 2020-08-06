@@ -146,19 +146,9 @@ function directionalDot (maxmins) {
       .duration(500)
       .ease(d3.easeLinear)
       .attr('x1', d => scales.count.x(d.dia))
-      .attr('y1', d => {
-        if (tempThis === 'max') {
-          return scales.count.y(d.primero) + 6
-        }
-        return scales.count.y(d.primero) - 6
-      })
+      .attr('y1', d => tempThis === 'max' ? scales.count.y(d.primero) + 6 : scales.count.y(d.primero) - 6)
       .attr('x2', d => scales.count.x(d.dia))
-      .attr('y2', d => {
-        if (tempThis === 'max') {
-          return scales.count.y(d.segundo) - 6
-        }
-        return scales.count.y(d.segundo) + 6
-      })
+      .attr('y2', d => tempThis === 'max' ? scales.count.y(d.segundo) - 6 : scales.count.y(d.segundo) + 6)
       .attr('stroke', d => {
         if (d.diff === 0) {
           return 'none'
@@ -176,11 +166,12 @@ function directionalDot (maxmins) {
         const tooltipWidth = 210
         const positionleft = `${d3.event.pageX}px`
         const positionright = `${d3.event.pageX - tooltipWidth}px`
+        const tempString = maxmins === 'max' ? 'máxima' : 'mínima'
         tooltip.transition()
         tooltip
           .style('opacity', 1)
           .html(
-            `<p class="tooltip-diff-text">La temperatura ${maxmins} en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`
+            `<p class="tooltip-diff-text">La temperatura ${tempString} en ${city} se registro en ${d.yearprimera} y fue de ${d.primero}ºC<p/>`
           )
           .style('left', postionWidthTooltip > w ? positionright : positionleft)
           .style('top', `${d3.event.pageY - 28}px`)
@@ -341,7 +332,6 @@ function directionalDot (maxmins) {
     d3.csv(`csv/${maxmins}/dos-records/Albacete-dos-records.csv`).then(data => {
       dataz = data.filter(d => String(d.mes).match(mes))
       dataz.forEach(d => {
-        d.fecha = +d.fecha
         d.primero = +d.primero
         d.segundo = +d.segundo
         d.diff = d.primero - d.segundo

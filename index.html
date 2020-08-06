@@ -53,7 +53,7 @@
                 <span class="author">Por <a href="https://jorgeatgu.com">Jorge Aznar</a></span>
                 <p class="chart-text">Una visualización de datos para ver como han ido evolucionando las temperaturas en casi todas las capitales de provincia de España.</p>
                 <p class="chart-text">A lo largo del proyecto podrás consultar la temperatura máxima y mínima registrada de cualquier día del año. El total de las noches tropicales. Las heladas registradas. La temperatura media mínima y la temperatura media máxima anual.</p>
-                <p class="update">Última actualización: <strong>05.07.2020</strong></p>
+                <p class="update">Actualizado: <strong>06.08.2020</strong></p>
             </article>
         </section>
     </section>
@@ -199,6 +199,24 @@
                 </svg>
             </article>
         </section>
+        <section id="temp-ext" class="temperature-ext chart-separator">
+            <section class="chart-text-container">
+                <h3 class="chart-text-title">Temperaturas "extremas"</h3>
+                <p class="chart-text">El título de extremo no es que sea muy preciso pero no sabía como denominar aquellas temperaturas que están por encima de los 35ºC.</p>
+                <p class="chart-text">En esta gráfica se puede ver las veces que se registraron temperaturas superiores entre los 35ºC y 45ºC en todas las estaciones.</p>
+            </section>
+            <section class="temperature-container-full">
+                <div class="container-selects">
+                    <p class="select-text">Selecciona una temperatura</p>
+                    <select class="temperatura-mensual-minima-select select-ext" id="select-ext"></select>
+                </div>
+                <article class="chart-temperature-ext">
+                    <svg class="charts">
+                        <g class="chart-temperature-ext-container"></g>
+                    </svg>
+                </article>
+            </section>
+        </section>
     </section>
     <section class="chart-separator notes-temp">
         <section id="notas-temp" class="chart-container">
@@ -227,24 +245,6 @@
             <article class="chart-frosty">
                 <svg class="charts">
                     <g class="chart-frosty-container"></g>
-                </svg>
-            </article>
-        </section>
-    </section>
-    <section id="temp-ext" class="temperature-ext chart-separator">
-        <section class="chart-text-container">
-            <h3 class="chart-text-title">Temperaturas "extremas"</h3>
-            <p class="chart-text">El título de extremo no es que sea muy preciso pero no sabía como denominar aquellas temperaturas que están por encima de los 35ºC.</p>
-            <p class="chart-text">En esta gráfica se puede ver las veces que se registraron temperaturas superiores entre los 35ºC y 45ºC en todas las estaciones.</p>
-        </section>
-        <section class="temperature-container-full">
-            <div class="container-selects">
-                <p class="select-text">Selecciona una temperatura</p>
-                <select class="temperatura-mensual-minima-select select-ext" id="select-ext"></select>
-            </div>
-            <article class="chart-temperature-ext">
-                <svg class="charts">
-                    <g class="chart-temperature-ext-container"></g>
                 </svg>
             </article>
         </section>
