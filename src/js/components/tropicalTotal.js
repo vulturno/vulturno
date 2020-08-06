@@ -37,7 +37,7 @@ function tropicalTotal () {
   }
 
   const updateScales = (width, height) => {
-    scales.count.x.range([0, width]).paddingInner(-0.1)
+    scales.count.x.range([0, width]).paddingInner(0.05)
     scales.count.y.range([height, 0])
   }
 
@@ -47,9 +47,7 @@ function tropicalTotal () {
       .tickFormat(d3.format('d'))
       .ticks(13)
       .tickValues(
-        scales.count.x.domain().filter(function (d, i) {
-          return !(i % 5)
-        })
+        scales.count.x.domain().filter((i) => !(i % 5))
       )
 
     g.select('.axis-x')
