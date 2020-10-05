@@ -160,7 +160,7 @@ function scatterTemp () {
         tooltip
           .style('opacity', 1)
           .html(
-            `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} el ${d.day}.${d.month}.${d.year} fue de ${d.maxima}ºC<p/>`
+            `<p class="tooltip-scatter-text">La temperatura mínima de ${ciudad} el ${d.day}.${d.month}.${d.year} fue de ${d.minima}ºC<p/>`
           )
           .style('left', postionWidthTooltip > w ? positionright : positionleft)
           .style('top', `${d3.event.pageY - 28}px`)
