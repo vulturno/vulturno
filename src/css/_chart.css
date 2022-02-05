@@ -686,3 +686,9 @@
     white-space: nowrap;
   }
 }
+
+.chart-cities-frosty-container {
+  rect {
+    fill: #257d98;
+  }
+}

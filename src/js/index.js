@@ -8,6 +8,7 @@ import forceLayout from './components/forceLayout.js'
 import recordsMax from './components/recordsMax.js'
 import recordsMin from './components/recordsMin.js'
 import tropicalCities from './components/tropicalCities.js'
+import frostyCities from './components/frostyCities.js'
 import directionalDot from './components/directionalDots.js'
 import scatterTemp from './components/scatterTemp.js'
 import tropicalTotal from './components/tropicalTotal.js'
@@ -49,6 +50,7 @@ scatterTemp()
 directionalDot(maxmin[0])
 directionalDot(maxmin[1])
 tropicalCities()
+frostyCities()
 
 setInterval(() => {
   quotesTemp()
@@ -69,6 +71,11 @@ new SlimSelect({
 
 new SlimSelect({
   select: '#select-city-tropical',
+  searchPlaceholder: 'Busca tu ciudad'
+})
+
+new SlimSelect({
+  select: '#select-city-frosty',
   searchPlaceholder: 'Busca tu ciudad'
 })
 

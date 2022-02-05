@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -10,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Adamina|Playfair+Display:700,900" rel="stylesheet">
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body>
@@ -53,7 +53,13 @@
                 <span class="author">Por <a href="https://jorgeatgu.com">Jorge Aznar</a></span>
                 <p class="chart-text">Una visualización de datos para ver como han ido evolucionando las temperaturas en casi todas las capitales de provincia de España.</p>
                 <p class="chart-text">A lo largo del proyecto podrás consultar la temperatura máxima y mínima registrada de cualquier día del año. El total de las noches tropicales. Las heladas registradas. La temperatura media mínima y la temperatura media máxima anual.</p>
-                <p class="update">Última actualización: <strong>16 de enero de 2022</strong></p>
+                <p class="update">Última actualización: <strong>5 de febrero de 2022</strong></p>
+            <article class="sponsor-card">
+              <p class="sponsor-card-text">Puedes apoyar económicamente este proyecto en:</p>
+              <a href="https://www.buymeacoffee.com/jorgeatgu"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a keyboard&emoji=❤️&slug=jorgeatgu&button_colour=5F7FFF&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00"></a>
+              <a href="https://www.patreon.com/bePatron?u=5688554" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+              <a class="github-button" href="https://github.com/sponsors/jorgeatgu" data-color-scheme="no-preference: light; light: light_high_contrast; dark: light;" data-icon="octicon-heart" data-size="large" aria-label="Sponsor @jorgeatgu on GitHub">Sponsor</a>
+            </article>
             </article>
         </section>
     </section>
@@ -245,6 +251,22 @@
             <article class="chart-frosty">
                 <svg class="charts">
                     <g class="chart-frosty-container"></g>
+                </svg>
+            </article>
+        </section>
+        <section id="heladas-ciudad" class="chart-text-container">
+            <h3 class="chart-text-title">Heladas por ciudad</h3>
+            <p class="chart-text">En la siguiente gráfica podemos ver la evolución de las heladas en cada ciudad a lo largo de los años.</p>
+            <p class="chart-text">Se considera helada cuando la temperatura del aire, registrada a 1,50 metros sobre el nivel del suelo, es de 0ºC.</p>
+        </section>
+        <section class="temperature-container-full">
+            <div class="container-selects">
+                <p class="select-text">Selecciona una ciudad</p>
+                <select class="temperatura-mensual-minima-select select-scatter-city" id="select-city-frosty"></select>
+            </div>
+            <article id="tropical" class="chart-cities-frosty">
+                <svg class="charts">
+                    <g class="chart-cities-frosty-container"></g>
                 </svg>
             </article>
         </section>
