@@ -52,10 +52,6 @@
   margin-bottom: .25rem;
 }
 
-.container-selects {
-  margin-left: .5rem;
-}
-
 .container-select-double {
   display: inline-block;
 
@@ -68,10 +64,6 @@
 
   .ss-main {
     margin-bottom: .25rem;
-  }
-
-  .container-selects {
-    margin-left: 28px;
   }
 
 }

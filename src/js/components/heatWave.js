@@ -37,8 +37,12 @@ function heatWave () {
 
   // LOAD THE DATA
   const loadData = mes => {
-    d3.csv(`csv/max/julio/${mes}-julio.csv`).then(data => {
+    d3.csv(`csv/max/junio/${mes}-junio.csv`).then(data => {
       const container = d3.select('.forno-container')
+
+      data.forEach(d => {
+        d.fecha = new Date(d.fecha)
+      })
 
       container
         .selectAll('.forno-element')
@@ -50,8 +54,7 @@ function heatWave () {
         .attr('class', 'forno-element')
         .html(
           d => `
-                                      <span class="forno-day forno-text">${d.fecha}</span>
-                                      <span class="forno-year forno-text">${d.yearprimera}</span>
+                                      <span class="forno-year forno-text">${new Intl.DateTimeFormat('es-Es', { year: 'numeric', month: 'long', day: 'numeric' }).format(d.fecha)}</span>
                                     <span class="forno-record forno-text">${d.primero}ºC</span>`
         )
     })

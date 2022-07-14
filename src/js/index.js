@@ -13,6 +13,7 @@ import directionalDot from './components/directionalDots.js'
 import scatterTemp from './components/scatterTemp.js'
 import tropicalTotal from './components/tropicalTotal.js'
 import frostyTotal from './components/frostyTotal.js'
+import heatWave from './components/heatWave.js'
 
 const maxmin = ['max', 'min']
 const csvForce = ['csv/total-records-max.csv', 'csv/total-records-min.csv']
@@ -51,6 +52,7 @@ directionalDot(maxmin[0])
 directionalDot(maxmin[1])
 tropicalCities()
 frostyCities()
+heatWave()
 
 setInterval(() => {
   quotesTemp()
@@ -101,5 +103,10 @@ new SlimSelect({
 
 new SlimSelect({
   select: '#select-cities-records-min',
+  searchPlaceholder: 'Selecciona una ciudad'
+})
+
+new SlimSelect({
+  select: '#select-heat-wave',
   searchPlaceholder: 'Selecciona una ciudad'
 })
