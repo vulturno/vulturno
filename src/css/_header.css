@@ -16,9 +16,18 @@
 }
 
 .update {
+  border-radius: 4px;
+  padding: 1rem;
   font-family: var(--text);
   font-size: 14px;
-  width: max-content;
+  background-color: var(--white);
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, .16),0 2px 12px 0 rgba(0, 0, 0, .08),0 0 0 .6px rgba(64 , 64, 76, .3);
+}
+
+.update-text {
+  display: block;
+  margin-bottom: .5rem;
 }
 
 @media only screen and (min-width: 48rem) {
