@@ -105,8 +105,3 @@ new SlimSelect({
   select: '#select-cities-records-min',
   searchPlaceholder: 'Selecciona una ciudad'
 })
-
-new SlimSelect({
-  select: '#select-heat-wave',
-  searchPlaceholder: 'Selecciona una ciudad'
-})
