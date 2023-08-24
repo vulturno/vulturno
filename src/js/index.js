@@ -1,5 +1,4 @@
 import menu from './components/menu.js'
-import quotes from './components/quotes.js'
 import quotesTemp from './components/quotesTemp.js'
 import tempExt from './components/temperatureExtrem.js'
 import formatDate from './components/formatDate.js'
@@ -39,7 +38,6 @@ const colorMin = d3.scaleOrdinal([
 const colores = [colorMax, colorMin]
 
 menu()
-quotes()
 tempExt()
 formatDate()
 tempMed()
