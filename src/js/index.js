@@ -74,10 +74,10 @@ new SlimSelect({
   searchPlaceholder: 'Busca tu ciudad'
 })
 
-new SlimSelect({
+/*new SlimSelect({
   select: '#select-city-frosty',
   searchPlaceholder: 'Busca tu ciudad'
-})
+})*/
 
 new SlimSelect({
   select: '#select-ext',
