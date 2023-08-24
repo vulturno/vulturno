@@ -49,7 +49,7 @@ scatterTemp()
 directionalDot(maxmin[0])
 directionalDot(maxmin[1])
 tropicalCities()
-frostyCities()
+/*frostyCities()*/
 heatWave()
 
 setInterval(() => {
