@@ -83,6 +83,11 @@ new SlimSelect({
 })
 
 new SlimSelect({
+  select: '#select-city-tropical',
+  searchPlaceholder: 'Busca tu ciudad'
+})
+
+new SlimSelect({
   select: '#select-cities-records-max',
   searchPlaceholder: 'Selecciona una ciudad'
 })
