@@ -4,6 +4,7 @@
   "description": "Base for any project of Jorge Aznar, {civic/data/designer} based on Zaragoza ⦉ http://jorgeatgu.com ⦊",
   "main": "gulpfile.js",
   "repository": "jorgeatgu/base",
+  "type": "module",
   "keywords": [
     "init",
     "d3",
