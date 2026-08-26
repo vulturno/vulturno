@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Vulturno | La evolución de la temperaturas en 45 ciudades de España</title>
+  <title>Vulturno | La evolución de la temperaturas en 47 ciudades de España</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -55,8 +55,14 @@
         <p class="chart-text">Una visualización de datos para ver como han ido evolucionando las temperaturas en casi todas las capitales de provincia de España.</p>
         <p class="chart-text">A lo largo del proyecto podrás consultar la temperatura máxima y mínima registrada de cualquier día del año. El total de las noches tropicales. Las heladas registradas. La temperatura media mínima y la temperatura media máxima anual.</p>
         <div class="update">
-          <span class="update-text">Actualizado el <strong>16 de enero de 2025.</strong></span>
-          <span class="update-text">Datos hasta el <strong>31 de diciembre de 2024.</strong></span>
+          <span class="update-text">Actualizado el <strong>26 de agosto de 2026.</strong></span>
+          <span class="update-text">Datos hasta el <strong>31 de julio de 2026.</strong></span>
+        </div>
+        <div class="container-selects">
+          <p class="select-text">Selecciona una ciudad para actualizar todas las gráficas</p>
+          <select class="temperatura-mensual-minima-select" id="select-global-city">
+            <option data-placeholder="true"></option>
+          </select>
         </div>
         <article class="sponsor-card">
           <p class="sponsor-card-text">Puedes apoyar económicamente este proyecto en:</p>
@@ -72,7 +78,7 @@
     <section class="chart-container">
       <section id="dia-a-dia" class="chart-text-container">
         <h3 class="chart-text-title nw">Temperatura máxima y mínima día a día</h3>
-        <p class="chart-text">En esta gráfica puedes consultar todas las máximas y minimas registradas en cada una de las estaciones entre 1950 y 2024.</p>
+        <p class="chart-text">En esta gráfica puedes consultar todas las máximas y minimas registradas en cada una de las estaciones entre 1950 y 2026.</p>
       </section>
       <article class="scatter-inputs">
         <article class="scatter-inputs-filter">
@@ -144,7 +150,7 @@
     <section class="chart-container">
       <section class="chart-text-container">
         <h3 class="chart-text-title">Récords de temperaturas máximas</h3>
-        <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día del año en las 46 estaciones analizadas.</p>
+        <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura máxima de cada día del año en las 47 estaciones analizadas.</p>
       </section>
       <article id="force-maxima" class="chart-force-maxima">
         <svg class="charts">
@@ -156,7 +162,7 @@
     <section class="chart-container">
       <section class="chart-text-container">
         <h3 class="chart-text-title">Récords de temperaturas mínimas</h3>
-        <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura mínima de cada día del año en las 46 estaciones analizadas.</p>
+        <p class="chart-text">En este grafo se puede consultar en qué año se establecieron los récords de temperatura mínima de cada día del año en las 47 estaciones analizadas.</p>
       </section>
       <article id="force-minima" class="chart-force-minima">
         <svg class="charts">
@@ -167,7 +173,7 @@
   <section id="max" class="temperature-max chart-separator">
     <section class="chart-text-container">
       <h3 class="chart-text-title">Temperaturas máxima anual</h3>
-      <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura máxima anual en cada una de las 46 estaciones analizadas.</p>
+      <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura máxima anual en cada una de las 47 estaciones analizadas.</p>
       <p class="chart-text">La mayoría de estaciones marcaron <strong>sus récords en el siglo XXI</strong>, sobre todo en la última década.</p>
     </section>
     <section class="temperature-container">
@@ -231,7 +237,7 @@
   <section id="min" class="temperature-min chart-separator">
     <section class="chart-text-container">
       <h3 class="chart-text-title">Temperaturas mínimas</h3>
-      <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura mínima anual en cada una de las 46 estaciones analizadas.</p>
+      <p class="chart-text">Una gráfica para visualizar en qué año se estableció el récord de temperatura mínima anual en cada una de las 47 estaciones analizadas.</p>
       <p class="chart-text">Esta gráfica es <strong>totalmente contraria a la anterior</strong>. Si los récords de temperaturas máximas se concentran en el siglo XXI, los récords de temperaturas mínimas lo <strong>hacen en el siglo XX</strong>. Desde 1986 no se ha <strong>batido ningún récord</strong>. Y la mayoría de récords se concentran en 1956 y 1972.</p>
     </section>
     <section class="temperature-container">
@@ -244,7 +250,7 @@
     <section id="heladas" class="chart-text-container chart-separator">
       <h3 class="chart-text-title">Heladas</h3>
       <p class="chart-text">Se considera helada cuando la temperatura del aire, registrada a 1,50 metros sobre el nivel del suelo, es de 0ºC.</p>
-      <p class="chart-text">En la siguiente gráfica podemos ver el total anual de heladas en las 46 estaciones de la AEMET.</p>
+      <p class="chart-text">En la siguiente gráfica podemos ver el total anual de heladas en las 47 estaciones de la AEMET.</p>
     </section>
     <section class="temperature-container-full">
       <article class="chart-frosty">
@@ -335,7 +341,7 @@
       <p class="metodology-text">Las series comienzan en 1950 ya que no todas las estaciones contienen datos de años anteriores. Aún así hay alguna estación que comienza años más tarde.</p>
       <p class="metodology-text">Para calcular la temperatura media anual lo que hay que hacer es sumar las temperaturas medias de todos los meses y dividirlo entre 12.</p>
       <p class="metodology-text">En Almería, Ávila, Cáceres, Castellón, Ciudad Real, Huelva, Lleida, Palencia, Segovia, Vitoria y Toledo he tenido que unificar las dos estaciones que tiene cada ciudad. Cuando una deja de emitir al año siguiente emite la nueva.</p>
-      <p class="metodology-text">Se han quedado fuera por falta de datos las estaciones de Teruel, Mérida, Lugo, Ceuta, Guadalajara y Jaén. Desde julio de 2022 se queda fuera Pamplona, en la estación los datos siempre van tarde, faltan meses y están incompletos. En 2023 Oviedo se queda fuera, hace meses que la estación no reporta datos.</p>
+      <p class="metodology-text">Se han quedado fuera por falta de datos las estaciones de Teruel, Mérida, Lugo, Ceuta, Guadalajara y Jaén. Pamplona vuelve a estar dentro, con su serie completa hasta julio de 2026. Oviedo también vuelve, pero su estación dejó de emitir el 1 de febrero de 2023 y ahí termina su serie. Santander no registra temperaturas desde el 15 de mayo de 2024. En ambos casos las gráficas diarias se detienen en esas fechas y los recuentos anuales posteriores aparecen a cero.</p>
       <p class="metodology-text">La estación de Madrid es la que está ubicada en el Retiro.</p>
       <p class="metodology-text">¿El eje vertical no tiene 0? <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/"> Pues no y tampoco pasa nada.</a> </p>
       <p class="metodology-text"><a href="https://github.com/vulturno/data">Aquí están todos los scripts que he ido creando para triar y obtener todos los datasets.</a> </p>
@@ -384,7 +390,7 @@
   </article>
   <footer class="footer">
     <div class="chart-container">
-      <p class="footer-texto">Hecho en Zaragoza con mucha maña por un <a class="footer-links" href="http://jorgeatgu.com" target="_blank">maño</a> | 2018 - 2025</p>
+      <p class="footer-texto">Hecho en Zaragoza con mucha maña por un <a class="footer-links" href="http://jorgeatgu.com" target="_blank">maño</a> | 2018 - 2026</p>
       <p class="footer-texto">Cualquier consulta escribid a: data@jorgeatgu.com</p>
       <a class="footer-links" href="http://github.com/vulturno">Todo el código y datos está disponible en GitHub</a>
     </div>
