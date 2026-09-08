@@ -1,5 +1,5 @@
 year,temp,tempmax,yearmax,tempmin,yearmin
-1950,19.2,19.2,2024,16.5,1956
+1950,19.2,19.7,2023,16.5,1956
 1951,18.0
 1952,17.5
 1953,18.1
@@ -71,3 +71,4 @@ year,temp,tempmax,yearmax,tempmin,yearmin
 2022,19.5
 2023,19.7
 2024,19.2
+2025,19.4

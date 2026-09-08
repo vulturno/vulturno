@@ -58,12 +58,12 @@ setInterval(() => {
 forceLayout(csvForce[0], records[0], colores[0])
 forceLayout(csvForce[1], records[1], colores[1])
 
-new SlimSelect({
+const slimCity = new SlimSelect({
   select: '#select-city',
   searchPlaceholder: 'Busca tu ciudad'
 })
 
-new SlimSelect({
+const slimScatter = new SlimSelect({
   select: '#select-scatter-city',
   searchPlaceholder: 'Busca tu ciudad'
 })
@@ -83,22 +83,62 @@ new SlimSelect({
   searchPlaceholder: 'Selecciona un mes'
 })
 
-new SlimSelect({
+const slimTropical = new SlimSelect({
   select: '#select-city-tropical',
   searchPlaceholder: 'Busca tu ciudad'
 })
 
-new SlimSelect({
+const slimRecordsMax = new SlimSelect({
   select: '#select-cities-records-max',
   searchPlaceholder: 'Selecciona una ciudad'
 })
 
-new SlimSelect({
+const slimRecordsMin = new SlimSelect({
   select: '#select-cities-records-min',
   searchPlaceholder: 'Selecciona una ciudad'
 })
 
-new SlimSelect({
+const slimFrosty = new SlimSelect({
   select: '#select-city-frosty',
   searchPlaceholder: 'Selecciona una ciudad'
+})
+
+const EXCLUDED_GLOBAL_CITIES = []
+
+const citySlims = {
+  'select-city': slimCity,
+  'select-scatter-city': slimScatter,
+  'select-city-tropical': slimTropical,
+  'select-cities-records-max': slimRecordsMax,
+  'select-cities-records-min': slimRecordsMin,
+  'select-city-frosty': slimFrosty
+}
+
+new SlimSelect({
+  select: '#select-global-city',
+  searchPlaceholder: 'Busca tu ciudad',
+  placeholder: 'Selecciona una ciudad',
+  onChange: info => {
+    const city = info.value
+    if (!city) return
+    Object.keys(citySlims).forEach(id => {
+      const native = document.getElementById(id)
+      if (native && native.querySelector(`option[value="${city}"]`)) {
+        citySlims[id].set(city)
+      }
+    })
+  }
+})
+
+d3.csv('csv/stations.csv').then(data => {
+  const globalSelect = document.getElementById('select-global-city')
+  data
+    .map(d => d.Name)
+    .filter(name => EXCLUDED_GLOBAL_CITIES.indexOf(name) === -1)
+    .forEach(name => {
+      const option = document.createElement('option')
+      option.value = name
+      option.text = name
+      globalSelect.appendChild(option)
+    })
 })

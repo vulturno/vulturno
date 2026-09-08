@@ -4,3 +4,6 @@ package-lock.json
 .ignore
 
 .now
+.vercel
+docs/
+CLAUDE.md

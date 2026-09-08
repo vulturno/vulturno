@@ -60,13 +60,13 @@ function maxRecords () {
       })
       const labels = [
         {
-          data: { year: 2012 },
+          data: { year: 2022 },
           y: 100,
           dy: -50,
           dx: -52,
           note: {
             title:
-              'Entre 2009 y 2018 se establecen el 78% de los récords de máximas',
+              'Entre 2022 y 2025 se establecen el 85% de los récords de máximas',
             wrap: 230,
             align: 'middle'
           }
