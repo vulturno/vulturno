@@ -11,7 +11,10 @@ import selector from 'postcss-custom-selectors';
 import customProperties from 'postcss-custom-properties';
 import sorting from 'postcss-sorting';
 import nested from 'postcss-nested';
-import stylelint from 'rollup-plugin-stylelint';
+import stylelintPlugin from 'rollup-plugin-stylelint';
+// rollup-plugin-stylelint es CommonJS: con package.json type:module el default
+// import entrega el namespace, no la funcion
+const stylelint = stylelintPlugin.default || stylelintPlugin;
 
 // ------ global
 import resolve from 'rollup-plugin-node-resolve';
