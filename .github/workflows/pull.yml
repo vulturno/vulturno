@@ -3,15 +3,19 @@ on:
   pull_request:
     branches:
       - master
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: amondnet/now-deployment@v2
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v42
         with:
-          zeit-token: ${{ secrets.ZEIT_TOKEN }}
-          github-token: ${{ secrets.GITHUB }}
-          now-org-id: ${{ secrets.orgId }}
-          now-project-id: ${{ secrets.projectId }}
+          vercel-token: ${{ secrets.ZEIT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.orgId }}
+          vercel-project-id: ${{ secrets.projectId }}
           working-directory: ./
