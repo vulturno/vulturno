@@ -167,6 +167,8 @@ function frostyCities () {
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n')
 
+    if (!scales.count || !stationResize) return
+
     d3.csv(`csv/heladas/${stationResize}-total-heladas.csv`).then(
       data => {
         datos = data

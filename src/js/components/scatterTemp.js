@@ -186,6 +186,7 @@ function scatterTemp () {
   }
 
   const updateMax = () => {
+    if (!scales.count) return
     reValueDate = returnDate()
 
     errorDate()
@@ -343,6 +344,7 @@ function scatterTemp () {
   }
 
   const updateMin = () => {
+    if (!scales.count) return
     reValueDate = returnDate()
 
     errorDate()
@@ -385,6 +387,7 @@ function scatterTemp () {
   }
 
   const resize = () => {
+    if (!scales.count || !selectCity.property('value')) return
     updateMax()
   }
 

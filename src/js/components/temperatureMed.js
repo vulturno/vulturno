@@ -192,6 +192,7 @@ function tempMed () {
   }
 
   function update (mes) {
+    if (!scales.count) return
     d3.csv(`csv/${mes}.csv`).then(data => {
       datos = data
 
@@ -235,6 +236,8 @@ function tempMed () {
       .replace(/ó/g, 'o')
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n')
+
+    if (!scales.count || !stationResize) return
 
     d3.csv(`csv/${stationResize}.csv`).then(data => {
       datos = data
