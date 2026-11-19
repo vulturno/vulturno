@@ -192,6 +192,7 @@ function tempMed () {
   }
 
   function update (mes) {
+    if (!scales.count) return
     d3.csv(`csv/${mes}.csv`).then(data => {
       datos = data
 
