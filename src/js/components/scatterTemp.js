@@ -385,6 +385,7 @@ function scatterTemp () {
   }
 
   const resize = () => {
+    if (!scales.count || !selectCity.property('value')) return
     updateMax()
   }
 

@@ -144,6 +144,7 @@ function recordsMin () {
   }
 
   const resize = () => {
+    if (!scales.count) return
     updateChart(dataz)
   }
 

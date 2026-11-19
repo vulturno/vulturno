@@ -215,6 +215,7 @@ function forceLayout (csvFile, record, color) {
   }
 
   const resize = () => {
+    if (!dataz) return
     updateChart(dataz)
   }
 

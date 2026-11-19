@@ -228,6 +228,7 @@ function directionalDot (maxmins) {
   }
 
   const resize = () => {
+    if (!scales.count) return
     updateChart(dataz)
   }
 

@@ -236,6 +236,8 @@ function tempMed () {
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n')
 
+    if (!scales.count || !stationResize) return
+
     d3.csv(`csv/${stationResize}.csv`).then(data => {
       datos = data
       updateChart(datos)

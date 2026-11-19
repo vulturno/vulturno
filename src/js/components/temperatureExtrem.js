@@ -166,6 +166,8 @@ function tempExt () {
       .replace(/ú/g, 'u')
       .replace(/ñ/g, 'n')
 
+    if (!scales.count || !stationResize) return
+
     d3.csv(`csv/total-temp-${stationResize}.csv`).then(data => {
       datos = data
       datos.forEach(d => {
